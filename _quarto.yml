@@ -4,7 +4,7 @@ project:
 
 website:
   title: "FHIR for Research"
-  site_url: https://fhir-for-research.pages.mitre.org/
+  site-url: https://fhir-for-research.pages.mitre.org/
   navbar:
     left:
       - href: index.qmd
