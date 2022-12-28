@@ -26,6 +26,8 @@ website:
 
  - [Quarto Guides](https://quarto.org/docs/guide/)
 
+The GitLab pipeline is setup to re-compute and re-render everything on CI Server, only supports Quarto and R at the moment.
+
 
 GitLab's README
 ---------------

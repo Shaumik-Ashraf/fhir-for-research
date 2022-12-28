@@ -1,9 +1,10 @@
 project:
   type: website
-  output-dir: "_site"
+  output-dir: public
 
 website:
   title: "FHIR for Research"
+  site_url: https://fhir-for-research.pages.mitre.org/
   navbar:
     left:
       - href: index.qmd
