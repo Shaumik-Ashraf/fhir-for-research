@@ -1,4 +1,6 @@
 # FHIR for Research Resources
+[![pipeline status](https://gitlab.mitre.org/fhir-for-research/web/badges/main/pipeline.svg)](https://gitlab.mitre.org/fhir-for-research/web/-/commits/main) 
+[![Latest Release](https://gitlab.mitre.org/fhir-for-research/web/-/badges/release.svg)](https://gitlab.mitre.org/fhir-for-research/web/-/releases) 
 
 ## Dependencies
  - [Quarto (v1.2.280)](https://quarto.org/docs/get-started/)
