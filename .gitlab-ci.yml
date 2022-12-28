@@ -1,24 +1,32 @@
 # gitlab-ci.yml
-# https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb
+
+image: ubuntu:20.04
+
+workflow:
+  rules:
+    # trigger every commit
+    - if: $CI_COMMIT_BRANCH
+
+# TODO: caching to improve ci/cd speed
+# cache:
+#   key: quarto-local-cache
+#   paths:
+#    - /root/.cache/
+
+# Install MITRE PKI Certs, Quarto, R
+before_script:
+  - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sh
+  - wget "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
+  - dpkg -i /tmp/quarto.deb
+  - echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list
+  - apt-get update
+  - apt-get install r-base
+  # TODO: install python for ipynb files
+
 
 # Name must be "pages" to properly deploy to Gitlab Pages - https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html
 pages:
   stage: deploy
-  image: ubuntu:20.04
-  # TODO: caching to improve ci/cd speed
-  # cache:
-  #   key: quarto-local-cache
-  #   paths:
-  #    - /root/.cache/
-  # Install MITRE PKI Certs, Quarto, R
-  before_script:
-    - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sudo sh
-    - wget "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
-    - dpkg -i /tmp/quarto.deb
-    - echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list
-    - apt-get update
-    - apt-get install r-base
-    # TODO: install python for ipynb files
   script:
     - quarto render .
   artifacts:
@@ -29,6 +37,7 @@ pages:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   tags:
     - pages
+  environment: production
 
 ci:
   stage: deploy
@@ -41,17 +50,6 @@ ci:
     name: ${CI_COMMIT_REF_NAME}
     url: https://${CI_PROJECT_NAMESPACE}.pages.mitre.org/-/${CI_PROJECT_NAME}/-/jobs/$CI_JOB_ID/artifacts/public/index.html
 
-  image: ubuntu:20.04
-
-  # Install Quarto, R
-  before_script:
-    - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sudo sh
-    - wget "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
-    - dpkg -i /tmp/quarto.deb
-    - echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list
-    - apt-get update
-    - apt-get install r-base
-    # TODO: install python for ipynb files
   script:
     - quarto render .
 

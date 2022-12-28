@@ -10,9 +10,9 @@
  - `quarto preview` (this will compile everthing into _site, start a server, and launch web browser to load localhost server)
 ###### To add a page
  - create foo.qmd
- - add foo.qmd to quarto.yml under navbar, for example:
+ - add `foo.qmd` to _quarto.yml under navbar, for example:
 ```
-<!-- quarto.yml -->
+<!-- _quarto.yml -->
 
 website:
   navbar:
