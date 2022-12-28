@@ -25,7 +25,10 @@ before_script:
   - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
   - apt-get update
   - apt-get install -y --no-install-recommends r-base
-  # TODO: install python for ipynb files
+  - Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
+  # TODO: install python for ipynb files, tinytex for LaTex
+  - quarto check install
+  - quarto check knitr
 
 
 # Name must be "pages" to properly deploy to Gitlab Pages - https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html
