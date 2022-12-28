@@ -10,8 +10,9 @@ pages:
   #   key: quarto-local-cache
   #   paths:
   #    - /root/.cache/
-  # Install Quarto, R
+  # Install MITRE PKI Certs, Quarto, R
   before_script:
+    - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sudo sh
     - wget "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
     - dpkg -i /tmp/quarto.deb
     - echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list
@@ -44,6 +45,7 @@ ci:
 
   # Install Quarto, R
   before_script:
+    - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sudo sh
     - wget "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
     - dpkg -i /tmp/quarto.deb
     - echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list
