@@ -1,0 +1,9 @@
+---
+title: "R Example"
+---
+
+Below is 42 from R execution.
+
+```{r}
+42
+```

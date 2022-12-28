@@ -1,7 +1,25 @@
 ---
-title: "web"
+title: "Home"
 ---
 
-This is a Quarto website.
+## This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+## Markdown Demo
+ - list item 1
+ - list item _italic_
+ - list item **bold**
+ - list item `inline code`
+   + nested list item 1
+
+ > Blockquote
+
+| table | col 1 | col 2 |
+|:-----:|:------|:------|
+| row   |   A   |   B   |
+| row   |   C   |   D   |
+
+## HTML Demo
+
+<button class="btn btn-primary">Button</button>
