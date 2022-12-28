@@ -24,7 +24,7 @@ before_script:
   - wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
   - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
   - apt-get update
-  - apt-get install -y --no-install-recommends r-base
+  - apt-get install -y --no-install-recommends r-base make
   - Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
   # TODO: install python for ipynb files, tinytex for LaTex
   - quarto check install
