@@ -1,6 +1,34 @@
 # FHIR for Research Resources
 
+## Dependencies
+ - [Quarto (v1.2.280)](https://quarto.org/docs/get-started/)
+ - R
+ - (will need to setup python for embeded python code or jupyter code)
 
+## Quick Start
+ - clone this repository
+ - `quarto preview` (this will compile everthing into _site, start a server, and launch web browser to load localhost server)
+###### To add a page
+ - create foo.qmd
+ - add foo.qmd to quarto.yml under navbar, for example:
+```
+<!-- quarto.yml -->
+
+website:
+  navbar:
+    left:
+      - about.qmd
+      - foo.qmd
+```
+ - run `quarto preview`
+
+## Documentation
+
+ - [Quarto Guides](https://quarto.org/docs/guide/)
+
+
+GitLab's README
+---------------
 
 ## Getting started
 

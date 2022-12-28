@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: "_site"
 
 website:
   title: "FHIR for Research"
@@ -8,8 +9,10 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: r_demo.qmd
-        text: "R Demo"
+      - r_demo.qmd
+  page-footer:
+    center:
+      - text: "&copy; MITRE 2022"
 
 format:
   html:

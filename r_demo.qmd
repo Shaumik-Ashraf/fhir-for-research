@@ -1,5 +1,5 @@
 ---
-title: "R Example"
+title: "R Demo"
 ---
 
 Below is 42 from R execution.

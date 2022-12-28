@@ -4,7 +4,10 @@ title: "Home"
 
 ## This is a Quarto website.
 
+Full Quarto Docs at <https://quarto.org/docs/guide/>.
+
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
 
 ## Markdown Demo
  - list item 1
@@ -19,6 +22,7 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 |:-----:|:------|:------|
 | row   |   A   |   B   |
 | row   |   C   |   D   |
+
 
 ## HTML Demo
 
