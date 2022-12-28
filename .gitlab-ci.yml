@@ -17,13 +17,11 @@ workflow:
 before_script:
   - apt-get update
   - apt-get upgrade
-  - apt-get install -y wget
+  - apt-get install -y wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common
   - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sh
   - wget -O - "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
   - dpkg -i /tmp/quarto.deb
-  # - wget "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280.tar.gz" > /tmp/quarto-1.2.280.tar.gz
-  # - tar -xf quarto-1.2.280.tar.gz
-  - echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list
+  - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
   - apt-get update
   - apt-get install r-base
   # TODO: install python for ipynb files
