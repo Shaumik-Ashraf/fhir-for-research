@@ -27,6 +27,7 @@ website:
 ```
 
 In NEW_FILE.qmd:
+<pre><code>
     ---
     title: NEW_FILE
     ---
@@ -40,6 +41,7 @@ In NEW_FILE.qmd:
     ```{python}
     # Python code goes here, but you can't embed R and Python code in the same file
     ```
+</code></pre>
 
  - run `quarto preview`
 
