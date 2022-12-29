@@ -15,8 +15,9 @@
  - create a .qmd file
  - add the file to _quarto.yml under navbar, for example:
 
+In _quarto.yml:
 ```
-<!-- _quarto.yml -->
+# ... (snipped for brevity)
 
 website:
   navbar:
@@ -25,21 +26,20 @@ website:
       - NEW_FILE.qmd
 ```
 
-<code>
----
-title: NEW_FILE
----
+In NEW_FILE.qmd:
+    ---
+    title: NEW_FILE
+    ---
 
-Markdown or HTML goes here
+    Markdown or HTML goes here
 
-```{r}
-# R code goes here
-```
+    ```{r}
+    # R code goes here
+    ```
 
-```{python}
-# Python code goes here, but you can't embed R and Python code in the same file
-```
-</code>
+    ```{python}
+    # Python code goes here, but you can't embed R and Python code in the same file
+    ```
 
  - run `quarto preview`
 
