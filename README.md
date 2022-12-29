@@ -25,23 +25,29 @@ website:
       - NEW_FILE.qmd
 ```
 
-```
+<code>
 ---
-title: MY_TITLE
+title: NEW_FILE
 ---
-# NEW_FILE
 
 Markdown or HTML goes here
 
-\`\`\`{r}
+```{r}
 # R code goes here
-\`\`\`
-
-\`\`\`{python}
-# Python code goes here, but you can't embed R and Python code in the same file
-\`\`\`
 ```
+
+```{python}
+# Python code goes here, but you can't embed R and Python code in the same file
+```
+</code>
+
  - run `quarto preview`
+
+##### To view pages by branch
+ - on gitlab sidebar navigate to Deployments -> Environments
+
+##### To view failed deployments
+ - on gitlab sidebar navigate to CI/CD -> Pipelines
 
 
 ## Documentation
