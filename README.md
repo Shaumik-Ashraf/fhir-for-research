@@ -3,16 +3,18 @@
 [![Latest Release](https://gitlab.mitre.org/fhir-for-research/web/-/badges/release.svg)](https://gitlab.mitre.org/fhir-for-research/web/-/releases) 
 
 ## Dependencies
- - [Quarto (v1.2.280)](https://quarto.org/docs/get-started/)
- - R
- - (will need to setup python for embeded python code or jupyter code)
+ - [Quarto](https://quarto.org/docs/get-started/)
+ - R (if you use RMarkdown)
+ - Jupyter and Python3 (if you use embedded Python)
 
 ## Quick Start
- - clone this repository
- - `quarto preview` (this will compile everthing into _site, start a server, and launch web browser to load localhost server)
-###### To add a page
- - create foo.qmd
- - add `foo.qmd` to _quarto.yml under navbar, for example:
+ - Clone this repository
+ - Run `quarto preview` (this will compile everthing into _site, start a server, and launch web browser to load localhost server)
+
+##### To add a page
+ - create a .qmd file
+ - add the file to _quarto.yml under navbar, for example:
+
 ```
 <!-- _quarto.yml -->
 
@@ -20,15 +22,33 @@ website:
   navbar:
     left:
       - about.qmd
-      - foo.qmd
+      - NEW_FILE.qmd
+```
+
+```
+---
+title: MY_TITLE
+---
+# NEW_FILE
+
+Markdown or HTML goes here
+
+\`\`\`{r}
+# R code goes here
+\`\`\`
+
+\`\`\`{python}
+# Python code goes here, but you can't embed R and Python code in the same file
+\`\`\`
 ```
  - run `quarto preview`
+
 
 ## Documentation
 
  - [Quarto Guides](https://quarto.org/docs/guide/)
 
-The GitLab pipeline is setup to re-compute and re-render everything on CI Server, only supports Quarto and R at the moment.
+The GitLab pipeline is setup to re-compute and re-render everything on CI Server. If you use Python libraries you need to add a requirements.txt, and if you use R libraries you need whatever R uses for package management.
 
 
 GitLab's README

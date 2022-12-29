@@ -11,6 +11,7 @@ website:
         text: Home
       - about.qmd
       - r_demo.qmd
+      - python_demo.qmd
   page-footer:
     center:
       - text: "&copy; MITRE 2022"
