@@ -17,14 +17,14 @@ workflow:
 before_script:
   - apt-get update
   - apt-get upgrade
-  - apt-get install -y --no-install-recommends wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+  - apt-get install -y --no-install-recommends wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common build-essential
   - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sh
   - wget -O - "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
   - dpkg -i /tmp/quarto.deb
   - wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
   - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
   - apt-get update
-  - apt-get install -y --no-install-recommends r-base make
+  - apt-get install -y --no-install-recommends r-base
   - Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
   # TODO: install python for ipynb files, tinytex for LaTex
   - quarto check install
@@ -58,7 +58,7 @@ ci:
     url: https://${CI_PROJECT_NAMESPACE}.pages.mitre.org/-/${CI_PROJECT_NAME}/-/jobs/$CI_JOB_ID/artifacts/public/index.html
 
   script:
-    - quarto render .
+    - quarto render . --site-url https://${CI_PROJECT_NAMESPACE}.pages.mitre.org/-/${CI_PROJECT_NAME}/-/jobs/$CI_JOB_ID/artifacts/public/
 
   tags:
     - pages
