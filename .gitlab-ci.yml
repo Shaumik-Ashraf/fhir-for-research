@@ -17,7 +17,7 @@ workflow:
 before_script:
   - apt-get update
   - apt-get upgrade
-  - apt-get install -y --no-install-recommends wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common build-essential
+  - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common build-essential
   - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sh
   - wget -O - "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
   - dpkg -i /tmp/quarto.deb
