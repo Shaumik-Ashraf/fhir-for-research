@@ -1,37 +1,15 @@
 # gitlab-ci.yml
 
-image: ubuntu:20.04
+image: registry.gitlab.com/quarto-forge/docker/polyglot
+
+before_script:
+  - quarto check
 
 workflow:
   rules:
     # trigger every commit
     - if: $CI_COMMIT_BRANCH
 
-# TODO: caching to improve ci/cd speed
-# cache:
-#   key: quarto-local-cache
-#   paths:
-#    - /root/.cache/
-
-# Install MITRE PKI Certs, Quarto, R
-before_script:
-  - apt-get update
-  - apt-get upgrade
-  - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget dirmngr gnupg apt-transport-https ca-certificates software-properties-common build-essential
-  - wget -q -O - --no-check-certificate https://gitlab.mitre.org/mitre-scripts/mitre-pki/raw/master/os_scripts/install_certs.sh | sh
-  - wget -O - "https://github.com/quarto-dev/quarto-cli/releases/download/v1.2.280/quarto-1.2.280-linux-amd64.deb" > /tmp/quarto.deb
-  - dpkg -i /tmp/quarto.deb
-  - wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-  - add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
-  - apt-get update
-  - apt-get install -y --no-install-recommends r-base
-  - Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
-  # TODO: install python for ipynb files, tinytex for LaTex
-  - quarto check install
-  - quarto check knitr
-
-
-# Name must be "pages" to properly deploy to Gitlab Pages - https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html
 pages:
   stage: deploy
   script:
