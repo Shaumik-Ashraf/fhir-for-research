@@ -28,19 +28,19 @@ website:
 
 In NEW_FILE.qmd:
 <pre><code>
-    ---
-    title: NEW_FILE
-    ---
+---
+title: NEW_FILE
+---
 
-    Markdown or HTML goes here
+Markdown or HTML goes here
 
-    ```{r}
-    # R code goes here
-    ```
+```{r}
+# R code goes here
+```
 
-    ```{python}
-    # Python code goes here, but you can't embed R and Python code in the same file
-    ```
+```{python}
+# Python code goes here, but you can't embed R and Python code in the same file
+```
 </code></pre>
 
  - run `quarto preview`
