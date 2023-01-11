@@ -7,12 +7,14 @@ variables:
   RENV_CONFIG_REPOS_OVERRIDE: "http://cran.r-project.org"
   RENV_PATHS_CACHE: ${CI_PROJECT_DIR}/cache
   RENV_PATHS_LIBRARY: ${CI_PROJECT_DIR}/renv/library
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
 cache:
   key: ${CI_JOB_NAME}
   paths:
     - ${RENV_PATHS_CACHE}
     - ${RENV_PATHS_LIBRARY}
+    - ${PIP_CACHE_DIR}/pip
 
 before_script:
   # Move renv cache from Docker to project directory so it can get picked up by the GitLab cache
@@ -22,7 +24,7 @@ before_script:
   - Rscript -e "renv::restore()"
 # end renv cache
   - apt-get install -y python3-pip
-  - python3 -m pip install jupyter
+  - python3 -m pip install -r requirements.txt
 
 workflow:
   rules:

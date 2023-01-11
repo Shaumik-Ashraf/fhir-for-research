@@ -1,3 +1,6 @@
 /.quarto/
 _site/
 public/
+.Rproj.user
+
+/python_env/

@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!cache/" # naming this _cache should work instead, but did not in testing https://community.rstudio.com/t/quarto-equivalent-to-exclude-yaml-command-in-distill/148758/2
+    - "!README.md"
 
 website:
   title: "FHIR for Research"
@@ -15,9 +16,20 @@ website:
       - about.qmd
       - r_demo.qmd
       - python_demo.qmd
+      
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Introduction"
+        contents:
+          - units/01-fhir-intro.qmd
+      
   page-footer:
     center:
-      - text: "&copy; MITRE 2022"
+      - text: "&copy; MITRE 2023"
+      
+
 
 format:
   html:

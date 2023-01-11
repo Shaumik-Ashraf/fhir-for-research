@@ -7,6 +7,18 @@
  - R (if you use RMarkdown)
  - Jupyter and Python3 (if you use embedded Python)
 
+Python uses `venv` (https://quarto.org/docs/projects/virtual-environments.html):
+
+You will need to create a `venv` in `python_env/`:
+
+    python3 -m venv python_env
+
+Then run `source python_env/bin/activate` to activate the `venv`, and the following command to install dependencies:
+
+    pip install -r requirements.txt
+    
+If you add a dependency, run `pip freeze > requirements.txt` to update the requirements file.
+
 ## Quick Start
  - Clone this repository
  - Run `quarto preview` (this will compile everthing into _site, start a server, and launch web browser to load localhost server)
