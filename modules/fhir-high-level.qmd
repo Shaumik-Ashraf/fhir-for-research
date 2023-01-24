@@ -1,5 +1,0 @@
----
-title: FHIR from 10,000 Feet
----
-
-Content here
