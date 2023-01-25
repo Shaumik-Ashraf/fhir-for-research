@@ -39,16 +39,78 @@ In the early 2010s, the scope of data sharing in the healthcare space needed to 
 
 With a major goal being to facilitate interoperability between legacy health care systems, it both builds upon previous standards (HL7® V2, HL7® V3, HL7® CDA) as well as adopts modern web technologies. FHIR® has been able to bridge the gap between 30 year old standards and modern web-based connectivity. And with its focus away from specified messages/documents and more towards the use of small building blocks (Resources) to build implementations, it can be customized to fit much more use cases compared to its predecessors.
 
-## 2. FHIR Eras
+## 2. FHIR® Eras
 
-### 2.1 Era 1: Early Concepts
+### 2.1 1993-2014: Early Concepts
 
 The basic concepts of FHIR® start with the beginnings of the internet in the mid 1990s. Web 1.0 was largely based on static pages using **HTTP (Hypertext Transfer Protocol)** to retrieve them. With such as limited system, **REST (REpresentational State Transfer)** was developed and popularized in the early 2000s. Its purpose was to create a standard framework for HTTP that could allow two servers to communicate and exchange data anywhere in the world, thus providing the structure for Web 2.0 and the explosion of worldwide websites in the 2000s.
 
 At this point in time, healthcare data exchange was very limited to sending messages and documents and was not using any web-based transactional frameworks. Then in the late 2000s, the idea emerged to apply RESTful data exchange principles in healthcare within HL7® and its interoperability/web development partners. FHIR® was then officially introduced in 2012, beginning the era of healthcare API development and web-based health data exchange. Shortly after, support also came from the JASON task force, which is an independent group of elite scientists that has advised the government on matters of science and technology since the 1960s. In 2013, the [JASON Report titled "A Robust Health Data Infrastructure"](https://www.healthit.gov/sites/default/files/ptp13-700hhs_white.pdf) was published and called for health data APIs to be developed to liberate data that was locked in electronic health records. This helped pave the way for significant government support of FHIR® in the coming years.
 
-### 2.2. Era 2: Developing the Core
+### 2.2. 2014-2019: Developing the Core
 
-### 2.3 Era 3: Acceleration
+In late 2014, the first official version of FHIR® was released, kicking off its second era where core development would begin. By 2015, 87% of hospitals in the US were using FHIR® certified EHRs.
 
-## 3. Government Help
+![](images/2015_hospital_fhir_usage.png)
+
+Around this time, both government and industry began to develop initiatives in response to the 2013 JASON Report. On the government side, the **Office of the National Coordinator for Health IT (ONC)** was in the beginnings of discussions around national standards for APIs. On the industry side, the **Argonaut Project** began, which is a private sector initiated and funded implementation community comprised of technology vendors and provider organizations. Its goal is to accelerate the use of FHIR in healthcare information exchange in a way that can be adopted by industry-specific needs and use cases.
+
+### 2.3 2019-Present: Acceleration
+
+## 3. FHIR® Version History
+
+HL7® FHIR® has evolved through four releases since its initial presentation in May 2012. It has
+grown from a true draft standard with 49 Resources to its current 145 and continues to expand.
+In that time the standard has improved and changed to meet the needs of the health information
+technology community.
+
+### 3.1 Draft Standard for Trial Use 1 (DSTU1)
+
+FHIR\'s first publication in September 2013 showed a new way forward for health care data exchange. Draft Standard for Trial Use 1 had 49 resources and focused on two use cases, creating a Personal Health Record on a mobile device and the retrieval of documents, such as encounter or discharge notes, to a mobile device. This initial release sparked the community\'s interest in expanding FHIR to cover a wider variety of health care and health IT needs.
+
+### 3.2 Draft Standard for Trial Use 2 (DSTU2)
+
+FHIR grew in market acceptance with the publication of the Draft Standard for Trial Use 2 in 2015. Efforts
+including the Argonaut Project developed Implementation Guides (IGs) and other technologies to support
+FHIR adoption by EHR developers and other health IT entities. The structure of Resources was adjusted to
+make creating extensions easier, allowing for more use cases to be covered without changes to the core
+standard. New Resources were also added to support non-clinical data, including claims and benefits
+processing.
+
+The publication of FHIR DSTU2 included the creation of the FHIR® Maturity Model (FMM). When new Resources are created, they are not immediately ready for use in live settings; they must be refined and tested for a variety of uses and settings. The FHIR Maturity Model established a set of levels that progressively measure technical advancement, known as maturity. Resource maturity as defined by the FMM begins with an initial draft and achieves final status with implementation in multiple settings. Since the maturity of the FHIR standard overall is not tied to the maturity of Resources, Resources can move up the maturity ladder between FHIR releases. The FMM, which is also applied to other components of the FHIR standard, defines Resource stability with six levels:
+
+-   **FMM0 (Draft)**: The Resource is still in early development but has been accepted into the FHIR standard
+
+-   **FMM1**: The Resource has no current technical errors and is believed to address all design goals
+
+-   **FMM2**: The Resources has been tested and approved at a FHIR® Connectathon with multiple FHIR®-enabled computer systems tested
+
+-   **FMM3**: The Resource passed all quality checks and an HL7® community ballot that determins if it is ready for trial use
+
+-   **FMM4**: The Resource has been tested for functionality for all intended purposes, has been published in a formal HL7® publication, and is operating in at least one prototype system
+
+-   **FMM5**: The Resource is in usse in at least five distinct systems operating in at least two countries
+
+Substantive changes at the FMM4 or FMM5 levels that would change usage from those already established or would break compatibility with existing implementations would require significant justification to be accepted and to move forward. After FMM5, a Resource reaches \"normative\" level; at this level, future changes must be backwards compatible so that applications that implement those Resources aren't at risk of being broken as the FHIR standard changes.
+
+### 3.3 Standard for Trial Use 3 (STU 3)
+
+FHIR Standard for Trial Use 3 was released in 2017 with improvements to the core Clinical, Administrative, and Financial Resources, improvements to the Clinical Decision Support and Clinical Quality Measure Resources and a new framework for workflow and task management. Additionally, tools were introduced that made FHIR IG creation and publication to the web easier, faster, and more unified.
+
+### 3.4 Release 4 (R4)
+
+As the first release with normative content, the 2019 release of FHIR Release 4 left behind the Trial Use
+name. Two key clinical Resources, Patient and Observation, were released as normative, along with the
+RESTful API, the XML and JSON formats, and nine additional Resources.
+
+In 2020, ONC published the Final Rule for the 21st Century Cures Act, establishing FHIR R4 as the standard required for Health IT Certification.
+
+### 3.5 Looking ahead to Release 5 (R5)
+
+FHIR Release 5 will see increased normative content, with over 30 Resources having been nominated by
+their HL7 Workgroups to be matured to that status. In addition, the community will continue to develop the supportive specifications to FHIR, such as the authorization framework SMART, Clinical Decision Support Hooks (CDS Hooks), and the Bulk Data Transfer specification, which will help implementers create a complete FHIR-based exchange of health care data.
+
+With the maturing of the FHIR IG tools and templates, better integration with public health, imaging,
+financial management, genomics and other fields will keep FHIR at the forefront of health IT.
+
+## 4. Government Help
