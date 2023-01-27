@@ -4,5 +4,6 @@ public/
 .Rproj.user
 .Rdata
 .Rhistory
+.DS_Store
 
 /python_env/

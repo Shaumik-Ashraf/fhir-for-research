@@ -77,14 +77,11 @@ In the coming years, more FHIR® resources will become mature and **normative**,
 
 ONC has provided a brief but comprehensive [summary](https://www.healthit.gov/sites/default/files/page/2021-04/FHIR%20Version%20History%20Fact%20Sheet.pdf) of the version history of FHIR releases since its debut in 2012:
 
-> HL7® FHIR® has evolved through four releases since its initial presentation in May 2012. It has
-> grown from a true draft standard with 49 Resources to its current 145 and continues to expand.
-> In that time the standard has improved and changed to meet the needs of the health information
-> technology community.
+> HL7® FHIR® has evolved through four releases since its initial presentation in May 2012. It has grown from a true draft standard with 49 Resources to its current 145 and continues to expand. In that time the standard has improved and changed to meet the needs of the health information technology community.
 
 ### 3.1 Draft Standard for Trial Use 1 (DSTU1)
 
-> FHIR\'s first publication in September 2013 showed a new way forward for health care data exchange. Draft Standard for Trial Use 1 had 49 resources and focused on two use cases, creating a Personal Health Record on a mobile device and the retrieval of documents, such as encounter or discharge notes, to a mobile device. This initial release sparked the community\'s interest in expanding FHIR to cover a wider variety of health care and health IT needs.
+> FHIR's first publication in September 2013 showed a new way forward for health care data exchange. Draft Standard for Trial Use 1 had 49 resources and focused on two use cases, creating a Personal Health Record on a mobile device and the retrieval of documents, such as encounter or discharge notes, to a mobile device. This initial release sparked the community's interest in expanding FHIR to cover a wider variety of health care and health IT needs.
 
 ### 3.2 Draft Standard for Trial Use 2 (DSTU2)
 
@@ -104,7 +101,7 @@ ONC has provided a brief but comprehensive [summary](https://www.healthit.gov/si
 >
 > -   **FMM5**: The Resource is in use in at least five distinct systems operating in at least two countries
 >
-> Substantive changes at the FMM4 or FMM5 levels that would change usage from those already established or would break compatibility with existing implementations would require significant justification to be accepted and to move forward. After FMM5, a Resource reaches \"normative\" level; at this level, future changes must be backwards compatible so that applications that implement those Resources aren't at risk of being broken as the FHIR standard changes.
+> Substantive changes at the FMM4 or FMM5 levels that would change usage from those already established or would break compatibility with existing implementations would require significant justification to be accepted and to move forward. After FMM5, a Resource reaches "normative" level; at this level, future changes must be backwards compatible so that applications that implement those Resources aren't at risk of being broken as the FHIR standard changes.
 
 ### 3.3 Standard for Trial Use 3 (STU 3)
 
@@ -112,16 +109,12 @@ ONC has provided a brief but comprehensive [summary](https://www.healthit.gov/si
 
 ### 3.4 Release 4 (R4)
 
-> As the first release with normative content, the 2019 release of FHIR Release 4 left behind the Trial Use
-> name. Two key clinical Resources, Patient and Observation, were released as normative, along with the
-> RESTful API, the XML and JSON formats, and nine additional Resources.
+> As the first release with normative content, the 2019 release of FHIR Release 4 left behind the Trial Use name. Two key clinical Resources, Patient and Observation, were released as normative, along with the RESTful API, the XML and JSON formats, and nine additional Resources.
 >
 > In 2020, ONC published the Final Rule for the 21st Century Cures Act, establishing FHIR R4 as the standard required for Health IT Certification.
 
 ### 3.5 Looking ahead to Release 5 (R5)
 
-> FHIR Release 5 will see increased normative content, with over 30 Resources having been nominated by
-> their HL7 Workgroups to be matured to that status. In addition, the community will continue to develop the supportive specifications to FHIR, such as the authorization framework SMART, Clinical Decision Support Hooks (CDS Hooks), and the Bulk Data Transfer specification, which will help implementers create a complete FHIR-based exchange of health care data.
+> FHIR Release 5 will see increased normative content, with over 30 Resources having been nominated by their HL7 Workgroups to be matured to that status. In addition, the community will continue to develop the supportive specifications to FHIR, such as the authorization framework SMART, Clinical Decision Support Hooks (CDS Hooks), and the Bulk Data Transfer specification, which will help implementers create a complete FHIR-based exchange of health care data.
 >
-> With the maturing of the FHIR IG tools and templates, better integration with public health, imaging,
-> financial management, genomics and other fields will keep FHIR at the forefront of health IT.
+> With the maturing of the FHIR IG tools and templates, better integration with public health, imaging, financial management, genomics and other fields will keep FHIR at the forefront of health IT.
