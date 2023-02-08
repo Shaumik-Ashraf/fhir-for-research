@@ -1,0 +1,32 @@
+---
+title: "Module: Key FHIR Resources"
+author: "Shaumik Ashraf"
+format: html
+editor: visual
+toc: true
+---
+
+## Learning Objectives
+ - Learn of key healthcare resources such as Patient, Observation, and Bundle
+ - Understand how FHIR defines resources with great granularity and flexibility
+ - Understand how FHIR encapsulates metadata as resources
+ - Learn of new Logical and Resource modelling in FHIR Revision 5
+
+## 1. Overview of Core Elements
+
+The [HL7 FHIR Website](http://hl7.org/fhir) gives a well structured summary of most Resources in FHIR Core:
+
+
+![FHIR Resources Index](images/fhir-index.png "Overview of FHIR Resources")
+
+A lower level refers to fundamental definitions required for a software developer to implement FHIR, while higher
+level resources correspond more directly to clinical use cases. FHIR itself stands for _Fast Healthcare Interoperability
+Resources_, so each of these resources encapsulate a piece of clinical information in transit and the resource structure defines
+the semantics for embedding clinical information. The resource itself may be encoded in JSON or XML and processed by any programming
+language or software tool. What FHIR enables is a way to define and structure the _semantics_ of clinical information for meaningful
+communication. FHIR is granular enough to capture the most miniscule information possible, while also flexible enough to work with a
+variety of medical informatics standards such as LOINC or ICD and also expand to new discoveries or workflows in healthcare. To best
+best understand how FHIR accomplishes this, lets examine the Patient resource.
+
+## 2. Patient Resource
+
