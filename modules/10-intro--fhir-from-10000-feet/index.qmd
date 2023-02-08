@@ -12,6 +12,16 @@ toc: true
 2.  Understand the major problems that FHIR® helps solve in healthcare
 3.  Understand what FHIR® Resources are and how they can be applied to many use cases in healthcare
 
+Scratchpad
+
+-   Understand the major problems that FHIR helps solve in both healthcare and research settings
+
+-   understand **how** fhir helps solve the problems
+
+-   understand the main differences between fhir and other approaches to health data sharing (and then link to the bigger article)
+
+-   Understand why now is the time that people should start caring about FHIR
+
 ## 1. What is Interoperability? Why is it Important?
 
 **Interoperability** is the ability of computer systems to exchange data with unambiguous, shared meaning. It is easier to understand one another if we speak the same language and don't have to rely on translators - imagine if every electronic device required a different power adaptor.
