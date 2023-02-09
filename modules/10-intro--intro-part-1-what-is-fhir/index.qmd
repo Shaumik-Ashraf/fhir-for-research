@@ -10,32 +10,23 @@ bibliography: bibliography.bib
 ## Learning Objectives
 
 1.  Understand what FHIR® is at a high-level
-2.  Understand the major problems that FHIR® helps solve in healthcare
-3.  Understand what FHIR® Resources are and how they can be applied to many use cases in healthcare
-
-Scratchpad
-
--   Understand the major problems that FHIR helps solve in both healthcare and research settings
-
--   understand **how** fhir helps solve the problems
-
--   understand the main differences between fhir and other approaches to health data sharing (and then link to the bigger article)
-
--   Understand why now is the time that people should start caring about FHIR
+2.  Understand what interoperability is and why it is important in healthcare
+3.  Understand why now is the time that people should start caring about FHIR
+4.  Understand the major problems that FHIR® helps solve in healthcare and research settings
 
 ## 1. Introduction
 
-The story of FHIR is part of a greater narrative of healthcare and technology adoption. with the former being notoriously slow at adopting the latter. Computer systems and web technologies began to enter mainstream industries in the 1900s/2000s, while hospitals did not start largely adopting electronic health record (EHR) systems until the mid 2010s. 96% of hospitals in the United States currently have electronic health records (EHRs); however, that number was only 16% not too long ago in 2010. To put that into perspective, around the same time that technologies such as WIndows 7 and the iPhone 4 were released, 84% of hospitals in the US were still using *paper* to communicate and store health information. The visual below shows the late but exponential rise of EHR adoption in the US in the past decade. [@ehr_adoption]
+The story of FHIR is part of a greater narrative of healthcare and technology adoption. with the former being notoriously slow at adopting the latter. Computer systems and web technologies began to enter mainstream industries in the 1900s/2000s, while hospitals did not start largely adopting electronic health record (EHR) systems until the mid 2010s. 96% of hospitals in the United States currently have electronic health records (EHRs); however, that number was only 16% not too long ago in 2010. To put that into perspective, around the same time that technologies such as Windows 7 and the iPhone 4 were released, 84% of hospitals in the US were still using *paper* to communicate and store health information. The visual below shows the late but exponential rise of EHR adoption in the US in the past decade. [@ehr_adoption]
 
 ![](images/ehr_adoption.png)
 
-In this time before FHIR, data was siloed in health systems. Different systems within a hospital were "speaking different languages" with their data, resulting in nothing being shared and preventable medical mistakes due to clinicans lacking critical information. The peak in EHR adoption around 2014 in the plot also happens to coincide with the birth of FHIR. In response to growing FHIR adoption, data was finally able to be seamlessly shared between not only systems within a single health organization, but also between different health organizations.
+In this time before FHIR, data was siloed in health systems. Different systems within a hospital were "speaking different languages" with their data, resulting in nothing being shared and preventable medical mistakes due to clinicians lacking critical information. The peak in EHR adoption around 2014 in the plot also happens to coincide with the birth of FHIR. In response to growing FHIR adoption, data was finally able to be seamlessly shared between not only systems within a single health organization, but also between different health organizations.
 
-So what is FHIR? How did it help solve this issue of data siloing and exchange? In short, FHIR is a data exchange standard to help health organizations share data. It helps faciliate interoperability across a broad set of use cases and stakeholders.
+So what is FHIR? How did it help solve this issue of siloed health information? In short, FHIR is a data exchange standard to help health organizations share data. It helps facilitate interoperability across a broad set of use cases and stakeholders.
 
 Before diving deeper into FHIR, an important question still stands- what exactly is interoperability anyways? Why is it important in healthcare? This module will answer these questions first to set the stage for understanding what FHIR is and why it is so powerful.
 
-## 1. What is Interoperability? Why is it Important?
+## 2. What is Interoperability? Why is it Important?
 
 **Interoperability** is the ability of computer systems to exchange data with unambiguous, shared meaning. It is easier to understand one another if we speak the same language and don't have to rely on translators.
 
@@ -43,7 +34,7 @@ The ability to deliver effective healthcare to all depends on the ability to sha
 
 ![](images/healthcare_interoperability.png){fig-alt="Healthcare Interoperability"}
 
-### 1.1 Impact of Lack of Interoperability on Stakeholders
+### 2.1 Impact of Lack of Interoperability on Stakeholders
 
 **Poor communication across care providers.** Medication discrepancies such as drug omissions during transitions of care and multiple modes of information transmission result in delays in PAC services and can lead to adverse events and preventable readmissions. Redundant information collection creates inefficiencies and burden.
 
@@ -51,7 +42,7 @@ The ability to deliver effective healthcare to all depends on the ability to sha
 
 **Increased cost and provider burden.** Additional costs exist related to hospital stays from adverse events and readmissions. Additional administrative costs also exist to locate, reconcile, and coordinate information.
 
-### 1.2 Standards
+### 2.2 Standards
 
 **Standards** are agreed-upon methods for connecting systems together. They may pertain to security, data transport, data format or structure, or the meanings of codes or terms. They are defined, updated, and maintained by standards development organizations (SDOs) through a collaborative process involving the audience that will be using the standards. Some examples of standards in sectors other than healthcare:
 
@@ -79,13 +70,13 @@ Standards also come with **challenges**, as stakeholders have both common and di
 
 As seen above, **HL7® FHIR®** is not the first health IT standard. However, other standards have focused on specific user needs (e.g., quality measures) and have failed to achieve widespread adoption across industry. FHIR® is a new specification based on emerging industry approaches, informed by years of [lessons learned](https://www.hl7.org/fhir/comparison.html) around requirements, successes, and challenges from defining and implementing previous standards. FHIR**®** aims to simplify implementation without sacrificing information integrity. It leverages existing models and ensures alignment to previously defined best practices to provide a consistent, easy to implement, and rigorous mechanism for exchanging data between healthcare applications. There is widespread adoption of base FHIR**®** Resources, with profiles tailoring them to specific use cases.
 
-### 1.3 Regulating Interoperability
+### 2.3 Regulating Interoperability
 
 The current health IT ecosystem is characterized by proprietary systems and closed data standards. In many cases, the only way to transfer data between sources is if both parties are in the same network and use the same IT systems (e.g., same EHR vendor). Patients do not have access to their own data and providers do not have access to complete patient records. Current economic incentives are not closing this gap.
 
 In order to address these issues and improve health outcomes, the US government (including ONC, CMS, and others) is beginning to regulate the adoption of FHIR® as a single, common, open standard.
 
-## 2. What is FHIR®?
+## 3. What is FHIR®?
 
 ![](images/fhir_acronym.png)
 
@@ -93,7 +84,7 @@ Healthcare records are increasingly becoming digitized. As patients move around 
 
 FHIR® is fast, efficient, and flexible. Its philosophy is to build a base set of resources that either by themselves or when combined satisfy the majority of use cases. It uses the **80/20 rule**, where 20% of the requirements satisfy 80% of the needs. Solutions are built from modular components called "Resources," which are described in detail in [3.3 Looking Closer: FHIR® Resources](#looking-closer-fhir-resources). There is also the option to develop custom extensions for a variety of use cases.
 
-### 2.1 FHIR® Key Principles
+### 3.1 FHIR® Key Principles
 
 -   Focus on **implementers**
 
@@ -109,7 +100,7 @@ FHIR® is fast, efficient, and flexible. Its philosophy is to build a base set o
 
 -   Demonstrate best practice **governance**
 
-### 2.2 Business Case: Why Promote FHIR®?
+### 3.2 Business Case: Why Promote FHIR®?
 
 **Single standard for health care transactions.** FHIR® provides a standard for *both* administrative (claims, explanations of benefits, etc.) *and* clinical data.
 
@@ -123,6 +114,6 @@ FHIR® is fast, efficient, and flexible. Its philosophy is to build a base set o
 
 **Enables more equitable decision-making**. Access to different slices of medical data could be standardized through FHIR® to supplement socio-economic determinants of health.
 
-### 2.3 Why Should You Understand FHIR®?
+### 3.3 Why Should You Understand FHIR®?
 
 The level of FHIR® activity and adoption is increasing rapidly. FHIR® APIs are specifically required in the **ONC 21st Century Cures Act** [@cures_act] and the **CMS Interoperability and Patient Access Rule** [@cms_rule]. Federal agencies such as CMS, ONC, and CDC are increasingly looking for FHIR®-based solutions to healthcare problems. As a result, healthcare providers with access to health IT APIs using FHIR® is widespread.
