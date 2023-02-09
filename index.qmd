@@ -20,7 +20,8 @@ title: "Home"
 
 ## Introduction \> FHIR for Research
 
--   [FHIR from 10,000 feet](modules/10-intro--fhir-from-10000-feet/)
+-   [Introduction Part 1: What is FHIR?](modules/10-intro--intro-part-1-what-is-fhir)
+-   [Introduction Part 2: How FHIR Works](modules/10-intro--intro-part-2-how-fhir-works)
 -   [Key FHIR Resources](modules/10-intro--key-fhir-resources/)
 -   [Accessing FHIR data high level](modules/10-intro--accessing-fhir-data/)
 -   [Real-world research using FHIR](modules/10-intro--real-world-research-using-fhir/)
