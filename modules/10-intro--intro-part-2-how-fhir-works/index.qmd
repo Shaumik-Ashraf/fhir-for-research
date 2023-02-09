@@ -4,42 +4,40 @@ author: "Blake Bergstrom"
 format: html
 editor: visual
 toc: true
+bibliography: bibliography.bib
 ---
 
 ## Learning Objectives
 
-1.  Understand what FHIR® is at a high-level
-2.  Understand the major problems that FHIR® helps solve in healthcare
-3.  Understand what FHIR® Resources are and how they can be applied to many use cases in healthcare
-
-Scratchpad
-
--   Understand the major problems that FHIR helps solve in both healthcare and research settings
-
--   understand **how** fhir helps solve the problems
-
--   understand the main differences between fhir and other approaches to health data sharing (and then link to the bigger article)
-
--   Understand why now is the time that people should start caring about FHIR
+1.  Understand at a high-level what FHIR Resources are and how they can be used to create implementations in healthcare settings
+2.  Understand why FHIR was developed to be based Resources
+3.  Understand how FHIR is able able to solve a wide variety of use cases in healthcare
 
 ## 1. Introduction
 
 This module is the second part of the introduction to FHIR, with [Part 1](modules/10-intro--intro-part-1-what-is-fhir) providing a high-level conceptual overview of what FHIR is. This module will build off of that content and provide lower level details of how FHIR actually works to help acheive interoperability in computer systems. Please note that this second half of the introduction to FHIR is for those interested in learning more about how FHIR works from a technical standpoint and is therefore optional for only data scientists, software developers, or anybody interested in such technical details.
 
-ONC (Office of the National Coordinator for Health IT) has provided a comprehensive summary of how FHIR works. Below is largely
+ONC (Office of the National Coordinator for Health IT) has provided a comprehensive summary of how FHIR works [@what_is_fhir]. The content below is largely quoted directly from this summary:
 
-## 3.1 FHIR® Key Terms
+FHIR is a health data exchange standard standard that combines an application programming interface (API) with common web technologies. These technologies power all kinds of internet-based data exchange and are used by e-commerce providers and social media companies such as Kayak, Mint, and Google. A core goal of FHIR was to create a standard that would lead to high adoption across disparate developer communities. Therefore, it is focused on being easy for software developers to use. To learn more about the history of these web technologies and how they relate to FHIR, please see the [Brief History of FHIR](modules/10-intro--brief-history-of-fhir) module. The last section in this module will dive more into what an API is and how FHIR uses one to let disparate systems communicate with each other.
+
+FHIR defines categories of data which is calls "Resources" to exchange data. With the "R" in FHIR standing for Resources, this is a topic that is foundational to understand FHIR. The philosophy behind FHIR is to create a set of Resources that, individually or in combination, satisfy most common use cases. The Patient Resource, for example, includes demographic data related to a patient, such as their name, address, and phone number. Resources also improves granular data retrieval, so that a request returns just the relevant data rather than a full record or document that itself must then be searched.
+
+Once they are modified for specific requirements using FHIR\'s built-in capabilities, combinations of
+Resources are brought together in an Implementation Guide to address a specific use case, such as a
+provider directory or patient-reported outcomes. This structure lends itself well to expansion beyond
+FHIR\'s core capabilities. Below details some key terms used within the FHIR community related to the process of developing healthcare solutions using FHIR resources:
 
 | Term                      | Definition                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                  |
-|--------------|----------------------------|-------------------------------|
+|-----------------|--------------------------|-----------------------------|
 | Use Case                  | Hypothetical scenario that illustrates a problem by providing clinically relevant details about a patient and defining the interactions between the patient and the healthcare system to achieve a goal                                                                                               | A patient with multiple chronic conditions experiences a fall and is admitted to a hospital for hip surgery. Upon discharge, the hospital needs to share the patient's medication instructions with the skilled nursing facility (SNF).                                                                                                  |
 | Implementation Guide (IG) | Provides instructions for developers on how to design and implement technological solutions to achieve the goal identified in the use case                                                                                                                                                            | In addition to the list of medications, it is important to include the dosage, frequency of administration, and medication start/end dates.                                                                                                                                                                                              |
 | Implementation            | The technological solution developers design using the implementation guide as a template (e.g., mobile app, API)                                                                                                                                                                                     | A specific hospital uses the IG as a template to update the way this information is represented in its EHR so that it is both consistent with other hospitals and compatible with SNF EHRs.                                                                                                                                              |
 | Connectathon              | An opportunity for multiple vendors to review the implementation guides, test the client and/or server software in a structured environment and provide constructive feedback; it can be described as a "test" kitchen and the implementation guide as a "recipe" that can be refined by participants | Several EHR vendors for various hospital systems and SNFs get together and share their implementations to make sure they all interpreted the IG consistently and produced compatible implementations, such that each of their individual IT systems can connect with each other and successfully exchange all the information in the IG. |
 
-### 3.2 Analogy: Baking
+## 2. Diving Deeper with an Analogy: Baking
 
-Using FHIR® Resources to build implementations can be compared to baking a cake. Below are key term analogies to keep in mind:
+With a high-level understanding that FHIR uses categories of data called Resources to build larger implementations, we will begin to go a little deeper and see how this process actually works. Using FHIR Resources to build implementations can be compared to baking a cake. Below are key term analogies to keep in mind:
 
 -   Implementation Guide = Recipe
 
@@ -47,11 +45,17 @@ Using FHIR® Resources to build implementations can be compared to baking a cake
 
 -   Connectathon = Test Kitchen
 
-A **Resource** can be viewed as a cake, which is a broad template with possible characteristics such as flavor, icing, toppings, and number of tiers. A **Profile** can be viewed as the type of cake, which further constrains the general Cake Resource. And finally, and **Extension** can be viewed as additional characteristics of the cake that were not part of the original cake and cake type. Below illustrates an example of a chocolate cake:
+A **Resource** can be viewed as a cake, which is a broad template with possible characteristics such as flavor, icing, toppings, and number of tiers.
+
+A **Profile** can be viewed as the type of cake, which further constrains the general Cake Resource.
+
+And finally, and **Extension** can be viewed as additional characteristics of the cake that were not part of the original cake and cake type.
+
+Below illustrates an example of a chocolate cake:
 
 ![](images/cake_analogy_profiles.png)
 
-An **instance** is each implementation of the Profile (each cake baked using the Chocolate Cake Recipe). You can have multiple instances using the same base FHIR® Resource with different Profile implementations. In other words, you can bake different chocolate cakes from the choices allowed in the Chocolate Cake Recipe:
+An **instance** is each implementation of the Profile (each cake baked using the Chocolate Cake Recipe). You can have multiple instances using the same base FHIR Resource with different Profile implementations. In other words, you can bake different chocolate cakes from the choices allowed in the Chocolate Cake Recipe:
 
 ![](images/cake_analogy_instances.png)
 
@@ -59,40 +63,38 @@ Keeping the cake analogy but with a real-world example, below shows the Prior Le
 
 ![](images/cake_analogy_prior_level_of_function.png)
 
-### 3.3 Looking Closer: FHIR® Resources {#looking-closer-fhir-resources}
+## 3. Looking Closer: FHIR Resources
 
-**Resources** are the building blocks for FHIR**®**. They act as customizable templates within a general framework. They are designed to be very flexible to provide structure to address 80% of use cases. Almost everything is optional, even critical information like name, gender, birth date, and address.
+With the baking analogy in mind, we will now formally talk about what Resouces, Profiles, and Extensions are. Resources are the building blocks for FHIR. They act as customizable templates within a general framework. They are designed to be very flexible to provide structure to address 80% of use cases. Almost everything is optional, even critical information like name, gender, birth date, and address.
 
 Resources by themselves are often not useful; Profiles and Extensions supplement existing Resources. Implementation Guides then add the necessary constraints to support interoperability. Developers can then use Implementation Guides to "bundle" together any combination of the 146 FHIR Resources (e.g., Patient, Diagnostic Report, Practitioner, Location) with Profiles and/or Extensions to transmit only select information from a large amount of data (e.g., an EHR).
 
 ::: {.callout-caution collapse="true"}
-## Expand To Learn About FHIR® Resource Specifications
+## Expand To Learn About FHIR Resource Specifications
 
-This is the [Patient Resource](https://www.hl7.org/fhir/patient.html) found on HL7®'s FHIR® documentation site, which is publicly available for further information. The left-hand side shows the name of the given Resource (in this case, Patient) as well as all of its component categories underneath. This module will not dive into the technical details, but note that each category has information about potential flags, cardinality, type, and description/constraints.
+This is the [Patient Resource](https://www.hl7.org/fhir/patient.html) found on HL7's FHIR documentation site, which is publicly available for further information. The left-hand side shows the name of the given Resource (in this case, Patient) as well as all of its component categories underneath. This module will not dive into the technical details, but note that each category has information about potential flags, cardinality, type, and description/constraints.
 
 ![](images/base_fhir_resource_spec.png)
 :::
 
 ::: {.callout-caution collapse="true"}
-## Expand to Learn About FHIR® Resource JSON Files
+## Expand to Learn About FHIR Resource JSON Files
 
-Below is an example of a what a FHIR® Resource looks like after its been implemented in JSON format. Like earlier, this module will not dive into the technical details, but note the general layout and 4 major sections of a FHIR resource.
+Below is an example of a what a FHIR Resource looks like after its been implemented in JSON format. Like earlier, this module will not dive into the technical details, but note the general layout and 4 major sections of a FHIR resource.
 
 ![](images/fhir_resource_json.png)
 :::
 
-### 3.4 US FHIR® Core Profile
+## 4. Connecting Systems Together: The FHIR API
 
-There is an important FHIR® Profile known as **US Core**, which profiles 23 FHIR® resources specifically for the US healthcare market. It is driven by and interacts with [United States Core Data for Interoperability (USCDI)](https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi), which is a standardized set of health data for nationwide, interoperable health information exchange. ONC Cures Act requires as a condition of certification that EHRs adopt the USCDI standards, a "standardized API for patient and population services," which includes an initial set of 16 data classes comprised of 52 data elements. The initial US Core ballot occurred in 2021 and subsequent ballots to update US Core will occur every January beginning in 2022.
-
-### 3.5 FHIR**®** APIs
+So far we have learned about what Resources are, how they can be customized and extended with Profiles and Extensions, and how they can be combined to develop Implementation Guides that tell developers how to create Implmentations in healthcare settings. But how do these Implementations talk to other systems? This is where FHIR's API comes in, which allows developers to pull and push FHIR data between disparate systems.
 
 Systems need to use the same "dictionary," "language," "terminology," and "alphabet" to exchange information accurately. Computer systems need all these layers to align in order to communicate with each other. French and English share the same alphabet, but two people speaking different languages won't understand each other. Even British English and American English may not align on terminology. They also need to use the same "directions," i.e., protocol. If two people are going to the same address but one takes the highway and the other takes backroads, they may not arrive at the same time.
 
-An **API (Application Programming Interface)** is software that allows two systems to talk to each other via a request/response architecture. It enables the retrieval or exchange of *only* specified information from a large amount of data.
+An **API** is software that allows two systems to talk to each other via a request/response architecture. It enables the retrieval or exchange of *only* specified information from a large amount of data.
 
-A **FHIR® API** leverages the same standards as web browsers to specify interoperable, computable format and meaning for exchanging healthcare data between systems. It uses the the HL7® FHIR® standard with REpresentational State Transfer (REST), which is software used for Web services development. It reduces miscommunication and impediments to communication between systems by establishing a *common language* (XML/JSON) and protocol (HTTP) for how systems exchange data (i.e., directions). Using standard terminology, searchability is improved. Implementation guides serve as instructions for developers to build FHIR® APIs.
+A **FHIR API** leverages the same standards as web browsers to specify interoperable, computable format and meaning for exchanging healthcare data between systems. It uses the the HL7 FHIR standard with REpresentational State Transfer (REST), which is software used for Web services development. It reduces miscommunication and impediments to communication between systems by establishing a *common language* (XML/JSON) and protocol (HTTP) for how systems exchange data (i.e., directions). Using standard terminology, searchability is improved. Implementation guides serve as instructions for developers to build FHIR APIs.
 
-Provided below is a high-level diagram of information flow with a FHIR® API. Data originates from a FHIR® client, which can be a developer made mobile/web application or simply a database. A RESTful API then sends this data over HTTP as standardized Resources to a FHIR® server, where it is then mapped to/from the FHIR® standard and subsequently parsed out into the appropriate system. Note that this process is **bidirectional** and can happen in the opposite direction as well, with a FHIR® server aggregating data from a multitude of systems and then sending that to a client application.
+Provided below is a high-level diagram of information flow with a FHIR API. Data originates from a FHIR client, which can be a developer made mobile/web application or simply a database. A RESTful API then sends this data over HTTP as standardized Resources to a FHIR server, where it is then mapped to/from the FHIR standard and subsequently parsed out into the appropriate system. Note that this process is **bidirectional** and can happen in the opposite direction as well, with a FHIR server aggregating data from a multitude of systems and then sending that to a client application.
 
 ![](images/fhir_information_flow.png)
