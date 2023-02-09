@@ -119,7 +119,7 @@ The level of FHIR® activity and adoption is increasing rapidly. FHIR® APIs are
 ### 3.1 FHIR® Key Terms
 
 | Term                      | Definition                                                                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                                                                                                  |
-|--------------|----------------------------|-------------------------------|
+|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Use Case                  | Hypothetical scenario that illustrates a problem by providing clinically relevant details about a patient and defining the interactions between the patient and the healthcare system to achieve a goal                                                                                               | A patient with multiple chronic conditions experiences a fall and is admitted to a hospital for hip surgery. Upon discharge, the hospital needs to share the patient's medication instructions with the skilled nursing facility (SNF).                                                                                                  |
 | Implementation Guide (IG) | Provides instructions for developers on how to design and implement technological solutions to achieve the goal identified in the use case                                                                                                                                                            | In addition to the list of medications, it is important to include the dosage, frequency of administration, and medication start/end dates.                                                                                                                                                                                              |
 | Implementation            | The technological solution developers design using the implementation guide as a template (e.g., mobile app, API)                                                                                                                                                                                     | A specific hospital uses the IG as a template to update the way this information is represented in its EHR so that it is both consistent with other hospitals and compatible with SNF EHRs.                                                                                                                                              |
@@ -159,15 +159,14 @@ Resources by themselves are often not useful; Profiles and Extensions supplement
 This is the [Patient Resource](https://www.hl7.org/fhir/patient.html) found on HL7®'s FHIR® documentation site, which is publicly available for further information. The left-hand side shows the name of the given Resource (in this case, Patient) as well as all of its component categories underneath. This module will not dive into the technical details, but note that each category has information about potential flags, cardinality, type, and description/constraints.
 
 ![](images/base_fhir_resource_spec.png)
-
 :::
 
 ::: {.callout-caution collapse="true"}
 ## Expand to Learn About FHIR® Resource JSON Files
+
 Below is an example of a what a FHIR® Resource looks like after its been implemented in JSON format. Like earlier, this module will not dive into the technical details, but note the general layout and 4 major sections of a FHIR resource.
 
 ![](images/fhir_resource_json.png)
-
 :::
 
 ### 3.4 US FHIR® Core Profile
