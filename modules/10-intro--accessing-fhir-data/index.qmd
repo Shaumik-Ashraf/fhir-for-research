@@ -1,0 +1,154 @@
+---
+title: Accessing FHIR Data
+---
+
+## Objectives
+
+-   Understand how the standardized API that FHIR provides for accessing data supports interoperability.
+-   See some simple examples of using the FHIR API.
+-   Try modifying queries to a live FHIR server to see how the responses change.
+
+## What is the FHIR API?
+
+[Wikipedia](https://en.wikipedia.org/wiki/API) says:
+
+> An application programming interface (API) is a way for two or more computer programs to communicate with each other.
+
+[FHIR defines a standard API](https://www.hl7.org/fhir/http.html) that allows you (or your software) to request data from a FHIR-enabled server. The basics of this API should be consistent across FHIR servers, though servers can add their own custom functionality on top of the standard FHIR API.
+
+FHIR's API is based on [an architecture called REST (REpresentational State Transfer)](https://www.ibm.com/topics/rest-apis). The details of this architecture are beyond the scope of this module, but we will cover a few high-level characteristics of REST below as they are important for understanding FHIR's API.
+
+It's worth noting that most modern web-centric APIs are "RESTful" -- this makes it much easier for software engineers without prior FHIR experience to work with FHIR APIs because they have likely encountered other RESTful APIs.
+
+## Constructing a FHIR API request
+
+A FHIR server's API is typically accessed via a [URL](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL)[^1] like `https://api.logicahealth.org/researchonfhir/open/`.
+
+[^1]: URLs may only be accessible inside an institution's firewall, or may be accessible to the public internet. Even if a FHIR server is accessible to the public internet, it may not respond to *any* request -- depending on how it is configured, it may require authentication (like a username and password) to return any data.
+
+This URL is used to construct the API request, which typically takes the following form:
+
+``` markdown
+GET https://api.logicahealth.org/researchonfhir/open/Patient/1234
+```
+
+This would retrieve a FHIR instance of [Patient](https://www.hl7.org/fhir/patient.html) for the patient with the ID `1234`.
+
+::: {.callout-note collapse="true"}
+## Try a FHIR API request
+
+The general structure of a FHIR API request includes the following:
+
+-   `GET` = HTTP "verb", which tells the server whether you are asking for data or performing another operation (see [the FHIR documentation](https://www.hl7.org/fhir/http.html#trules) for details)
+-   `https://api.logicahealth.org/researchonfhir/open/` = URL to the FHIR API
+-   `Patient` = FHIR resource type you want
+-   `1234` = The ID for the resource you want (note that an ID is not needed for some types of API requests)
+
+The `https://api.logicahealth.org/researchonfhir/open` endpoint is a live FHIR server loaded with synthetic patient data. The patient ID `smart-1032702` exists in this data. Construct and run a FHIR query below to retrieve this patient's instance of Patient:
+
+<!--# Proof of concept "run live query" widget is below -- this needs to get replaced with something much more robust that allows the user to construct the request themselves. -->
+
+<button onclick="getPatient()">
+
+Run query
+
+</button>
+
+::: {#patient-output}
+:::
+:::
+
+The response to a FHIR API request is typically in [JSON](https://en.wikipedia.org/wiki/JSON) format, which, like REST, is a commonly used data interchange format.
+
+Here's an example of what this looks like for an instance of a Patient resource:
+
+<!--# Maybe do something like this for showing JSON? https://codepen.io/WartClaes/pen/QGGPJL -->
+
+``` json
+{
+    "resourceType": "Patient",
+    "id": "1234",
+    "meta":
+    "identifier":
+    [
+        {
+            "use": "official",
+            "type":
+            {
+                "coding":
+                [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                        "code": "MR",
+                        "display": "Medical Record Number"
+                    }
+                ],
+                "text": "Medical Record Number"
+            },
+            "system": "http://hospital.smarthealthit.org",
+            "value": "smart-1032702"
+        }
+    ],
+    "active": true,
+    "name":
+    [
+        {
+            "use": "official",
+            "family": "Shaw",
+            "given":
+            [
+                "Amy",
+                "V"
+            ]
+        }
+    ],
+    "telecom":
+    [
+        {
+            "system": "phone",
+            "value": "800-782-6765",
+            "use": "mobile"
+        },
+        {
+            "system": "email",
+            "value": "amy.shaw@example.com"
+        }
+    ],
+    "gender": "female",
+    "birthDate": "2007-03-20",
+    "address":
+    [
+        {
+            "use": "home",
+            "line":
+            [
+                "49 Meadow St"
+            ],
+            "city": "Mounds",
+            "state": "OK",
+            "postalCode": "74047",
+            "country": "USA"
+        }
+    ]
+}
+```
+
+Modern programming languages universally support parsing JSON, which makes it easier to work with FHIR data than if a bespoke format was used.[^2] JSONlll also has the convenient property of being relatively easy for humans to read.
+
+[^2]: FHIR servers can also typically return data in other standard formats, like [XML](https://en.wikipedia.org/wiki/XML).
+
+```{=html}
+<script>
+  let getPatient = function() {
+    let url = "https://api.logicahealth.org/researchonfhir/open/Patient/smart-1032702";
+    fetch(url) // Call the fetch function passing the url of the API as a parameter
+    .then(res => res.json())
+    .then(function (res) {
+      document.getElementById('patient-output').innerHTML = JSON.stringify(res);
+    })
+    .catch(function() {
+      // This is where you run code if the server returns any errors
+    });
+  };
+</script>
+```
