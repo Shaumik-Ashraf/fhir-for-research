@@ -36,6 +36,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-
+    include-in-header: head.html
+    include-in-after-body: scripts.html
 
 

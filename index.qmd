@@ -2,6 +2,7 @@
 title: "Home"
 ---
 
+
 # Roles
 
 -   **Investigator** A clinician/scientist who is in a research PI, co-I, or staff scientist position. Their role requires enough technical informatics understanding to design and conduct research, and interface closely with technical staff responsible for implementation of informatics approaches including FHIR.
@@ -100,3 +101,9 @@ title: "Home"
 ## Train the Trainer \> Discussing FHIR With Executive Leaders
 
 -   TBD
+
+# LittlefootJS Example
+
+A markdown footnote. [^1].
+
+[^1]: Footnote Content - this should be in a popup.
