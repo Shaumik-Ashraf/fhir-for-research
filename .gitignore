@@ -2,5 +2,7 @@
 _site/
 public/
 .Rproj.user
+.Rdata
+.Rhistory
 
 /python_env/
