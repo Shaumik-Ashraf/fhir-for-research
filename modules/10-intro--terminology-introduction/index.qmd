@@ -1,0 +1,12 @@
+---
+title: Terminology introduction
+---
+
+# Key concepts
+
+-   What is medical terminology?
+-   Why is terminology important for interoperability?
+-   What are some common terminologies you may encounter?
+-   How is terminology implemented in FHIR?
+
+# What is medical terminology?
