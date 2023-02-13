@@ -4,9 +4,33 @@ title: Terminology introduction
 
 # Key concepts
 
--   What is medical terminology?
+-   What is terminology in health informatics?
 -   Why is terminology important for interoperability?
--   What are some common terminologies you may encounter?
+-   What are some common terminology systems you may encounter?
 -   How is terminology implemented in FHIR?
 
-# What is medical terminology?
+# What is terminology in health informatics?
+
+[HIMSS provides a summary of terminology standards](https://www.himss.org/terminology-standards) as a way to:
+
+> address a fundamental requirement for effective communication -- the ability to represent concepts in an unambiguous manner between a sender and receiver of information. Most communication between health information systems relies on structured vocabularies, terminologies, code sets and classification systems to represent health concepts.
+
+You might be familiar with some terminology systems like ICD-10 for classifying diseases (and related concepts). These systems typically consist of:
+
+1.  A machine-readable code representing a concept (like the ICD-10 code `W56.02XA`)
+2.  A human-readable description of the code (for `W56.02XA`, the description is "Struck by dolphin, initial encounter")
+3.  "Metadata" describing additional attributes of the concept, like parent or related concepts (`W56.02XA` is part of `W56`, which is the group of ICD-10 codes for "Contact with nonvenomous marine animal")
+
+There are a number of other common terminology systems for classifying things like pharmaceuticals, laboratory testing, and vaccines. We will describe some of these below.
+
+# Why is terminology important for interoperability?
+
+<!--# tbd -->
+
+# What are some common terminology systems you may encounter?
+
+<!--# I would include ICD-9/10/11, SNOMED, LOINC, RxNorm, and CVX and then link to https://www.himss.org/terminology-standards. I would write a little more detail than HIMSS does, and include a sample code from each. -->
+
+# How is terminology implemented in FHIR?
+
+<!--# Sub-sections on code systems, value sets, and concept maps. You can use COVID vaccines as an illustrative example; http://build.fhir.org/ig/dvci/shc-terminology/branches/remove-disease-types/index.html has value sets you can use (but just pull out a few codes, maybe...don't have the entire value set). Karen can provide a concept map example going from CVX to ICD-11 from our WHO work. -->
