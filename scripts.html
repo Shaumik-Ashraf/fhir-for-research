@@ -7,5 +7,17 @@
 ></script>
 
 <script type="application/javascript">
-  littlefoot.littlefoot() // Pass any littlefoot settings here.
+  littlefoot.littlefoot({
+    activateOnHover: true,
+    buttonTemplate: `
+        <button
+          class="littlefoot__button btn btn-link"
+          id="<% reference %>"
+          title="See Footnote <% number %>"
+          style="padding:0;line-height:1;vertical-align:top;text-decoration:none;"
+        >
+          <% number %>
+        </button>
+    `
+  })
 </script>
