@@ -16,7 +16,7 @@ You will need to create a `venv` in `python_env/`:
 Then run `source python_env/bin/activate` to activate the `venv`, and the following command to install dependencies:
 
     pip install -r requirements.txt
-    
+
 If you add a dependency, run `pip freeze > requirements.txt` to update the requirements file.
 
 ## Quick Start
