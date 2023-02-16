@@ -6,11 +6,60 @@ editor: visual
 toc: true
 ---
 
+# Outline
+
+<div class="alert alert-danger">This section will be deleted - here for reference</div>
+
+**Learning Objectives**
+
+1. Learn of key healthcare resources such as Patient, Observation, and Bundle
+2. Understand how FHIR defines resources with great granularity and flexibility
+3. Understand how FHIR encapsulates metadata as resources
+
+**Module Sections**
+
+ - Overview of Core Elements
+   + hl7.org/fhir screenshot
+ - Patient
+   + Snapshot Table
+   + Complex Types, HumanName example
+   + Choice types, deceased[X] example
+   + Link to Terminology for ValueSets, Codeable Concepts
+   + JSON Example
+ - Observation
+ - Condition
+ - Procedure
+ - Practitioner
+ - Organization
+ - Bundle
+ - Composition
+ - Reference
+ - Extension
+ - CapabilityStatement
+ - StructureDefinition
+ - OperationDefinition
+ - Profiling of Elements
+
+**Sources**
+
+- <http://hl7.org/fhir/>
+- <http://hl7.org/fhir/patient.html>
+- <http://hl7.org/fhir/observation.html>
+- <http://www.hl7.org/fhir/bundle.html>
+- <http://www.hl7.org/fhir/references.html>
+- <http://hl7.org/fhir/extensibility.html>
+- <http://hl7.org/fhir/capabilitystatement.html>
+- <http://hl7.org/fhir/structuredefinition.html>
+- <http://build.fhir.org/operationdefinition.html>
+- <http://hl7.org/fhir/profiling.html>
+- <http://build.fhir.org/ig/HL7/fhir-shorthand/reference.html>
+
+---
+
 ## Learning Objectives
  - Learn of key healthcare resources such as Patient, Observation, and Bundle
  - Understand how FHIR defines resources with great granularity and flexibility
  - Understand how FHIR encapsulates metadata as resources
- - Learn of new Logical and Resource modelling in FHIR Revision 5
 
 ## 1. Overview of Core Elements
 
