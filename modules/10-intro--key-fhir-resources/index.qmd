@@ -63,20 +63,23 @@ toc: true
 
 ## 1. Overview of Core Elements
 
-The [HL7 FHIR Website](https://hl7.org/fhir) gives a well structured summary of most Resources in FHIR Core:
+Recall that FHIR itself stands for _Fast Healthcare Interoperability **Resources**_. The FHIR Core defines, among other things,
+140 Resources that are the building blocks for healthcare interoperability. The [HL7 FHIR Website](https://hl7.org/fhir) gives
+a well structured summary of the FHIR Core:
 
 ![Levels classification for FHIR Core](images/fhir-index-delinked.png)
 
-As shown above the FHIR Core is tiered into 5 levels.
+As shown above the FHIR Core is tiered into 5 levels. The lower levels define primitive data types, complex data types, encodings, and other
+infrastructure required to implement FHIR. Progressively higher levels begin to encapsulate clinical information, with level 3 defining intuitive
+Resources such as `Patient` and level 5 representing clinical workflows or medical knowledge with the intended use of Clinical Decision Support.
 
-A lower level refers to fundamental definitions required for a software developer to implement FHIR, while higher
-level resources correspond more directly to clinical use cases. FHIR itself stands for _Fast Healthcare Interoperability
-Resources_, so each of these resources encapsulate a piece of clinical information in transit and the resource structure defines
-the semantics for embedding clinical information. The resource itself may be encoded in JSON or XML and processed by any programming
-language or software tool. What FHIR enables is a way to define and structure the _semantics_ of clinical information for meaningful
-communication. FHIR is granular enough to capture the most miniscule information possible, while also flexible enough to work with a
-variety of medical informatics standards such as LOINC or ICD and also expand to new discoveries or workflows in healthcare. To best
-best understand how FHIR accomplishes this, lets examine the Patient resource.
+The resource itself may be encoded in JSON, XML, or Turtle with processing done by any programming language or software tool. The FHIR standard
+and Resource specifications are for defining the semantics necessary to transfer clinical information. FHIR is granular enough to capture the
+most miniscule piece of information possible, but also flexible enough to work with a variety of medical informatics standards such as LOINC or ICD.
+A Resource can also extend itself to encompase new discoveries, profile itself for more specific use cases, define metadata for powerful autoconfiguration,
+and carry human-readible data for manual stewardship.
+
+To best best understand how FHIR accomplishes this, lets examine the Patient resource.
 
 ## 2. Patient Resource
 
