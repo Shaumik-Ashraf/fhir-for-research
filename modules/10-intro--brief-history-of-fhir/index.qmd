@@ -16,7 +16,7 @@ bibliography: bibliography.bib
 
 ## 1. Evolution of HL7 Standards
 
-Before learning about FHIR, an understanding of the standards that came before it is necessary to understand why it was developed. HL7 has been developing standards for the **transfer of healthcare data** since the late 1980s, with three major standards being implemented since then:
+Before learning about FHIR, an understanding of the standards that came before it is necessary to understand why it was developed. HL7 (Health Level 7) has been developing standards for the **transfer of healthcare data** since the late 1980s, with three major standards being implemented since then. Each successive standard has been built on the lessons learned from the previous one, resulting in the current version of FHIR today.
 
 -   1989: HL7 V2
 
@@ -24,11 +24,9 @@ Before learning about FHIR, an understanding of the standards that came before i
 
 -   2014: HL7 FHIR
 
-Each successive standard has been built on the lessons learned from the previous one, resulting in the current version of FHIR today.
-
 ### 1.1 HL7 Version 2: Messages
 
-Released in 1989, HL7 V2 allowed for the **simple transfer of messages** for clinical and patient care information. It was mainly **developed by clinical interface specialists** and is essentially a database query language that both developers can come up to speed quickly on and healthcare providers can use to send or request messages containing health data. The drawback of being so simple is that it does not support more complex interactions. It is currently the most widely used messaging standard in healthcare today, as it is the most mature.
+Released in 1989, HL7 V2 allowed for the **simple transfer of messages** for clinical and patient care information. It was mainly **developed by clinical interface specialists** and is a database query language that both developers can come up to speed quickly on and healthcare providers can use to send or request messages containing health data. The drawback of being simple is that it does not support complex interactions. It is currently the most widely used messaging standard in healthcare today, as it is the most mature.
 
 ### 1.2 HL7 Version 3: Clinical Documents
 
@@ -45,7 +43,7 @@ In response to these issues, HL7 V3 adoption has not been as large as HL7 V2, as
 
 In the early 2010s, the scope of data sharing in the healthcare space needed to be broadened, going beyond simple messages and clinical documents to span organizations, disciplines, and borders. The expansion of mobile and cloud-based applications was slowly finding its way into the healthcare space and standards needed to keep up. Thus enters HL7 FHIR, which is an alternative to document-centric approaches and leverages **web technologies such as HTTP-based RESTful APIs** to expand both the type of information that can be exchanged as well as the types of systems that can exchange it.
 
-With a major goal being to facilitate interoperability between legacy health care systems, it both builds upon previous standards (HL7 V2, HL7 V3, HL7 CDA) as well as adopts modern web technologies. FHIR has been able to bridge the gap between 30 year old standards and modern web-based connectivity. And with its focus away from specified messages/documents and more towards the use of small building blocks (Resources) to build implementations, it can be customized to fit much more use cases compared to its predecessors.
+With a major goal being to facilitate interoperability between legacy health care systems, it both builds upon previous standards (HL7 V2, HL7 V3, HL7 CDA) as well as adopts modern web technologies. FHIR has been able to bridge the gap between 30 year old standards and modern web-based connectivity. And with its focus away from specified messages and documents and more towards the use of small building blocks (Resources) to build implementations, it can be customized to fit much more use cases compared to its predecessors.
 
 ## 2. FHIR Eras
 
@@ -61,7 +59,7 @@ With an understanding of the history of standards before and leading up to FHIR,
 
 The basic concepts of FHIR start with the beginnings of the internet in the mid 1990s. Web 1.0 was largely based on static pages using **HTTP (Hypertext Transfer Protocol)** to retrieve them. With such a limited system, **REST (REpresentational State Transfer)** was developed and popularized in the early 2000s. Its purpose was to create a standard framework for HTTP that could allow two servers to communicate and exchange data anywhere in the world, thus providing the structure for Web 2.0 and the explosion of worldwide websites in the 2000s.
 
-At this point in time, healthcare data exchange was very limited to sending messages and documents and was not using any web-based transactional frameworks. Then in the late 2000s, the idea emerged to apply RESTful data exchange principles in healthcare within HL7 and its interoperability/web development partners. FHIR was then officially introduced in 2012, beginning the era of healthcare API development and web-based health data exchange. Shortly after, support also came from the JASON task force, which is an independent group of elite scientists that has advised the government on matters of science and technology since the 1960s. In 2014, the JASON Report titled "A Robust Health Data Infrastructure" [@jason_report] was published and called for health data APIs to be developed to liberate data that was locked in electronic health records. This helped pave the way for significant government support of FHIR in the coming years.
+At this point in time, healthcare data exchange was very limited to sending messages and documents and was not using any web-based transactional frameworks. Then in the late 2000s, the idea emerged to apply RESTful data exchange principles in healthcare within HL7 and its interoperability and web development partners. Starting in 2012, a team at HL7 led by Grahame Grieve began to develop a draft standard that built on the simplicity of HL7 V2 messages with technologies of the world wide web, resulting in FHIR. This began the era of healthcare API development and web-based health data exchange. Shortly after, support also came from the JASON task force, which is an independent group of scientists that has advised the government on matters of science and technology since the 1960s. In 2014, the JASON Report titled "A Robust Health Data Infrastructure" [@jason_report] was published and called for health data APIs to be developed to liberate data that was locked in electronic health records. This helped pave the way for significant government support of FHIR in the coming years.
 
 ### 2.2. 2014-2018: Developing the Core
 
@@ -87,7 +85,7 @@ By 2019, FHIR had reached maturity to a point that brought in the third major er
 
 -   Obtaining data for public health via FHIR
 
-In the coming years, more FHIR resources will become mature, along with an expansion of FHIR Accelerators and their use cases. However, the current state of FHIR is still far from realizing the vision of interoperability. The most important future eras have not been entered yet, which involve full-scale development and having a nationwide impact. One of the biggest factors to reach these new eras is the question of **who will pay** for such a significant change. Scaling FHIR to nationwide development includes complex and expensive changes/additions to existing IT systems, with organizations such as the US public health system and community health centers already limited budgets. The government (mainly ONC and CMS) have sponsored the development of FHIR standards for the past decade, but the main cost for nationwide deployment still remains to be solved.
+In the coming years, more FHIR resources will become mature, along with an expansion of FHIR Accelerators and their use cases. However, the current state of FHIR is still far from realizing the vision of interoperability. The most important future eras have not been entered yet, which involve full-scale development and having a nationwide impact. One of the biggest factors to reach these new eras is the question of **who will pay** for such a significant change. Scaling FHIR to nationwide development includes complex and expensive changes and additions to existing IT systems, with organizations such as the US public health system and community health centers already limited budgets. The government (mainly ONC and CMS) have sponsored the development of FHIR standards for the past decade, but the main cost for nationwide deployment still remains to be solved.
 
 ## 3. FHIR Releases Over Time and Their Impacts
 
