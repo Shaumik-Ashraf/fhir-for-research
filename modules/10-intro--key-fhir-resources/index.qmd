@@ -21,24 +21,27 @@ toc: true
  - Overview of Core Elements
    + hl7.org/fhir screenshot
  - Patient
-   + Snapshot Table
+   + Table
    + Complex Types, HumanName example
    + Choice types, deceased[X] example
-   + Link to Terminology for ValueSets, Codeable Concepts
-   + JSON Example
+   + Codeable Concepts (brief)
+   + Inherited Attributes
+   + Examples
  - Observation
- - Condition
- - Procedure
- - Practitioner
- - Organization
- - Bundle
- - Composition
  - Reference
- - Extension
- - CapabilityStatement
- - StructureDefinition
- - OperationDefinition
- - Profiling of Elements
+ - Bundle
+ - More Major Resources
+   + Condition
+   + Procedure
+   + Practitioner
+   + Organization
+   + Composition
+   + Extension
+ - Metadefining Resources
+   + CapabilityStatement
+   + StructureDefinition
+   + OperationDefinition
+ - Profiling of Elements (maybe brief - linked to other section - or moved under patient)
 
 **Sources**
 
@@ -125,6 +128,10 @@ case studies on Pieter van de Heuvel[^5]. At the same time it is also very flexi
 ### A Choice Type - deceased[x]
 
 TODO
+
+### A Codeable Concept - maritalStatus
+
+TODO (link to Terminology section)
 
 ### Inherited Attributes
 
