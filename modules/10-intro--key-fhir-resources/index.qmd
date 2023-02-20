@@ -42,17 +42,17 @@ toc: true
 
 **Sources**
 
-- <http://hl7.org/fhir/>
-- <http://hl7.org/fhir/patient.html>
-- <http://hl7.org/fhir/observation.html>
-- <http://www.hl7.org/fhir/bundle.html>
-- <http://www.hl7.org/fhir/references.html>
-- <http://hl7.org/fhir/extensibility.html>
-- <http://hl7.org/fhir/capabilitystatement.html>
-- <http://hl7.org/fhir/structuredefinition.html>
-- <http://build.fhir.org/operationdefinition.html>
-- <http://hl7.org/fhir/profiling.html>
-- <http://build.fhir.org/ig/HL7/fhir-shorthand/reference.html>
+- <https://hl7.org/fhir/>
+- <https://hl7.org/fhir/patient.html>
+- <https://hl7.org/fhir/observation.html>
+- <https://www.hl7.org/fhir/bundle.html>
+- <https://www.hl7.org/fhir/references.html>
+- <https://hl7.org/fhir/extensibility.html>
+- <https://hl7.org/fhir/capabilitystatement.html>
+- <https://hl7.org/fhir/structuredefinition.html>
+- <https://build.fhir.org/operationdefinition.html>
+- <https://hl7.org/fhir/profiling.html>
+- <https://build.fhir.org/ig/HL7/fhir-shorthand/reference.html>
 
 ---
 
@@ -63,23 +63,28 @@ toc: true
 
 ## 1. Overview of Core Elements
 
-Recall that FHIR itself stands for _Fast Healthcare Interoperability **Resources**_. The FHIR Core defines, among other things,
-140 resources **TODO cite** that are the building blocks for healthcare interoperability. The [HL7 FHIR Website](https://hl7.org/fhir) gives
+Recall that FHIR itself stands for _Fast Healthcare Interoperability **Resources**_. The FHIR Core v4.3.0 (also known as Revision 4B, or R4B) defines
+140 resources[^1] that are the building blocks for healthcare interoperability. The [HL7 FHIR Website](https://hl7.org/fhir) gives
 a well structured summary of the FHIR Core:
 
-![Levels classification for FHIR Core](images/fhir-index-delinked.png)
+[^1]: <https://hl7.org/fhir/R4B/resourcelist.html>
 
-As shown above the FHIR Core is tiered into 5 levels. The lower levels define primitive data types, complex data types, encodings, and other
+![Classification levels for FHIR Core](images/fhir-index-delinked.png)
+
+As shown above the FHIR Core is tiered into 5 levels. The lower levels define data types, encodings, and other
 infrastructure required to implement FHIR. Progressively higher levels begin to encapsulate clinical information, with level 3 defining intuitive
 Resources such as `Patient` and level 5 representing clinical workflows or medical knowledge with the intended use of Clinical Decision Support.
 
-The resource itself may be encoded in JSON, XML, or Turtle with processing done by any programming language or software tool. The FHIR standard
+A resource may be encoded in JSON, XML, or Turtle[^2] with processing done by any programming language or software tool. The FHIR standard
 and Resource specifications are for defining the semantics necessary to transfer clinical information. FHIR is granular enough to capture the
-most miniscule piece of information possible, but also flexible enough to work with a variety of medical informatics standards such as LOINC or ICD.
+miniscule pieces of information, but also flexible enough to work with a variety of medical use cases and data collection pipelines already in place.
 A Resource can also extend itself to encompase new discoveries, profile itself for more specific use cases, define metadata for powerful autoconfiguration,
-and carry human-readible data for manual stewardship. **TODO cite** These resources fully follow Object Oriented principles. **TODO cite**
+and carry human-readible data for manual stewardship. These resources fully follow Object Oriented principles.[^3]
 
-To best best understand how FHIR accomplishes this, lets examine the Patient resource.
+[^2]: <https://hl7.org/fhir/formats.html#wire>
+[^3]: <https://en.wikipedia.org/wiki/Object-oriented_programming>
+
+To understand how FHIR accomplishes this, let us examine the Patient resource.
 
 ## 2. Patient Resource
 
@@ -91,23 +96,54 @@ The table can be interpreted as follows:
 
  - **Name**: The attribute name.
  - **Flags**: Special markers that carry information required for implementers. For example, **`N`** means the resource is normative, which is the
-highest degree of officiality in the FHIR standard. [See all flags here](http://hl7.org/fhir/formats.html#table).
+highest degree of officiality in the FHIR standard. [See all flags here](https://hl7.org/fhir/formats.html#table).
  - **Card.**: The cardinality of the attribute in format `{minimum}..{maximum}`. For example, `0..*` implies zero to any possible number of values and `1..1`
 implies exactly 1 required element.
  - **Type**: The primitive or complex data type, where a complex data type is another Resource. Note in the first row that `Patient` itself also has a type,
-which gives inheritence of additional attributes we'll discuss [below](#TODO). [See all FHIR types here](https://hl7.org/fhir/datatypes.html).
- - **Description & Constraints**: A human-targeted explanation of the attribute, but may also contain key constraints that much be enforced by
+which gives inheritence of additional attributes we'll discuss [below](#inherited-attributes). [See all FHIR types here](https://hl7.org/fhir/datatypes.html).
+ - **Description & Constraints**: A human-targeted explanation of the attribute, but may also contain key constraints that must be enforced by
 implementors.
 
 Once you gain familiarity with FHIR, reading the corresponding table will give all the information you need to utilize a resource. FHIR is also defined so that
-drafting a standard automatically generated the table and additional documentation **TODO cite**. If you can thoroughly understand the Patient resource, then
+drafting a standard automatically generated the table and additional documentation[^4]. If you can thoroughly understand the Patient resource, then
 you can understand the majority of resources out there.
 
-### The first Complex Type - HumanName
+[^4]: <https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation#IGPublisherDocumentation-Summary>
+
+### The First Complex Type - HumanName
 
 Since complex types are just Resources and FHIR automatically documents resources by defining them, `HumanName` also has it's own [structure table](https://hl7.org/fhir/datatypes.html#HumanName):
 
 ![HumanName Resource](images/fhir-r4b-human_name-structure-delinked.png)
 
-Here you can see the granularity of FHIR. `HumanName` is designed to capture any and all possible circumstances, from nicknames to temporary pseudonyms to
-medical cases for Pieter van de Heuvel(**TODO cite https://hl7.org/fhir/patient-example-f001-pieter.json.html). At the same time it is also ver flexible:
+Here you can see the granularity of FHIR. `HumanName` is designed to capture any and all possible circumstances, from temporary pseudonyms to
+case studies on Pieter van de Heuvel[^5]. At the same time it is also very flexible
+
+[^5]: <https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation#IGPublisherDocumentation-Summary>
+
+
+### A Choice Type - deceased[x]
+
+TODO
+
+### Inherited Attributes
+
+TODO
+
+### Example Patients
+
+To summarize everything about the Patient resource into practice, here is a minimalistic Patient resource:
+
+```
+// TODO
+```
+
+In the real-world there would likely be an [implementation guide](#TODO) that requires more attributes for a specific use case. For example here is a
+Patient resource from the [US Core Data for Interoperability (USDCI)](https://build.fhir.org/ig/HL7/US-Core/index.html):
+
+```
+// TODO
+```
+
+This example should give you a full idea of what a FHIR Patient resource is and how it contains healthcare data. If you need more examples you can try the
+[FHIR Core Patient examples](https://hl7.org/fhir/patient-examples.html) or [US Core Patient examples](https://build.fhir.org/ig/HL7/US-Core/StructureDefinition-us-core-patient-examples.html).
