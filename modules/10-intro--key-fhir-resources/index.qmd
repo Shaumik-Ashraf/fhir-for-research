@@ -76,10 +76,10 @@ a well structured summary of the FHIR Core:
 
 As shown above the FHIR Core is tiered into 5 levels. The lower levels define data types, encodings, and other
 infrastructure required to implement FHIR. Progressively higher levels begin to encapsulate clinical information, with level 3 defining intuitive
-Resources such as `Patient` and level 5 representing clinical workflows or medical knowledge with the intended use of Clinical Decision Support.
+resources such as `Patient` and level 5 representing clinical workflows or medical knowledge with the intended use of Clinical Decision Support.
 
 A resource may be encoded in JSON, XML, or Turtle[^2] with processing done by any programming language or software tool. The FHIR standard
-and Resource specifications are for defining the semantics necessary to transfer clinical information. FHIR is granular enough to capture the
+and resource specifications are for defining the semantics necessary to transfer clinical information. FHIR is granular enough to capture the
 miniscule pieces of information, but also flexible enough to work with a variety of medical use cases and data collection pipelines already in place.
 A Resource can also extend itself to encompase new discoveries, profile itself for more specific use cases, define metadata for powerful autoconfiguration,
 and carry human-readible data for manual stewardship. These resources fully follow Object Oriented principles.[^3]
@@ -107,8 +107,8 @@ which gives inheritence of additional attributes we'll discuss [below](#inherite
  - **Description & Constraints**: A human-targeted explanation of the attribute, but may also contain key constraints that must be enforced by
 implementors.
 
-Once you gain familiarity with FHIR, reading the corresponding table will give all the information you need to utilize a resource. FHIR is also defined so that
-drafting a standard automatically generated the table and additional documentation[^4]. If you can thoroughly understand the Patient resource, then
+Once you gain familiarity with FHIR, reading the corresponding table will give all the information you need to utilize a resource. FHIR is also designed so that
+drafting a standard automatically generates the table and additional documentation[^4]. If you can thoroughly understand the Patient resource, then
 you can understand the majority of resources out there.
 
 [^4]: <https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation#IGPublisherDocumentation-Summary>
