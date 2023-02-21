@@ -382,12 +382,28 @@ And an example Observation of high blood glucose levels:
 
 From reading the above it is evident how the following information is semantically encoded:
 
- - **`resourceType: Observation`**: indicates that this is an Observation FHIR instance.
- - **`id: f001`**: the resource id is _f001_. An id only has to be unique per resourceType and FHIR server. See [accessing FHIR data](/modules/10-intro--accessing-fhir-data/) for how to use `id`.
- - **`text: ... (omitted for brevity)`**: human-targeted text for fallback if FHIR software fails. Although it is usually generated it should be treated as unstructured.
- - **`status: final`**: a _required_ attribute of `coding` type with a value set binding, which is effectively a string-based enumeration. This indicates the observation is finalized.
- - **`code: ...`**: a _required_ `CodeableConcept`, conforming to a [terminology binding](/modules/10-intro--terminology-introduction/) and providing a [LOINC code](http://hl7.org/fhir/valueset-observation-codes.html).
- - **`subject: ...`**: a [Reference](http://hl7.org/fhir/references.html#Reference) to another patient resource via `resourceType` and `id`. In this case it is the example Patient from earlier.
- - **`valueQuantity: ...`**: a supplied `value[x]` choice type with the actual result. In this case they use type [Quantity](http://hl7.org/fhir/datatypes.html#Quantity) to specify blood glucose concentration with units and a universal unit system.
+ - **resourceType: Observation**: indicates that this is an Observation FHIR instance.
+ - **id: f001**: the resource id is _f001_. An id only has to be unique per resourceType and FHIR server. See [accessing FHIR data](/modules/10-intro--accessing-fhir-data/) for how to use `id`.
+ - **text: ... (omitted for brevity)**: human-targeted text for fallback if FHIR software fails. Although it is usually generated it should be treated as unstructured.
+ - **status: final**: a _required_ attribute of `coding` type with a value set binding, which is effectively a string-based enumeration. This indicates the observation is finalized.
+ - **code: ...**: a _required_ `CodeableConcept`, conforming to a [terminology binding](/modules/10-intro--terminology-introduction/) and providing a [LOINC code](http://hl7.org/fhir/valueset-observation-codes.html).
+ - **subject: ...**: a [Reference](http://hl7.org/fhir/references.html#Reference) to another patient resource via `resourceType` and `id`. In this case it is the example Patient from earlier.
+ - **valueQuantity: ...**: a supplied `value[x]` choice type with the actual result. In this case they use type [Quantity](http://hl7.org/fhir/datatypes.html#Quantity) to specify blood glucose concentration with units and a universal unit system.
 
-## Bundle
+## 4. Bundle Resource
+
+In practice you will seldom find the two example resources above individually. The high-blood glucose observation is useless without a patient it applies too, and there is no purpose for a patient in a healthcare workflow unless it has an observed medical problem. Thus you will usually find multiple FHIR instances together in one package - a `Bundle` resource. Here is the [structure for Bundle]:
+
+![Bundle Resource](images/fhir-bundle-structure-delinked.png)
+
+And Bundle instance incorporating the above two examples:
+
+```json
+// TODO build with fhir_models to be safe
+```
+
+Essentially the bundle resource has:
+ - **resourceType: Bundle**: specify that this is a Bundle instance
+ - **type: collection**: specify that this Bundle is a collection of resources. Alternatives include `document` or `transaction`.
+ - **entry: ...**: an array of Bundle entries. Each entry is a [BackboneElement](http://hl7.org/fhir/backboneelement.html) which the FHIR counterpart to a structured map or named dictionary.
+ - **entry[0].resource: ...**: the actual resource contained within the entry.
