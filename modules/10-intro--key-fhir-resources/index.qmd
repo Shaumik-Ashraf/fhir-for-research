@@ -399,11 +399,211 @@ In practice you will seldom find the two example resources above individually. T
 And Bundle instance incorporating the above two examples:
 
 ```json
-// TODO build with fhir_models to be safe
+{
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "id": "f001",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Pieter van de Heuvel </b> male, DoB: 1944-11-17 ( id: 738472983 (USUAL))</p></div>"
+        },
+        "identifier": [
+          {
+            "use": "usual",
+            "system": "urn:oid:2.16.840.1.113883.2.4.6.3",
+            "value": "738472983"
+          },
+          {
+            "use": "usual",
+            "system": "urn:oid:2.16.840.1.113883.2.4.6.3"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "usual",
+            "family": "van de Heuvel",
+            "given": [
+              "Pieter"
+            ],
+            "suffix": [
+              "MSc"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "0648352638",
+            "use": "mobile"
+          },
+          {
+            "system": "email",
+            "value": "p.heuvel@gmail.com",
+            "use": "home"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1944-11-17",
+        "deceasedBoolean": false,
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "Van Egmondkade 23"
+            ],
+            "city": "Amsterdam",
+            "postalCode": "1024 RJ",
+            "country": "NLD"
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "M",
+              "display": "Married"
+            }
+          ],
+          "text": "Getrouwd"
+        },
+        "multipleBirthBoolean": true,
+        "contact": [
+          {
+            "relationship": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
+                    "code": "C"
+                  }
+                ]
+              }
+            ],
+            "name": {
+              "use": "usual",
+              "family": "Abels",
+              "given": [
+                "Sarah"
+              ]
+            },
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "0690383372",
+                "use": "mobile"
+              }
+            ]
+          }
+        ],
+        "communication": [
+          {
+            "language": {
+              "coding": [
+                {
+                  "system": "urn:ietf:bcp:47",
+                  "code": "nl",
+                  "display": "Dutch"
+                }
+              ],
+              "text": "Nederlands"
+            },
+            "preferred": true
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/f001",
+          "display": "Burgers University Medical Centre"
+        },
+        "resourceType": "Patient"
+      }
+    },
+    {
+      "resource": {
+        "id": "f001",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource &quot;f001&quot; </p></div><p><b>identifier</b>: id: 6323 (OFFICIAL)</p><p><b>status</b>: final</p><p><b>code</b>: Glucose [Moles/volume] in Blood <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"https://loinc.org/\">LOINC</a>#15074-8)</span></p><p><b>subject</b>: <a href=\"patient-f001.html\">Patient/f001: P. van de Heuvel</a> &quot;Pieter VAN DE HEUVEL&quot;</p><p><b>effective</b>: 2013-04-02T09:30:10+01:00 --&gt; (ongoing)</p><p><b>issued</b>: 04/04/2013 1:30:10 AM</p><p><b>performer</b>: <a href=\"practitioner-f005.html\">Practitioner/f005: A. Langeveld</a> &quot;Langeveld ANNE&quot;</p><p><b>value</b>: 6.3 mmol/l<span style=\"background: LightGoldenRodYellow\"> (Details: UCUM code mmol/L = 'mmol/L')</span></p><p><b>interpretation</b>: High <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/3.1.0/CodeSystem-v3-ObservationInterpretation.html\">ObservationInterpretation</a>#H)</span></p><h3>ReferenceRanges</h3><table class=\"grid\"><tr><td>-</td><td><b>Low</b></td><td><b>High</b></td></tr><tr><td>*</td><td>3.1 mmol/l<span style=\"background: LightGoldenRodYellow\"> (Details: UCUM code mmol/L = 'mmol/L')</span></td><td>6.2 mmol/l<span style=\"background: LightGoldenRodYellow\"> (Details: UCUM code mmol/L = 'mmol/L')</span></td></tr></table></div>"
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "system": "http://www.bmc.nl/zorgportal/identifiers/observations",
+            "value": "6323"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "15074-8",
+              "display": "Glucose [Moles/volume] in Blood"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/f001",
+          "display": "P. van de Heuvel"
+        },
+        "effectivePeriod": {
+          "start": "2013-04-02T09:30:10+01:00"
+        },
+        "issued": "2013-04-03T15:30:10+01:00",
+        "performer": [
+          {
+            "reference": "Practitioner/f005",
+            "display": "A. Langeveld"
+          }
+        ],
+        "valueQuantity": {
+          "value": 6.3,
+          "unit": "mmol/l",
+          "system": "http://unitsofmeasure.org",
+          "code": "mmol/L"
+        },
+        "interpretation": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                "code": "H",
+                "display": "High"
+              }
+            ]
+          }
+        ],
+        "referenceRange": [
+          {
+            "low": {
+              "value": 3.1,
+              "unit": "mmol/l",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            },
+            "high": {
+              "value": 6.2,
+              "unit": "mmol/l",
+              "system": "http://unitsofmeasure.org",
+              "code": "mmol/L"
+            }
+          }
+        ],
+        "resourceType": "Observation"
+      }
+    }
+  ],
+  "resourceType": "Bundle"
+}
 ```
 
 Essentially the bundle resource has:
+
  - **resourceType: Bundle**: specify that this is a Bundle instance
  - **type: collection**: specify that this Bundle is a collection of resources. Alternatives include `document` or `transaction`.
  - **entry: ...**: an array of Bundle entries. Each entry is a [BackboneElement](http://hl7.org/fhir/backboneelement.html) which the FHIR counterpart to a structured map or named dictionary.
  - **entry[0].resource: ...**: the actual resource contained within the entry.
+
+**TODO fix JSON resourceType**
