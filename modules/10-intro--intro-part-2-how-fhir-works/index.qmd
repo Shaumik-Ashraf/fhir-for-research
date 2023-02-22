@@ -54,7 +54,7 @@ Most applications of FHIR therefore require greater specificity than is provided
 This is quite abstract, so a baking analogy may be helpful:
 
 | FHIR Term | Baking Analog       | Description                                                                                                                        |
-|------------|------------|-------------------------------------------------|
+|---------------|---------------|-------------------------------------------|
 | Resource  | Cake                | A broad template with possible characteristics such as flavor, icing, toppings, and number of tiers.                               |
 | Profile   | Type of cake        | Adds constraints to the base Cake Resource to represent a specific type of cake.                                                   |
 | Extension | Cake shape and size | If the base Cake Resource does not provide a way to define cake shape and size, this can be added by a Profile using an Extension. |
@@ -79,7 +79,7 @@ Applying the cake analogy to a Prior Level of Function Profile, we have:
 
 In addition to providing a standard way to represent and store data (in instances of Resources, as described above), FHIR provides a standard way for systems to request and send instances of Resources to each other.
 
-This standard communication approach is called an API (short for [Application Program Interface](https://en.wikipedia.org/wiki/API)). As mentioned in Part 1 <!--# Add link to Part 1 -->, FHIR's API uses a \[REST\](https://en.wikipedia.org/wiki/Representational_state_transfer)ful approach, which is a widely used API paradigm throughout the technology industry. More specifics on FHIR's API can be found in the Accessing FHIR Data module. <!--# Add link to module -->
+This standard communication approach is called an API (short for [Application Program Interface](https://en.wikipedia.org/wiki/API)). As mentioned in [Part 1](modules/10-intro--intro-part-1-what-is-fhir), FHIR's API uses a \[REST\](https://en.wikipedia.org/wiki/Representational_state_transfer)ful approach, which is a widely used API paradigm throughout the technology industry. More specifics on FHIR's API can be found in the [Accessing FHIR Data module](modules/10-intro--accessing-fhir-data).
 
 Here is a high-level diagram showing how FHIR's API can connect systems to each other:
 
