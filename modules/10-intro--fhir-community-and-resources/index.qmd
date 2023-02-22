@@ -18,7 +18,7 @@ HL7 specifications and many FHIR Implementation Guides are developed as HL7 proj
 
 > Work groups are the bodies within HL7 that take on responsibility for developing and maintaining standards. They are where the "work" of HL7 gets done. HL7 has a large number of work groups covering the spectrum of the healthcare space. All work groups are open to participation by anyone with an interest in their content.
 
-These typically meet virtually on a weekly basis for a conference call, as well as in person (or hybird) at [HL7 Working Group Meetings](https://www.hl7.org/events/workgroupmeetings.cfm?ref=nav) held three times per year.
+These typically meet virtually on a weekly basis for a conference call, as well as in person (or hybrid) at [HL7 Working Group Meetings](https://www.hl7.org/events/workgroupmeetings.cfm?ref=nav) held three times per year.
 
 HL7 Work Groups consist of volunteer subject matter experts and other stakeholders. Each Work Group has a [mailing list](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions) that you can join to communicate with the Work Group, including asking for time on an upcoming conference call. Work Groups also typically post conference call agendas on their Confluence sites ([see the Work Group directory for Confluence links](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802)).
 
