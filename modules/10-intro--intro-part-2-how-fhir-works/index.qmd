@@ -19,7 +19,7 @@ This is the second part of our introduction to FHIR for research. You should [re
 This module goes into greater depth on how FHIR works from a technical standpoint, and will be of greatest interest to those who are interested in using FHIR in their work.
 :::
 
-## 1. The structure of FHIR
+## 1. The Structure of FHIR
 
 ONC (Office of the National Coordinator for Health IT)'s [FHIR Fact Sheet](https://www.healthit.gov/sites/default/files/page/2021-04/What%20Is%20FHIR%20Fact%20Sheet.pdf) describes the core capabilities of FHIR:
 
@@ -79,7 +79,7 @@ Applying the cake analogy to a Prior Level of Function Profile, we have:
 
 In addition to providing a standard way to represent and store data (in instances of Resources, as described above), FHIR provides a standard way for systems to request and send instances of Resources to each other.
 
-This standard communication approach is called an API (short for [Application Program Interface](https://en.wikipedia.org/wiki/API)). As mentioned in [Part 1](modules/10-intro--intro-part-1-what-is-fhir), FHIR's API uses a \[REST\](https://en.wikipedia.org/wiki/Representational_state_transfer)ful approach, which is a widely used API paradigm throughout the technology industry. More specifics on FHIR's API can be found in the [Accessing FHIR Data module](modules/10-intro--accessing-fhir-data).
+This standard communication approach is called an API (short for [Application Program Interface](https://en.wikipedia.org/wiki/API)). As mentioned in [Part 1](modules/10-intro--intro-part-1-what-is-fhir), FHIR's API uses a [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful approach, which is a widely used API paradigm throughout the technology industry. More specifics on FHIR's API can be found in the [Accessing FHIR Data module](modules/10-intro--accessing-fhir-data).
 
 Here is a high-level diagram showing how FHIR's API can connect systems to each other:
 
