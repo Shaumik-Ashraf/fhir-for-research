@@ -559,6 +559,24 @@ Essentially the bundle resource has:
 
 **TODO fix JSON resourceType**
 
+In some cases you may receive a bundle with one or zero entries if the context calls for it. For example a [FHIR Query](#TODO) is expected to return a varied number of resources, so the server
+executing the query will return a bundle regardless of the count.
+
+## 5. Capability statement resource
+
+## 6. Other Major Resources
+
+| Resource                                                         | Description                                                                                                                     |
+|:----------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
+| [Condition](https://hl7.org/fhir/condition)                      | |
+| [Procedure](https://hl7.org/fhir/procedure)                      | |
+| [Practitioner](https://hl7.org/fhir/practitioner)                | |
+| [Organization](https://hl7.org/fhir/organization)                | |
+| [Composition](https://hl7.org/fhir/composition)                  | |
+| [Extension](https://hl7.org/fhir/extension)                      | |
+| [StructureDefinition](https://hl7.org/fhir/structure_definition) | |
+| [OperationDefinition](https://hl7.org/fhir/operation_definition) | |
+
 ---
 
 ## Outline
@@ -585,6 +603,7 @@ Essentially the bundle resource has:
  - Observation
  - Reference
  - Bundle
+ - CapabilityStatement
  - More Major Resources
    + Condition
    + Procedure
@@ -592,8 +611,6 @@ Essentially the bundle resource has:
    + Organization
    + Composition
    + Extension
- - Metadefining Resources
-   + CapabilityStatement
    + StructureDefinition
    + OperationDefinition
  - Profiling of Elements (maybe brief - linked to other section - or moved under patient)
