@@ -10,8 +10,8 @@ bibliography: bibliography.bib
 ## Learning Objectives
 
 1.  Understand at a high-level what FHIR Resources are and how they can be used to create implementations in healthcare settings
-2.  Understand why FHIR was developed to be based Resources
-3.  Understand how FHIR is able able to solve a wide variety of use cases in healthcare
+2.  Understand why FHIR was developed to be based on Resources
+3.  Understand how FHIR is able to solve a wide variety of use cases in healthcare
 
 ::: callout-important
 This is the second part of our introduction to FHIR for research. You should [read Part 1 first](..//10-intro–intro-part-1-what-is-fhir/index.html) if you haven't already.
@@ -54,7 +54,7 @@ Most applications of FHIR therefore require greater specificity than is provided
 This is quite abstract, so a baking analogy may be helpful:
 
 | FHIR Term | Baking Analog       | Description                                                                                                                        |
-|---------------|---------------|-------------------------------------------|
+|----------------|----------------|----------------------------------------|
 | Resource  | Cake                | A broad template with possible characteristics such as flavor, icing, toppings, and number of tiers.                               |
 | Profile   | Type of cake        | Adds constraints to the base Cake Resource to represent a specific type of cake.                                                   |
 | Extension | Cake shape and size | If the base Cake Resource does not provide a way to define cake shape and size, this can be added by a Profile using an Extension. |
@@ -71,7 +71,7 @@ A specific cake would be represented by an **instance** of the Cake Resource. He
 
 Each instance of Cake may or may not **conform** to a specific Profile of Cake. The FHIR ecosystem provides software tools that can detect when an instance of a FHIR Resource conforms to a specific Profile.
 
-Applying the cake analogy to a Prior Level of Function Profile, we have:
+Applying the cake analogy to a [Prior Level of Function Profile](http://build.fhir.org/ig/HL7/fhir-pacio-functional-status/StructureDefinition-pacio-nhfs.html), we have:
 
 ![](images/cake_analogy_prior_level_of_function.png)
 
