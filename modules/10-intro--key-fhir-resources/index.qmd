@@ -15,7 +15,7 @@ toc: true
  - FHIR encapsulates metadata as resources for autoconfiguration and dynamic programming
 :::
 
-## 1. Overview of Core Elements
+## 1. Overview of core elements
 
 Recall that FHIR itself stands for _Fast Healthcare Interoperability **Resources**_. The FHIR Core v4.3.0 (also known as Revision 4B, or R4B) defines
 140 resources[^1] that are the building blocks for healthcare interoperability. The [HL7 FHIR Website](https://hl7.org/fhir) gives
@@ -64,7 +64,7 @@ you can understand the majority of resources out there.
 
 [^4]: <https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation#IGPublisherDocumentation-Summary>
 
-### The First Complex Type - HumanName
+### The first complex type - HumanName
 
 Since complex types are just resources and FHIR automatically documents resources by defining them, `HumanName` also has it's own [structure table](https://hl7.org/fhir/datatypes.html#HumanName):
 
@@ -75,7 +75,7 @@ case studies on Pieter van de Heuvel[^5]. At the same time it is also very flexi
 
 [^5]: <https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation#IGPublisherDocumentation-Summary>
 
-### A Choice Type Attribute - deceased[x]
+### A choice type attribute - deceased[x]
 
 Choice types are the FHIR specification for polymorphic attributes or union fields. For example `Patient` is defined such that
 either `Patient.deceasedBoolean` or `Patient.deceasedDateTime` are provided but not both, and the former must have a boolean value
@@ -90,14 +90,14 @@ exist to take care of it, but a processing script or data pipeline should also a
 
 [See more information on choice types here](https://hl7.org/fhir/formats.html#choice).
 
-### A Codeable Concept - maritalStatus
+### A codeable concept - maritalStatus
 
 `Patient.maritalStatus` is a [CodeableConcept](http://hl7.org/fhir/datatypes.html#CodeableConcept) which is very commonly used in FHIR. Codeable Concepts
 are a complex type that can flexibly bind an attribute to a specific terminology, value set, or health informatics standard such as ICD codes. In this case the
 attribute is bound to the [Marital Status Codes Value Set](http://hl7.org/fhir/valueset-marital-status.html). See our [Terminology module](/modules/10-intro--terminology-introduction/)
 for how these work.
 
-### Inherited Attributes
+### Inherited attributes
 
 Recall in the first row of the Patient structure table, `Patient` itself was assigned to the type `DomainResource`. This means that `DomainResource`
 is the parent of `Patient` and all its attributes (and constraints) are inherited. `DomainResource` is also the child of `Resource`, which is the base
@@ -112,7 +112,7 @@ In essence, all domain resources such as Patient or Condition will have an `id` 
 to uniquely refer to it, a `meta` attribute
 to store metadata such as implementation guide conformance, `text` to store a human-targeted narrative, and `extension` to store additional data if needed.
 
-### A Patient Example
+### A patient example
 
 To summarize everything about the Patient resource into practice, here is an anonymized example[^6] from the real world:
 
