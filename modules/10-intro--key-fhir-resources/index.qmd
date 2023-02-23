@@ -6,63 +6,14 @@ editor: visual
 toc: true
 ---
 
-# Outline
 
-<div class="alert alert-danger">This section will be deleted - here for reference</div>
+::: {.callout-tip}
+## Key points
 
-**Learning Objectives**
-
-1. Learn of key healthcare resources such as Patient, Observation, and Bundle
-2. Understand how FHIR defines resources with great granularity and flexibility
-3. Understand how FHIR encapsulates metadata as resources
-
-**Module Sections**
-
- - Overview of Core Elements
-   + hl7.org/fhir screenshot
- - Patient
-   + Table
-   + Complex Types, HumanName example
-   + Choice types, deceased[X] example
-   + Codeable Concepts (brief)
-   + Inherited Attributes
-   + Example
- - Observation
- - Reference
- - Bundle
- - More Major Resources
-   + Condition
-   + Procedure
-   + Practitioner
-   + Organization
-   + Composition
-   + Extension
- - Metadefining Resources
-   + CapabilityStatement
-   + StructureDefinition
-   + OperationDefinition
- - Profiling of Elements (maybe brief - linked to other section - or moved under patient)
-
-**Sources**
-
-- <https://hl7.org/fhir/>
-- <https://hl7.org/fhir/patient.html>
-- <https://hl7.org/fhir/observation.html>
-- <https://www.hl7.org/fhir/bundle.html>
-- <https://www.hl7.org/fhir/references.html>
-- <https://hl7.org/fhir/extensibility.html>
-- <https://hl7.org/fhir/capabilitystatement.html>
-- <https://hl7.org/fhir/structuredefinition.html>
-- <https://build.fhir.org/operationdefinition.html>
-- <https://hl7.org/fhir/profiling.html>
-- <https://build.fhir.org/ig/HL7/fhir-shorthand/reference.html>
-
----
-
-## Learning Objectives
- - Learn of key healthcare resources such as Patient, Observation, and Bundle
- - Understand how FHIR defines resources with great granularity and flexibility
- - Understand how FHIR encapsulates metadata as resources
+ - Patient, Observation, and Bundle are some of the primary resources in FHIR
+ - FHIR defines resources with great granularity and flexibility
+ - FHIR encapsulates metadata as resources for autoconfiguration and dynamic programming
+:::
 
 ## 1. Overview of Core Elements
 
@@ -81,7 +32,7 @@ resources such as `Patient` and level 5 representing clinical workflows or medic
 A resource may be encoded in JSON, XML, or Turtle[^2] with processing done by any programming language or software tool. The FHIR standard
 and resource specifications are for defining the semantics necessary to transfer clinical information. FHIR is granular enough to capture the
 miniscule pieces of information, but also flexible enough to work with a variety of medical use cases and data collection pipelines already in place.
-A Resource can also extend itself to encompase new discoveries, profile itself for more specific use cases, define metadata for powerful autoconfiguration,
+A resource can also extend itself to encompase new discoveries, profile itself for more specific use cases, define metadata for powerful autoconfiguration,
 and carry human-readible data for manual stewardship. These resources fully follow Object Oriented principles.[^3]
 
 [^2]: <https://hl7.org/fhir/formats.html#wire>
@@ -89,7 +40,7 @@ and carry human-readible data for manual stewardship. These resources fully foll
 
 To understand how FHIR accomplishes this, let us examine the Patient resource.
 
-## 2. Patient Resource
+## 2. Patient resource
 
 Here is a [summary table for Patient resource](https://hl7.org/fhir/patient):
 
@@ -102,7 +53,7 @@ The table can be interpreted as follows:
 highest degree of officiality in the FHIR standard. [See all flags here](https://hl7.org/fhir/formats.html#table).
  - **Card.**: The cardinality of the attribute in format `{minimum}..{maximum}`. For example, `0..*` implies zero to any possible number of values and `1..1`
 implies exactly 1 required element.
- - **Type**: The primitive or complex data type, where a complex data type is another Resource. Note in the first row that `Patient` itself also has a type,
+ - **Type**: The primitive or complex data type, where a complex data type is another resource. Note in the first row that `Patient` itself also has a type,
 which gives inheritence of additional attributes we'll discuss [below](#inherited-attributes). [See all FHIR types here](https://hl7.org/fhir/datatypes.html).
  - **Description & Constraints**: A human-targeted explanation of the attribute, but may also contain key constraints that must be enforced by
 implementors.
@@ -115,7 +66,7 @@ you can understand the majority of resources out there.
 
 ### The First Complex Type - HumanName
 
-Since complex types are just Resources and FHIR automatically documents resources by defining them, `HumanName` also has it's own [structure table](https://hl7.org/fhir/datatypes.html#HumanName):
+Since complex types are just resources and FHIR automatically documents resources by defining them, `HumanName` also has it's own [structure table](https://hl7.org/fhir/datatypes.html#HumanName):
 
 ![HumanName Resource](images/fhir-r4b-human_name-structure-delinked.png)
 
@@ -294,7 +245,7 @@ readily available[^7]. Turtle (also known as RDF) is rarely used, and sometimes 
 This example should give you a full idea of what a FHIR Patient resource is and how it contains healthcare data. If you need more examples visit the
 [FHIR Core Patient examples](https://hl7.org/fhir/patient-examples.html).
 
-## 3. Observation Resource
+## 3. Observation resource
 
 Another prominent resource is Observation, which can capture vital signs, laboratory data, imaging results, clinical findings, device measurements, and
 much more[^8]. Just like the Patient resource, here is the [Observation Resource structure table](http://hl7.org/fhir/observation.html#resource):
@@ -390,7 +341,7 @@ From reading the above it is evident how the following information is semantical
  - **subject: ...**: a [Reference](http://hl7.org/fhir/references.html#Reference) to another patient resource via `resourceType` and `id`. In this case it is the example Patient from earlier.
  - **valueQuantity: ...**: a supplied `value[x]` choice type with the actual result. In this case they use type [Quantity](http://hl7.org/fhir/datatypes.html#Quantity) to specify blood glucose concentration with units and a universal unit system.
 
-## 4. Bundle Resource
+## 4. Bundle resource
 
 In practice you will seldom find the two example resources above individually. The high-blood glucose observation is useless without a patient it applies too, and there is no purpose for a patient in a healthcare workflow unless it has an observed medical problem. Thus you will usually find multiple FHIR instances together in one package - a `Bundle` resource. Here is the [structure for Bundle]:
 
@@ -607,3 +558,59 @@ Essentially the bundle resource has:
  - **entry[0].resource: ...**: the actual resource contained within the entry.
 
 **TODO fix JSON resourceType**
+
+---
+
+## Outline
+
+<div class="alert alert-danger">This section will be deleted - here for reference</div>
+
+**Learning Objectives**
+
+1. Learn of key healthcare resources such as Patient, Observation, and Bundle
+2. Understand how FHIR defines resources with great granularity and flexibility
+3. Understand how FHIR encapsulates metadata as resources
+
+**Module Sections**
+
+ - Overview of Core Elements
+   + hl7.org/fhir screenshot
+ - Patient
+   + Table
+   + Complex Types, HumanName example
+   + Choice types, deceased[X] example
+   + Codeable Concepts (brief)
+   + Inherited Attributes
+   + Example
+ - Observation
+ - Reference
+ - Bundle
+ - More Major Resources
+   + Condition
+   + Procedure
+   + Practitioner
+   + Organization
+   + Composition
+   + Extension
+ - Metadefining Resources
+   + CapabilityStatement
+   + StructureDefinition
+   + OperationDefinition
+ - Profiling of Elements (maybe brief - linked to other section - or moved under patient)
+
+**Sources**
+
+- <https://hl7.org/fhir/>
+- <https://hl7.org/fhir/patient.html>
+- <https://hl7.org/fhir/observation.html>
+- <https://www.hl7.org/fhir/bundle.html>
+- <https://www.hl7.org/fhir/references.html>
+- <https://hl7.org/fhir/extensibility.html>
+- <https://hl7.org/fhir/capabilitystatement.html>
+- <https://hl7.org/fhir/structuredefinition.html>
+- <https://build.fhir.org/operationdefinition.html>
+- <https://hl7.org/fhir/profiling.html>
+- <https://build.fhir.org/ig/HL7/fhir-shorthand/reference.html>
+
+---
+
