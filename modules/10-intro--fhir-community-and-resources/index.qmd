@@ -26,14 +26,61 @@ HL7 Work Groups consist of volunteer subject matter experts and other stakeholde
 
 <!--# Brief description of the process for HL7 projects and balloting. The use case is for readers to have a basic understanding of where IGs come from and how the balloting process ensures quality. This should also briefly mention HL7 maturity levels (e.g. STU) -->
 
+Every HL7 project is sponsored by one of the Work Groups. The sponsorship ensures that stakeholders can offer input during the early stages of the standards development process and that each specification is developed with consideration of other existing or developing standards.
+
+All HL7 projects also go through the [balloting process](https://confluence.hl7.org/display/HL7/HL7+Balloting). For a given period of time, any reviewer affiliated with HL7 (and occasionally those outside of HL7) can submit comments and suggestions for edits. All issues and comments must be reviewed by the authors of the specification and the sponsoring Work Group before it can move to the next stage in the balloting process. At each stage of the balloting process, a vote is held to determine if the specification is ready for the next phase of development or publication.
+
+There are four ballot levels:
+
+-   **For Comment**: Generally a feedback solicitation stage for the early steps of specification development.
+-   **Informative**: Used to review content that is not binding for implementers.
+    -   This level is often used for internal HL7 processes or publishing guidance (not requirements) for the implementer community.
+-   **Standard for Trial Use (STU)**: Used for binding content that is deemed "ready to implement" by the Work Group, but lacks extensive implementation by FHIR community.
+-   **Normative**: This level is reserved for the final review of a specification.
+    -   It can require several cycles of feedback, edits, and voting, but once balloters and the Work Group approve, the specification can be published and considered to be an authoritative standard.
+    -   Content in this stage is considered to be stable and any subsequent changes should be minor fixes that will not negatively impact existing implementations of the specification.
+
+Every HL7 FHIR Implementation Guide includes a version history that lists the version of the guide, FHIR version used, date published, and often a description of the changes made in that version. This information can be useful for seeing historical, current, and work-in-progress versions that are being balloted.
+
+![The version history for the US Core FHIR IG showing the current version of the IG to be 5.0.1 and STU6 work in progress IG, 6.0.0](images/version-history-us-core.png)
+
+The version history can be accessed at the very bottom of the Implementation Guide.
+
+![The meta data for the US Core FHIR IG, at the bottom of the IG's page, includes a link to the Version History information above.](images/version-history-meta-data-us-core.png)
+
+
 ### Connectathons
 
 <!--# What are Connectathons, why are they important, how they may related to research -->
+
+[Connectathons](https://confluence.hl7.org/display/FHIR/Connectathons) are an opportunity for contributors and community members to engage synchronously for discussions and interoperability testing. HL7 describes them as:
+
+> ...an event that is centered on developing the HL7 FHIR Specification including resources, profiles and implementation guides. The purpose of a Connectathon is to prove that the specification is complete and facilitate FHIR implementation guide maturity.
+
+Three Connectathons are held each year, in both in-person and virtual formats. Anyone is welcome to attend as a participant or they may submit a proposal to be a Track Lead. Connectathon Track Leads can share their specification or resource for implementers to test drive and offer feedback.
+
 
 ## 2. Zulip (chat.fhir.org)
 
 <!--# Describe what Zulip is (analogy to Slack or Teams groups), how to find the right stream if you have a question (search streams, or search all public streams for similar topics and see where they were posted), and #implementers stream to post in if you can't figure out where to ask -->
 
+Zulip is an asynchronous communication platform, similar to Slack or Teams messaging, with an instance for the international FHIR community at [chat.fhir.org](https://chat.fhir.org). Anyone is welcome to join and it can be an valuable tool for asking questions and connecting with others that have similar objectives for health data. Zulip has Streams (like Channels on Slack) for topics like Implementation Guide development, Terminology, and Cancer Interoperability. Users then post comments or questions inside the Stream for others to respond. Streams can be found by searching for specific topics or browsing through the list. Searching all Streams or narrowing a search to a certain Stream in the search bar is helpful for troubleshooting common problems or seeing if anyone else has asked the same question before.
+
+Have a question and don't know which Stream to post it in? The #implementers Stream is a good place to start, but consider searching and browsing other channels first so the question finds the best audience. HL7 has also developed [community guidelines](https://confluence.hl7.org/display/FHIR/Chat.fhir.org+Community+Expectations) and expectations for using [chat.fhir.org](https://chat.fhir.org).
+
+
+
 ## 3. HL7 Confluence and Jira
 
 <!--# Describe what Confluence is (Wikipedia), and Jira ("issue tracking"). Confluence is useful for finding relevant HL7 projects and Work Groups, and for documentation on the HL7/FHIR infrastructure and processes. Jira is probably only useful to this audience in the sense that it is mentioned in Confluence. -->
+
+Documentation on HL7 processes and general information is typically found in Confluence:
+
+-   [HL7 Confluence](https://confluence.hl7.org) is a Wikipedia-like encyclopedia for HL7. Many of the links throughout this module go to HL7 Confluence pages. The site is useful for finding:
+    -   relevant HL7 projects in development
+    -   schedules and information for HL7 Work Groups
+    -   processes and documentation on HL7 and FHIR Infrastructure
+
+Project work and specification development primarily occurs in Jira:
+
+-   [HL7 Jira](https://jira.hl7.org/secure/Dashboard.jspa) is an issue-tracking resource used for managing comments and suggestions on HL7 specifications and terminologies. The balloting and comment review process detailed in @sec-hl7projects takes place in Jira.
