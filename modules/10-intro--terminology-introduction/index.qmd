@@ -1,5 +1,9 @@
 ---
-title: Terminology introduction
+title: "Terminology Introduction""
+author: "Blake Bergstrom"
+format: html
+editor: visual
+toc: true
 ---
 
 # Key concepts
