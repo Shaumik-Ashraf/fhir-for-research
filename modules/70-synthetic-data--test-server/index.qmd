@@ -1,0 +1,26 @@
+---
+title: Standing up a FHIR server for training and testing
+---
+
+::: callout-tip
+## Key points
+
+1.  The easiest approach is using the free Logica FHIR Sandbox
+2.  If this dose not meet your needs, you can also run a FHIR server via Docker
+:::
+
+## Logica Sandbox
+
+<!--# Discuss how to bulk load Synthea data in (and test this to make sure it actually works, noting any obvious limits on size or difficulties you encounter), the model for retrieving data, caveats related to having a public FHIR server anyone can write to (your data may disappear), and Logica's SMART on FHIR capabilities -->
+
+## Docker-based options
+
+<!--# Some options are: -->
+
+https://github.com/logicahealth/sandbox-community-edition may be an option
+
+https://github.com/smart-on-fhir/smart-dev-sandbox may be an option
+
+https://hub.docker.com/r/hapiproject/hapi may be an option
+
+<!--# Are there other options? -->

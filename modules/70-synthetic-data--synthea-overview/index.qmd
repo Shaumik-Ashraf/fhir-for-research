@@ -1,0 +1,13 @@
+---
+title: Synthea synthetic data overview
+---
+
+::: callout-tip
+## Key points
+
+1.  Synthetic data is often the best way to provide training on using FHIR or for testing FHIR-related software.
+2.  Synthea is an open source tool for generating synthetic clinical data in FHIR Resource instances.
+3.  Synthetic Synthea data can be downloaded from https://synthea.mitre.org or generated locally
+:::
+
+Content TBD
