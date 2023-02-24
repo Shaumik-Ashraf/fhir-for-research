@@ -38,6 +38,7 @@ pages:
   artifacts:
     paths:
       - public
+    expose_as: Website
   rules:
     # Only run for default branch
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -51,6 +52,7 @@ ci:
     paths:
       - public
     expire_in: 6 months
+    expose_as: Website
 
   environment:
     name: ${CI_COMMIT_REF_NAME}
