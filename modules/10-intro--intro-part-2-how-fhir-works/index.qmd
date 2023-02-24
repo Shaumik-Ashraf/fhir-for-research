@@ -7,19 +7,23 @@ toc: true
 bibliography: bibliography.bib
 ---
 
+::: callout-tip
 ## Learning Objectives
 
 1.  Understand at a high-level what FHIR Resources are and how they can be used to create implementations in healthcare settings
 2.  Understand why FHIR was developed to be based on Resources
 3.  Understand how FHIR is able to solve a wide variety of use cases in healthcare
+:::
 
 ::: callout-important
-This is the second part of our introduction to FHIR for research. You should [read Part 1 first](..//10-intro–intro-part-1-what-is-fhir/index.html) if you haven't already.
+## Did you read FHIR from 10,000 Feet?
+
+This is the second part of our introduction to FHIR for research. You should read [FHIR from 10,000 Feet](..//10-intro–intro-part-1-what-is-fhir/index.html) first if you haven't already.
 
 This module goes into greater depth on how FHIR works from a technical standpoint, and will be of greatest interest to those who are interested in using FHIR in their work.
 :::
 
-## 1. The Structure of FHIR
+## The Structure of FHIR
 
 ONC (Office of the National Coordinator for Health IT)'s [FHIR Fact Sheet](https://www.healthit.gov/sites/default/files/page/2021-04/What%20Is%20FHIR%20Fact%20Sheet.pdf) describes the core capabilities of FHIR:
 
@@ -27,13 +31,15 @@ ONC (Office of the National Coordinator for Health IT)'s [FHIR Fact Sheet](https
 >
 > Once they are modified for specific requirements using FHIR's built-in capabilities, combinations of Resources are brought together in an Implementation Guide to address a specific use case, such as a provider directory or patient-reported outcomes. This structure lends itself well to expansion beyond FHIR's core capabilities.
 
-Below is a screenshot of the [Patient Resource](https://www.hl7.org/fhir/R4B/patient.html) from the FHIR specification (`R4B` version) on HL7's FHIR documentation website:
+Below is a screenshot of the [Patient resource](https://www.hl7.org/fhir/R4B/patient.html) from the FHIR specification (`R4B` version) on HL7's FHIR documentation website:
 
-![](images/R4_Patient.png)
+[![](images/R4_Patient.png){fig-alt="Screenshot of Resource Contents table of the Patient resource in the FHIR R4B specification"}](https://www.hl7.org/fhir/R4B/patient.html)
 
-This view of a FHIR Resource will become very familiar to you if you spend time working with FHIR specifications. It shows the hierarchy of elements (i.e., data fields) in the Resource, starting with the name of the Resource (`Patient`). Elements may be only one level deep (like `Patient.birthDate`) or nested (like `Patient.contact.name`).
+This view of a FHIR resource will become very familiar to you if you spend time working with FHIR specifications. It shows the hierarchy of elements (i.e., data fields) in the resource, starting with the name of the resource ("Patient"). Elements may be only one level deep (like `Patient.birthDate`) or nested (like `Patient.contact.name`).
 
-Each element has properties that appear in the `Flag`, `Card.` (short for "Carnality"), and `Type` columns. (These details are beyond the scope of this module; see TKTK for more information.) Elements also have short descriptions (`Description & Constraints`) as well as longer descriptions (accessible by clicking on the element's name; [see the details of `Patient.gender` for an example](https://www.hl7.org/fhir/R4B/patient-definitions.html#Patient.gender)).
+Each element has properties that appear in the `Flag`, `Card.` (short for "Carnality"), and `Type` columns. These details are beyond the scope of this module; see **\<insert link to other module here\>** for more information.
+
+Elements also have short descriptions (`Description & Constraints`) as well as longer descriptions (accessible by clicking on the element's name; [see the details of `Patient.gender` for an example](https://www.hl7.org/fhir/R4B/patient-definitions.html#Patient.gender)).
 
 When a FHIR Resource is created and populated with data, we call this an **instance** of the resource. An instance of the Patient Resource would assign `Patient.name` to a value like `Andy Smith`. Instances are created in a format like [JSON](https://en.wikipedia.org/wiki/JSON) or [XML](https://en.wikipedia.org/wiki/XML) -- to see an example of this, expand the box below.
 
@@ -45,7 +51,7 @@ Below is an example of a what a FHIR Resource instance looks like in JSON format
 ![](images/fhir_resource_json.png)
 :::
 
-## 2. Customizing FHIR
+## Customizing FHIR
 
 FHIR Resources are designed to be broadly applicable, without constraints. For example, if the Patient Resource required `birthDate` to be filled in, this would make it impossible to use an instance of Patient to represent data that uses age in years rather date of birth for privacy reasons.
 
@@ -54,7 +60,7 @@ Most applications of FHIR therefore require greater specificity than is provided
 This is quite abstract, so a baking analogy may be helpful:
 
 | FHIR Term | Baking Analog       | Description                                                                                                                        |
-|----------------|----------------|----------------------------------------|
+|-----------|---------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | Resource  | Cake                | A broad template with possible characteristics such as flavor, icing, toppings, and number of tiers.                               |
 | Profile   | Type of cake        | Adds constraints to the base Cake Resource to represent a specific type of cake.                                                   |
 | Extension | Cake shape and size | If the base Cake Resource does not provide a way to define cake shape and size, this can be added by a Profile using an Extension. |
@@ -75,7 +81,7 @@ Applying the cake analogy to a [Prior Level of Function Profile](http://build.fh
 
 ![](images/cake_analogy_prior_level_of_function.png)
 
-## 3. Connecting Systems Together: The FHIR API
+## Connecting Systems Together: The FHIR API
 
 In addition to providing a standard way to represent and store data (in instances of Resources, as described above), FHIR provides a standard way for systems to request and send instances of Resources to each other.
 
