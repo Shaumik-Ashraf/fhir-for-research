@@ -555,9 +555,7 @@ Essentially the bundle resource has:
  - **resourceType: Bundle**: specify that this is a Bundle instance
  - **type: collection**: specify that this Bundle is a collection of resources. Alternatives include `document` or `transaction`.
  - **entry: ...**: an array of Bundle entries. Each entry is a [BackboneElement](http://hl7.org/fhir/backboneelement.html) which the FHIR counterpart to a structured map or named dictionary.
- - **entry[0].resource: ...**: the actual resource contained within the entry.
-
-**TODO fix JSON resourceType**
+ - **entry[i].resource: ...**: the actual resource contained within the entry.
 
 In some cases you may receive a bundle with one or zero entries if the context calls for it. For example a [FHIR Query](#TODO) is expected to return a varied number of resources, so the server
 executing the query will return a bundle regardless of the count.
@@ -567,13 +565,114 @@ executing the query will return a bundle regardless of the count.
 A `CapabilityStatement` is a resource that contains metadata about a FHIR server, including what other resources the server hosts and how to access them. Here we skip the [CapabilityStatment structure table](https://hl7.org/fhir/capabilitystatement) and look directly at an example:
 
 ```json
-// TODO CapabilityStatement
-// only required attributes, software name (maybe), security, resources, and maybe operations
+{
+  "resourceType" : "CapabilityStatement",
+  "version" : "4.3.0",
+  "name" : "Example FHIR Capability Statement",
+  "status" : "draft",
+  "experimental" : true,
+  "date" : "2022-05-28T12:47:40+10:00",
+  "kind" : "capability",
+  "fhirVersion" : "4.3.0",
+  "format" : [
+    "xml",
+    "json"
+  ],
+  "implementationGuide": [
+    "https://fhir-igs.example.com/example-implementation-guide"
+  ],
+  "rest" : [
+    {
+      "mode" : "server",
+      "documentation" : "An example Capability Statement",
+      "security" : {
+        "cors" : true,
+        "service" : [{
+          "coding" : [{
+            "system" : "http://terminology.hl7.org/CodeSystem/restful-security-service",
+            "code" : "SMART-on-FHIR",
+            "display" : "SMART-on-FHIR"
+          }],
+          "text" : "See http://docs.smarthealthit.org/"
+        }],
+        "description" : "This is the Capability Statement to declare that the server supports SMART-on-FHIR. See the SMART-on-FHIR docs for the extension that would go with such a server"
+      },
+      "resource" : [
+        {
+          "type" : "Patient",
+          "interaction" : [
+            { "code" : "read" },
+            {
+              "code" : "search-type",
+              "documentation" : "When a client searches patients with no search criteria, they get a list of all patients they have access too. Servers may elect to offer additional search parameters, but this is not required"
+            }
+          ]
+        },
+        {
+          "type" : "DocumentReference",
+          "interaction" : [
+            { "code" : "read" },
+            { "code" : "search-type" }
+          ],
+          "searchParam" : [{
+            "name" : "_id",
+            "type" : "token",
+            "documentation" : "_id parameter always supported. For the connectathon, servers may elect which search parameters are supported"
+          }]
+        },
+        {
+          "type" : "Condition",
+          "interaction" : [
+            { "code" : "read" },
+            { "code" : "search-type" }
+          ],
+          "searchParam" : [{
+            "name" : "_id",
+            "type" : "token",
+            "documentation" : "Standard _id parameter"
+          }]
+        },
+        {
+          "type" : "DiagnosticReport",
+          "interaction" : [
+            { "code" : "read" },
+            { "code" : "search-type" }
+          ],
+          "searchParam" : [
+            {
+              "name" : "_id",
+              "type" : "token",
+              "documentation" : "Standard _id parameter"
+            },
+            {
+              "name" : "service",
+              "type" : "token",
+            "documentation" : "which diagnostic discipline/department created the report"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 
+Some things automatically discoverable from the `CapabilityStatement` are:
 
+ - **`CapabilityStatement.fhirVersion`:** the FHIR version to which the API conforms to. In this case the server is running FHIR 4.3.0 (also known as FHIR R4B) **at that base url**. It is possible for a FHIR server to service multiple FHIR versions, but then each FHIR API will be serviced at a different base url, for example FHIR R4 at <https://fhir.example.com/R4/> and FHIR R4B at <https://fhir.example.com/R4B/>.
+ - **`CapabilityStatement.format`:** the [encoding formats](https://hl7.org/fhir/formats.html#wire) supported by the FHIR server. [FHIR queries](/modules/10-intro--accessing-fhir-data/) must specify one of these formats via the [HTTP `Accept` Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept).
+ - **`CapabilityStatement.implementationGuide`:** the [implementation guides (IG)](/modules/30-fhir-data-modeling--real-world-ig/) that the FHIR server conforms to. However, it is technically possible for a server to be partially or even fully compliant to an IG without listing it in the metadata.
+ - **`CapabilityStatement.rest[i].security.service`:** the [RESTful security services](http://hl7.org/fhir/valueset-restful-security-service.html#expansion) required to access data on this server as a `CodeableConcept`. This example uses [SMART-on-FHIR](/modules/20-intro-smart-on-fhir--overview/), but other possiblities include [OAuth](https://oauth.net/) or [UDAP](https://www.udap.org/).
+ - **`CapabilityStatement.rest[i].resource.type`:** all FHIR resources supported by the server. Note this does not include foundational resources such as `CapabilityStatement` or `Bundle`, but all resources [level 3 and higher](https://hl7.org/fhir).
+ - **`CapabilityStatement.rest[i].resource.interaction`:** the [RESTful interactions](http://hl7.org/fhir/http.html) available for that resource. All possible interactions are divided into 3 categories: instance level, type level, and system level. Only instance and type level interactions are listed here, and they apply to a specific FHIR resource instance or the entire FHIR resource class respectively. The [`search`](http://hl7.org/fhir/http.html#search) interaction applies to type level, and the `CapabilityStatement.rest[i].resource.searchParam` field further specifies what search parameters are possible.
+
+In this way the `CapabilityStatement` creates a powerful way to encapsulate the metadata on how to retrieve and access more applicable FHIR data. All FHIR servers **must** have a capability statement, and it must be available at the `/metadata` route. This allows any client or user to automatically configure themselves for information exchange. A trained person can also gleam at a `CapabilityStatement` to understand the capabilities of a FHIR server or FHIR-conformant digital healthcare service. This auto-configuration or auto-discovery power is key advantage FHIR brings to healthcare.
+
+Strictly speaking there are also other uses of `CapabilityStatement` such as being FHIR client metadata or a requirements statement. However the representation of metadata at a well-known endpoint for a FHIR server is its most common use case, and usually the go-to when beginning a FHIR-involved project or interaction. 
 
 ## 6. Other Major Resources
+
+By now you probably understand how to read FHIR resources - look at the structure table and parse the provided encoding appropriately. Here a few more common and key FHIR resources:
 
 | Resource                                                        | Description                                                                                                                     |
 |:---------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
