@@ -564,10 +564,11 @@ executing the query will return a bundle regardless of the count.
 
 ## 5. Capability statement resource
 
-A `CapabilityStatement` is a resource that contains metadata about a FHIR server, including what other resources the server hosts and how to access them. Here let's skip the [CapabilityStatment structure table](https://hl7.org/fhir/capability_statement) and look directly at an example:
+A `CapabilityStatement` is a resource that contains metadata about a FHIR server, including what other resources the server hosts and how to access them. Here we skip the [CapabilityStatment structure table](https://hl7.org/fhir/capability_statement) and look directly at an example:
 
 ```json
-// TODO
+// TODO CapabilityStatement
+// only required attributes, software name (maybe), security, resources, and maybe operations
 ```
 
 
