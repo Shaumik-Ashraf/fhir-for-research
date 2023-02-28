@@ -4,6 +4,7 @@ author: "Shaumik Ashraf"
 format: html
 editor: visual
 toc: true
+tbl-colwidths: [25,75]
 ---
 
 
@@ -659,6 +660,7 @@ A `CapabilityStatement` is a resource that contains metadata about a FHIR server
 
 Some things automatically discoverable from the `CapabilityStatement` are:
 
+ - **`CapabilityStatement.url`:** the base URI for the FHIR server. Technically this could also be the URI to the capability statement itself, which would include the base URI for the server.
  - **`CapabilityStatement.fhirVersion`:** the FHIR version to which the API conforms to. In this case the server is running FHIR 4.3.0 (also known as FHIR R4B) **at that base url**. It is possible for a FHIR server to service multiple FHIR versions, but then each FHIR API will be serviced at a different base url, for example FHIR R4 at <https://fhir.example.com/R4/> and FHIR R4B at <https://fhir.example.com/R4B/>.
  - **`CapabilityStatement.format`:** the [encoding formats](https://hl7.org/fhir/formats.html#wire) supported by the FHIR server. [FHIR queries](/modules/10-intro--accessing-fhir-data/) must specify one of these formats via the [HTTP `Accept` Header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept).
  - **`CapabilityStatement.implementationGuide`:** the [implementation guides (IG)](/modules/30-fhir-data-modeling--real-world-ig/) that the FHIR server conforms to. However, it is technically possible for a server to be partially or even fully compliant to an IG without listing it in the metadata.
@@ -674,68 +676,14 @@ Strictly speaking there are also other uses of `CapabilityStatement` such as bei
 
 By now you probably understand how to read FHIR resources - look at the structure table and parse the provided encoding appropriately. Here a few more common and key FHIR resources:
 
-| Resource                                                        | Description                                                                                                                     |
-|:---------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
-| [Condition](https://hl7.org/fhir/condition)                     | |
-| [Procedure](https://hl7.org/fhir/procedure)                     | |
-| [Practitioner](https://hl7.org/fhir/practitioner)               | |
-| [Organization](https://hl7.org/fhir/organization)               | |
-| [Composition](https://hl7.org/fhir/composition)                 | |
-| [Extension](https://hl7.org/fhir/extension)                     | |
-| [StructureDefinition](https://hl7.org/fhir/structuredefinition) | |
-| [OperationDefinition](https://hl7.org/fhir/operationdefinition) | |
-
----
-
-## Outline
-
-<div class="alert alert-danger">This section will be deleted - here for reference</div>
-
-**Learning Objectives**
-
-1. Learn of key healthcare resources such as Patient, Observation, and Bundle
-2. Understand how FHIR defines resources with great granularity and flexibility
-3. Understand how FHIR encapsulates metadata as resources
-
-**Module Sections**
-
- - Overview of Core Elements
-   + hl7.org/fhir screenshot
- - Patient
-   + Table
-   + Complex Types, HumanName example
-   + Choice types, deceased[X] example
-   + Codeable Concepts (brief)
-   + Inherited Attributes
-   + Example
- - Observation
- - Reference
- - Bundle
- - CapabilityStatement
- - More Major Resources
-   + Condition
-   + Procedure
-   + Practitioner
-   + Organization
-   + Composition
-   + Extension
-   + StructureDefinition
-   + OperationDefinition
- - Profiling of Elements (maybe brief - linked to other section - or moved under patient)
-
-**Sources**
-
-- <https://hl7.org/fhir/>
-- <https://hl7.org/fhir/patient.html>
-- <https://hl7.org/fhir/observation.html>
-- <https://www.hl7.org/fhir/bundle.html>
-- <https://www.hl7.org/fhir/references.html>
-- <https://hl7.org/fhir/extensibility.html>
-- <https://hl7.org/fhir/capabilitystatement.html>
-- <https://hl7.org/fhir/structuredefinition.html>
-- <https://build.fhir.org/operationdefinition.html>
-- <https://hl7.org/fhir/profiling.html>
-- <https://build.fhir.org/ig/HL7/fhir-shorthand/reference.html>
-
----
+| FHIR resource                        | Description                                                                                                                     |
+|:------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------|
+| [Condition](https://hl7.org/fhir/condition)                     | A problem, diagnosis, or clinical event. It is expected to be the reason for a medical intervention and tie into a larger [clinical workflow](http://hl7.org/fhir/workflow.html). There is some use-case overlap with `Observation`, for which an [IG](/modules/30-fhir-data-modeling--real-world-ig/) will provide better guidance. |
+| [Procedure](https://hl7.org/fhir/procedure)                     | A medical activity preformed on a patient, such as surgery, diagnostic procedures, or therapy. It is expected to be a part of a clinical workflow. |
+| [Practitioner](https://hl7.org/fhir/practitioner)               | Any individual providing healthcare or a related service, from physicians to receptionists to service animals. |
+| [Organization](https://hl7.org/fhir/organization)               | Any formal or informal group of entities acting towards a collective cause, such as hospitals, departments, corporations, or health insurance groups. |
+| [Composition](https://hl7.org/fhir/composition)                 | A set of FHIR resources that create a single coherent clinical statement, and usually acts as the skeleton for a [document](http://hl7.org/fhir/documents.html). This is typically used in conjunction with a `Bundle`. |
+| [Extension](https://hl7.org/fhir/extension)                     | A FHIR resource composed of a definitive URL and a `Extension.value[x]` of any type. Almost all resources inherit this from `DomainResource.extension` and an IG should provide a specification for how it is used. |
+| [StructureDefinition](https://hl7.org/fhir/structuredefinition) | A FHIR resource that defines other FHIR resources. An instance exists for all FHIR resources, which allows for powerful dynamic programming and automated documentation. |
+| [OperationDefinition](https://hl7.org/fhir/operationdefinition) | A FHIR resource that defines [FHIR operations](http://hl7.org/fhir/operations.html) in addition to traditional REST operations, that conventionally being with a dollar sign (`$`). For example, `https://fhir.example.com/Patient/$match` will preform a [patient matching operation](http://hl7.org/fhir/patient-operation-match.html). This resource also allows for powerful dynamic programming for FHIR operations. |
 
