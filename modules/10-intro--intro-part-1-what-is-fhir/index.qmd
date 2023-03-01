@@ -6,10 +6,8 @@ format:
       - title-block.html
 editor: visual
 toc: true
-bibliography: bibliography.bib
 area:
   name: Overview
 topic:
   name: FHIR for Research
 ---
-
