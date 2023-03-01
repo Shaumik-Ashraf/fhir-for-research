@@ -1,10 +1,16 @@
 ---
-title: "Module: Introduction Part 1: What is FHIR?"
-author: "Blake Bergstrom"
-format: html
+title: "FHIR from 10,000 Feet"
+format:
+  html:
+    template-partials:
+      - title-block.html
 editor: visual
 toc: true
 bibliography: bibliography.bib
+area:
+  name: Overview
+topic:
+  name: FHIR for Research
 ---
 
 ::: callout-tip

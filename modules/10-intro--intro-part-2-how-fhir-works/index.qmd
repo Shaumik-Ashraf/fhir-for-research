@@ -1,11 +1,15 @@
 ---
-title: "Module: Introduction Part 2: How FHIR Works"
-author: "Blake Bergstrom"
+title: "FHIR from 1,000 Feet"
 format: html
 editor: visual
 toc: true
 bibliography: bibliography.bib
+area:
+  name: Overview
+topic:
+  name: FHIR for Research
 ---
+
 
 ::: callout-tip
 ## Learning Objectives
