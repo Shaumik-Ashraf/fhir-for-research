@@ -38,28 +38,30 @@ Examples:
 
 -   "ASH Research Collaborative: a real-world data infrastructure to support real-world evidence development and learning healthcare systems in hematology,"[@Wood_Marks_Plovnick_Hewitt_Neuberg_Walters_Dolan_Tucker_Abrams_Thompson_etal._2021] uses real-world data, OMOP, and FHIR to generate disease-specific learning communities. 
 
+-   "From OpenEHR to FHIR and OMOP data model for microbiology findings" [@Rinaldi_Thun_2021], illustrates the process of collecting data from eight institutions, converting it from openEHR to FHIR-format, and then from the FHIR-format to OMOP to support different use cases while maintaining interoperability.
+
 - "REDCap on FHIR: Clinical Data Interoperability Services," [@Cheng_Duda_Taylor_Delacqua_Lewis_Bosler_Johnson_Harris_2021] developed the Clinical Data Interoperability Services to exhcange data between REDCap and any EHR with the FHIR API.
 
 **SMART on FHIR**
 
 [SMART on FHIR](https://smarthealthit.org/about-smart-2/) is an application programming interface (API) that enables interoperability between applications and any healthcare system using FHIR. A widely used implementation of SMART on FHIR is the Apple Health Records API, which allows iPhone users to store their health records on their device.
 
+SMART has an [app gallery](https://apps.smarthealthit.org/apps?sort=name-asc) for viewing developers' applications that can be implemented in an EHR.
+
 Example: "Evolving Research Data Sharing Networks to Clinical App Sharing Networks" [@Wagholikar_Jain_Oliveira_Mandel_Klann_Colas_Patil_Yadav_Mandl_Carton_etal._2017], trialed multi-site app sharing for shared decision-making between two different institutions using four SMART-on-FHIR apps. 
 
 **Patient-Facing Apps**
 
-FHIR can also be used to create interoperably patient-facing apps that can support research, either through data collection or facilitating research participant communication.
+FHIR can also be used to create interoperable, patient-facing apps that can support research, either through data collection or facilitating research-participant communication. Some apps listed in the SMART app gallery linked above are patient-facing apps.
 
 Example: "C3-PRO: Connecting ResearchKit to the Health System Using i2b2 and FHIR" [@Pfiffner_Pinyol_Natter_Mandl_2016], uses FHIR to facilitate the process and record-keeping of patient consent, health data, and patient-reported outcomes during the research process. 
 
 **Multi-site Research**
 
-FHIR is also an valuable tool for facilitating research across multiple sites. Data sharing is often necessary for multi-site initiatives. FHIR supports data-sharing with standardized formats and common terminologies.
+Multi-site data-sharing requires standardized formats and common terminologies, which can be facilitated by FHIR. A larger pool of data from multiple healthcare institutions can mean more comprehensive studies or broader groups of patients to draw from for research participation.
 
 Examples:
 
 -   "The Architecture of a Feasibility Query Portal for Distributed COVID-19 Fast Healthcare Interoperability Resources (FHIR) Patient Data Repositories: Design and Implementation Study" [@Gruendner_Deppenwiese_Folz_Köhler_Kroll_Prokosch_Rosenau_Rühle_Scheidl_Schüttler_etal._2022], describes the process of querying data, compiling in FHIR-format, and distributing to multiple hospitals for improved data accessibility. 
-
--   "From OpenEHR to FHIR and OMOP data model for microbiology findings" [@Rinaldi_Thun_2021], illustrates the process of collecting data from eight institutions, converting it from openEHR to FHIR-format, and then from the FHIR-format to OMOP to support different use cases while maintaining interoperability.
 
 ## 
