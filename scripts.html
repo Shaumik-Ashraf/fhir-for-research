@@ -1,0 +1,23 @@
+<!-- scripts.html -->
+<!-- any content in this file is inserted right before </body> -->
+
+<script
+  src="https://unpkg.com/littlefoot/dist/littlefoot.js"
+  type="application/javascript"
+></script>
+
+<script type="application/javascript">
+  littlefoot.littlefoot({
+    activateOnHover: true,
+    buttonTemplate: `
+        <button
+          class="littlefoot__button btn btn-link"
+          id="<% reference %>"
+          title="See Footnote <% number %>"
+          style="padding:0;line-height:1;vertical-align:top;text-decoration:none;"
+        >
+          <% number %>
+        </button>
+    `
+  })
+</script>
