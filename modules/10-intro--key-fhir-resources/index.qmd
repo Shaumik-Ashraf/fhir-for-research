@@ -1,5 +1,9 @@
 ---
-title: "Module: Key FHIR Resources"
+title: Key FHIR Resources
+area:
+  name: Overview
+topic:
+  name: FHIR for Research
 author: "Shaumik Ashraf"
 format: html
 editor: visual
@@ -666,4 +670,3 @@ By now you probably understand how to read FHIR resources - look at the structur
 | [Extension](https://hl7.org/fhir/extension)                     | A FHIR resource composed of a definitive URL and a `Extension.value[x]` of any type. Almost all resources inherit this from `DomainResource.extension` and an IG should provide a specification for how it is used. |
 | [StructureDefinition](https://hl7.org/fhir/structuredefinition) | A FHIR resource that defines other FHIR resources. An instance exists for all FHIR resources, which allows for powerful dynamic programming and automated documentation. |
 | [OperationDefinition](https://hl7.org/fhir/operationdefinition) | A FHIR resource that defines [FHIR operations](http://hl7.org/fhir/operations.html) in addition to traditional REST operations, that conventionally being with a dollar sign (`$`). For example, `https://fhir.example.com/Patient/$match` will preform a [patient matching operation](http://hl7.org/fhir/patient-operation-match.html). This resource also allows for powerful dynamic programming for FHIR operations. |
-
