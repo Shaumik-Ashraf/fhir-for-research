@@ -78,3 +78,14 @@
   color: red;
 }
 
+
+/* Learning objectives/key points */
+#learning-objectives .answer {
+  display: none;
+}
+
+#key-points .answer {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  color: green;
+}
