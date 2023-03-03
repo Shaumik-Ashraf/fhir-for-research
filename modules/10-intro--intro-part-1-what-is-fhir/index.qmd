@@ -1,5 +1,6 @@
 ---
-title: Common Data Models & FHIR
+title: "FHIR from 10,000 Feet"
+
 area:
   name: Overview
 topic:

@@ -1,0 +1,99 @@
+# Roles
+
+-   **Investigator** A clinician/scientist who is in a research PI, co-I, or staff scientist position. Their role requires enough technical informatics understanding to design and conduct research, and interface closely with technical staff responsible for implementation of informatics approaches including FHIR.
+
+-   **Research Leaders** Member of the leadership responsible for shaping research strategy and capacity across an institution's research portfolio. This persona may include roles like CTR PIs, Institute directors, or health system executives like Chief Scientific Officers or Chief Research Informatics Officers.
+
+-   **Informaticist** A technical role primarily responsible for working hands-on with clinical data. This role involve elements of software engineering, but is not focused primarily on developing software. Deep familiarity with clinical data and databases can be assumed, but there may be heterogeneous experience with FHIR and related technology.
+
+-   **Software Engineer** A technical role involved in developing software for clinically-focused research. This role may have some hands-on experience with FHIR and related technology, but likely does not have comprehensive knowledge of the space. This role differs from the "Informaticist" in that it focuses on creating software, rather than on data modeling and manipulation.
+
+-   **Clinician Scientist/Trainee** A role for practicing clinicians or clinician-trainees. This role is involved with research as a clinical subject matter expert or co-investigator, but is not be responsible for an entire study (or they would be in the "Investigator" role). Their role in research is focused on the clinical aspects related to their area of expertise, and could involve activities like chart review, creating a "phenotyping strategy" to identify a condition using EHR data, or designing a patient- or provider-facing intervention.
+
+-   **Trainer** This role is responsible for leading future CTR-led trainings. People in this role are likely hands-on technical, or technical leaders. There may be overlap with the "Informaticist" and "Software Engineer" roles.
+
+# Topics
+
+## Overview \> FHIR for Research
+
+-   [FHIR from 10,000 Feet](modules/10-intro--intro-part-1-what-is-fhir/index.html)
+-   [FHIR from 1,000 Feet](modules/10-intro--intro-part-2-how-fhir-works/index.html)
+-   [Key FHIR Resources](modules/10-intro--key-fhir-resources/index.html)
+-   [Accessing FHIR Data High Level](modules/10-intro--accessing-fhir-data/index.html)
+-   [Real-World Research Using FHIR](modules/10-intro--real-world-research-using-fhir/index.html)
+-   [Brief History of FHIR](modules/10-intro--brief-history-of-fhir/index.html)
+-   [Terminology Introduction](modules/10-intro--terminology-introduction/index.html)
+-   [Common Data Models & FHIR](modules/10-intro--common-data-models-and-fhir/index.html)
+-   [The FHIR Community & Documentation](modules/10-intro--fhir-community-and-resources/index.html)
+
+## Overview \> SMART on FHIR
+
+-   [*FHIR from 10,000 feet*](modules//index.html)
+-   [SMART on FHIR high level overview](modules/20-intro-smart-on-fhir--overview/index.html)
+-   [Real-world research using SMART on FHIR](modules/20-intro-smart-on-fhir--real-world-research/index.html)
+-   [Technical quick start](modules/20-intro-smart-on-fhir--technical-quick-start/index.html)
+
+## Overview \> Data Modeling in FHIR
+
+-   [*FHIR from 10,000 feet*](modules/10-intro--fhir-from-10000-feet/index.html)
+-   [*Key FHIR Resources*](modules/10-intro--key-fhir-resources/index.html)
+-   [*Terminology Introduction*](modules/10-intro--key-fhir-resources/index.html)
+-   [Real world FHIR specifications](modules/30-fhir-data-modeling--real-world-ig/index.html)
+-   [Reading a FHIR specification](modules/30-fhir-data-modeling--reading-ig/index.html)
+-   [*Terminology Introduction*](modules/10-intro--terminology-introduction/index.html)
+-   [Writing a FHIR specification](modules/30-fhir-data-modeling--writing-ig/index.html)
+-   [API-focused FHIR Resources](modules/30-fhir-data-modeling--api-focused-fhir-resources/index.html)
+
+## Working with FHIR Data \> Tabular Analysis
+
+-   *Prerequisite: **Introduction \> FHIR for Research***
+-   [Real-world use cases](modules/40-fhir-data-tabular--real-world-use-cases/index.html)
+-   [FHIR to tabular data](modules/40-fhir-data-tabular--from-fhir/index.html)
+-   [Retrieving and subsetting data with FHIR](modules/40-fhir-data-tabular--retrieving-and-subsetting/index.html)
+-   [Integrating FHIR data with data from other APIs](modules/40-fhir-data-tabular--api-integration/index.html)
+
+## Working with FHIR Data \> Using REDCap with FHIR
+
+-   *Prerequisite: **Introduction \> FHIR for Research***
+-   [Real-world use cases](modules/50-fhir-data-redcap--real-world-use-cases/index.html)
+-   [Best practices workflow](modules/50-fhir-data-redcap--best-practices-workflow/index.html)
+-   [Example for a study](modules/50-fhir-data-redcap--example-study/index.html)
+
+## SMART on FHIR \> Research Implementation
+
+-   *Prerequisite: **Introduction \> SMART on FHIR***
+-   [Existing Technical Resources](modules/60-smart-on-fhir--existing-technical-resources/index.html)
+-   [Provider-facing use case example](modules/60-smart-on-fhir--provider-facing-use-case-example/index.html)
+-   [Patient-facing use case example](modules/60-smart-on-fhir--patient-facing-use-case-example/index.html)
+-   [*Key FHIR Resources*](modules/10-intro--key-fhir-resources/index.html)
+-   [*Terminology Introduction*](modules/10-intro--terminology-introduction/index.html)
+-   [*Retrieving and subsetting data with FHIR*](modules/40-fhir-data-tabular--retrieving-and-subsetting/index.html)
+-   [*The FHIR community + resources*](modules/10-intro--fhir-community-and-resources/index.html)
+
+## Train the Trainer \> Standing Up a FHIR Server With Custom Synthea Data
+
+-   *Prerequisite: **Introduction \> FHIR for Research***
+-   [Synthea synthetic data overview](modules/70-synthetic-data--synthea-overview/index.html)
+-   [Standing up a FHIR testing server](modules/70-synthetic-data--test-server/index.html)
+-   [Post-processing Synthea data](modules/70-synthetic-data--post-processing-synthea/index.html)
+-   [Customizing Synthea](modules/70-synthetic-data--customizing-synthea/index.html)
+-   [Flexporter?](modules/70-synthetic-data--flexporter/index.html)
+
+## Train the Trainer \> Cross-CTR FHIR Knowledge Sharing
+
+-   [Papers and abstracts using FHIR](modules/80-cross-ctr--papers-and-abstracts-using-fhir/index.html)
+-   [Research workflow best practices](modules/80-cross-ctr--research-workflow-best-practices/index.html)
+-   [Increasing core facility capacity with FHIR](modules/80-cross-ctr--increasing-core-facility-capacity-with-fhir/index.html)
+-   **TBD** CTR-driven content
+
+## Train the Trainer \> Working With This Documentation
+
+-   [Updating or forking self-directed resources](modules/90-meta--contributing/index.html)
+-   [Contributing updates or additions "upstream"](modules/90-meta--forking/index.html)
+-   [Best practices identified in NIH-led webinars and workshops](modules/90-meta--training-best-practices/index.html)
+-   [*The FHIR community + resources*](modules/10-intro--fhir-community-and-resources/index.html)
+-   What happens when FHIR version change?
+
+## Train the Trainer \> Discussing FHIR With Executive Leaders
+
+-   TBD
