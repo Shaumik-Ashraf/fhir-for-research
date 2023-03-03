@@ -32,7 +32,6 @@ Learning objectives
 <div class="callout-body-container callout-body">
 <p class="prompt">After reading this module, you will be able to answer the following questions:</p>
 <ol type="1">
-
 $for(learning_objectives)$
 <li>
     $learning_objectives.question$
@@ -41,6 +40,15 @@ $for(learning_objectives)$
 $endfor$
 
 </ol>
+<div class="target-roles-container">
+<hr>
+Target roles:
+<ul class="target-roles">
+$for(roles)$
+    <li>$roles$ </li>
+$endfor$
+</ul>
+</div>
 </div>
 </div>
 <!-- End learning objectives block -->
@@ -58,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('#quarto-document-content').appendChild( clone );
     document.querySelector('#key-points .callout-caption-container').textContent = 'Key points';
     document.querySelector('#key-points .prompt').textContent = 'The learning objective questions are below, along with their answers:'
+    document.querySelector('#key-points .target-roles-container').remove();
 
 });
 </script>
+<!-- End hack to add key points block at end of page-->
