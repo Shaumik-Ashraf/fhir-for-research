@@ -65,8 +65,11 @@ FHIR has a very active community of users who are often willing to engage in dis
 The intent of this module is to intoduce readers to the HL7 and FHIR community, offer a few suggestions on where to ask questions, and clarify the various touchpoints and engagement opportunities.
 
 These resources will be discussed in further detail below:
+
 - Guidance for [asking questions](https://confluence.hl7.org/display/FHIR/FHIR+Rules+for+Asking+Questions) in the FHIR community
+
 - Using the FHIR [mailing lists](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions)
+
 - [Community expectations and chat.fhir.org Stream descriptions](https://confluence.hl7.org/display/FHIR/Chat.fhir.org+Community+Expectations)
 
 ## 1. Working with the HL7 FHIR community
@@ -194,8 +197,6 @@ Documentation on HL7 processes and general information is typically found in the
 ### HL7 Jira
 
 Project work and specification development primarily occurs in [HL7 Jira](https://jira.hl7.org/secure/Dashboard.jspa). The site is an issue-tracking resource used for managing comments and suggestions on HL7 specifications and terminologies. 
-
-The balloting and comment review process detailed in @sec-hl7projects takes place in Jira.
 
 ### Zulip (chat.fhir.org)
 
