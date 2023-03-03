@@ -15,7 +15,7 @@ roles:
   
 learning_objectives:
   - question: What are the key ways FHIR has previosuly been used in research?
-    answesr: tbd
+    answer: tbd
   - question: What are examples of FHIR's use in research that may be applicable to your work?
 ---
 
