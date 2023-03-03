@@ -74,7 +74,6 @@ Roles should be listed as a YAML array in the frontmatter. The following roles a
 -   `Informaticist`
 -   `Software Engineer`
 -   `Clinician Scientist/Trainee`
--   `Trainer`
 
 ## Structure
 
