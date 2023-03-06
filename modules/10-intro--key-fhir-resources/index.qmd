@@ -60,7 +60,6 @@ Here you can see the granularity of FHIR. HumanName is designed to capture any a
 
 ```json
 {
-  ...
   "name": [
     {
       "use": "usual",
@@ -72,8 +71,7 @@ Here you can see the granularity of FHIR. HumanName is designed to capture any a
         "MSc"
       ]
     }
-  ],
-  ...
+  ]
 }
 ```
 
