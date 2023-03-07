@@ -1,0 +1,12 @@
+---
+title: Advanced Topics
+sidebar: false
+---
+
+**Advanced Topics** is focused on technical leaders who are conducting their own trainings, or researchers who are interested in a deeper dive.
+
+## Custom Synthea Data & FHIR Testing Servers
+
+-   [Synthea Synthetic Data Overview](/modules/70-synthetic-data--synthea-overview/index.html)
+-   [Customizing Synthea](/modules/70-synthetic-data--customizing-synthea/index.html)
+-   [Standing Up a FHIR Testing Server](/modules/70-synthetic-data--test-server/index.html)
