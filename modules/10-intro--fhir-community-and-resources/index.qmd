@@ -22,44 +22,38 @@ learning_objectives:
 
 ---
 
-<!--# COMMENT: Karen, see above for templating the learning objectives and answers. --LDC -->
 
-<!--# DISCUSS: is this just to give an overview of what community resources exist or to instruct the researchers on how to get involved with the community? If hte latter, I think a lot more content can be added. I've noted some areas below.
+<!--# COMMENT: Karen, I reformatted the learning objectives and key points above. --LDC -->
 
-For researchers, what level of involvement do we expect them to have in the community?
+<!--# DISCUSS
+The learning objectives/answers don't match quite right to the content.
 
- --LDC 
- -->
+what do you think about:
 
- <!--# Lizzie, I aimed for a middle ground. More details to make HL7 feel attainable and accessible, but not too lengthy-- KMB -->
+learning objectives
 
-<!--# DISCUSS:
-Consider adding these links as specific resources:
-- https://confluence.hl7.org/display/FHIR/FHIR+Rules+for+Asking+Questions
-- https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions
-- https://confluence.hl7.org/display/FHIR/Chat.fhir.org+Community+Expectations
-
-some are already listed below, but may be helpful to call them out separately as a way to help people get started.
+- question: "How can I get involved with the FHIR community?"
+  answer: "You can interact with the FHIR community through Work Groups, Zulip (chat.fhir.org), and Connectathons." <-- link all of these
+- question: "Where can I ask FHIR related questions?"
+  answer: "Zulip (chat.fhir.org), the FHIR Community Forum, and StackOverflow are great places to ask FHIR-related questions." <-- link these
+- question: <something about resources>
+  answer: confluence and jira.
 
 --LDC
 -->
 
 ## Introduction
 
-<!--#
+FHIR has an active community of users who engage in discussions and offer advice. Discussions take place in a variety of forums.
 
-New FHIR users may want to join the community....
+This module will intoduce you to the HL7 and FHIR community, offer suggestions on where to ask questions, and clarify the various touchpoints and engagement opportunities.
 
-^ want something like this as a lead in sentence.
+<!--# DISCUSS
 
---LDC
--->
+I no longer think this is necessary.
 
-FHIR has an active community of users who engage in discussions and offer advice. Discussions take place in a variety of forums, including an online chat tool called Zulip ([chat.fhir.org](https://chat.fhir.org)) or through HL7 Work Group meetings. HL7 community resources can be found on the [HL7 Confluence](https://confluence.hl7.org) website. <!--# seems out of place? --LDC -->
+--LDC 
 
-The intent of this module is to intoduce readers<!--# should this be 'you'? --LDC --> to the HL7 and FHIR community, offer suggestions on where to ask questions, and clarify the various touchpoints and engagement opportunities.
-
-<!--# remove start --LDC -->
 These resources will be discussed in further detail below:
 
 - Guidance for [asking questions](https://confluence.hl7.org/display/FHIR/FHIR+Rules+for+Asking+Questions) in the FHIR community
@@ -67,69 +61,49 @@ These resources will be discussed in further detail below:
 - Using the FHIR [mailing lists](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions)
 
 - [Community expectations and chat.fhir.org Stream descriptions](https://confluence.hl7.org/display/FHIR/Chat.fhir.org+Community+Expectations)
-<!--# remove end --LDC -->
 
-## Working with the HL7 FHIR community
-
-The FHIR community is comprised of developers, maintainers, and implementers that engage with the [FHIR specification](https://hl7.org/fhir/). Community-members work in a variety of environments including clinical settings, health-focused companies and non-profits, and local, state, and federal health agencies. [HL7](<https://hl7.org>) manages both the FHIR technology (implementation guides [IGs] and the FHIR API for example) and the community of maintainers and implementers. [FHIR](<https://hl7.org/fhir/>) is an open source specification, and the vast majority of HL7's FHIR work is done in public forums and channels. <!--# DISCUSS where does "in the open" come from? I couldn't see it used in terms of FHIR. With it quoted, it should be an official phrase / commonly used phrase with FHIR. Maybe include without the quotes? --LDY  --> Any interested person can join in to discuss or contribute. <!--# COMMENT: Adding in references to the community --LDC --> The FHIR community also develops many of the FHIR Implementation Guides in the open, or publicly. This approach makes members of the community accessible to other implementers and developers who want to follow the progress of work or ask questions via the mechanisms described below.
-
-<!--# DISCUSS:
-The mechanisms described below should include:
-- HL7 Work Groups
-- Zulip
-- The FHIR community forum (community.fhir.org)
-- Connectathons
-
-Move HL7 projects to its own section or as a subsection to HL7 work groups.
-I'm even wondering if HL7 projects doesn't belong in this module at all - it doesn't seem to match.
---LDC
  -->
+
+## The HL7 FHIR community
+
+The HL7 FHIR community is comprised of developers, maintainers, and implementers that engage with the [FHIR specification](https://hl7.org/fhir/). Community-members work in a variety of environments including clinical settings, health-focused companies and non-profits, and local, state, and federal health agencies. [HL7](<https://hl7.org>) manages the [FHIR standard](https://hl7.org/fhir/), FHIR technology (e.g., [implementation guides (IGs)](http://fhir.org/guides/registry/) and the [FHIR API](https://www.hl7.org/fhir/http.html)<!--# i added link. double check to ensure it's the right one --LDC -->) and the community of maintainers and implementers. 
+
+[FHIR](<https://hl7.org/fhir/>) is an open source specification, and the vast majority of HL7's FHIR work is done in public forums and channels. Any interested person can join in to discuss or contribute. The FHIR community also develops many of the FHIR Implementation Guides publicly. This approach makes members of the community accessible to other implementers and developers who want to follow the progress of work or ask questions via the channels described below.
 
 ### HL7 Work Groups
 
-HL7 specifications and many FHIR Implementation Guides are developed as [HL7 Projects](http://www.hl7.org/special/Committees/projman/searchableProjectIndex.cfm?action=list). HL7 Projects include a variety of initiatives and for the purpose of this module, the term will refer to any efforts, including IGs, that are developed under the guidance of one or more [HL7 Work Groups](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802). Each Work Group lists the [projects under their umbrella](http://www.hl7.org/Special/committees/index.cfm?ref=nav).
+HL7 specifications and many FHIR Implementation Guides are developed as [HL7 Projects](http://www.hl7.org/special/Committees/projman/searchableProjectIndex.cfm?action=list). HL7 Projects include a variety of initiatives. For the purpose of this module, "HL7 Projects" refers to any efforts, including IGs, that are developed under the guidance of one or more [HL7 Work Groups](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802). 
 
 > Work groups are the bodies within HL7 that take on responsibility for developing and maintaining standards. They are where the "work" of HL7 gets done. HL7 has a large number of work groups covering the spectrum of the healthcare space. All work groups are open to participation by anyone with an interest in their content.
 
-These typically meet on a weekly basis for a [conference call](http://www.hl7.org/concalls/CallDirectory.aspx), as well as in-person (or hybrid) at [HL7 Working Group Meetings](https://www.hl7.org/events/workgroupmeetings.cfm?ref=nav) held three times per year.
+Each Work Group lists the [projects under their umbrella](http://www.hl7.org/Special/committees/index.cfm?ref=nav).
 
-HL7 Work Groups consist of volunteer subject matter experts and other stakeholders. Each Work Group has a [mailing list](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions) that you can join to communicate with the Work Group, including asking for time on an upcoming conference call. Work Groups also typically post conference call agendas on their Confluence sites ([see the Work Group directory for Confluence links](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802)).
+Work Groups typically meet on a weekly basis for a [conference call](http://www.hl7.org/concalls/CallDirectory.aspx), as well as in-person (or hybrid) at [HL7 Working Group Meetings](https://www.hl7.org/events/workgroupmeetings.cfm?ref=nav), which are held three times per year.
 
-Two ways to get involved in a Work Group:
+HL7 Work Groups consist of subject matter experts and other stakeholders. Each Work Group has a [mailing list](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions) that you can join to communicate with the Work Group, including asking for time on an upcoming conference call. Work Groups also typically post conference call agendas on their Confluence sites (see the [Work Group directory](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802) for Confluence links).
 
-- The fastest way to get involved is to join a regular [conference call](http://www.hl7.org/concalls/CallDirectory.aspx) and ask to introduce yourself. There is a core group of leadership for each Work Group that facilitates meetings and attendees typically vary depending on agenda content.
+#### Getting started
 
-- Alternatively (or additionally), join the Work Group's [mailing list](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions) and reach out to the group's leadership to introduce yourself via email. The mailing list is also used to request items be added to a future agenda. 
+The fastest way to get started is to join a regular [conference call](http://www.hl7.org/concalls/CallDirectory.aspx) and ask to introduce yourself. There is a core leadership team for each Work Group that facilitates meetings. Attendees vary depending on agenda content.
 
-Tips for joining a Work Group:
+Alternatively (or additionally), join the Work Group's [mailing list](https://confluence.hl7.org/display/FHIR/Mailing+List+Instructions) and reach out to the group's leadership to introduce yourself. The mailing list is also used to request items be added to a future agenda. 
+
+#### Tips for attending Work Group meetings:
 
 - Get specific questions addressed by asking to be on the agenda ahead of the meeting.
 
-- Be prepared to discuss your agenda item(s). [Agendas](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802) are typically available ahead of the meeting as well.
+- Be prepared to discuss your agenda item(s). Agendas are available ahead of the meeting on the Work Group's Confluence page.
 
 - Share your expertise. Contributions to the Work Group ensure that new projects and specifications can be implemented and used by the community. That requires input from a variety of stakeholders.
-
-
-<!--# DISCUSS:
-As a dev/implementer/etc., I'd want to know
-- What the working groups are (a list of working groups - already linked above)
-- How I find out what each working group does
-- How I find out what IGs/specs/projects each working group is working on
-- How to find out when they meet
-- How to join
-
-Will this be in a separate module? If not, consider re-orging this section to call out these steps.
---LDC
--->
-
-<!--# Added tips for getting involved and joining WGs-- KMB -->
 
 ### HL7 Projects
 <!--# Brief description of the process for HL7 projects and balloting. The use case is for readers to have a basic understanding of where IGs come from and how the balloting process ensures quality. This should also briefly mention HL7 maturity levels (e.g. STU) -->
 
-<!--# DISCUSS What is an "Hl7 project"? Is it an HL7 spec? IG? all of the above? Define "HL7 project" in terms of concepts previously used  --LDC -->
-
-<!--# DISCUSS Defined HL7 projects above in Work Group section—should it be redefined here? --KMB -->
+<!--# DISCUSS
+I think this section should be removed entirely.
+I expect Max will need to make that decision. I think it's good info but doesn't belong in this module. I think the previous section does a good job providing an introduction to HL7 projects.
+--LDC
+-->
 
 Every HL7 project is sponsored by one of the Work Groups. The sponsorship ensures that stakeholders can offer input during the early stages of the standards development process and that each specification is developed with consideration of other existing or developing standards.
 
@@ -154,29 +128,64 @@ The version history can be accessed at the very bottom of the Implementation Gui
 ![The meta data for the US Core FHIR IG, at the bottom of the IG's page, includes a link to the Version History information above.](images/version-history-meta-data-us-core.png)
 
 
+### Zulip (chat.fhir.org)
+
+<!--# Describe what Zulip is (analogy to Slack or Teams groups), how to find the right stream if you have a question (search streams, or search all public streams for similar topics and see where they were posted), and #implementers stream to post in if you can't figure out where to ask -->
+
+<!--# DISCUSS
+I moved this to the FHIR community section
+
+--LDC
+-->
+
+Zulip ([chat.fhir.org](https://chat.fhir.org)) is an asynchronous communication platform, similar to Slack or Teams messaging. Anyone is welcome to join and it can be an valuable tool for asking questions and connecting with others that have similar objectives for health data. 
+
+Zulip has Streams (like Channels on Slack) for topics like Implementation Guide development, Terminology, and Cancer Interoperability. Users then post comments or questions inside the Stream for others to respond. Streams can be found by searching for specific topics or browsing through the list. Searching all Streams or narrowing a search to a certain Stream in the search bar is helpful for troubleshooting common problems or seeing if anyone else has asked the same question before.
+
+#### Getting started
+
+Before using Zulip, review HL7's [community expectations](https://confluence.hl7.org/display/FHIR/Chat.fhir.org+Community+Expectations). 
+
+If you have a question and don't know which Stream to post it in, [#implementers](https://chat.fhir.org/#narrow/stream/179166-implementers) Stream is a good place to start. 
+
+Other useful Streams to subscribe to include:
+
+- [#Announcements](https://chat.fhir.org/#narrow/stream/179240-Announcements): posts with new Streams, releases of new versions of specifications, and ballot updates
+
+- [#implementers](https://chat.fhir.org/#narrow/stream/179166-implementers): discussion about implementing FHIR resources
+
+- [#analytics on FHIR](https://chat.fhir.org/#narrow/stream/179219-analytics-on-FHIR): useful for those using FHIR interfaces and APIs for data analytics
+
+- [#social](https://chat.fhir.org/#narrow/stream/179160-social): general discussion about the FHIR community with the occasional fun update from a community member
+
+
+
 ### Connectathons
 
 <!--# What are Connectathons, why are they important, how they may related to research -->
 
-[Connectathons](https://confluence.hl7.org/display/FHIR/Connectathons) are an opportunity for contributors and community members <!--# DISCUSS: should this be "developers and implementers"? --LDC --> <!--# I think it's ok with contributors and community members? Open to changing if you disagree-- KMB -->to engage synchronously for discussions and interoperability testing. HL7 describes them as:
+[Connectathons](https://confluence.hl7.org/display/FHIR/Connectathons) are an opportunity for contributors and community members to engage synchronously for discussions and interoperability testing. HL7 describes [Connectathons](https://confluence.hl7.org/display/FHIR/Connectathons) as:<!--# Added link again here to make it obvious where the quote below was coming from. I felt the earlier link was too far away from the direct quote. --LDC -->
 
 > ...an event that is centered on developing the HL7 FHIR Specification including resources, profiles and implementation guides. The purpose of a Connectathon is to prove that the specification is complete and facilitate FHIR implementation guide maturity.
 
-Three Connectathons are held each year, in both in-person and virtual formats. Anyone is welcome to [attend as a participant](https://confluence.hl7.org/display/FHIR/Connectathons)<!--# DISCUSS: I don't see a better evergreen participant page for Connectathons but the most recent or next Connectathon is linked there --KMB -->, or they may submit a proposal to be a [Track Lead](https://confluence.hl7.org/display/FHIR/Connectathon+Track+Lead+Responsibilities). Connectathon Track Leads can share their specification or resource for implementers to test drive and offer feedback. A complete list of the Tracks is posted before the Connectathon, and offerings from [previous Connectathons](https://confluence.hl7.org/display/FHIR/Previous+Connectathons) can be browsed as well. 
+Three Connectathons are held each year in both in-person and virtual formats. Anyone can [attend as a participant](https://confluence.hl7.org/display/FHIR/Connectathons)<!--# DISCUSS: I don't see a better evergreen participant page for Connectathons but the most recent or next Connectathon is linked there --KMB --><!--# looks good to me --LDC --> or submit a proposal to be a [Track Lead](https://confluence.hl7.org/display/FHIR/Connectathon+Track+Lead+Responsibilities). Connectathon Track Leads share their specification or resource for implementers to test drive and offer feedback. A complete list of the Tracks is posted before the Connectathon, and offerings from [previous Connectathons](https://confluence.hl7.org/display/FHIR/Previous+Connectathons) can be browsed as well. 
 
-Participation levels and modes of engagement vary depending on objectives and interests for attending the Connectathon. The [FAQs](https://confluence.hl7.org/display/FHIR/HL7+FHIR+Connectathon+FAQs) provide some information on what is required to participate. Each Connectathon also hosts a virtual FHIR Training for Beginners session and a virtual participant information session ahead of the kick off to the event.
 
-<!--#
-As an implementer, I want to know:
-- where/how to sign up
-- how to figure out what tracks are happening
-- basics on how to participate
+#### Getting started
+<!--# DISCUSS
+I added "Getting started" sections to each community section. I mostly moved existing content into them, but added a fair bit to this one. Please review.
 
-Do we expect researchers to participate in connectathons? If so, we should include the above (and/or links to resources) either here or in a separate module
--- LDC
+--LDC
 -->
+If you'd like to attend a Connectathon, you can find information about the upcoming Connectathons on [HL7's Connectathon events page](https://www.hl7.org/events/fhir-connectathon/) or the [Connectathon Confluence page](https://confluence.hl7.org/display/FHIR/Connectathons).
 
-<!--# I think I captured the above information in this edit. I don't think many researchers will participate in connectathons (my hunch only) so I think it's ok to keep it introductory -- KMB -->
+The [Connectathon FAQs](https://confluence.hl7.org/display/FHIR/HL7+FHIR+Connectathon+FAQs) provide information on requirements to participate. 
+
+First time attendees must watch the [FHIR Training for Beginners Newcomer Orientation](https://vimeo.com/542197402/8fb80fea04).
+
+Each Connectathon hosts a virtual Participant Information Session several weeks ahead of the Connectathon event. The Participant Information Session includes information about what Tracks are available, how to connect with Track Leads, and how to prepare your sandbox system.
+<!--#FIX not sure how to cite this:
+https://confluence.hl7.org/display/FHIR/2023+-+01+Connectathon+32 --LDC -->
 
 
 ## HL7 FHIR resources
@@ -191,27 +200,51 @@ Documentation on HL7 processes and general information is typically found in the
 -   schedules and information for HL7 Work Groups
 -   processes and documentation on HL7 and FHIR infrastructure
 
+The Confluence site also includes tips on [getting involved](https://confluence.hl7.org/display/FHIR/Getting+Involved) and [implementor support](https://confluence.hl7.org/display/FHIR/Implementer+Support).
+
 ### HL7 Jira
 
 Project work and specification development primarily occurs in [HL7 Jira](https://jira.hl7.org/secure/Dashboard.jspa). The site is an issue-tracking resource used for managing comments and suggestions on HL7 specifications and terminologies. 
 
-### Zulip (chat.fhir.org)
+<!--
+DISCUSS
 
-<!--# Describe what Zulip is (analogy to Slack or Teams groups), how to find the right stream if you have a question (search streams, or search all public streams for similar topics and see where they were posted), and #implementers stream to post in if you can't figure out where to ask -->
+I added the items below. Please review for accuracy and whether they belong.
 
-Zulip ([chat.fhir.org](https://chat.fhir.org)) is an asynchronous communication platform, similar to Slack or Teams messaging. Anyone is welcome to join and it can be an valuable tool for asking questions and connecting with others that have similar objectives for health data. Zulip has Streams (like Channels on Slack) for topics like Implementation Guide development, Terminology, and Cancer Interoperability. Users then post comments or questions inside the Stream for others to respond. Streams can be found by searching for specific topics or browsing through the list. Searching all Streams or narrowing a search to a certain Stream in the search bar is helpful for troubleshooting common problems or seeing if anyone else has asked the same question before.
+--LDC
+-->
+### FHIR Community Forum
 
-Have a question and don't know which Stream to post it in? The [#implementers](https://chat.fhir.org/#narrow/stream/179166-implementers) Stream is a good place to start, but consider searching and browsing other streams first so the question finds the best audience. HL7 has also developed [community expectations](https://confluence.hl7.org/display/FHIR/Chat.fhir.org+Community+Expectations) for using [chat.fhir.org](https://chat.fhir.org).
+Discussion about FHIR Implementation and Development Topics occurs in the [FHIR Community Forum](http://community.fhir.org/). The [FHIR Community Forum](http://community.fhir.org/t/welcome-to-the-fhir-community-forum/8) is a place to ask questions like 
 
-Useful Streams to subscribe to include:
+> - How do I do [x]? where [x] is any kind of use of FHIR at all
+> - Has anyone solved [my problem] with the specification? (or is anyone interested in this)
+> - Why does FHIR work like it does?
+> - What does everyone think about [making some change to the FHIR specification]?
 
-- [#Announcements](https://chat.fhir.org/#narrow/stream/179240-Announcements): posts with new Streams, releases of new versions of specifications, and ballot updates
+Although the FHIR Community Forum is monitored, Zulip ([chat.fhir.org](https://chat.fhir.org)) is more active.
 
-- [#implementers](https://chat.fhir.org/#narrow/stream/179166-implementers): discussion about implementing FHIR resources
+### FHIR Test Servers
+<!--# DISCUSS
+I'm not sure if this belongs here or not...
 
-- [#analytics on FHIR](https://chat.fhir.org/#narrow/stream/179219-analytics-on-FHIR): useful for those using FHIR interfaces and APIs for data analytics
+--LDC
+-->
 
-- [#social](https://chat.fhir.org/#narrow/stream/179160-social): general discussion about the FHIR community with the occasional fun update from a community member
+Multiple [FHIR test servers](https://confluence.hl7.org/display/FHIR/Public+Test+Servers) are available for testing FHIR implementations.
+
+> These are public services provided by volunteers and HL7 makes no representations concerning their safety or reliability.
+
+
+### StackOverflow on FHIR
+[StackOverflow](https://stackoverflow.com/) is a forum for asking and answering technical questions. Use the [hl7-fhir tag](https://stackoverflow.com/questions/tagged/hl7_fhir) for developer and programming questions about reference FHIR implementations.
+
+---
+
+<!--# DISCUSS
+I no longer thing "where to begin" is necessary if we have teh "getting started" sections above.
+
+--LDC
 
 ## Where to begin
 
@@ -220,4 +253,4 @@ A few accesible and approachable ways to wade into HL7 FHIR community are to:
 - Join the Zulip [chat.fhir.org](https://chat.fhir.org) space and subscribe to a couple of relevant, active channels.
 
 - Explore the HL7 Confluence [Work Groups and project list](https://confluence.hl7.org/pages/viewpage.action?pageId=4489802) and find a group or project to join.
-
+-->
