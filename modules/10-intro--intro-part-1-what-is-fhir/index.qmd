@@ -1,133 +1,91 @@
 ---
 title: "FHIR from 10,000 Feet"
-format:
-  html:
-    template-partials:
-      - title-block.html
-editor: visual
-toc: true
-bibliography: bibliography.bib
+
 area:
   name: Overview
 topic:
   name: FHIR for Research
+
+roles:
+  - Investigator
+  - Research Leaders
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives:
+  - question: What role does FHIR play in health data interoperability?
+    answer: FHIR is becoming the ubiquitous specification governing interoperability of health systems. This is driven both by regulation in the US, and by FHIR's pragmatic implementation-first approach.
+  - question: Why is FHIR currently relevant for research?
+    answer: At a high level, FHIR is now well-adopted throughout the US healthcare system thanks to ONC and CMS rules. FHIR's openness, active development with an implementer-first approach, and extensibility make it a flexible tool for research.
+  - question: What are areas where FHIR can enhance research?
+    answer: 1) Providing direct access to health data through a standardized API that would otherwise have to be accessed with one-off analyst work, or through a more complex workflow.<br><br>2) Defining a data model for research that can be implemented using existing FHIR resources and API endpoints.
 ---
 
-::: callout-tip
-## Learning objectives
+## EHRs and interoperability
 
-1.  Understand what FHIR is at a high-level
-2.  Understand what interoperability is and why it is important in healthcare and health research
-3.  Understand the major problems that FHIR helps solve in healthcare and research settings
-4.  Understand why now is the time that people should start caring about FHIR
-:::
-
-<!--# Replace with "Key Points"? We should discuss once the module's content is in place. -->
-
-<!--# FIX Update learning objectives given split into two seaparate pages --MM -->
-
-<!--# Lizzy's suggestions: understand how fhir helps solve the problems; understand the main differences between fhir and other approaches to health data sharing (and then link to the bigger article) -->
-
-## Introduction
-
-Electronic health record (EHR) systems have been [broadly adopted throughout the US since 2014](https://www.healthit.gov/data/quickstats/national-trends-hospital-and-physician-adoption-electronic-health-records) (see graph below)
+Electronic health record (EHR) systems have been [broadly adopted throughout the US since 2014](https://www.healthit.gov/data/quickstats/national-trends-hospital-and-physician-adoption-electronic-health-records) (see graph below).
 
 ![Source: [ONC](https://www.healthit.gov/data/quickstats/national-trends-hospital-and-physician-adoption-electronic-health-records)](images/ehr_adoption.png){#fig-ehr-adoption fig-alt="Graph showing trend in hospital and physician EHR adoption form 2008 to 2021. Adoption is between 10 and 20% in 2008, rising to >70% in 2014."}
 
-The ability to exchange data across these EHRs and ancillary systems ("interoperability") has lagged behind their adoption. Improving interoperability remains a key challenge for the the implementers and users of EHRs, including researchers who wish to utilize EHR data in their work. <mark>FHIR is one of the key technologies that enables interoperability of health-related data.</mark>
+**Interoperability**, or the ability to exchange data across these EHRs and ancillary systems has lagged behind their adoption. Improving interoperability remains an important challenge for the the implementers and users of EHRs, including researchers who wish to utilize EHR data in their work.
+
+FHIR is one of the key technologies that enables interoperability of health-related data.
 
 Below, we will provide additional background on interoperability and the technologies that enable it, including FHIR.
 
-## Interoperability of Health Data
+## FHIR is key to the US health data interoperability ecosystem
 
-**Interoperability** is "the ability of different information systems, devices and applications (systems) to access, exchange, integrate and cooperatively use data in a coordinated manner, within and across organizational, regional and national boundaries, to provide timely and seamless portability of information and optimize the health of individuals and populations globally." [@interoperability_himss]
+[HIMSS](https://www.himss.org/resources/interoperability-healthcare)[^1] [defines interoperability](https://www.himss.org/resources/interoperability-healthcare) as follows:
 
-The ability to deliver effective healthcare to all depends on the ability to share information and collaborate in providing care. It helps both clinicians and patients, as the former can now deliver safer, more effective patient-centered care and the latter can now access electronic health information to help manage and coordinate their care. [@interoperability_onc]
+[^1]: HIMSS is the Healthcare Information and Management Systems Society. [Its mission](https://www.himss.org/who-we-are) is to "reform the global health ecosystem through the power of information and technology."
 
-### Impact of Lack of Interoperability on Stakeholders
+> It is the ability of different information systems, devices and applications (systems) to access, exchange, integrate and cooperatively use data in a coordinated manner, within and across organizational, regional and national boundaries, to provide timely and seamless portability of information and optimize the health of individuals and populations globally.
 
-**Poor communication across care providers.** Medication discrepancies such as drug omissions during transitions of care and multiple modes of information transmission result in delays in post-acute care services and can lead to adverse events and preventable readmissions. Redundant information collection creates inefficiencies and burden.
+[ONC](https://www.healthit.gov/topic/interoperability)[^2] describes the importance of interoperability:
 
-**Reliance on patient recall during periods of high stress.** Recall of information can be unreliable, as patients may be unconscious, incapacitated, or otherwise unresponsive or unable to communicate information. This in term increases patient and/or family stress.
+[^2]: ONC is [The Office of the National Coordinator for Health Information Technology](https://www.healthit.gov/topic/interoperability). From [their website](https://www.healthit.gov/topic/about-onc): "ONC is the principal federal entity charged with coordination of nationwide efforts to implement and use the most advanced health information technology and the electronic exchange of health information."
 
-**Increased cost and provider burden.** Additional costs exist related to hospital stays from adverse events and readmissions. Additional administrative costs also exist to locate, reconcile, and coordinate information.
+> Interoperability helps clinicians deliver safe, effective, patient-centered care. It also provides new ways for individuals and caregivers to access electronic health information to manage and coordinate care. Advancing interoperability is now an essential part of most health care activities ranging from health equity to public health emergency response.
 
-<!--# This section should have more of a research focus. I think it's fine to discuss these topics related to *providing* clinical care as well, but research should at least be included. -->
+The [21st Century Cures Act](https://www.nih.gov/research-training/medical-research-initiatives/cures) (referred to as the Cures Act) was signed by President Obama in December 2016. As part of this legislation, ONC established a set of interoperability criteria as part of their [Health IT Certification Program](https://www.healthit.gov/topic/certification-ehrs/certification-health-it). These criteria include:
 
-### Standards
+-   "Standardized access to single patient and multiple patient services via an API(s) using the HL7 FHIR standard" [@ONC_2015_Edition]
 
-**Standards** are agreed-upon methods for connecting systems together. They support interoperability by letting disparate systems talk to each other using the same "standard" language. They may pertain to security, data transport, data format or structure, or the meanings of codes or terms. They are defined, updated, and maintained by standards development organizations (SDOs) through a collaborative process involving the audience that will be using the standards.
+-   Use of [United States Core Data for Interoperability (USCDI) standard](https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi) as part of these APIs [@ONC_2020_USCDI], which is implemented in FHIR with the [US Core FHIR Implementation Guide](https://www.hl7.org/fhir/us/core/)
 
-Standards are a critical part of the technology ecosystem outside of healthcare. For example, USB connectors are ubiquitous for charging devices like smartphone and tablets, and for connecting peripherals to computers. An SDO called the International Electrotechnical Commission published the IEC 62680-1-3 specification that governs USB-C, the most common kind of USB connector on modern devices. This specification ensures USB-C devices and cables can work with each other.
+While the Health IT Certification Program is voluntary, [CMS provides a financial incentive](https://www.cms.gov/Regulations-and-Guidance/Legislation/EHRIncentivePrograms/Certification) to health systems that use certified EHRs. Practically speaking, this means that FHIR and USCDI support is now built into many EHRs and other health data systems to meet [ONC's December 2022 deadline](https://www.healthit.gov/sites/default/files/2022-08/Highlighted_Regulatory_Dates_All.pdf).
 
-![A USB-C connector next to a laptop. Source: Wikipedia/Wikideas1](images/image-1151772527.png){alt="A USB-C connector next to a laptop. Source: Wikipedia/Wikideas1" fig-align="left" width="50%"}
+### FHIR is becoming ubiquitous
 
-**Standards in Healthcare**
+As of 2019, [84% of hospitals had adopted FHIR](https://www.healthit.gov/buzz-blog/health-it/the-heat-is-on-us-caught-fhir-in-2019). FHIR also is widely used in the health technology ecosystem beyond EHRs. For example, [Apple's HealthKit uses FHIR](https://developer.apple.com/documentation/healthkit/samples/accessing_health_records) for accessing data from healthcare institutions. The major public cloud providers ([Amazon](https://aws.amazon.com/healthlake/), [Google](https://cloud.google.com/healthcare-api/docs/concepts/fhir), and [Microsoft](https://azure.microsoft.com/en-us/products/health-data-services)) also provide FHIR functionality. FHIR is an international standard and is actively used outside the US.[^3]
 
-In healthcare, one of the key SDOs is Health Level Seven (HL7®), which is "dedicated to providing a comprehensive framework and related standards for the exchange, integration, sharing, and retrieval of electronic health information that supports clinical practice and the management, delivery, and evaluation of health services." [@hl7] Below are examples of HL7 standards for healthcare:
+[^3]: For example, there are a number of internationally-focused FHIR Implementation Guides: <http://hl7.org/fhir/uv/>.
 
--   [HL7 v2 Messaging](http://www.hl7.org/implement/standards/product_brief.cfm?product_id=185): A commonly used health data interchange standard that includes messaging specifications for patient administration, orders, results, scheduling, claims management, document management, and many others. v2 has been in use since the 1990s.
+## FHIR's focus on implementation is beneficial to research uses
 
--   [Consolidated-Clinical Document Architecture (C-CDA)](https://www.healthit.gov/topic/standards-technology/consolidated-cda-overview): framework for creating clinical documents that contain both human-readable text and a machine-readable format (XML). v1.0 of the standard was published in 2000. [@cda_hl7]
+From the [Fundamental Principles of FHIR](https://confluence.hl7.org/display/FHIR/Fundamental+Principles+of+FHIR):
 
--   [HL7 Fast Healthcare Interoperability Resources (FHIR)](http://hl7.org/fhir/): specification for exchanging clinical and administrative healthcare data based on common web technologies. The first draft standard of the FHIR specification was published in 2014. [@fhir_wikipedia]
+> Implementers are the target consumers of the specification. Implementability is the primary consideration in all specification design decisions. 
+>
+> This is the most fundamental precept of FHIR. Most other principles and precepts exist to support this objective. 
+>
+> **Rationale**: Standards that don't get implemented (or are implemented poorly) benefit no-one. Standards that place theoretical correctness, clinical perfection, modeling approach, preferred architecture or any other priority above implementability are unlikely to see significant adoption and thus will produce little overall benefit. That does not mean that other considerations can not be taken into account, only that implementability must remain **the** primary objective.
 
--   <!--# FIX Add v3 -MM -->
+Based on this principle, FHIR has a number of characteristics that benefit research:
 
-As seen above, **HL7 FHIR** is not the first health IT standard. It is a new specification based on emerging industry approaches, informed by years of [lessons learned](https://www.hl7.org/fhir/comparison.html) around requirements, successes, and challenges from defining and implementing previous standards. Section 3 of this module will dive deeper into what FHIR is from a high-level and the module [Introduction Part 2: How FHIR Works](modules/10-intro--intro-part-2-how-fhir-works) will give a deeper comparison of the three HL7 standards mentioned above.
+-   The FHIR specification is open source, and is actively improved through open source development principles
 
-### Regulating Interoperability
+-   There are no inherent fees when using FHIR (though technology vendors may charge fees related to using their products that implement FHIR)
 
-In an effort to push health IT vendors toward open standards that allow for better interoperability (and hopefully increase access to data and improve health outcomes), US government agencies including ONC and CMS are beginning to require adoption of FHIR as the primary standard for exchanging health data.
+-   FHIR uses common web technologies, which are widely used in technology outside of health care and allow software developers without prior FHIR experience to quickly climb the learning curve
 
-<!--# Add specifics on this regulation in ~3 sentences. What is it called, when was it adopted, and what does the regulation actually require? -->
+-   The FHIR specification is easily customized and extended to meet the needs of a specific use case (e.g., [representing oncology data](https://hl7.org/fhir/us/mcode/)).
 
-<!--# Question from Blake: Section 3.3 specifically brings up the ONC 21st Century Cures Act & the CMS Interoperability and Patient Access Rule. Do we want to remove the mention of that infor from that section and move it to this one? Since you wanted that section to focus on researchers, it might make more sense to move the regulation part up here anyways. -->
+## FHIR provides a uniform data model and API for sharing data
 
-## What is FHIR?
+The FHIR specification provides an extensible set of "resources" for defining different types of data, like [`Patient`](https://www.hl7.org/fhir/patient.html) for representing demographics and administrative information about an individual, and [`Observation`](https://www.hl7.org/fhir/observation.html) for representing measurements and assertions about a patient or other subject. These FHIR resources are [designed to include data elements that cover the majority of use cases](http://www.healthintersections.com.au/?p=1924), and the FHIR specification provides [mechanisms](https://www.hl7.org/fhir/extensibility.html) for extending data models when necessary.
 
-![](images/fhir_acronym.png)
+FHIR also provides an API (Application Programming Interface; see [Wikipedia for details](https://en.wikipedia.org/wiki/API)) that provides a standardized way for systems to request and receive FHIR data.
 
-Healthcare records are increasingly becoming digitized. As patients move around the healthcare ecosystem, their electronic health records must be available, discoverable, and understandable. FHIR is a standard for exchanging healthcare information electronically. Standards establish a common language and process for all health IT systems to communicate, allowing information to be shared seamlessly and efficiently. FHIR can be used as a stand-alone data exchange standard or with existing standards.
-
-FHIR is fast, efficient, and flexible. Its philosophy is to build a base set of resources that either by themselves or when combined satisfy the majority of use cases. It uses the **80/20 rule**, where 20% of the requirements satisfy 80% of the needs. Solutions are built from modular components called "Resources," which are described in detail in the module [Introduction Part 2: How FHIR Works](modules/10-intro--intro-part-2-how-fhir-works). There is also the option to develop custom extensions for a variety of use cases.
-
-### FHIR Key Principles
-
-Learning from previous standards, FHIR's foundation was built around web technologies to allow for a variety of stakeholders to develop scalable health data exchange technologies, including healthcare providers, EHR vendors, researchers, and more. Below summarizes the major principles that governed the development of FHIR:
-
--   Focus on **implementers**
-
--   Target support for **common scenarios**
-
--   Leverage cross-industry **web technologies**
-
--   Require **human readability** as base level of interoperability
-
--   The standard is **freely available**
-
--   Support multiple **paradigms and architectures**
-
--   Demonstrate best practice **governance**
-
-<!--# The sections below are missing the researcher context. We need less of a focus on business/clinical care, and more of a focus on why this matters to researchers (though don't entirely lose the business/clinical use cases as those are still relevant). -->
-
-<!--# Lizzy's suggestion: FHIR works by having containers with strict rules of what information can be put where and in what format. When a system fills a FHIR container and sends it to another system, that other system can understand what each piece of information means. -->
-
-### Business Case: Why Promote FHIR?
-
-**Single standard for health care transactions.** FHIR provides a standard for *both* administrative (claims, explanations of benefits, etc.) *and* clinical data.
-
-**Reduced burden and operating costs.** Aligning industry on a single, common standard means that parties do not need to maintain complicated translation layers, manual processes, or numerous differing workflows for accomplishing a single task.
-
-**Enables competition.** An open standards breaks down barriers to entry, allowing more open, free competition and lower costs.
-
-**Empowers patients.** One standard allows developers to compile all different types of data, without the need for additional layers of translation, enabling patients and caregivers to access their information in one place.
-
-**Greater data insights for healthier people**. Marrying these data sets will empower research, data science, and informatics, ultimately leading to healthier populations.
-
-**Enables more equitable decision-making**. Access to different slices of medical data could be standardized through FHIR to supplement socio-economic determinants of health.
-
-### Why Should You Understand FHIR?
-
-The level of FHIR activity and adoption is increasing rapidly. FHIR APIs are specifically required in the **ONC 21st Century Cures Act** [@cures_act] and the **CMS Interoperability and Patient Access Rule** [@cms_rule]. Federal agencies such as CMS, ONC, and CDC are increasingly looking for FHIR-based solutions to healthcare problems. As a result, healthcare providers with access to health IT APIs using FHIR is widespread.
+The FHIR specification also discusses the [security concerns related to FHIR](https://www.hl7.org/fhir/security.html) including recommended best practices.
