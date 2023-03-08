@@ -53,53 +53,57 @@ The `https://api.logicahealth.org/researchonfhir/open` endpoint is a live FHIR s
 <!--# Proof of concept "run live query" widget is below -- this needs to get replaced with something much more robust that allows the user to construct the request themselves. -->
 
 ```{=html}
-<div class="d-flex row">
-  <div class="col my-auto me-3">
-    <select id="accessing-fhir-data-query-http-verb" class="form-select form-select-sm" aria-label="Select a FHIR Resource" name="query-http-verb">
-      <option selected>HTTP Verb</option>
-      <option value="GET">GET</option>
-      <option value="POST">POST</option>
-      <option value="HEAD">HEAD</option>
-      <option value="PATCH">PATCH</option>
-      <option value="PUT">PUT</option>
-      <option value="DELETE">DELETE</option>
-    </select>
-  </div>
+  <div class="d-xl-flex row justify-content-around g-3">
+    <div class="col-xl-4 mb-2 my-xl-auto mx-auto" style="max-width:8rem;">
+      <select id="accessing-fhir-data-query-http-verb" class="form-select form-select-sm" aria-label="Select a FHIR Resource" name="query-http-verb">
+        <option selected>HTTP Verb</option>
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="HEAD">HEAD</option>
+        <option value="PATCH">PATCH</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+      </select>
+    </div>
 
-  <div class="col my-auto">
-    <input id="accessing-fhir-data-query-base-url" type="text" class="form-control form-control-sm" aria-label="FHIR API URL" name="query-base-url" placeholder="URL to FHIR API" />
-  </div>
+    <div class="col-xl-4 mb-2 my-xl-auto">
+      <div class="row d-md-flex justify-content-center">
+        <div class="col my-auto">
+          <input id="accessing-fhir-data-query-base-url" type="text" class="form-control form-control-sm" aria-label="FHIR API URL" name="query-base-url" placeholder="URL to FHIR API" />
+        </div>
 
-  <div class="col my-auto">
-    <!-- customized 'slash' svg to look nice -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16" transform="rotate(-30 0 0) scale(2 2)">
-      <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
-    </svg>
-  </div>
+        <div class="col my-auto">
+          <!-- customized 'slash' svg to look nice -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16" transform="rotate(-30 0 0) scale(2 2)">
+            <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg>
+        </div>
 
-  <div class="col my-auto">
-    <select id="accessing-fhir-data-query-resource" class="form-select form-select-sm" aria-label="Select a FHIR Resource" name="query-resource">
-      <option selected>FHIR Resource</option>
-      <option value="Patient">Patient</option>
-      <option value="Observation">Observation</option>
-    </select>
-  </div>
+        <div class="col my-auto">
+          <select id="accessing-fhir-data-query-resource" class="form-select form-select-sm" aria-label="Select a FHIR Resource" name="query-resource">
+            <option selected>FHIR Resource</option>
+            <option value="Patient">Patient</option>
+            <option value="Observation">Observation</option>
+          </select>
+        </div>
 
-  <div class="col my-auto">
-    <!-- customized 'slash' svg to look nice -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16" transform="rotate(-30 0 0) scale(2 2)">
-      <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
-    </svg>
-  </div>
+        <div class="col my-auto">
+          <!-- customized 'slash' svg to look nice -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16" transform="rotate(-30 0 0) scale(2 2)">
+            <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg>
+        </div>
 
-  <div class="col my-auto me-2">
-    <input id="accessing-fhir-data-query-id" type="text" class="form-control form-control-sm" name="query-id" size="4" />
-  </div>
+        <div class="col my-auto">
+          <input id="accessing-fhir-data-query-id" type="text" class="form-control form-control-sm" name="query-id" size="4" placeholder="ID" />
+        </div>
+      </div>
+    </div>
 
-  <div class="col my-auto">
-    <button class="btn btn-sm btn-primary" onclick="getPatient()">Run query</button>
+    <div class="col-xl-4 mb-2 my-xl-auto mx-2 text-center">
+      <button class="btn btn-sm btn-primary" onclick="getPatient()">Run query</button>
+    </div>
   </div>
-</div>
 ```
 
 ::: {#patient-output}
