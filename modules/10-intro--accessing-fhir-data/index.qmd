@@ -53,46 +53,50 @@ The `https://api.logicahealth.org/researchonfhir/open` endpoint is a live FHIR s
 <!--# Proof of concept "run live query" widget is below -- this needs to get replaced with something much more robust that allows the user to construct the request themselves. -->
 
 ```{=html}
-  <div class="d-xl-flex row justify-content-around g-3">
-    <div class="col-xl-4 mb-2 my-xl-auto mx-auto mx-xl-2" style="width:10rem;">
-      <select id="accessing-fhir-data-query-http-verb" class="form-select" aria-label="Select a FHIR Resource" name="query-http-verb">
-        <option selected>HTTP Verb</option>
-        <option value="GET">GET</option>
-        <option value="POST">POST</option>
-        <option value="HEAD">HEAD</option>
-        <option value="PATCH">PATCH</option>
-        <option value="PUT">PUT</option>
-        <option value="DELETE">DELETE</option>
-      </select>
-    </div>
-
-    <div class="col-xl-4 mb-2 my-xl-auto">
-      <div class="input-group">
-        <input type="text" class="form-control form-control-sm" placeholder="URL to FHIR API" aria-label="URL to FHIR API" name="query-base-uri">
-
-        <span class="input-group-text">/</span>
-
-        <select id="accessing-fhir-data-query-resource" class="form-select form-select-sm" aria-label="Select a FHIR Resource" name="query-resource">
-          <option selected>FHIR Resource</option>
-          <option value="Patient">Patient</option>
-          <option value="Observation">Observation</option>
-        </select>
-
-        <span class="input-group-text">/</span>
-
-        <input type="text" class="form-control form-control-sm" placeholder="ID" aria-label="FHIR resource ID" name="query-id">
-      </div>
-
-    </div>
-
-    <div class="col-xl-4 mb-2 my-xl-auto mx-2 text-center">
-      <button class="btn btn-sm btn-primary rounded py-2 py-xl-1" style="line-height:1;" onclick="getPatient()">Run query</button>
-    </div>
+<div class="d-xl-flex row justify-content-around g-3">
+  <div class="col-xl-4 mb-2 my-xl-auto mx-auto mx-xl-2" style="width:10rem;">
+    <select id="accessing-fhir-data-query-http-verb" class="form-select" aria-label="Select a FHIR Resource" name="query-http-verb">
+      <option selected>HTTP Verb</option>
+      <option value="GET">GET</option>
+      <option value="POST">POST</option>
+      <option value="HEAD">HEAD</option>
+      <option value="PATCH">PATCH</option>
+      <option value="PUT">PUT</option>
+      <option value="DELETE">DELETE</option>
+    </select>
   </div>
+
+  <div class="col-xl-4 mb-2 my-xl-auto">
+    <div class="input-group">
+      <input type="text" class="form-control form-control-sm" placeholder="URL to FHIR API" aria-label="URL to FHIR API" name="query-base-uri">
+
+      <span class="input-group-text">/</span>
+
+      <select id="accessing-fhir-data-query-resource" class="form-select form-select-sm" aria-label="Select a FHIR Resource" name="query-resource">
+        <option selected>FHIR Resource</option>
+        <option value="Patient">Patient</option>
+        <option value="Observation">Observation</option>
+      </select>
+
+      <span class="input-group-text">/</span>
+
+      <input type="text" class="form-control form-control-sm" placeholder="ID" aria-label="FHIR resource ID" name="query-id">
+    </div>
+
+  </div>
+
+  <div class="col-xl-4 mb-2 my-xl-auto mx-2 text-center">
+    <button class="btn btn-sm btn-primary rounded py-2 py-xl-1" style="line-height:1;" onclick="getPatient()">Run query</button>
+  </div>
+</div>
+
+<code>
+  <pre id="patient-output">
+
+  </pre>
+</code>
 ```
 
-::: {#patient-output}
-:::
 :::
 
 The response to a FHIR API request is typically in [JSON](https://en.wikipedia.org/wiki/JSON) format, which, like REST, is a commonly used data interchange format.
@@ -177,14 +181,15 @@ Modern programming languages universally support parsing JSON, which makes it ea
 ```{=html}
 <script>
   let getPatient = function() {
-    let url = "https://api.logicahealth.org/researchonfhir/open/Patient/smart-1032702";
+    let url = "https://hapi.fhir.org/baseR4/Patient/591702";
     fetch(url) // Call the fetch function passing the url of the API as a parameter
     .then(res => res.json())
     .then(function (res) {
       document.getElementById('patient-output').innerHTML = JSON.stringify(res);
     })
-    .catch(function() {
+    .catch(function(err) {
       // This is where you run code if the server returns any errors
+      console.log("Failed to fetch patient: ", err)
     });
     return false;
   };
