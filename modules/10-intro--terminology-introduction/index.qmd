@@ -7,6 +7,22 @@ bibliography: bibliography.bib
 toc: true
 ---
 
+<!--# DISCUSS
+
+Overall comments:
+
+Basic content and structure look good.
+
+1. simplify your language and remove extraneous words/sentences/modifiers.
+2. add many more links - for example, in RxNorm, The first use of "RxNorm" should link to the RxNorm page. In general, first use of an external resource in a section should be linked. Check all sections and ensure linking is happening.
+3. Change headings to statements rather than questions.
+4. Any outstanding notes/questions should be moved in a .qmd comment (You have some "Note: <...>" stuff).
+5. Use block quotes sparingly and only when the content cannot be easily summarized and is appropriate for the audience.
+6. Update to follow style guide (which you already noted :))
+
+--LDC
+-->
+
 ## Key concepts
 
 -   What is terminology in health informatics?
@@ -16,13 +32,45 @@ toc: true
 
 ## 1. What is terminology in health informatics?
 
-At its most basic definition, terminology in IT refers to a code mapping to a concept. A **concept** is a unitary mental representation of a real or abstract thing, e.g., a disease state or medical procedure. A **code** is a series of letters, numbers, or symbols *assigned to one concept in a code system* for the purposes of classification or identification. A concept is universal and may have a different code between different **code systems**. It is common in healthcare to map codes between multiple code systems to help achieve interoperability between disparate systems.
+<!--# FIX
+reminder to simplify your language and remove unnecessary sentences.
+Our goal with these is simple and succinct.
+
+For example:
+
+"At its most basic definition, terminology in IT refers to a code mapping to a concept."
+
+can be
+
+"Terminology in Health Informatics is a mapping between a **code* and a *concept**."
+
+
+"It is common in healthcare to map codes between multiple code systems to help achieve interoperability between disparate systems."
+
+can be
+
+"Mapping codes between code systems helps achieve interoperability between health systems."
+
+Please go through this entire module and simplify and/or remove entire sentences where possible.
+
+--LDC
+-->
+
+
+At its most basic definition, terminology in IT refers to a code mapping to a concept. A **concept** is a unitary mental representation of a real or abstract thing<!--# FIX what does "unitary mental representation of a real or abstract thing" mean? Rephrase and simplify. --LDC -->, e.g., a disease state or medical procedure. A **code** is a series of letters, numbers, or symbols *assigned to one concept in a code system* for the purposes of classification or identification. A concept is universal and may have a different code between different **code systems**. It is common in healthcare to map codes between multiple code systems to help achieve interoperability between disparate systems.
 
 [HIMSS provides a summary of terminology standards](https://www.himss.org/terminology-standards) as a way to:
 
 > address a fundamental requirement for effective communication -- the ability to represent concepts in an unambiguous manner between a sender and receiver of information. Most communication between health information systems relies on structured vocabularies, terminologies, code sets and classification systems to represent health concepts.
+<!--# DISCUSS
 
-You might be familiar with some terminology systems like ICD-10 for classifying diseases (and related concepts). These systems typically consist of:
+You use a lot of block quotes.
+My take: only include large quotes where they state something different/unique from what you were saying and they say it in the best way possible. Otherwise, summarize/reframe/simplify for your audience and cite the original.
+
+--LDC
+-->
+
+You might be familiar with some terminology systems like ICD-10<!-- #FIX add link --LDC --> for classifying diseases (and related concepts). These systems typically consist of:
 
 1.  A machine-readable code representing a concept (like the ICD-10 code `W56.02XA`)
 2.  A human-readable description of the code (for `W56.02XA`, the description is "Struck by dolphin, initial encounter")
@@ -121,8 +169,13 @@ There are multiple attribute relationships, depending on whether they relate to 
 Below is an example how SNOMED might represent a condition and its associated relationships. A patient has acute post-streptococcal ![](images/image-588201257.png)glomerulenephritis, which is then associated with a multitude of hierarchical and attribute relationships.
 
 \*NOTE: let's recreate this in HTML down the road. It is the best visual I've been able to find for showing SNOMED relationships, i got it from this snippet of a [Georgia Tech Online Health Informatics MS course video](https://www.youtube.com/watch?v=OqFILtre8Dc).
+<!--# FIX
+Moving forward, include notes like this in a comment like these so we don't miss them in the final push.
 
-![](images/image-1259988036.png)
+--LDC
+-->
+
+![](images/image-1259988036.png)<!--# FIX broken image link --LDC -->
 
 ### 3.3 ICD
 
