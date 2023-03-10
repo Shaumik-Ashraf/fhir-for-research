@@ -1,19 +1,22 @@
 ---
-title: "Terminology Introduction""
+title: "Terminology Introduction"
 author: "Blake Bergstrom"
 format: html
 editor: visual
+bibliography: bibliography.bib
 toc: true
 ---
 
-# Key concepts
+## Key concepts
 
 -   What is terminology in health informatics?
 -   Why is terminology important for interoperability?
 -   What are some common terminology systems you may encounter?
 -   How is terminology implemented in FHIR?
 
-# What is terminology in health informatics?
+## 1. What is terminology in health informatics?
+
+At its most basic definition, terminology in IT refers to a code mapping to a concept. A **concept** is a unitary mental representation of a real or abstract thing, e.g., a disease state or medical procedure. A **code** is a series of letters, numbers, or symbols *assigned to one concept in a code system* for the purposes of classification or identification. A concept is universal and may have a different code between different **code systems**. It is common in healthcare to map codes between multiple code systems to help achieve interoperability between disparate systems.
 
 [HIMSS provides a summary of terminology standards](https://www.himss.org/terminology-standards) as a way to:
 
@@ -27,14 +30,526 @@ You might be familiar with some terminology systems like ICD-10 for classifying 
 
 There are a number of other common terminology systems for classifying things like pharmaceuticals, laboratory testing, and vaccines. We will describe some of these below.
 
-# Why is terminology important for interoperability?
+## 2. Why is terminology important for interoperability?
 
-<!--# tbd -->
+[HIMMS summarizes the importance of standard terminology in health informatics](https://www.himss.org/terminology-standards) below:
 
-# What are some common terminology systems you may encounter?
+> Standard terminology provides a foundation for interoperability by improving the effectiveness of information exchange. Using standard terminology should be a simple and logical step in health IT. However, with the complexities of many diagnoses systems, clinical narrative transferred via PDF format, various coding systems, and the cost of digitizing volumes of reference material/dictionaries, it isn\'t as easy as you would think.
+>
+> Structured terms provide a means for organizing information and serve to define the semantics of information using consistent and computable mechanisms. Therefore, *health information specialists* need the tools to focus on delivering terminology through a common delivery system to the software vendors and institutions in a consistent, high quality and verifiable fashion. Vendors and institutions need to be able to write applications that access terminology content, be it SNOMED, immunization data, demographics, LOINC, or a coding system local to the institution in exactly the same way.
 
-<!--# I would include ICD-9/10/11, SNOMED, LOINC, RxNorm, and CVX and then link to https://www.himss.org/terminology-standards. I would write a little more detail than HIMSS does, and include a sample code from each. -->
+The developers of FHIR were aware of the importance of the ability to translate information between these terminologies, developing multiple Resources specifically for that purpose. Before diving into how that works, we will first review some of the most common terminology systems that you as a researcher might encounter.
 
-# How is terminology implemented in FHIR?
+## 3. What are some common terminology systems you may encounter?
+
+[HIMSS discusses 11 different terminology standards](https://www.himss.org/terminology-standards), however we will focus on the major 5 that you will most likely run into as a researcher. These include the following:
+
+-   **LOINC** (Logical Observation Identifiers Names and Codes)
+
+-   **SNOMED CT** (Systemetized Nomenclature of Medicine--Clinical Terms)
+
+-   **ICD** (International Statistical Classification of Diseases and Related Health Problems)
+
+-   **RxNorm** (Medical prescription Normalized)
+
+-   **CVX** (Vaccine administered)
+
+### 3.1 LOINC
+
+#### 3.1.1 About
+
+LOINC is a common langauge for identifying health measurements, observations, and documents. It was created and is maintained by the **Regenstrief Institute**, which describes LOINC as representing the "question" that an observation asks, with other standards (such as SNOMED CT, described next) representing the "answer." It [summarizes LOINC](https://loinc.org/get-started/) as "the global lingua franca for identifying tests and observations."
+
+#### 3.1.2 Nomenclature
+
+A LOINC code distinguishes a given observation (test ordered, survey question, or clinical document) across six dimensions known as **Parts** [@loinc_term_basics]. The table below defines each Part as well as provides examples for the breakdown of the LOINC for a *manual count of white blood cells in cerebral spinal fluid specimen*.
+
+| LOINC Part          | Definition                                                                                                                                                 | Example                        |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Component (Analyte) | The substance or entity being measured                                                                                                                     | Leukocytes (white blood cells) |
+| Property            | The characteristic or attribute of the analyte                                                                                                             | NCnc (Number concentration)    |
+| Time                | The interval of time over which an observation was made                                                                                                    | Pt (Point in time)             |
+| System (Specimen)   | The specimen or thing upon which the observation was made                                                                                                  | CSF (Cerebral spinal fluid)    |
+| Scale               | How the observation value is quantified or expressed: quantitative, ordinal, nominal                                                                       | Qn (Quantitative)              |
+| Method              | (Optional) A high-level classification of how the observation was made. Only needed when teh technique affects the clinical interpretation of the results. | Manual Count                   |
+
+The LOINC code for the above test is [`806-0`](https://loinc.org/806-0). There are three different text labels LOINC creates for a code, with definitions and examples for the test above provided below [@loinc_term_basics]:
+
+| Text Label (Name)          | Example for [`806-0`](https://loinc.org/806-0) (test above)      |
+|----------------------------|------------------------------------------------------------------|
+| Fully-Specified Name (FSN) | Leukocytes: NCnc: Pt: CSF: Qn: Manual count                      |
+| Long Common Name           | Leukocytes \[#/volume\] in Cerebral spinal fluid by Manual count |
+| Short Name                 | WBC \# CSF Manual                                                |
+
+### 3.2 SNOMED CT
+
+#### 3.2.1 About
+
+SNOMED CT is a clinical terminology standard that is developed by **SNOMED International**. It can be viewed as the "answer" for a test or measurement to the LOINC "question" code. [SNOMED International further details the utility of SNOMED CT](https://www.snomed.org/five-step-briefing) below:
+
+> SNOMED CT:
+>
+> -   Is the most comprehensive, multilingual clinical healthcare terminology in the world
+>
+> -   Is a resource with comprehensive, scientifically validated clinical content
+>
+> -   Enables consistent representation of clinical content in electronic health records
+>
+> -   Is mapped to other international standards
+>
+> -   Is in use in more than eighty countries
+
+#### 3.2.2 Nomenclature
+
+The basic principles behind SNOMED CT are concepts, descriptions, and relationships [@snomed].
+
+A **concept** represents a unique clinical meaning that is referenced with a unique numeric identifier that is computer readable. A concept also has a **description**, which represents the human readable phrases that describe the concept (what a doctor would read). A given concept can have one or more descriptions linked to it.
+
+Concepts can then be interrelated together with **relationships**, which provide computer readable definitions of concepts and allow for data to be searched for in a variety of ways. Since healthcare workers often have different ways of saying the same thing, relationships allow synonyms to be linked together around a single concept, allowing computer systems to understand the common meaning. There are two major types of relationships:
+
+-   **Hierarchical Relationship**: defines specific concepts as children of more general concepts; each concept has at least one hierarchical relationship
+
+-   **Attribute Relationships**: defines non-hierarchical relationships between two concepts; each concept can ahve as many attribute relationships as needed
+
+There is only one hierarchical relationship attribute: `is a`. If Concept 1 is a subset of Concept 2, they can be connected with the following statement: `Concept 1 is a Concept 2`.
+
+There are multiple attribute relationships, depending on whether they relate to one of two groups of concepts [@snomed_aao]:
+
+1.  Attribute relationships for diseases and disorders: `finding site`, `causative agent`, `associated morphology`
+2.  Attribute relationships for medical and surgical procedures: `procedure site`, `method`, `direct morphology`, `direct device`, `using`
+
+Below is an example how SNOMED might represent a condition and its associated relationships. A patient has acute post-streptococcal glomerulenephritis, which is then associated with a multitude of hierarchical and attribute relationships.
+
+\*NOTE: let's recreate this in HTML down the road. It is the best visual I've been able to find for showing SNOMED relationships, i got it from this snippet of a [Georgia Tech Online Health Informatics MS course video](https://www.youtube.com/watch?v=OqFILtre8Dc).
+
+![](images/image-1259988036.png)
+
+### 3.3 ICD
+
+#### 3.3.1 About
+
+ICD is a medical classification list developed by the **World Health Organization (WHO)** that contains codes for diseases, signs and symptoms, abnormal findings, compaints, social circumstances, and external causes of injury or diseases. [The WHO describes its impact](https://www.who.int/standards/classifications/classification-of-diseases) as the following, which details direct benefits to research:
+
+> Clinical terms coded with ICD are the main basis for health recording and statistics on disease in primary, secondary and tertiary care, as well as on cause of death certificates. These data and statistics support payment systems, service planning, administration of quality and safety, and health services research. Diagnostic guidance linked to categories of ICD also standardizes data collection and enables large scale research.
+
+WHO consistently updates ICD with new versions, with ICD-11 being the most recent version and ICD-10 currently being the most used. We will discuss the basic structure of ICD-10 in this module.
+
+#### 3.3.2 Nomenclature
+
+An ICD-10 code can range between 3 and 7 alphanumeric characters and has three major parts [@icd_10]:
+
+1.  **Category**: A three character code that always begins with one letter that is followed by two numbers. This code describes the general type of injury or disease.
+2.  **Subclassification** (optional): To further specify an injury or disease, the three-character alphanumeric category code can be followed by a decimal point and up to three different levels of classification to futher explain the cause, manifestiation, location, severity, and type of of injury or disease. This code section can be up to 3 numeric characters, with each added character adding more specificity.
+3.  **Extension** (optional): This final code section is one of three letters that describe the type of encounter a given injruy or disease. It will always be the 7th character and directly follows the subclassification numbers, not requiring a decimal point to separate it. It can either be A (initial encounter), D (subsequent encounter), or S (sequila).
+
+::: {.callout-caution collapse="true"}
+## Expand to view ICD-10 categories
+
+| Range    | Topic                                                                                               |
+|----------|-----------------------------------------------------------------------------------------------------|
+| A00-B99  | Certain infections and parasitic diseases                                                           |
+| C00-D49  | Neoplasms                                                                                           |
+| D50-D89  | Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism |
+| E00-E89  | Endocrine, nutritional and metabolic diseases                                                       |
+| F01-F99  | Mental, Behavioral and Neurodevelopmental disorders                                                 |
+| G00-G99  | Diseases of the nervous system                                                                      |
+| H00-H59  | Diseases of the eye and adnexa                                                                      |
+| H60-H95  | Diseases of the ear and mastoid process                                                             |
+| I00-I99  | Diseases of the circulatory system                                                                  |
+| J00-J99  | Diseases of the respiratory system                                                                  |
+| K00-K95  | Diseases of the digestive system                                                                    |
+| L00-L99  | Diseases of the skin and subcutaneous tissue                                                        |
+| M00-M99  | Diseases of the musculoskeletal system and connective tissue                                        |
+| N00-N99  | Diseases of the genitourinary system                                                                |
+| O00- O9A | Pregnancy, childbirth, and puerperium                                                               |
+| P00-P96  | Certain conditions originating in the perinatal period                                              |
+| Q00-Q99  | Congenital malformations, deformations and chromosomal abnormalities                                |
+| R00-R99  | Symptoms, signs, and abnormal clinical laboratory findings, not elsewhere classified                |
+| S00-T88  | Injury, poisoning, and certain other consequences of external causes                                |
+| V00-Y99  | External causes of morbidity                                                                        |
+| Z00-Z99  | Factors influencing health status and contact with health services                                  |
+
+:::
+
+Below is an example of different levels of specificity for an ICD-10 code [@icd_10]. The injury is a *closed fracture of distal phalanx of right index finger*.
+
+-   **`S62` -- fracture at wrist and hand level**
+
+    -   `S62.0` -- fracture at navicular \[scaphoid\] bone of wrist
+
+    -   ...
+
+    -   `S62.5` -- fracture of thumb
+
+    -   **`S62.6` -- fracture of other and unspecified finger(s)**
+
+        -   `S62.60` -- fracture of unspecified phalanx of finger
+
+        -   `S62.61` -- displaced fracture of proximal phalanx of finger
+
+        -   ...
+
+        -   **`S62.63` -- displaced fracture of distal phalanx of finger**
+
+            -   **`S62.630` -- displaced fracture of distal phalanx of right index finger**
+
+                -   **`S62.630A` -- ... initial encounter for closed fracture**
+
+                -   `S62.630B` -- ... initial encounter for open fracture
+
+                -   `S62.630D` -- ... initial encounter for fracture with routine healing
+
+### 3.4 RxNorm
+
+#### 3.4.1 About
+
+The **NIH National Library of Medicine (NLM)** produces RxNorm and [provides a summary](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) of its purpose:
+
+> RxNorm provides normalized names for clinical drugs and links its names to many of the drug vocabularies commonly used in pharmacy management and drug interaction software, including those of First Databank, Micromedex, Multum, and Gold Standard Drug Database. By providing links between these vocabularies, RxNorm can mediate messages between systems not using the same software and vocabulary.
+
+Its scope includes the names of prescription and many over-the-counter drugs approved for use in the US, including generic and branded medications. Outside of RxNorm's scope include substances such as bulk powders, food, dietary supplements, and medical devices.
+
+#### 3.4.2 Nomenclature
+
+To understand RxNorm nomenclature, it is useful to review three major steps that NLM goes through when receiving drug names from a myriad of data sources [@rx_norm_nih].
+
+1.  **Group source data**: When NLM receives drug names with different formats that refer to the same medication, it groups them all together and refers to them as **synonyms**. This group of synonyms is called a **concept**. Below are examples of different synonyms that all refer to the same concept:
+    -   Naproxen Tab 250 MG
+
+    -   Naproxen 250mg tablet (product)
+
+    -   NAPROXEN\@250 mg\@ORAL\@TABLET
+
+    -   Naproxen 250 MILLIGRAM In 1 TABLET ORAL TABLET
+
+    -   NAPROXEN 250MG TAB,UD \[VA Product\]
+2.  **Create normalized name for a concept**: After synonyms are grouped into a concept, RxNorm then creates a normalized name for it detailing the ingredient, strength, and dose form. If the drug is branded or in a pack, then those are also included. For the concept above, the RxNorm normalized name is "Naproxen 250 MG Oral Tablet." The branded version is "Naproxen 250 MG Oral Tablet \[Prosaid\]." The general format for an RxNorm normalized name is dependent on two factors: (1) generic vs. branded, and (2) single vs. pack. Below summarizes the general formats for each scenario:
+    -   Generic drugs - Ingredient Strength Dose Form
+
+    -   Branded drugs - Ingredient Strength Dose Form \[Brand Name\]
+
+    -   Generic drug packs - {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack
+
+    -   Branded drug packs - {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack \[Brand Name\]
+3.  **Assign concept unique identifier (RXCUI)**: The RXCUI is a numeric identifer that is a code assigned to a given concept. For example, the RXCUI for the above concept example is `198013`.
+
+RxNorm normalized names can have different levels of specificity, defined by the **term type (TTY)**. For example, depending on the TTY, an RXNorm normalized name might only include the ingredient, might only include the dose form, or one of many combinations of descriptors.
+
+::: {.callout-caution collapse="true"}
+## Expand to view the different TTYs
+
+| TTY  | Name                              | Description                                                                                                                                                                                        | Example                                                                                                                                                                                                |
+|:-----|:----------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| IN   | Ingredient                        | A compound or moiety that gives the drug its distinctive clinical properties. Ingredients generally use the United States Adopted Name (USAN).                                                     | Fluoxetine                                                                                                                                                                                             |
+| PIN  | Precise Ingredient                | A specified form of the ingredient that may or may not be clinically active. Most precise ingredients are salt or isomer forms.                                                                    | Fluoxetine Hydrochloride                                                                                                                                                                               |
+| MIN  | Multiple Ingredients              | Two or more ingredients appearing together in a single drug preparation, created from SCDF. In rare cases when IN/PIN or PIN/PIN combinations of the same base ingredient exist, created from SCD. | Fluoxetine / Olanzapine                                                                                                                                                                                |
+| DF   | Dose Form                         | See [Appendix 2](https://www.nlm.nih.gov/research/umls/rxnorm/docs/2018/appendix2.html) for a full list of Dose Forms.                                                                             | Oral Solution                                                                                                                                                                                          |
+| DFG  | Dose Form Group                   | See [Appendix 3](https://www.nlm.nih.gov/research/umls/rxnorm/docs/2018/appendix3.html) for a full list of Dose Form Groups.                                                                       | Oral Liquid                                                                                                                                                                                            |
+| SCDC | Semantic Clinical Drug Component  | Ingredient + Strength                                                                                                                                                                              | Fluoxetine 4 MG/ML                                                                                                                                                                                     |
+| SCDF | Semantic Clinical Drug Form       | Ingredient + Dose Form                                                                                                                                                                             | Fluoxetine Oral Solution                                                                                                                                                                               |
+| SCDG | Semantic Clinical Dose Form Group | Ingredient + Dose Form Group                                                                                                                                                                       | Fluoxetine Oral Product                                                                                                                                                                                |
+| SCD  | Semantic Clinical Drug            | Ingredient + Strength + Dose Form                                                                                                                                                                  | Fluoxetine 4 MG/ML Oral Solution                                                                                                                                                                       |
+| BN   | Brand Name                        | A proprietary name for a family of products containing a specific active ingredient.                                                                                                               | Prozac                                                                                                                                                                                                 |
+| SBDC | Semantic Branded Drug Component   | Ingredient + Strength + Brand Name                                                                                                                                                                 | Fluoxetine 4 MG/ML \[Prozac\]                                                                                                                                                                          |
+| SBDF | Semantic Branded Drug Form        | Ingredient + Dose Form + Brand Name                                                                                                                                                                | Fluoxetine Oral Solution \[Prozac\]                                                                                                                                                                    |
+| SBDG | Semantic Branded Dose Form Group  | Brand Name + Dose Form Group                                                                                                                                                                       | Prozac Pill                                                                                                                                                                                            |
+| SBD  | Semantic Branded Drug             | Ingredient + Strength + Dose Form + Brand Name                                                                                                                                                     | Fluoxetine 4 MG/ML Oral Solution \[Prozac\]                                                                                                                                                            |
+| PSN  | Prescribable Name                 | Synonym of another TTY, given for clarity and for display purposes in electronic prescribing applications. Only one PSN per concept.                                                               | Leena 28 Day Pack                                                                                                                                                                                      |
+| SY   | Synonym                           | Synonym of another TTY, given for clarity.                                                                                                                                                         | Prozac 4 MG/ML Oral Solution                                                                                                                                                                           |
+| TMSY | Tall Man Lettering Synonym        | Tall Man Lettering synonym of another TTY, given to distinguish between commonly confused drugs.                                                                                                   | FLUoxetine 10 MG Oral Capsule \[PROzac\]                                                                                                                                                               |
+| BPCK | Brand Name Pack                   | {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack \[Brand Name\]                                                                                                       | {12 (Ethinyl Estradiol 0.035 MG / Norethindrone 0.5 MG Oral Tablet) / 9 (Ethinyl Estradiol 0.035 MG / Norethindrone 1 MG Oral Tablet) / 7 (Inert Ingredients 1 MG Oral Tablet) } Pack \[Leena 28 Day\] |
+| GPCK | Generic Pack                      | {# (Ingredient + Strength + Dose Form) / \# (Ingredient + Strength + Dose Form)} Pack                                                                                                              | {11 (varenicline 0.5 MG Oral Tablet) / 42 (varenicline 1 MG Oral Tablet) } Pack                                                                                                                        |
+
+:::
+
+### 3.5 CVX
+
+#### 3.5.1 About
+
+The CDC's National Center of Immunization and Respiratory Diseases (NCIRD) develops and maintains the CVX code set. Further [details are provided by NCIRD](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx):
+
+> It includes both active and inactive vaccines available in the US. CVX codes for inactive vaccines allow transmission of historical immunization records. When a MVX (manufacturer) code is paired with a CVX (vaccine administered) code, the specific trade named vaccine may be indicated.
+
+#### 3.5.2 Nomenclature
+
+The CVS code set is tabular with 6 different columns:
+
+1.  Short Description
+2.  Full Vaccine Name
+3.  CVX Code (2-3 numerical characters)
+4.  Vaccine Status
+    -   **Active:** A currently available administrable vaccine
+
+    -   **Inactive:** An administrable vaccine formulation that is no longer available for patient administration, but can be found in historical patient records **OR** A historical record of a vaccine administered where the exact formulation is unknown
+
+    -   **Pending:** A vaccine that is expected to become active in the future
+
+    -   **Non-US:** A vaccine that available outside the US only
+
+    -   **Never Active:** A vaccine that was never available and is not in the pipeline of new vaccines
+5.  Last Updated Date
+6.  Notes
+
+Below is an example of the first 5 entries of the CDX codeset, organized in ascending order of CVX Code:
+
++-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
+| Short Description | Full Vaccine Name                                 | CVX Code | Vaccine Status | Last Updated\ | Notes                                   |
+|                   |                                                   |          |                | Date          |                                         |
++===================+===================================================+==========+================+===============+=========================================+
+| DTP               | diphtheria, tetanus toxoids and pertussis vaccine | 01       | Inactive       | 5/28/2010     |                                         |
++-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
+| OPV               | trivalent poliovirus vaccine, live, oral          | 02       | Inactive       | 2/10/2017     | This is the OPV that was used in the US |
++-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
+| MMR               | measles, mumps and rubella virus vaccine          | 03       | Active         | 5/28/2010     |                                         |
++-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
+| M/R               | measles and rubella virus vaccine                 | 04       | Inactive       | 5/28/2010     |                                         |
++-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
+| measles           | measles virus vaccine                             | 05       | Inactive       | 8/31/2010     |                                         |
++-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
+
+## 4. How is terminology implemented in FHIR?
+
+FHIR provides a [Terminology Service](https://build.fhir.org/terminology-service.html#:~:text=A%20FHIR%20terminology%20service%20is,inherently%20known%20terminologies%20providing%20support.) to allow the mapping of information between different terminology standards. It does so by defining three major terminology-related Resources: `CodeSystem`, `ValueSet`, and `ConceptMap`. The diagram below shows how these resources can be used together to map terminology information using FHIR. The next sections will provide more information about each resource.
+
+NOTE: this is a screenshot from the FHIR for Devs presentation. It is by far the best visual I have found on this topic, but it is definitely not the final version we should use. Down the line we should have this recreated.
+
+![](images/fhir_terminology.png)
+
+### 4.1 CodeSystem
+
+The [`CodeSystem` Resource](https://build.fhir.org/codesystem.html) defines an organized, managed collection of *codes* that belong to a particular terminology standard. Examples include LOINC, SNOMED CT, and the other standards discussed in the previous section. This Resource declares not only the existence of a code system, but also its key properties:
+
+-   Identifying URL and version
+
+-   Description, Copyright, publication date, and other metadata
+
+-   Some key properties of the code system itself - e.g. whether it exhibits concept permanence, whether it defines a compositional grammar, and whether the codes that it defines are case sensitive
+
+-   What filters can be used in value sets that use the code system in a ValueSet.compose element
+
+-   What concept properties are defined by the code system
+
+::: {.callout-caution collapse="true"}
+## Expand to view an example of a simple `CodeSystem` resource
+
+``` json
+{
+  "resourceType" : "CodeSystem",
+  "id" : "example",
+  "meta" : {
+    "profile" : ["http://hl7.org/fhir/StructureDefinition/shareablecodesystem"]
+  },
+  "text" : {
+    "status" : "additional",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n      \n      <p>CodeSystem &quot;ACME Codes for Cholesterol&quot;: This is an example code system that includes \n        all the codes for serum cholesterol defined by ACME inc.</p>\n      \n      <p>Developed by: FHIR project team (example)</p>\n      \n      <p>Published for testing on 28-Jan 2016</p>\n      \n      <p>This code system defines all the ACME codes for serum cholesterol:</p>\n      \n      <table class=\"grid\">\n        \n        <tr>\n          \n          <td>\n            \n            <b>Code</b>\n          \n          </td>\n          \n          <td>\n            \n            <b>Display</b>\n          \n          </td>\n          \n          <td>\n            \n            <b>Definition</b>\n          \n          </td>\n        \n        </tr>\n        \n        <tr>\n          \n          <td>chol-mmol</td>\n          \n          <td>SChol (mmol/L)</td>\n          \n          <td>Serum Cholesterol, in mmol/L</td>\n        \n        </tr>\n        \n        <tr>\n          \n          <td>chol-mass</td>\n          \n          <td>SChol (mg/L)</td>\n          \n          <td>Serum Cholesterol, in mg/L</td>\n        \n        </tr>\n        \n        <tr>\n          \n          <td>chol</td>\n          \n          <td>SChol</td>\n          \n          <td>Serum Cholesterol</td>\n        \n        </tr>\n      \n      </table>\n    \n    </div>"
+  },
+  "url" : "http://hl7.org/fhir/CodeSystem/example",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.4.642.4.1827"
+  },
+  {
+    "system" : "http://acme.com/identifiers/codesystems",
+    "value" : "internal-cholesterol-inl"
+  }],
+  "version" : "5.0.0-cibuild",
+  "name" : "ACMECholCodesBlood",
+  "title" : "ACME Codes for Cholesterol in Serum/Plasma",
+  "status" : "draft",
+  "experimental" : true,
+  "date" : "2016-01-28",
+  "publisher" : "Acme Co",
+  "contact" : [{
+    "name" : "FHIR project team",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "http://hl7.org/fhir"
+    }]
+  }],
+  "description" : "This is an example code system that includes all the ACME codes for serum/plasma cholesterol from v2.36.",
+  "caseSensitive" : true,
+  "content" : "complete",
+  "filter" : [{
+    "code" : "acme-plasma",
+    "description" : "An internal filter used to select codes that are only used with plasma",
+    "operator" : ["="],
+    "value" : "the value of this filter is either 'true' or 'false'"
+  }],
+  "concept" : [{
+    "code" : "chol-mmol",
+    "display" : "SChol (mmol/L)",
+    "definition" : "Serum Cholesterol, in mmol/L",
+    "designation" : [{
+      "use" : {
+        "system" : "http://acme.com/config/fhir/codesystems/internal",
+        "code" : "internal-label"
+      },
+      "value" : "From ACME POC Testing"
+    }]
+  },
+  {
+    "code" : "chol-mass",
+    "display" : "SChol (mg/L)",
+    "definition" : "Serum Cholesterol, in mg/L",
+    "designation" : [{
+      "use" : {
+        "system" : "http://acme.com/config/fhir/codesystems/internal",
+        "code" : "internal-label"
+      },
+      "value" : "From Paragon Labs"
+    }]
+  },
+  {
+    "code" : "chol",
+    "display" : "SChol",
+    "definition" : "Serum Cholesterol",
+    "designation" : [{
+      "use" : {
+        "system" : "http://acme.com/config/fhir/codesystems/internal",
+        "code" : "internal-label"
+      },
+      "value" : "Obdurate Labs uses this with both kinds of units..."
+    }]
+  }]
+}
+```
+
+:::
+
+### 4.2 ValueSet
+
+The [`ValueSet` Resource](https://build.fhir.org/valueset.html) species a set of codes drawn from one or more code systems intended for use in a particular context. It uses the `CodeSystem` resource by directly referring to it based on whatever code system it is specifying codes from.
+
+::: {.callout-caution collapse="true"}
+## Expand to view an example of a `ValueSet` Resource that specifies the value set of "All CPT Values" from the code system SNOMED CT
+
+``` json
+{
+  "resourceType" : "ValueSet",
+  "id" : "example-cpt-all",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n      <ul>\n        <li>Include all codes defined in \n          <a href=\"http://terminology.hl7.org/5.1.0/CodeSystem-CPT.html\">\n            <code>http://www.ama-assn.org/go/cpt</code>\n          </a>\n        </li>\n      </ul>\n    </div>"
+  },
+  "url" : "http://hl7.org/fhir/ValueSet/example-cpt-all",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.4.642.3.3138"
+  }],
+  "version" : "5.0.0-cibuild",
+  "name" : "AllCPTCodes",
+  "title" : "All CPT codes",
+  "status" : "active",
+  "experimental" : true,
+  "date" : "2015-03-12",
+  "publisher" : "Health Level Seven International (Vocabulary)",
+  "description" : "A value set that includes all CPT codes",
+  "useContext" : [{
+    "code" : {
+      "system" : "http://example.org/fhir/CodeSystem/use-contexts",
+      "code" : "species"
+    },
+    "valueCodeableConcept" : {
+      "coding" : [{
+        "system" : "http://snomed.info/sct",
+        "code" : "337915000",
+        "display" : "Homo sapiens (organism)"
+      }]
+    }
+  }],
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "US"
+    }]
+  }],
+  "copyright" : "CPT Copyright © 2014 American Medical Association. All rights reserved.",
+  "compose" : {
+    "include" : [{
+      "system" : "http://www.ama-assn.org/go/cpt"
+    }]
+  }
+}
+```
+
+:::
+
+### 4.3 ConceptMap
+
+The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html) provides an overview of both its function as well as its relevance to researchers using FHIR for data analysis involving terminolgy standards:
+
+> A concept map defines a mapping from a set of concepts defined in a code system (commonly referred to as the "system") to one or more concepts defined in other code systems. In the mapping context, a system can be a typical [code system](https://build.fhir.org/terminologies.html) based on a recognized standard or local terminology (in any of its forms), or in some cases it may be an ["implicit" code system](https://build.fhir.org/conceptmap.html#implicit) that is not based on a recognized terminology but still represents a set of "concepts" that can be usefully mapped. Mappings are one way - from the source to the target system. In many cases, the reverse mappings are valid, but this cannot be assumed to be the case.
+>
+> Mappings between code system concepts are only intended to be defined in the context of a particular business usage. The business use case is normally defined by the specification of the source and target value sets. The mappings may be useful in other contexts, but this must be determined based on the context of use and meaning; it cannot be taken for granted automatically. An example where the usage context is important for choosing the correct mapping is mapping from a clinical terminology (e.g. SNOMED CT) to a classification (e.g. ICD-10) for either data analysis or billing. Mappings in the data analysis context would be targeted for an appropriate classification (often at a higher level), whereas in the billing context there may be specific requirements to be met (e.g. leaf level codes only) that could result in multiple mappings for a single source concept and then require additional information beyond the source concept itself in order to select the correct final mapping.
+
+::: {.callout-caution collapse="true"}
+## Expand to view an example of a `ConceptMap` Resource that maps SNOMED CT to ICD-10
+
+``` json
+{
+  "resourceType" : "ConceptMap",
+  "id" : "103",
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n      <h2>SNOMEDCTToICD10CMMappingsForFractureOfUlna (http://hl7.org/fhir/ConceptMap/103)</h2>\n      <p>Mapping from http://snomed.info/sct?fhir_vs to (not specified)</p>\n      <p>DRAFT (not intended for production usage). Published on 2012-06-13 by HL7, Inc (FHIR project team (example): \n        <a href=\"http://hl7.org/fhir\">http://hl7.org/fhir</a>). Creative Commons 0\n      </p>\n      <div>\n        <p>Example rule-based mappings between SNOMED CT to ICD-10-CM for fracture of ulna</p>\n\n      </div>\n      <br/>\n      <p>\n        <b>Group 1</b>Mapping from \n        <a href=\"http://terminology.hl7.org/5.1.0/CodeSystem-v3-snomed-CT.html\">SNOMED\u00a0CT International Edition</a> to \n        <a href=\"http://terminology.hl7.org/5.1.0/CodeSystem-icd10CM.html\">International Classification of Diseases, 10th Revision, Clinical Modification (ICD-10-CM)</a>\n      </p>\n      <table class=\"grid\">\n        <tr>\n          <td>\n            <b>Source Code</b>\n          </td>\n          <td>\n            <b>Relationship</b>\n          </td>\n          <td>\n            <b>Target Code</b>\n          </td>\n          <td>\n            <b>Comment</b>\n          </td>\n        </tr>\n        <tr>\n          <td>263204007 (Fracture of shaft of ulna)</td>\n          <td>\n            <a href=\"codesystem-concept-map-relationship.html#source-is-broader-than-target\" title=\"source-is-broader-than-target\">is broader than</a>\n          </td>\n          <td>S52.209A (Unsp fracture of shaft of unsp ulna, init for clos fx)</td>\n          <td>The target mapping to ICD-10-CM is 'source-is-broader-than-target', since additional patient data on the encounter (initial vs. subsequent) and fracture type is required for a valid ICD-10-CM mapping.</td>\n        </tr>\n        <tr>\n          <td>263204007 (Fracture of shaft of ulna)</td>\n          <td>\n            <a href=\"codesystem-concept-map-relationship.html#source-is-broader-than-target\" title=\"source-is-broader-than-target\">is broader than</a>\n          </td>\n          <td>S52.209D (Unsp fx shaft of unsp ulna, subs for clos fx w routn heal)</td>\n          <td>The target mapping to ICD-10-CM is 'source-is-broader-than-target', since additional patient data on the encounter (initial vs. subsequent), fracture type and healing (for subsequent encounter) is required for a valid ICD-10-CM mapping.</td>\n        </tr>\n      </table>\n    </div>"
+  },
+  "url" : "http://hl7.org/fhir/ConceptMap/103",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.4.642.14.7"
+  },
+  {
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:uuid:53cd62ee-033e-414c-9f58-3ca97b5ffc3b"
+  }],
+  "version" : "5.0.0-cibuild",
+  "name" : "SNOMEDCTToICD10CMMappingsForFractureOfUlna",
+  "title" : "SNOMED CT to ICD-10-CM mappings for fracture of ulna",
+  "status" : "draft",
+  "experimental" : true,
+  "date" : "2012-06-13",
+  "publisher" : "HL7, Inc",
+  "contact" : [{
+    "name" : "FHIR project team (example)",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "http://hl7.org/fhir"
+    }]
+  }],
+  "description" : "Example rule-based mappings between SNOMED CT to ICD-10-CM for fracture of ulna",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "http://unstats.un.org/unsd/methods/m49/m49.htm",
+      "code" : "840",
+      "display" : "United States of America"
+    }]
+  }],
+  "purpose" : "Show example rule based mappings",
+  "copyright" : "Creative Commons 0",
+  "sourceScopeCanonical" : "http://snomed.info/sct?fhir_vs",
+  "group" : [{
+    "source" : "http://snomed.info/sct",
+    "target" : "http://hl7.org/fhir/sid/icd-10-cm",
+    "element" : [{
+      "code" : "263204007",
+      "target" : [{
+        "code" : "S52.209A",
+        "relationship" : "source-is-broader-than-target",
+        "comment" : "The target mapping to ICD-10-CM is 'source-is-broader-than-target', since additional patient data on the encounter (initial vs. subsequent) and fracture type is required for a valid ICD-10-CM mapping."
+      }]
+    },
+    {
+      "code" : "263204007",
+      "target" : [{
+        "code" : "S52.209D",
+        "relationship" : "source-is-broader-than-target",
+        "comment" : "The target mapping to ICD-10-CM is 'source-is-broader-than-target', since additional patient data on the encounter (initial vs. subsequent), fracture type and healing (for subsequent encounter) is required for a valid ICD-10-CM mapping."
+      }]
+    }]
+  }]
+}
+```
+
+:::
 
 <!--# Sub-sections on code systems, value sets, and concept maps. You can use COVID vaccines as an illustrative example; http://build.fhir.org/ig/dvci/shc-terminology/branches/remove-disease-types/index.html has value sets you can use (but just pull out a few codes, maybe...don't have the entire value set). Karen can provide a concept map example going from CVX to ICD-11 from our WHO work. -->
