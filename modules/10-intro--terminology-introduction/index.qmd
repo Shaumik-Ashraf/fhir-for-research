@@ -46,7 +46,7 @@ The developers of FHIR were aware of the importance of the ability to translate 
 
 -   **LOINC** (Logical Observation Identifiers Names and Codes)
 
--   **SNOMED CT** (Systemetized Nomenclature of Medicine--Clinical Terms)
+-   **SNOMED CT** (Systematized Nomenclature of Medicine--Clinical Terms)
 
 -   **ICD** (International Statistical Classification of Diseases and Related Health Problems)
 
@@ -58,7 +58,7 @@ The developers of FHIR were aware of the importance of the ability to translate 
 
 #### 3.1.1 About
 
-LOINC is a common langauge for identifying health measurements, observations, and documents. It was created and is maintained by the **Regenstrief Institute**, which describes LOINC as representing the "question" that an observation asks, with other standards (such as SNOMED CT, described next) representing the "answer." It [summarizes LOINC](https://loinc.org/get-started/) as "the global lingua franca for identifying tests and observations."
+LOINC is a common language for identifying health measurements, observations, and documents. It was created and is maintained by the **Regenstrief Institute**, which describes LOINC as representing the "question" that an observation asks, with other standards (such as SNOMED CT, described next) representing the "answer." It [summarizes LOINC](https://loinc.org/get-started/) as "the global lingua franca for identifying tests and observations."
 
 #### 3.1.2 Nomenclature
 
@@ -71,7 +71,7 @@ A LOINC code distinguishes a given observation (test ordered, survey question, o
 | Time                | The interval of time over which an observation was made                                                                                                    | Pt (Point in time)             |
 | System (Specimen)   | The specimen or thing upon which the observation was made                                                                                                  | CSF (Cerebral spinal fluid)    |
 | Scale               | How the observation value is quantified or expressed: quantitative, ordinal, nominal                                                                       | Qn (Quantitative)              |
-| Method              | (Optional) A high-level classification of how the observation was made. Only needed when teh technique affects the clinical interpretation of the results. | Manual Count                   |
+| Method              | (Optional) A high-level classification of how the observation was made. Only needed when the technique affects the clinical interpretation of the results. | Manual Count                   |
 
 The LOINC code for the above test is [`806-0`](https://loinc.org/806-0). There are three different text labels LOINC creates for a code, with definitions and examples for the test above provided below [@loinc_term_basics]:
 
@@ -109,7 +109,7 @@ Concepts can then be interrelated together with **relationships**, which provide
 
 -   **Hierarchical Relationship**: defines specific concepts as children of more general concepts; each concept has at least one hierarchical relationship
 
--   **Attribute Relationships**: defines non-hierarchical relationships between two concepts; each concept can ahve as many attribute relationships as needed
+-   **Attribute Relationships**: defines non-hierarchical relationships between two concepts; each concept can have as many attribute relationships as needed
 
 There is only one hierarchical relationship attribute: `is a`. If Concept 1 is a subset of Concept 2, they can be connected with the following statement: `Concept 1 is a Concept 2`.
 
@@ -118,7 +118,7 @@ There are multiple attribute relationships, depending on whether they relate to 
 1.  Attribute relationships for diseases and disorders: `finding site`, `causative agent`, `associated morphology`
 2.  Attribute relationships for medical and surgical procedures: `procedure site`, `method`, `direct morphology`, `direct device`, `using`
 
-Below is an example how SNOMED might represent a condition and its associated relationships. A patient has acute post-streptococcal glomerulenephritis, which is then associated with a multitude of hierarchical and attribute relationships.
+Below is an example how SNOMED might represent a condition and its associated relationships. A patient has acute post-streptococcal ![](images/image-588201257.png)glomerulenephritis, which is then associated with a multitude of hierarchical and attribute relationships.
 
 \*NOTE: let's recreate this in HTML down the road. It is the best visual I've been able to find for showing SNOMED relationships, i got it from this snippet of a [Georgia Tech Online Health Informatics MS course video](https://www.youtube.com/watch?v=OqFILtre8Dc).
 
@@ -128,7 +128,7 @@ Below is an example how SNOMED might represent a condition and its associated re
 
 #### 3.3.1 About
 
-ICD is a medical classification list developed by the **World Health Organization (WHO)** that contains codes for diseases, signs and symptoms, abnormal findings, compaints, social circumstances, and external causes of injury or diseases. [The WHO describes its impact](https://www.who.int/standards/classifications/classification-of-diseases) as the following, which details direct benefits to research:
+ICD is a medical classification list developed by the **World Health Organization (WHO)** that contains codes for diseases, signs and symptoms, abnormal findings, complaints, social circumstances, and external causes of injury or diseases. [The WHO describes its impact](https://www.who.int/standards/classifications/classification-of-diseases) as the following, which details direct benefits to research:
 
 > Clinical terms coded with ICD are the main basis for health recording and statistics on disease in primary, secondary and tertiary care, as well as on cause of death certificates. These data and statistics support payment systems, service planning, administration of quality and safety, and health services research. Diagnostic guidance linked to categories of ICD also standardizes data collection and enables large scale research.
 
@@ -139,8 +139,8 @@ WHO consistently updates ICD with new versions, with ICD-11 being the most recen
 An ICD-10 code can range between 3 and 7 alphanumeric characters and has three major parts [@icd_10]:
 
 1.  **Category**: A three character code that always begins with one letter that is followed by two numbers. This code describes the general type of injury or disease.
-2.  **Subclassification** (optional): To further specify an injury or disease, the three-character alphanumeric category code can be followed by a decimal point and up to three different levels of classification to futher explain the cause, manifestiation, location, severity, and type of of injury or disease. This code section can be up to 3 numeric characters, with each added character adding more specificity.
-3.  **Extension** (optional): This final code section is one of three letters that describe the type of encounter a given injruy or disease. It will always be the 7th character and directly follows the subclassification numbers, not requiring a decimal point to separate it. It can either be A (initial encounter), D (subsequent encounter), or S (sequila).
+2.  **Subclassification** (optional): To further specify an injury or disease, the three-character alphanumeric category code can be followed by a decimal point and up to three different levels of classification to further explain the cause, manifestation, location, severity, and type of injury or disease. This code section can be up to 3 numeric characters, with each added character adding more specificity.
+3.  **Extension** (optional): This final code section is one of three letters that describe the type of encounter a given injury or disease. It will always be the 7th character and directly follows the subclassification numbers, not requiring a decimal point to separate it. It can either be A (initial encounter), D (subsequent encounter), or S (sequila).
 
 ::: {.callout-caution collapse="true"}
 ## Expand to view ICD-10 categories
@@ -231,7 +231,7 @@ To understand RxNorm nomenclature, it is useful to review three major steps that
     -   Generic drug packs - {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack
 
     -   Branded drug packs - {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack \[Brand Name\]
-3.  **Assign concept unique identifier (RXCUI)**: The RXCUI is a numeric identifer that is a code assigned to a given concept. For example, the RXCUI for the above concept example is `198013`.
+3.  **Assign concept unique identifier (RXCUI)**: The RXCUI is a numeric identifier that is a code assigned to a given concept. For example, the RXCUI for the above concept example is `198013`.
 
 RxNorm normalized names can have different levels of specificity, defined by the **term type (TTY)**. For example, depending on the TTY, an RXNorm normalized name might only include the ingredient, might only include the dose form, or one of many combinations of descriptors.
 
@@ -290,7 +290,7 @@ The CVS code set is tabular with 6 different columns:
 5.  Last Updated Date
 6.  Notes
 
-Below is an example of the first 5 entries of the CDX codeset, organized in ascending order of CVX Code:
+Below is an example of the first 5 entries of the CDX code set, organized in ascending order of CVX Code:
 
 +-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
 | Short Description | Full Vaccine Name                                 | CVX Code | Vaccine Status | Last Updated\ | Notes                                   |
@@ -476,7 +476,7 @@ The [`ValueSet` Resource](https://build.fhir.org/valueset.html) species a set of
 
 ### 4.3 ConceptMap
 
-The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html) provides an overview of both its function as well as its relevance to researchers using FHIR for data analysis involving terminolgy standards:
+The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html) provides an overview of both its function as well as its relevance to researchers using FHIR for data analysis involving terminology standards:
 
 > A concept map defines a mapping from a set of concepts defined in a code system (commonly referred to as the "system") to one or more concepts defined in other code systems. In the mapping context, a system can be a typical [code system](https://build.fhir.org/terminologies.html) based on a recognized standard or local terminology (in any of its forms), or in some cases it may be an ["implicit" code system](https://build.fhir.org/conceptmap.html#implicit) that is not based on a recognized terminology but still represents a set of "concepts" that can be usefully mapped. Mappings are one way - from the source to the target system. In many cases, the reverse mappings are valid, but this cannot be assumed to be the case.
 >
@@ -551,5 +551,3 @@ The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html
 ```
 
 :::
-
-<!--# Sub-sections on code systems, value sets, and concept maps. You can use COVID vaccines as an illustrative example; http://build.fhir.org/ig/dvci/shc-terminology/branches/remove-disease-types/index.html has value sets you can use (but just pull out a few codes, maybe...don't have the entire value set). Karen can provide a concept map example going from CVX to ICD-11 from our WHO work. -->
