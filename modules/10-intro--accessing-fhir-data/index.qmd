@@ -182,16 +182,16 @@ Modern programming languages universally support parsing JSON, which makes it ea
 <script>
   let getPatient = function() {
 
-    let outputNode = document.getElementById('patient-output');
+    let outputNode = document.getElementById('query-output');
 
     // let url = "https://hapi.fhir.org/baseR4/Patient/591702";
-    let url = document.querySelector("[name='query-base-uri']").value + "/" + document.querySelector("[name='query-resource']").value + "/" + document.querySelectior("[name='query-id]").value;
+    let url = document.querySelector("[name='query-base-uri']").value + "/" + document.querySelector("[name='query-resource']").value + "/" + document.querySelector("[name='query-id']").value;
 
     fetch(url) // Call the fetch function passing the url of the API as a parameter
     .then(res => res.json())
     .then(function (res) {
-      var viewerString = jsonViewer(res, true);
-      if( var == null ) {
+      let viewerString = jsonViewer(res, true);
+      if( viewerString === null ) {
         outputNode.innerHTML = `
           <div class="alert alert-danger">
             FHIR query returned incorrect JSON syntax. Query response:
