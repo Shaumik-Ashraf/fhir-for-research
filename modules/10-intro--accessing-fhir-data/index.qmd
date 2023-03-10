@@ -91,7 +91,7 @@ The `https://api.logicahealth.org/researchonfhir/open` endpoint is a live FHIR s
 </div>
 
 <code>
-  <pre id="patient-output">
+  <pre id="query-output">
 
   </pre>
 </code>
@@ -181,16 +181,37 @@ Modern programming languages universally support parsing JSON, which makes it ea
 ```{=html}
 <script>
   let getPatient = function() {
-    let url = "https://hapi.fhir.org/baseR4/Patient/591702";
+
+    let outputNode = document.getElementById('patient-output');
+
+    // let url = "https://hapi.fhir.org/baseR4/Patient/591702";
+    let url = document.querySelector("[name='query-base-uri']").value + "/" + document.querySelector("[name='query-resource']").value + "/" + document.querySelectior("[name='query-id]").value;
+
     fetch(url) // Call the fetch function passing the url of the API as a parameter
     .then(res => res.json())
     .then(function (res) {
-      document.getElementById('patient-output').innerHTML = JSON.stringify(res);
+      var viewerString = jsonViewer(res, true);
+      if( var == null ) {
+        outputNode.innerHTML = `
+          <div class="alert alert-danger">
+            FHIR query returned incorrect JSON syntax. Query response:
+            <hr />
+            ${res}
+          </div>
+        `
+      }
+      else {
+        outputNode.appendChild( parseHTML( viewerString ) );
+      }
     })
     .catch(function(err) {
       // This is where you run code if the server returns any errors
       console.log("Failed to fetch patient: ", err)
+      outputNode.innerHTML = `
+        <div class="alert alert-danger">FHIR query failed. The correct FHIR query is GET https://hapi.fhir.org/baseR4/Patient/591702. Please try again.</div>
+      `
     });
+
     return false;
   };
 </script>
