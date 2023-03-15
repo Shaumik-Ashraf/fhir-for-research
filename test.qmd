@@ -2,7 +2,15 @@
 title: "Test"
 ---
 
-## JSON Viewer
+## JSON Viewer Examples
+
+```json
+{
+  "json": "example",
+  "bad": true,
+  // this shouldn't break
+}
+```
 
 ```json
 {
@@ -170,6 +178,14 @@ title: "Test"
     "reference": "Organization/1"
   }
 }
+```
+
+## Python code
+
+```python
+# this should be unaffected by json viewer
+
+print(42);
 ```
 
 ## This is a Quarto website.
