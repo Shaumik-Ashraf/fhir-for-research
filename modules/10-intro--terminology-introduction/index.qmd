@@ -7,6 +7,7 @@ bibliography: bibliography.bib
 toc: true
 ---
 
+```{=html}
 <!--# DISCUSS
 
 Overall comments:
@@ -22,7 +23,7 @@ Basic content and structure look good.
 
 --LDC
 -->
-
+```
 ## Key concepts
 
 -   What is terminology in health informatics?
@@ -30,8 +31,9 @@ Basic content and structure look good.
 -   What are some common terminology systems you may encounter?
 -   How is terminology implemented in FHIR?
 
-## 1. What is terminology in health informatics?
+## 1. Terminology in health informatics
 
+```{=html}
 <!--# FIX
 reminder to simplify your language and remove unnecessary sentences.
 Our goal with these is simple and succinct.
@@ -55,22 +57,16 @@ Please go through this entire module and simplify and/or remove entire sentences
 
 --LDC
 -->
-
-
-At its most basic definition, terminology in IT refers to a code mapping to a concept. A **concept** is a unitary mental representation of a real or abstract thing<!--# FIX what does "unitary mental representation of a real or abstract thing" mean? Rephrase and simplify. --LDC -->, e.g., a disease state or medical procedure. A **code** is a series of letters, numbers, or symbols *assigned to one concept in a code system* for the purposes of classification or identification. A concept is universal and may have a different code between different **code systems**. It is common in healthcare to map codes between multiple code systems to help achieve interoperability between disparate systems.
+```
+Terminology in Health Informatics is a mapping between a **concept** and a **code**. A concept is a mental representation of a real or abstract thing<!--# FIX what does "unitary mental representation of a real or abstract thing" mean? Rephrase and simplify. --LDC -->, e.g., a disease state or medical procedure. A code is a series of letters, numbers, or symbols *assigned to one concept in a code system* for the purposes of classification or identification. A concept is universal and may have a different code between different **code systems**. Mapping codes between code systems helps achieve interoperability between health systems.
 
 [HIMSS provides a summary of terminology standards](https://www.himss.org/terminology-standards) as a way to:
 
 > address a fundamental requirement for effective communication -- the ability to represent concepts in an unambiguous manner between a sender and receiver of information. Most communication between health information systems relies on structured vocabularies, terminologies, code sets and classification systems to represent health concepts.
-<!--# DISCUSS
 
-You use a lot of block quotes.
-My take: only include large quotes where they state something different/unique from what you were saying and they say it in the best way possible. Otherwise, summarize/reframe/simplify for your audience and cite the original.
+<!--# You use a lot of block quotes. My take: only include large quotes where they state something different/unique from what you were saying and they say it in the best way possible. Otherwise, summarize/reframe/simplify for your audience and cite the original. -LDC -->
 
---LDC
--->
-
-You might be familiar with some terminology systems like ICD-10<!-- #FIX add link --LDC --> for classifying diseases (and related concepts). These systems typically consist of:
+You might be familiar with some terminology systems like [ICD-10](https://www.cdc.gov/nchs/icd/icd10.htm)<!--# FIX add link --LDC --> for classifying diseases (and related concepts). These systems typically consist of:
 
 1.  A machine-readable code representing a concept (like the ICD-10 code `W56.02XA`)
 2.  A human-readable description of the code (for `W56.02XA`, the description is "Struck by dolphin, initial encounter")
@@ -78,29 +74,29 @@ You might be familiar with some terminology systems like ICD-10<!-- #FIX add lin
 
 There are a number of other common terminology systems for classifying things like pharmaceuticals, laboratory testing, and vaccines. We will describe some of these below.
 
-## 2. Why is terminology important for interoperability?
+## 2. Why terminology is important for interoperability
 
 [HIMMS summarizes the importance of standard terminology in health informatics](https://www.himss.org/terminology-standards) below:
 
-> Standard terminology provides a foundation for interoperability by improving the effectiveness of information exchange. Using standard terminology should be a simple and logical step in health IT. However, with the complexities of many diagnoses systems, clinical narrative transferred via PDF format, various coding systems, and the cost of digitizing volumes of reference material/dictionaries, it isn\'t as easy as you would think.
+> Standard terminology provides a foundation for interoperability by improving the effectiveness of information exchange. Using standard terminology should be a simple and logical step in health IT. However, with the complexities of many diagnoses systems, clinical narrative transferred via PDF format, various coding systems, and the cost of digitizing volumes of reference material/dictionaries, it isn't as easy as you would think.
 >
 > Structured terms provide a means for organizing information and serve to define the semantics of information using consistent and computable mechanisms. Therefore, *health information specialists* need the tools to focus on delivering terminology through a common delivery system to the software vendors and institutions in a consistent, high quality and verifiable fashion. Vendors and institutions need to be able to write applications that access terminology content, be it SNOMED, immunization data, demographics, LOINC, or a coding system local to the institution in exactly the same way.
 
-The developers of FHIR were aware of the importance of the ability to translate information between these terminologies, developing multiple Resources specifically for that purpose. Before diving into how that works, we will first review some of the most common terminology systems that you as a researcher might encounter.
+The developers of FHIR were aware of the importance of translating information between these terminologies, developing multiple Resources specifically for that purpose. Before diving into how that works, we will first review some of the most common terminology systems that you as a researcher might encounter.
 
-## 3. What are some common terminology systems you may encounter?
+## 3. Common terminology systems you may encounter
 
 [HIMSS discusses 11 different terminology standards](https://www.himss.org/terminology-standards), however we will focus on the major 5 that you will most likely run into as a researcher. These include the following:
 
--   **LOINC** (Logical Observation Identifiers Names and Codes)
+-   [**LOINC**](https://loinc.org/) (Logical Observation Identifiers Names and Codes)
 
--   **SNOMED CT** (Systematized Nomenclature of Medicine--Clinical Terms)
+-   [**SNOMED CT**](https://www.snomed.org/) (Systematized Nomenclature of Medicine--Clinical Terms)
 
--   **ICD** (International Statistical Classification of Diseases and Related Health Problems)
+-   [**ICD**](https://www.who.int/standards/classifications/classification-of-diseases) (International Statistical Classification of Diseases and Related Health Problems)
 
--   **RxNorm** (Medical prescription Normalized)
+-   [**RxNorm**](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) (Medical prescription Normalized)
 
--   **CVX** (Vaccine administered)
+-   [**CVX**](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx) (Vaccine administered)
 
 ### 3.1 LOINC
 
@@ -112,22 +108,33 @@ LOINC is a common language for identifying health measurements, observations, an
 
 A LOINC code distinguishes a given observation (test ordered, survey question, or clinical document) across six dimensions known as **Parts** [@loinc_term_basics]. The table below defines each Part as well as provides examples for the breakdown of the LOINC for a *manual count of white blood cells in cerebral spinal fluid specimen*.
 
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 | LOINC Part          | Definition                                                                                                                                                 | Example                        |
-|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
++=====================+============================================================================================================================================================+================================+
 | Component (Analyte) | The substance or entity being measured                                                                                                                     | Leukocytes (white blood cells) |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 | Property            | The characteristic or attribute of the analyte                                                                                                             | NCnc (Number concentration)    |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 | Time                | The interval of time over which an observation was made                                                                                                    | Pt (Point in time)             |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 | System (Specimen)   | The specimen or thing upon which the observation was made                                                                                                  | CSF (Cerebral spinal fluid)    |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 | Scale               | How the observation value is quantified or expressed: quantitative, ordinal, nominal                                                                       | Qn (Quantitative)              |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 | Method              | (Optional) A high-level classification of how the observation was made. Only needed when the technique affects the clinical interpretation of the results. | Manual Count                   |
++---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+
 
 The LOINC code for the above test is [`806-0`](https://loinc.org/806-0). There are three different text labels LOINC creates for a code, with definitions and examples for the test above provided below [@loinc_term_basics]:
 
++----------------------------+------------------------------------------------------------------+
 | Text Label (Name)          | Example for [`806-0`](https://loinc.org/806-0) (test above)      |
-|----------------------------|------------------------------------------------------------------|
++============================+==================================================================+
 | Fully-Specified Name (FSN) | Leukocytes: NCnc: Pt: CSF: Qn: Manual count                      |
++----------------------------+------------------------------------------------------------------+
 | Long Common Name           | Leukocytes \[#/volume\] in Cerebral spinal fluid by Manual count |
++----------------------------+------------------------------------------------------------------+
 | Short Name                 | WBC \# CSF Manual                                                |
++----------------------------+------------------------------------------------------------------+
 
 ### 3.2 SNOMED CT
 
@@ -151,7 +158,7 @@ SNOMED CT is a clinical terminology standard that is developed by **SNOMED Inter
 
 The basic principles behind SNOMED CT are concepts, descriptions, and relationships [@snomed].
 
-A **concept** represents a unique clinical meaning that is referenced with a unique numeric identifier that is computer readable. A concept also has a **description**, which represents the human readable phrases that describe the concept (what a doctor would read). A given concept can have one or more descriptions linked to it.
+A **concept** represents a unique clinical meaning that is referenced with a unique computer readable numeric identifier. A concept also has a **description**, which represents the human readable phrases that describe the concept (what a doctor would read). A given concept can have one or more descriptions linked to it.
 
 Concepts can then be interrelated together with **relationships**, which provide computer readable definitions of concepts and allow for data to be searched for in a variety of ways. Since healthcare workers often have different ways of saying the same thing, relationships allow synonyms to be linked together around a single concept, allowing computer systems to understand the common meaning. There are two major types of relationships:
 
@@ -166,16 +173,17 @@ There are multiple attribute relationships, depending on whether they relate to 
 1.  Attribute relationships for diseases and disorders: `finding site`, `causative agent`, `associated morphology`
 2.  Attribute relationships for medical and surgical procedures: `procedure site`, `method`, `direct morphology`, `direct device`, `using`
 
-Below is an example how SNOMED might represent a condition and its associated relationships. A patient has acute post-streptococcal ![](images/image-588201257.png)glomerulenephritis, which is then associated with a multitude of hierarchical and attribute relationships.
+Below is an example how SNOMED might represent a condition and its associated relationships. A patient has acute post-streptococcal glomerulenephritis, which is then associated with a multitude of hierarchical and attribute relationships.
 
-\*NOTE: let's recreate this in HTML down the road. It is the best visual I've been able to find for showing SNOMED relationships, i got it from this snippet of a [Georgia Tech Online Health Informatics MS course video](https://www.youtube.com/watch?v=OqFILtre8Dc).
-<!--# FIX
+<!--# *NOTE: let's recreate this in HTML down the road. It is the best visual I've been able to find for showing SNOMED relationships, i got it from this snippet of a Georgia Tech Online Health Informatics MS course video. -->
+
+ <!--# FIX
 Moving forward, include notes like this in a comment like these so we don't miss them in the final push.
 
 --LDC
 -->
 
-![](images/image-1259988036.png)<!--# FIX broken image link --LDC -->
+![](images/snomed_example.png)<!--# FIX broken image link --LDC -->
 
 ### 3.3 ICD
 
@@ -198,30 +206,51 @@ An ICD-10 code can range between 3 and 7 alphanumeric characters and has three m
 ::: {.callout-caution collapse="true"}
 ## Expand to view ICD-10 categories
 
-| Range    | Topic                                                                                               |
-|----------|-----------------------------------------------------------------------------------------------------|
-| A00-B99  | Certain infections and parasitic diseases                                                           |
-| C00-D49  | Neoplasms                                                                                           |
-| D50-D89  | Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism |
-| E00-E89  | Endocrine, nutritional and metabolic diseases                                                       |
-| F01-F99  | Mental, Behavioral and Neurodevelopmental disorders                                                 |
-| G00-G99  | Diseases of the nervous system                                                                      |
-| H00-H59  | Diseases of the eye and adnexa                                                                      |
-| H60-H95  | Diseases of the ear and mastoid process                                                             |
-| I00-I99  | Diseases of the circulatory system                                                                  |
-| J00-J99  | Diseases of the respiratory system                                                                  |
-| K00-K95  | Diseases of the digestive system                                                                    |
-| L00-L99  | Diseases of the skin and subcutaneous tissue                                                        |
-| M00-M99  | Diseases of the musculoskeletal system and connective tissue                                        |
-| N00-N99  | Diseases of the genitourinary system                                                                |
-| O00- O9A | Pregnancy, childbirth, and puerperium                                                               |
-| P00-P96  | Certain conditions originating in the perinatal period                                              |
-| Q00-Q99  | Congenital malformations, deformations and chromosomal abnormalities                                |
-| R00-R99  | Symptoms, signs, and abnormal clinical laboratory findings, not elsewhere classified                |
-| S00-T88  | Injury, poisoning, and certain other consequences of external causes                                |
-| V00-Y99  | External causes of morbidity                                                                        |
-| Z00-Z99  | Factors influencing health status and contact with health services                                  |
-
++-----------+-----------------------------------------------------------------------------------------------------+
+| Range     | Topic                                                                                               |
++===========+=====================================================================================================+
+| A00-B99   | Certain infections and parasitic diseases                                                           |
++-----------+-----------------------------------------------------------------------------------------------------+
+| C00-D49   | Neoplasms                                                                                           |
++-----------+-----------------------------------------------------------------------------------------------------+
+| D50-D89   | Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism |
++-----------+-----------------------------------------------------------------------------------------------------+
+| E00-E89   | Endocrine, nutritional and metabolic diseases                                                       |
++-----------+-----------------------------------------------------------------------------------------------------+
+| F01-F99   | Mental, Behavioral and Neurodevelopmental disorders                                                 |
++-----------+-----------------------------------------------------------------------------------------------------+
+| G00-G99   | Diseases of the nervous system                                                                      |
++-----------+-----------------------------------------------------------------------------------------------------+
+| H00-H59   | Diseases of the eye and adnexa                                                                      |
++-----------+-----------------------------------------------------------------------------------------------------+
+| H60-H95   | Diseases of the ear and mastoid process                                                             |
++-----------+-----------------------------------------------------------------------------------------------------+
+| I00-I99   | Diseases of the circulatory system                                                                  |
++-----------+-----------------------------------------------------------------------------------------------------+
+| J00-J99   | Diseases of the respiratory system                                                                  |
++-----------+-----------------------------------------------------------------------------------------------------+
+| K00-K95   | Diseases of the digestive system                                                                    |
++-----------+-----------------------------------------------------------------------------------------------------+
+| L00-L99   | Diseases of the skin and subcutaneous tissue                                                        |
++-----------+-----------------------------------------------------------------------------------------------------+
+| M00-M99   | Diseases of the musculoskeletal system and connective tissue                                        |
++-----------+-----------------------------------------------------------------------------------------------------+
+| N00-N99   | Diseases of the genitourinary system                                                                |
++-----------+-----------------------------------------------------------------------------------------------------+
+| O00- O9A  | Pregnancy, childbirth, and puerperium                                                               |
++-----------+-----------------------------------------------------------------------------------------------------+
+| P00-P96   | Certain conditions originating in the perinatal period                                              |
++-----------+-----------------------------------------------------------------------------------------------------+
+| Q00-Q99   | Congenital malformations, deformations and chromosomal abnormalities                                |
++-----------+-----------------------------------------------------------------------------------------------------+
+| R00-R99   | Symptoms, signs, and abnormal clinical laboratory findings, not elsewhere classified                |
++-----------+-----------------------------------------------------------------------------------------------------+
+| S00-T88   | Injury, poisoning, and certain other consequences of external causes                                |
++-----------+-----------------------------------------------------------------------------------------------------+
+| V00-Y99   | External causes of morbidity                                                                        |
++-----------+-----------------------------------------------------------------------------------------------------+
+| Z00-Z99   | Factors influencing health status and contact with health services                                  |
++-----------+-----------------------------------------------------------------------------------------------------+
 :::
 
 Below is an example of different levels of specificity for an ICD-10 code [@icd_10]. The injury is a *closed fracture of distal phalanx of right index finger*.
@@ -291,28 +320,47 @@ RxNorm normalized names can have different levels of specificity, defined by the
 ::: {.callout-caution collapse="true"}
 ## Expand to view the different TTYs
 
-| TTY  | Name                              | Description                                                                                                                                                                                        | Example                                                                                                                                                                                                |
-|:-----|:----------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| IN   | Ingredient                        | A compound or moiety that gives the drug its distinctive clinical properties. Ingredients generally use the United States Adopted Name (USAN).                                                     | Fluoxetine                                                                                                                                                                                             |
-| PIN  | Precise Ingredient                | A specified form of the ingredient that may or may not be clinically active. Most precise ingredients are salt or isomer forms.                                                                    | Fluoxetine Hydrochloride                                                                                                                                                                               |
-| MIN  | Multiple Ingredients              | Two or more ingredients appearing together in a single drug preparation, created from SCDF. In rare cases when IN/PIN or PIN/PIN combinations of the same base ingredient exist, created from SCD. | Fluoxetine / Olanzapine                                                                                                                                                                                |
-| DF   | Dose Form                         | See [Appendix 2](https://www.nlm.nih.gov/research/umls/rxnorm/docs/2018/appendix2.html) for a full list of Dose Forms.                                                                             | Oral Solution                                                                                                                                                                                          |
-| DFG  | Dose Form Group                   | See [Appendix 3](https://www.nlm.nih.gov/research/umls/rxnorm/docs/2018/appendix3.html) for a full list of Dose Form Groups.                                                                       | Oral Liquid                                                                                                                                                                                            |
-| SCDC | Semantic Clinical Drug Component  | Ingredient + Strength                                                                                                                                                                              | Fluoxetine 4 MG/ML                                                                                                                                                                                     |
-| SCDF | Semantic Clinical Drug Form       | Ingredient + Dose Form                                                                                                                                                                             | Fluoxetine Oral Solution                                                                                                                                                                               |
-| SCDG | Semantic Clinical Dose Form Group | Ingredient + Dose Form Group                                                                                                                                                                       | Fluoxetine Oral Product                                                                                                                                                                                |
-| SCD  | Semantic Clinical Drug            | Ingredient + Strength + Dose Form                                                                                                                                                                  | Fluoxetine 4 MG/ML Oral Solution                                                                                                                                                                       |
-| BN   | Brand Name                        | A proprietary name for a family of products containing a specific active ingredient.                                                                                                               | Prozac                                                                                                                                                                                                 |
-| SBDC | Semantic Branded Drug Component   | Ingredient + Strength + Brand Name                                                                                                                                                                 | Fluoxetine 4 MG/ML \[Prozac\]                                                                                                                                                                          |
-| SBDF | Semantic Branded Drug Form        | Ingredient + Dose Form + Brand Name                                                                                                                                                                | Fluoxetine Oral Solution \[Prozac\]                                                                                                                                                                    |
-| SBDG | Semantic Branded Dose Form Group  | Brand Name + Dose Form Group                                                                                                                                                                       | Prozac Pill                                                                                                                                                                                            |
-| SBD  | Semantic Branded Drug             | Ingredient + Strength + Dose Form + Brand Name                                                                                                                                                     | Fluoxetine 4 MG/ML Oral Solution \[Prozac\]                                                                                                                                                            |
-| PSN  | Prescribable Name                 | Synonym of another TTY, given for clarity and for display purposes in electronic prescribing applications. Only one PSN per concept.                                                               | Leena 28 Day Pack                                                                                                                                                                                      |
-| SY   | Synonym                           | Synonym of another TTY, given for clarity.                                                                                                                                                         | Prozac 4 MG/ML Oral Solution                                                                                                                                                                           |
-| TMSY | Tall Man Lettering Synonym        | Tall Man Lettering synonym of another TTY, given to distinguish between commonly confused drugs.                                                                                                   | FLUoxetine 10 MG Oral Capsule \[PROzac\]                                                                                                                                                               |
-| BPCK | Brand Name Pack                   | {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack \[Brand Name\]                                                                                                       | {12 (Ethinyl Estradiol 0.035 MG / Norethindrone 0.5 MG Oral Tablet) / 9 (Ethinyl Estradiol 0.035 MG / Norethindrone 1 MG Oral Tablet) / 7 (Inert Ingredients 1 MG Oral Tablet) } Pack \[Leena 28 Day\] |
-| GPCK | Generic Pack                      | {# (Ingredient + Strength + Dose Form) / \# (Ingredient + Strength + Dose Form)} Pack                                                                                                              | {11 (varenicline 0.5 MG Oral Tablet) / 42 (varenicline 1 MG Oral Tablet) } Pack                                                                                                                        |
-
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| TTY     | Name                              | Description                                                                                                                                                                                        | Example                                                                                                                                                                                                |
++:========+:==================================+:===================================================================================================================================================================================================+:=======================================================================================================================================================================================================+
+| IN      | Ingredient                        | A compound or moiety that gives the drug its distinctive clinical properties. Ingredients generally use the United States Adopted Name (USAN).                                                     | Fluoxetine                                                                                                                                                                                             |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| PIN     | Precise Ingredient                | A specified form of the ingredient that may or may not be clinically active. Most precise ingredients are salt or isomer forms.                                                                    | Fluoxetine Hydrochloride                                                                                                                                                                               |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| MIN     | Multiple Ingredients              | Two or more ingredients appearing together in a single drug preparation, created from SCDF. In rare cases when IN/PIN or PIN/PIN combinations of the same base ingredient exist, created from SCD. | Fluoxetine / Olanzapine                                                                                                                                                                                |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DF      | Dose Form                         | See [Appendix 2](https://www.nlm.nih.gov/research/umls/rxnorm/docs/2018/appendix2.html) for a full list of Dose Forms.                                                                             | Oral Solution                                                                                                                                                                                          |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DFG     | Dose Form Group                   | See [Appendix 3](https://www.nlm.nih.gov/research/umls/rxnorm/docs/2018/appendix3.html) for a full list of Dose Form Groups.                                                                       | Oral Liquid                                                                                                                                                                                            |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCDC    | Semantic Clinical Drug Component  | Ingredient + Strength                                                                                                                                                                              | Fluoxetine 4 MG/ML                                                                                                                                                                                     |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCDF    | Semantic Clinical Drug Form       | Ingredient + Dose Form                                                                                                                                                                             | Fluoxetine Oral Solution                                                                                                                                                                               |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCDG    | Semantic Clinical Dose Form Group | Ingredient + Dose Form Group                                                                                                                                                                       | Fluoxetine Oral Product                                                                                                                                                                                |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SCD     | Semantic Clinical Drug            | Ingredient + Strength + Dose Form                                                                                                                                                                  | Fluoxetine 4 MG/ML Oral Solution                                                                                                                                                                       |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| BN      | Brand Name                        | A proprietary name for a family of products containing a specific active ingredient.                                                                                                               | Prozac                                                                                                                                                                                                 |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SBDC    | Semantic Branded Drug Component   | Ingredient + Strength + Brand Name                                                                                                                                                                 | Fluoxetine 4 MG/ML \[Prozac\]                                                                                                                                                                          |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SBDF    | Semantic Branded Drug Form        | Ingredient + Dose Form + Brand Name                                                                                                                                                                | Fluoxetine Oral Solution \[Prozac\]                                                                                                                                                                    |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SBDG    | Semantic Branded Dose Form Group  | Brand Name + Dose Form Group                                                                                                                                                                       | Prozac Pill                                                                                                                                                                                            |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SBD     | Semantic Branded Drug             | Ingredient + Strength + Dose Form + Brand Name                                                                                                                                                     | Fluoxetine 4 MG/ML Oral Solution \[Prozac\]                                                                                                                                                            |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| PSN     | Prescribable Name                 | Synonym of another TTY, given for clarity and for display purposes in electronic prescribing applications. Only one PSN per concept.                                                               | Leena 28 Day Pack                                                                                                                                                                                      |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| SY      | Synonym                           | Synonym of another TTY, given for clarity.                                                                                                                                                         | Prozac 4 MG/ML Oral Solution                                                                                                                                                                           |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| TMSY    | Tall Man Lettering Synonym        | Tall Man Lettering synonym of another TTY, given to distinguish between commonly confused drugs.                                                                                                   | FLUoxetine 10 MG Oral Capsule \[PROzac\]                                                                                                                                                               |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| BPCK    | Brand Name Pack                   | {# (Ingredient Strength Dose Form) / \# (Ingredient Strength Dose Form)} Pack \[Brand Name\]                                                                                                       | {12 (Ethinyl Estradiol 0.035 MG / Norethindrone 0.5 MG Oral Tablet) / 9 (Ethinyl Estradiol 0.035 MG / Norethindrone 1 MG Oral Tablet) / 7 (Inert Ingredients 1 MG Oral Tablet) } Pack \[Leena 28 Day\] |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| GPCK    | Generic Pack                      | {# (Ingredient + Strength + Dose Form) / \# (Ingredient + Strength + Dose Form)} Pack                                                                                                              | {11 (varenicline 0.5 MG Oral Tablet) / 42 (varenicline 1 MG Oral Tablet) } Pack                                                                                                                        |
++---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 :::
 
 ### 3.5 CVX
@@ -360,11 +408,11 @@ Below is an example of the first 5 entries of the CDX code set, organized in asc
 | measles           | measles virus vaccine                             | 05       | Inactive       | 8/31/2010     |                                         |
 +-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
 
-## 4. How is terminology implemented in FHIR?
+## 4. How terminology is implemented in FHIR
 
 FHIR provides a [Terminology Service](https://build.fhir.org/terminology-service.html#:~:text=A%20FHIR%20terminology%20service%20is,inherently%20known%20terminologies%20providing%20support.) to allow the mapping of information between different terminology standards. It does so by defining three major terminology-related Resources: `CodeSystem`, `ValueSet`, and `ConceptMap`. The diagram below shows how these resources can be used together to map terminology information using FHIR. The next sections will provide more information about each resource.
 
-NOTE: this is a screenshot from the FHIR for Devs presentation. It is by far the best visual I have found on this topic, but it is definitely not the final version we should use. Down the line we should have this recreated.
+<!--# NOTE: this is a screenshot from the FHIR for Devs presentation. It is by far the best visual I have found on this topic, but it is definitely not the final version we should use. Down the line we should have this recreated. -->
 
 ![](images/fhir_terminology.png)
 
@@ -466,12 +514,11 @@ The [`CodeSystem` Resource](https://build.fhir.org/codesystem.html) defines an o
   }]
 }
 ```
-
 :::
 
 ### 4.2 ValueSet
 
-The [`ValueSet` Resource](https://build.fhir.org/valueset.html) species a set of codes drawn from one or more code systems intended for use in a particular context. It uses the `CodeSystem` resource by directly referring to it based on whatever code system it is specifying codes from.
+The [`ValueSet` Resource](https://build.fhir.org/valueset.html) specifies a set of codes drawn from one or more code systems intended for use in a particular context. It uses the `CodeSystem` resource by directly referring to it based on whatever code system it is specifying codes from.
 
 ::: {.callout-caution collapse="true"}
 ## Expand to view an example of a `ValueSet` Resource that specifies the value set of "All CPT Values" from the code system SNOMED CT
@@ -524,7 +571,6 @@ The [`ValueSet` Resource](https://build.fhir.org/valueset.html) species a set of
   }
 }
 ```
-
 :::
 
 ### 4.3 ConceptMap
@@ -602,5 +648,4 @@ The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html
   }]
 }
 ```
-
 :::
