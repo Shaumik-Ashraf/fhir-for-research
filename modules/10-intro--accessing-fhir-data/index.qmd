@@ -109,7 +109,6 @@ Here's an example of what this looks like for an instance of a Patient resource:
 {
     "resourceType": "Patient",
     "id": "1234",
-    "meta":
     "identifier":
     [
         {
@@ -188,7 +187,7 @@ Modern programming languages universally support parsing JSON, which makes it ea
     let url = document.querySelector("[name='query-base-uri']").value + "/" + document.querySelector("[name='query-resource']").value + "/" + document.querySelector("[name='query-id']").value;
 
     fetch(url) // Call the fetch function passing the url of the API as a parameter
-    .then(res => res.json())
+    .then(res => res.text())
     .then(function (res) {
       let viewerString = jsonViewer(res, true);
       if( viewerString === null ) {
