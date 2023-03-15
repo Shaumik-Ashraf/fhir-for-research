@@ -602,5 +602,3 @@ The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html
   }]
 }
 ```
-
-:::
