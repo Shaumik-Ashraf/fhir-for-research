@@ -1,12 +1,19 @@
 <!-- scripts.html -->
 <!-- any content in this file is inserted right before </body> -->
 
-
-<!-- confirm JS -->
-<script>
-    console.log("Loaded JavaScript")
+<!-- Fix up CI build links -->
+<script type="application/javascript">
+  setTimeout(() => {
+    const links = document.querySelectorAll(
+      'a[href^="https://fhir-for-research.pages.mitre.org/-/web/-/jobs/"]'
+    );
+    for (let i = 0; i < links.length; i++) {
+      const href = links[i].getAttribute("href");
+      const newHref = href + "index.html";
+      links[i].setAttribute("href", newHref);
+    }
+  }, 1000);
 </script>
-
 
 <!-- improved citations with littlefootjs -->
 <script
@@ -157,7 +164,15 @@
             return _result;
         }
         
-        return parseObject(JSON.parse(json));
+        try {
+            return parseObject(JSON.parse(json));
+        }
+        catch(err) {
+            console.log("Could not render JSON viewer: ", err);
+            console.log("for string: ", json);
+            return null;
+        }
+
     };
 
 
@@ -172,6 +187,7 @@
         let codeBlock = jsonCode.parentNode.parentNode;
         let uid = codeBlock.id;
         let documentLocation = codeBlock.parentNode;
+        let viewerHTML = jsonViewer(json, true);
 
         let tabContainer = parseHTML(`
           <div>
@@ -190,10 +206,11 @@
           </div>
         `)
 
-        documentLocation.replaceChild(tabContainer, codeBlock);
+        if( viewerHTML != null ) {
+            documentLocation.replaceChild(tabContainer, codeBlock);
 
-        let viewerHTML = jsonViewer(json, true);
-        tabContainer.querySelector(`div#${uid}TabContent div#${uid}Viewer`).appendChild( parseHTML(viewerHTML) );
-        tabContainer.querySelector(`div#${uid}TabContent div#${uid}Json`).appendChild(codeBlock);
+            tabContainer.querySelector(`div#${uid}TabContent div#${uid}Viewer`).appendChild( parseHTML(viewerHTML) );
+            tabContainer.querySelector(`div#${uid}TabContent div#${uid}Json`).appendChild(codeBlock);
+        }
     });
 </script>
