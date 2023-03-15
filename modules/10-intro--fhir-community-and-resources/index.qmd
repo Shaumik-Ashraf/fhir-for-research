@@ -1,8 +1,6 @@
 ---
 title: FHIR Community & Resources
 
-author: Karen Bates
-
 area:
   name: Overview
 topic:
@@ -31,9 +29,9 @@ This module will intoduce you to the HL7 and FHIR community, offer suggestions o
 
 ## The HL7 FHIR community
 
-The HL7 FHIR community is comprised of developers, maintainers, and implementers that engage with the [FHIR specification](https://hl7.org/fhir/). Community-members work in a variety of environments including clinical settings, health-focused companies and non-profits, and local, state, and federal health agencies. [HL7](<https://hl7.org>) manages the [FHIR standard](https://hl7.org/fhir/), FHIR technology (e.g., [implementation guides (IGs)](http://fhir.org/guides/registry/) and the [FHIR API](https://www.hl7.org/fhir/http.html)) and the community of maintainers and implementers. 
+The HL7 FHIR community is comprised of developers, maintainers, and implementers that engage with the [FHIR specification](https://hl7.org/fhir/). Community-members work in a variety of environments including clinical settings, health-focused companies and non-profits, and local, state, and federal health agencies. [HL7](<https://hl7.org>) <!--# FIX this link isn't valid Markdown syntax -- remove the < > —MM 3/15/23 11:43 AM -->manages the [FHIR standard](https://hl7.org/fhir/), FHIR technology (e.g., [ballotting and publishing implementation guides (IGs)](http://fhir.org/guides/registry/), and the [FHIR API](https://www.hl7.org/fhir/http.html)), and the community of maintainers and implementers. 
 
-[FHIR](<https://hl7.org/fhir/>) is an open source specification, and the vast majority of HL7's FHIR work is done in public forums and channels. Any interested person can join in to discuss or contribute. The FHIR community also develops many of the [FHIR Implementation Guides (IGs)](http://fhir.org/guides/registry/) publicly. This approach makes members of the community accessible to other implementers and developers who want to follow the progress of work or ask questions via the channels described below.
+[FHIR](<https://hl7.org/fhir/>) is an open source specification, and the vast majority of HL7's FHIR work is done in public forums and channels. Any interested person can join in to discuss or contribute. The FHIR community also develops many [FHIR Implementation Guides (IGs)](http://fhir.org/guides/registry/) publicly. This approach makes members of the community accessible to other implementers and developers who want to ask questions, follow the progress of work, or contribute to the work via the channels described below.
 
 ### HL7 Work Groups
 
@@ -63,11 +61,9 @@ Alternatively (or additionally), join the Work Group's [mailing list](https://co
 
 ### Zulip (chat.fhir.org)
 
-<!--# Describe what Zulip is (analogy to Slack or Teams groups), how to find the right stream if you have a question (search streams, or search all public streams for similar topics and see where they were posted), and #implementers stream to post in if you can't figure out where to ask -->
-
 Zulip ([chat.fhir.org](https://chat.fhir.org)) is an asynchronous communication platform, similar to Slack or Teams messaging. Anyone is welcome to join and it can be an valuable tool for asking questions and connecting with others that have similar objectives for health data. 
 
-Zulip has Streams (like Channels on Slack) for topics like [Implementation Guide development](https://chat.fhir.org/#narrow/stream/179252-IG-creation), [Terminology](https://chat.fhir.org/#narrow/stream/179202-terminology), and [Cancer Interoperability](https://chat.fhir.org/#narrow/stream/179234-Cancer-Interoperability). Users then post comments or questions inside the Stream for others to respond. Streams can be found by searching for specific topics or browsing through the list. Searching all Streams or narrowing a search to a certain Stream in the search bar is helpful for troubleshooting common problems or seeing if anyone else has asked the same question before.
+Zulip has Streams (like Channels on Slack) for general topics like [Implementation Guide development](https://chat.fhir.org/#narrow/stream/179252-IG-creation) and [Terminology](https://chat.fhir.org/#narrow/stream/179202-terminology), and and domain-specific topics like [Cancer Interoperability](https://chat.fhir.org/#narrow/stream/179234-Cancer-Interoperability). Users post comments or questions inside the Stream where others can respond. Streams can be found by searching for specific topics or browsing through the list. Searching all Streams or narrowing a search to a certain Stream in the search bar is helpful for troubleshooting common problems or seeing if anyone else has asked the same question before.
 
 #### Getting started
 
@@ -88,8 +84,6 @@ Other useful Streams to subscribe to include:
 
 
 ### Connectathons
-
-<!--# What are Connectathons, why are they important, how they may related to research -->
 
 [Connectathons](https://confluence.hl7.org/display/FHIR/Connectathons) are an opportunity for contributors and community members to engage synchronously for discussions and interoperability testing. HL7 describes [Connectathons](https://confluence.hl7.org/display/FHIR/Connectathons) as:
 
@@ -112,33 +106,28 @@ Each Connectathon hosts a virtual Participant Information Session several weeks 
 
 ### HL7 Confluence
 
-<!--# Describe what Confluence is (Wikipedia), and Jira ("issue tracking"). Confluence is useful for finding relevant HL7 projects and Work Groups, and for documentation on the HL7/FHIR infrastructure and processes. Jira is probably only useful to this audience in the sense that it is mentioned in Confluence. -->
+Documentation on HL7 processes and general information is typically found in the [HL7 Confluence](https://confluence.hl7.org) site. Confluence is a Wikipedia-like documentation website for HL7. Many of the links throughout this module go to HL7 Confluence pages. The site is useful for finding:
 
-Documentation on HL7 processes and general information is typically found in the [HL7 Confluence](https://confluence.hl7.org) site. Confluence is a Wikipedia-like encyclopedia for HL7. Many of the links throughout this module go to HL7 Confluence pages. The site is useful for finding:
-
--   relevant HL7 projects in development
--   schedules and information for HL7 Work Groups
--   processes and documentation on HL7 and FHIR infrastructure
+-   Relevant HL7 projects in development
+-   Schedules and information for HL7 Work Groups
+-   Processes and documentation for HL7 and FHIR infrastructure
 
 The Confluence site also includes tips on [getting involved](https://confluence.hl7.org/display/FHIR/Getting+Involved) and [implementor support](https://confluence.hl7.org/display/FHIR/Implementer+Support).
 
 ### HL7 Jira
 
-Project work and specification development primarily occurs in [HL7 Jira](https://jira.hl7.org/secure/Dashboard.jspa). The site is an issue-tracking resource used for managing comments and suggestions on HL7 specifications and terminologies. 
+Project work and specification development primarily occurs in [HL7 Jira](https://jira.hl7.org/secure/Dashboard.jspa). The site is an issue-tracking resource used for managing comments and suggestions on HL7 specifications and terminologies. This includes the core FHIR specification and FHIR Implementation Guides developed with HL7 Work Group oversight.
 
 ### FHIR Community Forum
 
-Discussion about FHIR Implementation and Development Topics occurs in the [FHIR Community Forum](http://community.fhir.org/). The [FHIR Community Forum](http://community.fhir.org/t/welcome-to-the-fhir-community-forum/8) is a place to ask questions like 
+Discussion about FHIR implementation and development topics occurs in the [FHIR Community Forum](http://community.fhir.org/). The [FHIR Community Forum](http://community.fhir.org/t/welcome-to-the-fhir-community-forum/8) is a place to ask questions like:
 
 > - How do I do [x]? where [x] is any kind of use of FHIR at all
 > - Has anyone solved [my problem] with the specification? (or is anyone interested in this)
 > - Why does FHIR work like it does?
 > - What does everyone think about [making some change to the FHIR specification]?
 
-Although the FHIR Community Forum is monitored, Zulip ([chat.fhir.org](https://chat.fhir.org)) is more active.
+Although the FHIR Community Forum is monitored, Zulip ([chat.fhir.org](https://chat.fhir.org)) may be more active.
 
 ### StackOverflow on FHIR
-[StackOverflow](https://stackoverflow.com/) is a forum for asking and answering technical questions. Use the [hl7-fhir tag](https://stackoverflow.com/questions/tagged/hl7_fhir) for developer and programming questions about reference FHIR implementations.
-
----
-
+[StackOverflow](https://stackoverflow.com/) is a third-party forum for asking and answering technical questions. HL7 FHIR is one of the topics discussed on StackOverflow, in addition to many other technologies unrelated to health. Use the [hl7-fhir tag](https://stackoverflow.com/questions/tagged/hl7_fhir) for developer and programming questions about reference FHIR implementations.
