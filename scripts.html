@@ -1,12 +1,19 @@
 <!-- scripts.html -->
 <!-- any content in this file is inserted right before </body> -->
 
-
-<!-- confirm JS -->
-<script>
-    console.log("Loaded JavaScript")
+<!-- Fix up CI build links -->
+<script type="application/javascript">
+  setTimeout(() => {
+    const links = document.querySelectorAll(
+      'a[href^="https://fhir-for-research.pages.mitre.org/-/web/-/jobs/"]'
+    );
+    for (let i = 0; i < links.length; i++) {
+      const href = links[i].getAttribute("href");
+      const newHref = href + "index.html";
+      links[i].setAttribute("href", newHref);
+    }
+  }, 1000);
 </script>
-
 
 <!-- improved citations with littlefootjs -->
 <script
@@ -22,7 +29,7 @@
           class="littlefoot__button btn btn-link"
           id="<% reference %>"
           title="See Footnote <% number %>"
-          style="padding:0;line-height:1;vertical-align:top;text-decoration:none;"
+          style="line-height:1;vertical-align:top;text-decoration:none;"
         >
           <% number %>
         </button>

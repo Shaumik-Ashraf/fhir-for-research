@@ -63,7 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {
     clone.id = 'key-points';
 
     // Append the newly created element on element p
-    document.querySelector('#quarto-document-content').appendChild( clone );
+    //
+    // Figure out if `#quarto-appendix` exists
+    if(document.getElementById("quarto-appendix")) {
+        document.getElementById('quarto-document-content').insertBefore(clone, document.getElementById("quarto-appendix"));
+    } else {
+        document.querySelector('#quarto-document-content').appendChild( clone );
+    }
     document.querySelector('#key-points .callout-caption-container').textContent = 'Key points';
     document.querySelector('#key-points .prompt').textContent = 'The learning objective questions are below, along with their answers:'
     document.querySelector('#key-points .target-roles-container').remove();
