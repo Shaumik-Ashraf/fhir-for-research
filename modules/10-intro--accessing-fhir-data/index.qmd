@@ -26,14 +26,14 @@ It's worth noting that most modern web-centric APIs are "RESTful" -- this makes 
 
 ## Constructing a FHIR API request
 
-A FHIR server's API is typically accessed via a [URL](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL)[^1] like `https://api.logicahealth.org/researchonfhir/open/`.
+A FHIR server's API is typically accessed via a [URL](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL)[^1] like `https://hapi.fhir.org/baseR4/`.
 
 [^1]: URLs may only be accessible inside an institution's firewall, or may be accessible to the public internet. Even if a FHIR server is accessible to the public internet, it may not respond to *any* request -- depending on how it is configured, it may require authentication (like a username and password) to return any data.
 
 This URL is used to construct the API request, which typically takes the following form:
 
 ``` markdown
-GET https://api.logicahealth.org/researchonfhir/open/Patient/1234
+GET https://hapi.fhir.org/baseR4/Patient/1234
 ```
 
 This would retrieve a FHIR instance of [Patient](https://www.hl7.org/fhir/patient.html) for the patient with the ID `1234`.
@@ -44,11 +44,11 @@ This would retrieve a FHIR instance of [Patient](https://www.hl7.org/fhir/patien
 The general structure of a FHIR API request includes the following:
 
 -   `GET` = HTTP "verb", which tells the server whether you are asking for data or performing another operation (see [the FHIR documentation](https://www.hl7.org/fhir/http.html#trules) for details)
--   `https://api.logicahealth.org/researchonfhir/open/` = URL to the FHIR API
+-   `https://hapi.fhir.org/baseR4/` = URL to the FHIR API
 -   `Patient` = FHIR resource type you want
 -   `1234` = The ID for the resource you want (note that an ID is not needed for some types of API requests)
 
-The `https://api.logicahealth.org/researchonfhir/open` endpoint is a live FHIR server loaded with synthetic patient data. The patient ID `smart-1032702` exists in this data. Construct and run a FHIR query below to retrieve this patient's instance of Patient:
+The `https://hapi.fhir.org/baseR4` endpoint is a live FHIR server loaded with synthetic patient data. The patient ID `591702` exists in this data. Construct and run a FHIR query below to retrieve this patient's instance of Patient:
 
 <!--# Proof of concept "run live query" widget is below -- this needs to get replaced with something much more robust that allows the user to construct the request themselves. -->
 
@@ -90,11 +90,9 @@ The `https://api.logicahealth.org/researchonfhir/open` endpoint is a live FHIR s
   </div>
 </div>
 
-<code>
-  <pre id="query-output">
+<br />
 
-  </pre>
-</code>
+<div id="query-output"></div>
 ```
 
 :::
@@ -180,13 +178,49 @@ Modern programming languages universally support parsing JSON, which makes it ea
 ```{=html}
 <script>
   let getPatient = function() {
-
     let outputNode = document.getElementById('query-output');
+    outputNode.innerHTML = ""; // clear any previous results
 
-    // let url = "https://hapi.fhir.org/baseR4/Patient/591702";
-    let url = document.querySelector("[name='query-base-uri']").value + "/" + document.querySelector("[name='query-resource']").value + "/" + document.querySelector("[name='query-id']").value;
+    let baseUriInput = document.querySelector("[name='query-base-uri']");
+    let resourceInput = document.querySelector("[name='query-resource']");
+    let idInput = document.querySelector("[name='query-id']");
 
-    fetch(url) // Call the fetch function passing the url of the API as a parameter
+    let method = document.querySelector("[name='query-http-verb']").value;
+
+
+    // validate selected http verb
+    if( method != "GET" ) {
+      outputNode.innerHTML = `
+        <div class="alert alert-danger">The FHIR query in this situation must be <b>GET</b>. Please try again.</div>
+      `;
+      return false;
+    }
+
+
+    // construct & validate full url
+    if((baseUriInput.value == null) || (baseUriInput.value == "")) {
+      outputNode.innerHTML = `
+        <div class="alert alert-danger">The FHIR query base URI in this situation should be <b>https://hapi.fhir.org/baseR4</b>. Please try again.</div>
+      `;
+      return false;
+    }
+    if((resourceInput.value != "Patient") && (resourceInput.value != "Observation")) {
+      outputNode.innerHTML = `
+        <div class="alert alert-danger">The FHIR query base URI in this situation should be <b>Patient</b>. Please try again.</div>
+      `;
+      return false;
+    }
+    if((idInput.value == null) || (idInput.value == "")) {
+      outputNode.innerHTML = `
+        <div class="alert alert-danger">The FHIR query ID in this situation should be <b>591702</b>. Please try again.</div>
+      `;
+      return false;
+    }
+    let url = baseUriInput.value + "/" + resourceInput.value + "/" + idInput.value;
+
+
+    // fetch request and construct response view
+    fetch(url, {method: method})
     .then(res => res.text())
     .then(function (res) {
       let viewerString = jsonViewer(res, true);
@@ -200,14 +234,36 @@ Modern programming languages universally support parsing JSON, which makes it ea
         `
       }
       else {
-        outputNode.appendChild( parseHTML( viewerString ) );
+        outputNode.innerHTML = `
+          <div>
+            <ul class="nav nav-tabs" id="outputTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="outputViewerTab" data-bs-toggle="tab" data-bs-target="#outputViewer" type="button" role="tab" aria-controls="outputViewer" aria-selected="true">Viewer</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="outputJsonTab" data-bs-toggle="tab" data-bs-target="#outputJson" type="button" role="tab" aria-controls="outputJson" aria-selected="false">JSON</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="outputTabContent" style="height:50vh;overflow:scroll;">
+              <div class="tab-pane fade show active" id="outputViewer" role="tabpanel" aria-labelledby="outputViewerTab"></div>
+              <div class="tab-pane fade" id="outputJson" role="tabpanel" aria-labelledby="outputJsonTab"></div>
+            </div>
+          </div>
+        `;
+        document.querySelector("#outputViewer").appendChild( parseHTML( viewerString ) );
+        document.querySelector("#outputJson").innerHTML = `
+          <div class="sourceCode">
+            <pre class="sourceCode json code-with-copy"><code class="sourceCode json">${res}</code></pre>
+          </div>
+        `;
+
       }
     })
     .catch(function(err) {
       // This is where you run code if the server returns any errors
       console.log("Failed to fetch patient: ", err)
       outputNode.innerHTML = `
-        <div class="alert alert-danger">FHIR query failed. The correct FHIR query is GET https://hapi.fhir.org/baseR4/Patient/591702. Please try again.</div>
+        <div class="alert alert-danger">FHIR query failed. The correct FHIR query is <b>GET https://hapi.fhir.org/baseR4/Patient/591702</b>. Please try again.</div>
       `
     });
 
