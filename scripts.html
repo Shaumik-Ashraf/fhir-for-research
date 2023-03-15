@@ -164,7 +164,15 @@
             return _result;
         }
         
-        return parseObject(JSON.parse(json));
+        try {
+            return parseObject(JSON.parse(json));
+        }
+        catch(err) {
+            console.log("Could not render JSON viewer: ", err);
+            console.log("for string: ", json);
+            return null;
+        }
+
     };
 
 
@@ -179,6 +187,7 @@
         let codeBlock = jsonCode.parentNode.parentNode;
         let uid = codeBlock.id;
         let documentLocation = codeBlock.parentNode;
+        let viewerHTML = jsonViewer(json, true);
 
         let tabContainer = parseHTML(`
           <div>
@@ -197,10 +206,11 @@
           </div>
         `)
 
-        documentLocation.replaceChild(tabContainer, codeBlock);
+        if( viewerHTML != null ) {
+            documentLocation.replaceChild(tabContainer, codeBlock);
 
-        let viewerHTML = jsonViewer(json, true);
-        tabContainer.querySelector(`div#${uid}TabContent div#${uid}Viewer`).appendChild( parseHTML(viewerHTML) );
-        tabContainer.querySelector(`div#${uid}TabContent div#${uid}Json`).appendChild(codeBlock);
+            tabContainer.querySelector(`div#${uid}TabContent div#${uid}Viewer`).appendChild( parseHTML(viewerHTML) );
+            tabContainer.querySelector(`div#${uid}TabContent div#${uid}Json`).appendChild(codeBlock);
+        }
     });
 </script>
