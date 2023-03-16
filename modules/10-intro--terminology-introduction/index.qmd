@@ -1,10 +1,28 @@
 ---
-title: "Terminology Introduction"
-author: "Blake Bergstrom"
-format: html
-editor: visual
+title: "Module: History of FHIR"
+
 bibliography: bibliography.bib
-toc: true
+
+area:
+  name: Overview
+topic:
+  name: FHIR for Research
+
+roles:
+  - Investigator
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives:
+  - question: What is terminology in health informatics?
+    answer: tbd
+  - question: Why is terminology important for interoperability?
+    answer: tbd
+  - question: What are some common terminology systems you may encounter?
+    answer: tbd
+  - question: How is terminology implemented in FHIR?
+    answer: tbd
 ---
 
 ```{=html}
@@ -24,14 +42,7 @@ Basic content and structure look good.
 --LDC
 -->
 ```
-## Key concepts
-
--   What is terminology in health informatics?
--   Why is terminology important for interoperability?
--   What are some common terminology systems you may encounter?
--   How is terminology implemented in FHIR?
-
-## 1. Terminology in health informatics
+## Terminology in health informatics
 
 ```{=html}
 <!--# FIX
@@ -58,7 +69,13 @@ Please go through this entire module and simplify and/or remove entire sentences
 --LDC
 -->
 ```
-Terminology in Health Informatics is a mapping between a **concept** and a **code**. A concept is a mental representation of a real or abstract thing<!--# FIX what does "unitary mental representation of a real or abstract thing" mean? Rephrase and simplify. --LDC -->, e.g., a disease state or medical procedure. A code is a series of letters, numbers, or symbols *assigned to one concept in a code system* for the purposes of classification or identification. A concept is universal and may have a different code between different **code systems**. Mapping codes between code systems helps achieve interoperability between health systems.
+Terminology in Health Informatics is a mapping between a **concept** and a **code**.
+
+-   **Concept**: mental representation of a real or abstract thing<!--# FIX what does "unitary mental representation of a real or abstract thing" mean? Rephrase and simplify. --LDC -->, e.g., a disease state or medical procedure.
+
+-   **Code**: series of letters, numbers, or symbols assigned to one concept in a code system for the purposes of classification or identification.
+
+A concept is a universal and may have a different code between different code systems. Mapping codes between code systems helps achieve interaperability between health systems.
 
 [HIMSS provides a summary of terminology standards](https://www.himss.org/terminology-standards) as a way to:
 
@@ -74,37 +91,33 @@ You might be familiar with some terminology systems like [ICD-10](https://www.cd
 
 There are a number of other common terminology systems for classifying things like pharmaceuticals, laboratory testing, and vaccines. We will describe some of these below.
 
-## 2. Why terminology is important for interoperability
+## Why terminology is important for interoperability
 
-[HIMMS summarizes the importance of standard terminology in health informatics](https://www.himss.org/terminology-standards) below:
+Standard terminology serves as the foundation for interoperability in health IT by (1) organizing complex information across a multitude of domains and (2) defining the semantics of consistent and computable information exchange between computer systems. Using standard terminologies allows researchers to access, organize, and utilize health data in a consistent and reliable way. [@himss_terminology]
 
-> Standard terminology provides a foundation for interoperability by improving the effectiveness of information exchange. Using standard terminology should be a simple and logical step in health IT. However, with the complexities of many diagnoses systems, clinical narrative transferred via PDF format, various coding systems, and the cost of digitizing volumes of reference material/dictionaries, it isn't as easy as you would think.
->
-> Structured terms provide a means for organizing information and serve to define the semantics of information using consistent and computable mechanisms. Therefore, *health information specialists* need the tools to focus on delivering terminology through a common delivery system to the software vendors and institutions in a consistent, high quality and verifiable fashion. Vendors and institutions need to be able to write applications that access terminology content, be it SNOMED, immunization data, demographics, LOINC, or a coding system local to the institution in exactly the same way.
+The developers of FHIR were aware of the importance of translating information between these terminologies, developing multiple FHIR Resources specifically for that purpose. Before diving into how that works, we will first review some of the most common terminology systems that you as a researcher might encounter.
 
-The developers of FHIR were aware of the importance of translating information between these terminologies, developing multiple Resources specifically for that purpose. Before diving into how that works, we will first review some of the most common terminology systems that you as a researcher might encounter.
-
-## 3. Common terminology systems you may encounter
+## Common terminology systems you may encounter
 
 [HIMSS discusses 11 different terminology standards](https://www.himss.org/terminology-standards), however we will focus on the major 5 that you will most likely run into as a researcher. These include the following:
 
--   [**LOINC**](https://loinc.org/) (Logical Observation Identifiers Names and Codes)
+-   [LOINC](https://loinc.org/) (Logical Observation Identifiers Names and Codes)
 
--   [**SNOMED CT**](https://www.snomed.org/) (Systematized Nomenclature of Medicine--Clinical Terms)
+-   [SNOMED CT](https://www.snomed.org/) (Systematized Nomenclature of Medicine--Clinical Terms)
 
--   [**ICD**](https://www.who.int/standards/classifications/classification-of-diseases) (International Statistical Classification of Diseases and Related Health Problems)
+-   [ICD](https://www.who.int/standards/classifications/classification-of-diseases) (International Statistical Classification of Diseases and Related Health Problems)
 
--   [**RxNorm**](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) (Medical prescription Normalized)
+-   [RxNorm](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) (Medical prescription Normalized)
 
--   [**CVX**](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx) (Vaccine administered)
+-   [CVX](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx) (Vaccine administered)
 
-### 3.1 LOINC
+### LOINC
 
-#### 3.1.1 About
+#### About
 
-LOINC is a common language for identifying health measurements, observations, and documents. It was created and is maintained by the **Regenstrief Institute**, which describes LOINC as representing the "question" that an observation asks, with other standards (such as SNOMED CT, described next) representing the "answer." It [summarizes LOINC](https://loinc.org/get-started/) as "the global lingua franca for identifying tests and observations."
+LOINC is a common language for identifying health measurements, observations, and documents. It can be thought of as representing the "question" that an observation asks, with other standards (such as SNOMED CT, described next) representing the "answer." It has been called "the global lingua franca for identifying tests and observations." [@loinc_get_started]
 
-#### 3.1.2 Nomenclature
+#### Nomenclature
 
 A LOINC code distinguishes a given observation (test ordered, survey question, or clinical document) across six dimensions known as **Parts** [@loinc_term_basics]. The table below defines each Part as well as provides examples for the breakdown of the LOINC for a *manual count of white blood cells in cerebral spinal fluid specimen*.
 
@@ -136,9 +149,9 @@ The LOINC code for the above test is [`806-0`](https://loinc.org/806-0). There a
 | Short Name                 | WBC \# CSF Manual                                                |
 +----------------------------+------------------------------------------------------------------+
 
-### 3.2 SNOMED CT
+### SNOMED CT
 
-#### 3.2.1 About
+#### About
 
 SNOMED CT is a clinical terminology standard that is developed by **SNOMED International**. It can be viewed as the "answer" for a test or measurement to the LOINC "question" code. [SNOMED International further details the utility of SNOMED CT](https://www.snomed.org/five-step-briefing) below:
 
@@ -154,13 +167,17 @@ SNOMED CT is a clinical terminology standard that is developed by **SNOMED Inter
 >
 > -   Is in use in more than eighty countries
 
-#### 3.2.2 Nomenclature
+#### Nomenclature
 
 The basic principles behind SNOMED CT are concepts, descriptions, and relationships [@snomed].
 
-A **concept** represents a unique clinical meaning that is referenced with a unique computer readable numeric identifier. A concept also has a **description**, which represents the human readable phrases that describe the concept (what a doctor would read). A given concept can have one or more descriptions linked to it.
+-   **Concept**: Unique clinical meaning that is referenced with a unique computer readable numeric identifier. Can have multiple descriptions.
 
-Concepts can then be interrelated together with **relationships**, which provide computer readable definitions of concepts and allow for data to be searched for in a variety of ways. Since healthcare workers often have different ways of saying the same thing, relationships allow synonyms to be linked together around a single concept, allowing computer systems to understand the common meaning. There are two major types of relationships:
+-   **Description**: Human readable phrases that describe a concept (what a doctor would read).
+
+-   **Relationship**: Correlation between related concepts, i.e. "synonyms." Provides computer readable definitions of concepts and allow for data to be searched for in a variety of ways.
+
+Since healthcare workers often have different ways of saying the same thing, relationships allow synonyms to be linked together around a single concept, allowing computer systems to understand the common meaning. There are two major types of relationships:
 
 -   **Hierarchical Relationship**: defines specific concepts as children of more general concepts; each concept has at least one hierarchical relationship
 
@@ -177,25 +194,26 @@ Below is an example how SNOMED might represent a condition and its associated re
 
 <!--# *NOTE: let's recreate this in HTML down the road. It is the best visual I've been able to find for showing SNOMED relationships, i got it from this snippet of a Georgia Tech Online Health Informatics MS course video. -->
 
- <!--# FIX
+```{=html}
+<!--# FIX
 Moving forward, include notes like this in a comment like these so we don't miss them in the final push.
 
 --LDC
 -->
-
+```
 ![](images/snomed_example.png)<!--# FIX broken image link --LDC -->
 
-### 3.3 ICD
+### ICD
 
-#### 3.3.1 About
+#### About
 
-ICD is a medical classification list developed by the **World Health Organization (WHO)** that contains codes for diseases, signs and symptoms, abnormal findings, complaints, social circumstances, and external causes of injury or diseases. [The WHO describes its impact](https://www.who.int/standards/classifications/classification-of-diseases) as the following, which details direct benefits to research:
+ICD is a medical classification list that contains codes for diseases, signs and symptoms, abnormal findings, complaints, social circumstances, and external causes of injury or diseases. [The WHO describes its major use cases](https://www.who.int/standards/classifications/classification-of-diseases) as the following:
 
-> Clinical terms coded with ICD are the main basis for health recording and statistics on disease in primary, secondary and tertiary care, as well as on cause of death certificates. These data and statistics support payment systems, service planning, administration of quality and safety, and health services research. Diagnostic guidance linked to categories of ICD also standardizes data collection and enables large scale research.
+> These data and statistics support payment systems, service planning, administration of quality and safety, and health services research. Diagnostic guidance linked to categories of ICD also standardizes data collection and enables large scale research.
 
 WHO consistently updates ICD with new versions, with ICD-11 being the most recent version and ICD-10 currently being the most used. We will discuss the basic structure of ICD-10 in this module.
 
-#### 3.3.2 Nomenclature
+#### Nomenclature
 
 An ICD-10 code can range between 3 and 7 alphanumeric characters and has three major parts [@icd_10]:
 
@@ -281,17 +299,17 @@ Below is an example of different levels of specificity for an ICD-10 code [@icd_
 
                 -   `S62.630D` -- ... initial encounter for fracture with routine healing
 
-### 3.4 RxNorm
+### RxNorm
 
-#### 3.4.1 About
+#### About
 
-The **NIH National Library of Medicine (NLM)** produces RxNorm and [provides a summary](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) of its purpose:
+The NIH National Library of Medicine (NLM) produces RxNorm and [provides a summary](https://www.nlm.nih.gov/research/umls/rxnorm/index.html) of its purpose:
 
-> RxNorm provides normalized names for clinical drugs and links its names to many of the drug vocabularies commonly used in pharmacy management and drug interaction software, including those of First Databank, Micromedex, Multum, and Gold Standard Drug Database. By providing links between these vocabularies, RxNorm can mediate messages between systems not using the same software and vocabulary.
+> RxNorm provides normalized names for clinical drugs and links its names to many of the drug vocabularies commonly used in pharmacy management and drug interaction software... By providing links between these vocabularies, RxNorm can mediate messages between systems not using the same software and vocabulary.
 
 Its scope includes the names of prescription and many over-the-counter drugs approved for use in the US, including generic and branded medications. Outside of RxNorm's scope include substances such as bulk powders, food, dietary supplements, and medical devices.
 
-#### 3.4.2 Nomenclature
+#### Nomenclature
 
 To understand RxNorm nomenclature, it is useful to review three major steps that NLM goes through when receiving drug names from a myriad of data sources [@rx_norm_nih].
 
@@ -363,15 +381,13 @@ RxNorm normalized names can have different levels of specificity, defined by the
 +---------+-----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 :::
 
-### 3.5 CVX
+### CVX
 
-#### 3.5.1 About
+#### About
 
-The CDC's National Center of Immunization and Respiratory Diseases (NCIRD) develops and maintains the CVX code set. Further [details are provided by NCIRD](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx):
+CVX is a standard terminology for both active and inactive vaccines in the US. It is developed and maintained by the CDC's National Center of Immuniczation and Respiratory Diseases (NCIRD). Inactive vaccine CVX codes allow for the analysis of historical immunization records. [@cvx]
 
-> It includes both active and inactive vaccines available in the US. CVX codes for inactive vaccines allow transmission of historical immunization records. When a MVX (manufacturer) code is paired with a CVX (vaccine administered) code, the specific trade named vaccine may be indicated.
-
-#### 3.5.2 Nomenclature
+#### Nomenclature
 
 The CVS code set is tabular with 6 different columns:
 
@@ -408,17 +424,17 @@ Below is an example of the first 5 entries of the CDX code set, organized in asc
 | measles           | measles virus vaccine                             | 05       | Inactive       | 8/31/2010     |                                         |
 +-------------------+---------------------------------------------------+----------+----------------+---------------+-----------------------------------------+
 
-## 4. How terminology is implemented in FHIR
+## How terminology is implemented in FHIR
 
-FHIR provides a [Terminology Service](https://build.fhir.org/terminology-service.html#:~:text=A%20FHIR%20terminology%20service%20is,inherently%20known%20terminologies%20providing%20support.) to allow the mapping of information between different terminology standards. It does so by defining three major terminology-related Resources: `CodeSystem`, `ValueSet`, and `ConceptMap`. The diagram below shows how these resources can be used together to map terminology information using FHIR. The next sections will provide more information about each resource.
+FHIR provides a [Terminology Service](https://build.fhir.org/terminology-service.html#:~:text=A%20FHIR%20terminology%20service%20is,inherently%20known%20terminologies%20providing%20support.) to allow the mapping of information between different terminology standards. It does so by defining three major terminology-related FHIR Resources: `CodeSystem`, `ValueSet`, and `ConceptMap`. The diagram below shows how these FHIR Resources can be used together to map terminology information using FHIR. The next sections will provide more information about each resource.
 
 <!--# NOTE: this is a screenshot from the FHIR for Devs presentation. It is by far the best visual I have found on this topic, but it is definitely not the final version we should use. Down the line we should have this recreated. -->
 
 ![](images/fhir_terminology.png)
 
-### 4.1 CodeSystem
+### CodeSystem
 
-The [`CodeSystem` Resource](https://build.fhir.org/codesystem.html) defines an organized, managed collection of *codes* that belong to a particular terminology standard. Examples include LOINC, SNOMED CT, and the other standards discussed in the previous section. This Resource declares not only the existence of a code system, but also its key properties:
+The [CodeSystem FHIR Resource](https://build.fhir.org/codesystem.html) defines an organized, managed collection of *codes* that belong to a particular terminology standard. Examples include LOINC, SNOMED CT, and the other standards discussed in the previous section. This FHIR Resource declares not only the existence of a code system, but also its key properties:
 
 -   Identifying URL and version
 
@@ -431,7 +447,7 @@ The [`CodeSystem` Resource](https://build.fhir.org/codesystem.html) defines an o
 -   What concept properties are defined by the code system
 
 ::: {.callout-caution collapse="true"}
-## Expand to view an example of a simple `CodeSystem` resource
+## Expand to view an example of a simple `CodeSystem` FHIR resource
 
 ``` json
 {
@@ -516,12 +532,12 @@ The [`CodeSystem` Resource](https://build.fhir.org/codesystem.html) defines an o
 ```
 :::
 
-### 4.2 ValueSet
+### ValueSet
 
-The [`ValueSet` Resource](https://build.fhir.org/valueset.html) specifies a set of codes drawn from one or more code systems intended for use in a particular context. It uses the `CodeSystem` resource by directly referring to it based on whatever code system it is specifying codes from.
+The [ValueSet FHIR Resource](https://build.fhir.org/valueset.html) specifies a set of codes drawn from one or more code systems intended for use in a particular context. It uses the `CodeSystem` FHIR Resource by directly referring to it based on whatever code system it is specifying codes from.
 
 ::: {.callout-caution collapse="true"}
-## Expand to view an example of a `ValueSet` Resource that specifies the value set of "All CPT Values" from the code system SNOMED CT
+## Expand to view an example of a `ValueSet` FHIR Resource that specifies the value set of "All CPT Values" from the code system SNOMED CT
 
 ``` json
 {
@@ -573,16 +589,12 @@ The [`ValueSet` Resource](https://build.fhir.org/valueset.html) specifies a set 
 ```
 :::
 
-### 4.3 ConceptMap
+### ConceptMap
 
-The [`ConceptMap` Resource documentation](https://build.fhir.org/conceptmap.html) provides an overview of both its function as well as its relevance to researchers using FHIR for data analysis involving terminology standards:
-
-> A concept map defines a mapping from a set of concepts defined in a code system (commonly referred to as the "system") to one or more concepts defined in other code systems. In the mapping context, a system can be a typical [code system](https://build.fhir.org/terminologies.html) based on a recognized standard or local terminology (in any of its forms), or in some cases it may be an ["implicit" code system](https://build.fhir.org/conceptmap.html#implicit) that is not based on a recognized terminology but still represents a set of "concepts" that can be usefully mapped. Mappings are one way - from the source to the target system. In many cases, the reverse mappings are valid, but this cannot be assumed to be the case.
->
-> Mappings between code system concepts are only intended to be defined in the context of a particular business usage. The business use case is normally defined by the specification of the source and target value sets. The mappings may be useful in other contexts, but this must be determined based on the context of use and meaning; it cannot be taken for granted automatically. An example where the usage context is important for choosing the correct mapping is mapping from a clinical terminology (e.g. SNOMED CT) to a classification (e.g. ICD-10) for either data analysis or billing. Mappings in the data analysis context would be targeted for an appropriate classification (often at a higher level), whereas in the billing context there may be specific requirements to be met (e.g. leaf level codes only) that could result in multiple mappings for a single source concept and then require additional information beyond the source concept itself in order to select the correct final mapping.
+The [`ConceptMap` FHIR Resource](https://build.fhir.org/conceptmap.html) provides a one-way mapping between a set of concepts that are defined in a code system. In FHIR, this mapping is intended to be for a particular use case, which should be defined by the specification. The example below maps SNOMED CT to ICD-10, which is a use case that is common in data analysis and billing.
 
 ::: {.callout-caution collapse="true"}
-## Expand to view an example of a `ConceptMap` Resource that maps SNOMED CT to ICD-10
+## Expand to view an example of a `ConceptMap` FHIR Resource that maps SNOMED CT to ICD-10
 
 ``` json
 {
