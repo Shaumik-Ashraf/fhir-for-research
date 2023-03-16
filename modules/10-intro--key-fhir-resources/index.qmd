@@ -1,0 +1,7 @@
+---
+title: Key FHIR Resources
+area:
+  name: Overview
+topic:
+  name: FHIR for Research
+---
