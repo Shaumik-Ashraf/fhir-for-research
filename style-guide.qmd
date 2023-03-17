@@ -111,7 +111,7 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
 
 - Each sentence has a unique purpose.
   - **What is this sentence telling you?** If it's the same thing as a previous sentence, consider removing.
-  - Exceptions are when the repitition:
+  - Exceptions are when the repetition:
     - is intentional to solidify understanding
     - provides a new perspective
 
@@ -137,9 +137,9 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
   - **Ctrl-f for "ly".** For each adverb you find:
     - **Does the meaning of the sentence change if you remove the adverb?** If not, remove.
     - **Can you replace the modified verb with a more descriptive verb and remove the adverb?** Use a thesaurus for this. If so, replace the verb and remove the adverb.
-    - If the you can't remove or replace the adverb, keep it.
+    - If you can't remove or replace the adverb, keep it.
   - **Example** "developing multiple Resources specifically for that purpose."
-    - _specifically_ is unecessary.
+    - _specifically_ is unnecessary.
   - **Example** "There is only one hierarchical relationship attribute."
     - _only_ is redundant to _one_.
   - **Example** "She ran quickly"
@@ -152,13 +152,13 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
   - **Example** "The sentence provides an explanation."
     - _explanation_ is a nominalization of _to explain_. You can rewrite this sentence as "The sentence explains."
   - **Example** "Her understanding of the situation meant that they could proceed."
-    - _understanding_ is a nominalization of _to understand_. You can rewirte this sentence as "Because she understood the situation, they could proceed."
+    - _understanding_ is a nominalization of _to understand_. You can rewrite this sentence as "Because she understood the situation, they could proceed."
 
 - Sentences are simple, as long as simplicity doesn't reduce readability.
   - **Look for sentences with 2 or more commas (where the commas aren't part of a list).** 
   - **Does the sentence have multiple purposes?** If so, try dividing it into two separate sentences.
     - **Example** "After they went to the park, they drove to a restaurant, and at the restaurant, they had dinner."
-      - The sentences says what they did after the park, _and_ what they did at the restaurant.
+      - The sentence says what they did after the park, _and_ what they did at the restaurant.
       - "After they went to the park, they drove to a restaurant. At the restaurant, they had dinner."
   - **Can you reorganize or rewrite the sentence to use fewer commas?**
     - **Example** "In many cases, the reverse mappings are valid, but this cannot be assumed to be the case."
