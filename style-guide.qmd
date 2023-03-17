@@ -175,6 +175,17 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
       - "who was so cute" divides "Her dog chased the ball" in half.
       - "Her adorable dog chased the ball." is better.
 
+- **You avoid jargon**
+  - **Example** "Note in the first row that Patient also has a type, which gives inheritence of additional attributes we'll discuss below."
+    - _inheritance_ is a software development concept that likely won't be easily understood by people who aren't already familiar with HL7 data types or software development.
+    - Instead, define _inheritance_ inline or use a different word.
+
+- **You use [plain language](https://www.plainlanguage.gov/).** [You use simpler words where the simple word has the same meaning.](https://www.plainlanguage.gov/guidelines/words/use-simple-words-phrases/)
+  - **Example** [Try words like "use" instead of "utilize," "about" instead of "approximately" and "try" instead of "attempt."](https://zapier.com/blog/plain-language/)
+  - **Example** 
+    - [Original: "It is suggested that the wire should be connected to the terminal by the engineer when the switch-box assembly is completed."](https://zapier.com/blog/plain-language/)
+    - [Simplified: "We suggest that you connect the wire to the terminal when you finish assembling the switch-box."](https://zapier.com/blog/plain-language/)
+
 ## Structure
 
 ### Learning objectives
