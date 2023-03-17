@@ -38,7 +38,7 @@ GET https://hapi.fhir.org/baseR4/Patient/1234
 
 This would retrieve a FHIR instance of [Patient](https://www.hl7.org/fhir/patient.html) for the patient with the ID `1234`.
 
-::: {.callout-note collapse="true"}
+::: {.callout-note .column-page collapse="true"}
 ## Try a FHIR API request
 
 The general structure of a FHIR API request includes the following:
@@ -68,7 +68,7 @@ The `https://hapi.fhir.org/baseR4` endpoint is a live FHIR server loaded with sy
 
   <div class="col-xl-4 mb-2 my-xl-auto">
     <div class="input-group">
-      <input type="text" class="form-control form-control-sm" placeholder="URL to FHIR API" aria-label="URL to FHIR API" name="query-base-uri">
+      <input type="text" class="form-control form-control-sm" placeholder="URL to FHIR API" aria-label="URL to FHIR API" name="query-base-uri" size="50">
 
       <span class="input-group-text">/</span>
 
@@ -86,7 +86,7 @@ The `https://hapi.fhir.org/baseR4` endpoint is a live FHIR server loaded with sy
   </div>
 
   <div class="col-xl-4 mb-2 my-xl-auto mx-2 text-center">
-    <button class="btn btn-sm btn-primary rounded py-2 py-xl-1" style="line-height:1;" onclick="getPatient()">Run query</button>
+    <button class="btn btn-sm btn-primary rounded py-2 py-xl-1" style="line-height:2;" onclick="getPatient()">Run query</button>
   </div>
 </div>
 
@@ -94,7 +94,6 @@ The `https://hapi.fhir.org/baseR4` endpoint is a live FHIR server loaded with sy
 
 <div id="query-output"></div>
 ```
-
 :::
 
 The response to a FHIR API request is typically in [JSON](https://en.wikipedia.org/wiki/JSON) format, which, like REST, is a commonly used data interchange format.
