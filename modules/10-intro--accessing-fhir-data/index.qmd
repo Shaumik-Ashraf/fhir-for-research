@@ -38,7 +38,7 @@ GET https://hapi.fhir.org/baseR4/Patient/1234
 
 This would retrieve a FHIR instance of [Patient](https://www.hl7.org/fhir/patient.html) for the patient with the ID `1234`.
 
-::: {.callout-note .column-page collapse="true"}
+::: {.callout-note .column-body .bg-white collapse="true" id="query-dropdown"}
 ## Try a FHIR API request
 
 The general structure of a FHIR API request includes the following:
@@ -175,6 +175,16 @@ Modern programming languages universally support parsing JSON, which makes it ea
 [^2]: FHIR servers can also typically return data in other standard formats, like [XML](https://en.wikipedia.org/wiki/XML).
 
 ```{=html}
+<!-- script to expand FHIR Query callout/dropdown -->
+<script>
+  document.querySelector("#query-dropdown > .callout-header").addEventListener("click", () => {
+    console.log("Resizing query dropdown");
+    document.querySelector("#query-dropdown").classList.toggle("column-body");
+    document.querySelector("#query-dropdown").classList.toggle("column-page");
+  });
+</script>
+
+<!-- script to execute FHIR Query demo -->
 <script>
   let getPatient = function() {
     let outputNode = document.getElementById('query-output');
