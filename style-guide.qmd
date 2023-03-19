@@ -46,13 +46,14 @@ Each module needs frontmatter like the following:
 
 You can use use the widget below to convert to proper title case:
 
-<form id="tester" action>
-
-<input aria-label="Title to convert" id="untitled" type="text" value="Turn me into a title" /><input type="submit" value="Convert &rarr;" /><input aria-label="Result" id="titled" type="text" />
-
-</form>
-
 ```{=html}
+<form id="tester" action>
+    <div class="input-group">
+        <input aria-label="Title to convert" id="untitled" type="text" value="Turn me into a title" class="form-control" />
+        <input type="submit" value="Convert &rarr;" class="btn btn-outline-secondary" />
+        <input aria-label="Result" id="titled" type="text" class="form-control" />
+    </div>
+</form>
 <script type="text/javascript">
 document.getElementById('tester').addEventListener('submit', function(ev) {
 ev.preventDefault()
