@@ -1,6 +1,6 @@
 ---
 title: "FHIR from 1,000 Feet"
-format: docx
+
 area:
   name: Overview
 topic:
@@ -39,7 +39,9 @@ ONC (Office of the National Coordinator for Health IT)'s [FHIR Fact Sheet](https
 
 Below is a screenshot of the [Patient resource](https://www.hl7.org/fhir/R4B/patient.html) from the FHIR specification (`R4B` version) on HL7's FHIR documentation website:
 
+::: column-page-inset
 [![](images/R4_Patient.png){fig-alt="Screenshot of Resource Contents table of the Patient resource in the FHIR R4B specification"}](https://www.hl7.org/fhir/R4B/patient.html)
+:::
 
 This view of a FHIR resource will become very familiar to you if you spend time working with FHIR specifications. It shows the hierarchy of elements (i.e., data fields) in the FHIR resource, starting with the name of the FHIR resource (`Patient`). Elements may be only one level deep (like `Patient.birthDate`) or nested (like `Patient.contact.name`).
 
@@ -63,27 +65,128 @@ FHIR resources are designed to be broadly applicable, without constraints. For e
 
 Most applications of FHIR therefore require greater specificity than is provided by the FHIR specification itself (e.g., requiring age to be present in instances of `Patient` for a research study). These additional, use case-specific constraints are added through a process called **profiling**. The output of profiling is an **Implementation Guide (IG)**, which is a collection of **profiles** that build on top of the FHIR specification (or other IGs).
 
-This is quite abstract, so a baking analogy may be helpful:
+This is quite abstract, so a baking analogy may be helpful.
 
-| FHIR Term | Baking Analog       | Description                                                                                                                          |
-|------------------|------------------|-------------------------------------|
-| Resource  | Cake                | A broad template with possible characteristics such as flavor, icing, toppings, and number of tiers.                                 |
-| Profile   | Type of cake        | Adds constraints to the base `Cake` resource to represent a specific type of cake.                                                   |
-| Extension | Cake shape and size | If the base `Cake` resource does not provide a way to define cake shape and size, this can be added by a profile using an extension. |
+### Baking example
 
-This is what it would look like to customize a hypothetical `Cake` resource to specifically model a chocolate cake, and include its size and shape:
++-----------+---------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| FHIR term | Baking analog       | Description                                                                                                                        |
++===========+=====================+====================================================================================================================================+
+| Resource  | Cake                | A broad template with possible characteristics such as flavor, icing, toppings, and number of tiers.                               |
++-----------+---------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Profile   | Type of cake        | Adds constraints to the base Cake resource to represent a specific type of cake.                                                   |
++-----------+---------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| Extension | Cake shape and size | If the base Cake resource does not provide a way to define cake shape and size, this can be added by a profile using an extension. |
++-----------+---------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
-![](images/cake_analogy_profiles.png)
+The **hypothetical Cake resource** might define the following elements:
 
-A specific cake would be represented by an **instance** of the `Cake` resource. Here are some examples:
++----------------+------------+------------------+------------------------------------------------+
+| Element        | Required?  | Number of values | Description                                    |
++================+============+==================+================================================+
+| `id`           | Yes        | 1                | An identifier for this cake                    |
++----------------+------------+------------------+------------------------------------------------+
+| `flavor`       | No         | 0 or 1           | Flavor of the cake                             |
++----------------+------------+------------------+------------------------------------------------+
+| `icing`        | No         | 0 or 1           | Type of icing                                  |
++----------------+------------+------------------+------------------------------------------------+
+| `toppings`     | No         | 0+               | Toppings included on the cake                  |
++----------------+------------+------------------+------------------------------------------------+
+| `tiers`        | No         | 0 or 1           | Number of tiers                                |
++----------------+------------+------------------+------------------------------------------------+
+| *`extensions`* | No         | 0+               | Placeholder for extensions defined by profiles |
++----------------+------------+------------------+------------------------------------------------+
 
-![](images/cake_analogy_instances.png)
+A **hypothetical Chocolate Cake profile** of Cake can (1) add constraints to existing elements, and (2) define extensions. Below is an example of the contents of this profile with the changes <mark>highlighted</mark>.
 
-Each instance of `Cake` may or may not **conform** to a specific profile of `Cake`. The FHIR ecosystem provides software tools that can detect when an instance of a FHIR resource conforms to a specific profile.
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| Element            | Required?        | Number of values | Description                                                                               |
++====================+==================+==================+===========================================================================================+
+| `id`               | Yes              | 1                | An identifier for this cake                                                               |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| `flavor`           | <mark>Yes</mark> | <mark>1</mark>   | Flavor of the cake                                                                        |
+|                    |                  |                  |                                                                                           |
+|                    |                  |                  | <mark>Fixed to <code>chocolate</code></mark>                                              |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| `icing`            | <mark>Yes</mark> | <mark>1</mark>   | Type of icing                                                                             |
+|                    |                  |                  |                                                                                           |
+|                    |                  |                  | <mark>Must be a value from the International Icing Types value set</mark>                 |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| `toppings`         | No               | 0+               | Toppings included on the cake                                                             |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| `tiers`            | No               | 0 or 1           | Number of tiers                                                                           |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| `extensions.shape` | No               | <mark>0+</mark>  | <mark>Tier shape (one value per tier, starting with the bottom)</mark>                    |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
+| `extensions.size`  | No               | <mark>0+</mark>  | <mark>Tier size (one numeric value per tier, starting with the bottom, with units)</mark> |
++--------------------+------------------+------------------+-------------------------------------------------------------------------------------------+
 
-Applying the cake analogy to a [Prior Level of Function Profile](http://build.fhir.org/ig/HL7/fhir-pacio-functional-status/StructureDefinition-pacio-nhfs.html), we have:
+A specific cake would be represented by an **instance** of the Cake resource. For example, here is the instance representing a specific cake called "Aaron's cake":
 
-![](images/cake_analogy_prior_level_of_function.png)
++----------------------------+-------------------+
+| Element of `Cake` resource | Assigned value    |
++============================+===================+
+| `id`                       | `Aaron's cake`    |
++----------------------------+-------------------+
+| `flavor`                   | `chocolate`       |
++----------------------------+-------------------+
+| `icing`                    | `ganache`         |
++----------------------------+-------------------+
+| `toppings`                 | 1.  `raspberries` |
+|                            | 2.  `sprinkles`   |
+|                            | 3.  `candles`     |
++----------------------------+-------------------+
+| `tiers`                    | `2`               |
++----------------------------+-------------------+
+| `shape`                    | 1.  `round`       |
+|                            | 2.  `round`       |
++----------------------------+-------------------+
+| `size`                     | 1.  `10 inches`   |
+|                            | 2.  `8 inches`    |
++----------------------------+-------------------+
+
+: {tbl-colwidths="\[40,60\]"}
+
+Checking against the constraints added by the Chocolate Cake profile, Aaron's cake meets the constraints it adds: it has a value of `chocolate` for `flavor`, and has a value for `icing`.[^1] This means that Aaron's cake **conforms** to the Chocolate Cake profile defined above.
+
+[^1]: It also takes advantage of the extensions added by the Chocolate Cake profile, but both extensions are not marked as "required." This means that you could have a cake conforming to the Chocolate Cake profile *without* these extensions populated.
+
+More broadly, each instance of a Cake resource may or may not conform to a specific profile of Cake. The FHIR ecosystem provides software tools that can detect when an instance of a FHIR resource conforms to a specific profile.
+
+### Clinical data example
+
+The [PACIO Project](https://pacioproject.org) is a post-acute care interoperability project that publishes several [FHIR profiles as part of an Implementation Guide](http://hl7.org/fhir/us/pacio-fs/) to support more seamless exchange of relevant data.
+
+The following table shows how PACIO approaches representing a narrative history of a patient's functional status[^2] using FHIR:
+
+[^2]: [PACIO defines functional status](http://hl7.org/fhir/us/pacio-fs/STU1/index.html#functional-status) as:
+
+    > Functioning <mark>observations related to mobility, self-care and domestic life</mark> are often used to describe how a person is able to interact with their environment and is a foundation to patient centered care. It is used in reporting outcomes for clinical care, quality improvement activities, quality measure reporting, and research.
+
+    (Highlights added.)
+
+::: column-page-left
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| FHIR term | PACIO's approach using FHIR                                                                                                                                                  | Commentary                                                                                                                                                                 |
++===========+==============================================================================================================================================================================+============================================================================================================================================================================+
+| Resource  | Functional status data are represented with the [Observation](https://www.hl7.org/fhir/observation.html) FHIR resource.                                                      | "Observations are a central element in healthcare, used to support diagnosis, monitor progress, determine baselines and patterns\..."[^3]                                  |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Profile   | PACIO provides a [Narrative History of Functional Status profile](http://hl7.org/fhir/us/pacio-fs/STU1/StructureDefinition-pacio-nhfs.html) of the Observation resource.     | Adds constraints like:                                                                                                                                                     |
+|           |                                                                                                                                                                              |                                                                                                                                                                            |
+|           |                                                                                                                                                                              | -   Require `performer` element to indicate who performed the assessment                                                                                                   |
+|           |                                                                                                                                                                              |                                                                                                                                                                            |
+|           |                                                                                                                                                                              | -   Identifying functional status narrative records with [LOINC](https://loinc.org/get-started/what-loinc-is/) concept `10158-4` (History of Functional status Narrative). |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Extension | Two extensions are defined by this profile:                                                                                                                                  | The base Observation resource does not have a mechanism for capturing these types of data.                                                                                 |
+|           |                                                                                                                                                                              |                                                                                                                                                                            |
+|           | 1.  [event-location](http://hl7.org/fhir/us/pacio-fs/STU1/StructureDefinition-event-location.html) indicates where the observed event occured                                |                                                                                                                                                                            |
+|           | 2.  [assistance-required](http://hl7.org/fhir/us/pacio-fs/StructureDefinition/assistance-required) indicates the level of assistance needed by the patient during assessment |                                                                                                                                                                            |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+: {tbl-colwidths="\[20,40,40\]"}
+:::
+
+[^3]: From the [FHIR specification's description of the Observation resource](http://hl7.org/fhir/5.0.0-draft-final/observation.html).
 
 ## Connecting systems together: the FHIR API
 
@@ -98,3 +201,37 @@ Here is a high-level diagram showing how FHIR's API can connect systems to each 
 For example, a FHIR Client (like the Apple Health app on an iPhone) can request data from a FHIR server using the "RESTful API over HTTP." FHIR provides a standardized approach to this so that the Apple Health app can use the same request regardless of which FHIR server they are contacting.
 
 Like with FHIR resources, the standard FHIR API is not meant to define all necessary operations for every use case. FHIR Implementation Guides (IGs) can also define additional API capabilities needed for a specific use case.
+
+## Research implications
+
+Using FHIR for research practically depends on the relevant systems supporting FHIR and institutions providing researchers access. Additionally, not all systems may support FHIR in the same way: for example, accessing functional status data may require system-level support of PACIO's Implementation Guide or another IG on top of basic FHIR support.
+
+If the necessary FHIR support exists or can feasibly be added, researchers may benefit in several ways by using FHIR. This is illustrated below with a comparison of common research-related tasks using (a) FHIR to access data and (b) accessing data via a custom one-off extract:
+
+::: column-page-left
++----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
+| Task                                   | Via FHIR                                                                                                                                                             | Via custom data extract                                                 |
++========================================+======================================================================================================================================================================+=========================================================================+
+| Defining data dictionary               | PACIO's FHIR IG can be used directly, or extended as needed                                                                                                          | Create custom data dictionary from scratch in Excel                     |
++----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
+| Ensuring data consistency              | FHIR data elements have defined types, helping to ensure consistency with date formats, units, etc.                                                                  | Depends on implementation of extract                                    |
+|                                        |                                                                                                                                                                      |                                                                         |
+|                                        | FHIR allows for defining a list of valid choices for a specific element                                                                                              |                                                                         |
++----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
+| Checking data quality                  | Automated tools check for resource instance conformance against FHIR profiles                                                                                        | Manual                                                                  |
++----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
+| Loading data into analysis software    | Convert from JSON with known schema and element types; analysis code can be feasibly tested ahead of time with automatically generated synthetic data in FHIR format | Data format at least partially unknown until final extract is delivered |
++----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
+| Integrate data with mobile application | SMART on FHIR provides an authentication and authorization mechanism to access FHIR data, and a standardized API for requesting and receiving FHIR data              | No standard approach                                                    |
++----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+
+
+: {tbl-colwidths="\[20,40,40\]"}
+:::
+
+## Additional reading {.unnumbered}
+
+Building on this introduction to how FHIR works, you may be interested in reading more:
+
+-   [Real World Research](#) discusses examples from peer-reviewed literature where FHIR was used.
+
+-   The Observation resource was discussed above. [Key FHIR Resources](#) covers more of the common FHIR resources that are frequently used.

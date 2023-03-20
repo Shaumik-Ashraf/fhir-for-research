@@ -7,6 +7,7 @@ topic:
   name: FHIR for Research
   
 toc: false
+number-sections: false
 
 roles:
   - Investigator
@@ -89,3 +90,7 @@ The FHIR specification provides an extensible set of "resources" for defining di
 FHIR also provides an API (Application Programming Interface; see [Wikipedia for details](https://en.wikipedia.org/wiki/API)) that provides a standardized way for systems to request and receive FHIR data.
 
 The FHIR specification also discusses the [security concerns related to FHIR](https://www.hl7.org/fhir/security.html) including recommended best practices.
+
+### Research implications
+
+These features of FHIR, along with its widespread adoption, provide researchers an opportunity to access data with a more standardized, reproducible approach. FHIR also facilitates direct data integration with other software (e.g., mobile apps) that would be much more difficult otherwise. For more information, please see [FHIR from 1,000 Feet](../10-intro--intro-part-2-how-fhir-works/).
