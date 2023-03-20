@@ -1,3 +1,7 @@
+---
+bibliography: ../bibliography.bib
+---
+
 ### Standards
 
 **Standards** are agreed-upon methods for connecting systems together. They support interoperability by letting disparate systems talk to each other using the same "standard" language. They may pertain to security, data transport, data format or structure, or the meanings of codes or terms. They are defined, updated, and maintained by standards development organizations (SDOs) through a collaborative process involving the audience that will be using the standards.
