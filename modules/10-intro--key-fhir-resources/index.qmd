@@ -5,17 +5,14 @@ format: html
 editor: visual
 toc: true
 tbl-colwidths: [25,75]
-
 area:
   name: Overview
 topic:
   name: FHIR for Research
-
 roles:
   - Informaticist
   - Software Engineer
   - Clinician Scientist/Trainee
-
 learning_objectives:
   - question: What are some key FHIR resources?
     answer: Patient, Observation, and Bundle. 
@@ -132,7 +129,6 @@ Thus `HumanName` is just composed of basic types such as `HumanName.given`, an a
 
 ```json
 {
-  ...
   "name": [
     {
       "use": "usual",
@@ -144,8 +140,7 @@ Thus `HumanName` is just composed of basic types such as `HumanName.given`, an a
         "MSc"
       ]
     }
-  ],
-  ...
+  ]
 }
 ```
 
@@ -782,6 +777,7 @@ By now, you probably understand how to read FHIR resources - look at the structu
 
 | FHIR resource                        | Description                                                                                                                     |
 |:------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------|
+
 | [Patient](https://hl7.org/fhir/patient.html)                         | A subject of medical care or other health-related activity. May be an individual human or animal.    |
 | [Observation](https://hl7.org/fhir/observation.html)                 | Assertions about a patient, device, lab report, or other subject. There is some use-case overlap with `Condition` or `DiagnosticReport`, for which an [IG](/modules/30-fhir-data-modeling--real-world-ig/) will provide better guidance. In general `Observations` are for very simple and specific statements. |
 | [Bundle](https://hl7.org/fhir/bundle.html)                           | A FHIR resource for combining clinically relevant FHIR resources together into one. May contain anywhere from zero to thousands of FHIR resources. |
@@ -797,3 +793,4 @@ By now, you probably understand how to read FHIR resources - look at the structu
 
 
 <!--# FIX include references/bibliography --LDC -->
+<!--# DISCUSS I only used links instead of blockquotes or footnotes, should I still site HL7 website? --SA -->

@@ -6,3 +6,5 @@ public/
 .Rhistory
 
 /python_env/
+
+/.luarc.json
