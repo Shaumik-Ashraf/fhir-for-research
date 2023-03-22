@@ -51,13 +51,13 @@ Common Data Models (CDMs) and platforms that have been used with FHIR in researc
 
 #### Examples of FHIR for data transformation
 
-FHIR does not have to be used as a replacement for data models, it can be complementary. Lenert et al., 2021 [@Lenert_Ilatovskiy_Agnew_Rudisill_Jacobs_Weatherston_Deans_Jr_2021] tests a method of using FHIR as a canonical data standard for consolidating COVID-19 data from multiple institutionals, and then distributing the data to PCORnet and OMOP for analysis. The authors describe this method as a, "best of both worlds" approach since FHIR is designed for accurate representation of clinical events, while PCORnet and OMOP are useful for computation and analysis of the clinical events. 
+FHIR does not have to be used as a replacement for data models, it can be complementary. Lenert et al., 2021 [@Lenert_Ilatovskiy_Agnew_Rudisill_Jacobs_Weatherston_Deans_Jr_2021] tests a method of using FHIR as a canonical data standard for consolidating COVID-19 data from multiple institutions, and then distributing the data to PCORnet and OMOP for analysis. The authors describe this method as a "best of both worlds" approach since FHIR is designed for accurate representation of clinical events, while PCORnet and OMOP are useful for computation and analysis of the clinical events. 
 
-Using FHIR as the canonical data standard and then transmitting the data to other CDMs shortened the timeline from data aquisition to analytics which was critical for an emerging pandemic like COVID-19 and could be helpful for other rapidly changing clinical research.
+Using FHIR as the canonical data standard and then transmitting the data to other CDMs shortened the timeline from data acquisition to analytics which was critical for an emerging pandemic like COVID-19 and could be helpful for other rapidly changing clinical research.
 
 Wood et al. 2021 offers another example of using both OMOP and FHIR [@Wood_Marks_Plovnick_Hewitt_Neuberg_Walters_Dolan_Tucker_Abrams_Thompson_etal._2021]. The authors created disease-specific learning communities from real-world data. Using OMOP and FHIR reduces burden and ensures sustainability for the learning community by routinely ingesting patients' entire EHR. Working with both data standards also opens participation to more data sources like health care systems, hospitals, and outpatient practices, that already use OMOP or FHIR. 
 
-In some instances, transforming health data between data models and using FHIR allows researchers to bend the data to fit their needs. Rinalid & Thun 2021 [@Rinaldi_Thun_2021] mapped openEHR information to FHIR, and then to an OMOP CDM. The process brought together data from 8 university hospitals in Germany to create an infection surveillance consortium with more recent, rapidly updated information. The group planned to use openEHR to model infection-related information, but also wanted to conform to the Medical Informatics Initiatve (MII), which requires member organizations to use FHIR. However, FHIR is designed to support patient-level data but the consortium wanted a population-level perspective with the ability to store and analyze data. They found that OMOP provided a better holistic-view and the analytical capabilities they needed. Transforming through the three models allowed them to take advantage of the benefits each offered while maintaining interoperability between the hospitals and the MII.
+In some instances, transforming health data between data models and using FHIR allows researchers to bend the data to fit their needs. Rinaldi & Thun 2021 [@Rinaldi_Thun_2021] mapped openEHR information to FHIR, and then to an OMOP CDM. The process brought together data from 8 university hospitals in Germany to create an infection surveillance consortium with more recent, rapidly updated information. The group planned to use openEHR to model infection-related information, but also wanted to conform to the Medical Informatics Initiative (MII), which requires member organizations to use FHIR. However, FHIR is designed to support patient-level data, but the consortium wanted a population-level perspective with the ability to store and analyze data. They found that OMOP provided a better holistic-view and the analytical capabilities they needed. Transforming through the three models allowed them to take advantage of the benefits each offered while maintaining interoperability between the hospitals and the MII.
 
 <!--# DISCUSS: 
 Including one or both of the examples below from Rinaldi & Thun 2021 might be illustrative but will need to reformat. Happy to remove if they aren't useful
@@ -71,9 +71,9 @@ Including one or both of the examples below from Rinaldi & Thun 2021 might be il
 
  <!--# DISCUSS: Does REDCap fit in this section or should it be moved to it's own spot? --KMB -->
 
-REDCap is another useful, FHIR-compatible tool. Cheng et al. 2021 [@Cheng_Duda_Taylor_Delacqua_Lewis_Bosler_Johnson_Harris_2021] describes the development of the Clinical Data Interoperability Services (CDIS), which facilitates the exhcange of data between REDCap and any EHR via the FHIR API. The authors tested two use cases for CDIS: Clinical Data Pull (CDP) and Clinical Data Mart (CDM).
+REDCap is another useful, FHIR-compatible tool. Cheng et al. 2021 [@Cheng_Duda_Taylor_Delacqua_Lewis_Bosler_Johnson_Harris_2021] describes the development of the Clinical Data Interoperability Services (CDIS), which facilitates the exchange of data between REDCap and any EHR via the FHIR API. The authors tested two use cases for CDIS: Clinical Data Pull (CDP) and Clinical Data Mart (CDM).
 
-The CDP use case would apply to prospective studies that aggregate data and fill out case report forms (CRFs) for study participants. The CDM use case is for studies with a known cohort of patients and requires a bulk data extraction from an EHR. At the time of publishing, 55 CDP projects and 27 CDM projects had been implemented. Both use cases significantly reduced manual data entry into REDCap. CDIS has also proven to be repurposable between projects at an institution, without the need for support from IT staff.
+The CDP use case would apply to prospective studies that aggregate data and fill out case report forms (CRFs) for study participants. The CDM use case is for studies with a known cohort of patients and requires a bulk data extraction from an EHR. At the time of publishing, 55 CDP projects and 27 CDM projects had been implemented. Both use cases significantly reduced manual data entry into REDCap. CDIS has also proven to be reusable between projects at an institution, without the need for support from IT staff.
 
 ![The CDIS workflow uses FHIR to simplify the process of creating a registry from EHR data.](images/cheng-fhir-shortcut.png)
 
@@ -107,11 +107,11 @@ FHIR can also be used to create interoperable, patient-facing apps that collect 
 
 #### Examples of FHIR for patient-facing apps
 
-Pfiffner et al. 2016 [@Pfiffner_Pinyol_Natter_Mandl_2016] created an extension, dubbed C3-PRO, that connects Apple's ResearchKit to health systems. C3-PRO is a clever name for the full platform: the Consent, Contact, and Community framework for Patient Reported Outcomes. The open source tool uses FHIR to connect any Apple ResearchKit app to the Informatics for Integrating Biology and the Bedside (i2b2) standard. They found that FHIR formats standardizes the the survey questions and consent libraries for study participation. And since they are standardized, they can be reused across other studies.
+Pfiffner et al. 2016 [@Pfiffner_Pinyol_Natter_Mandl_2016] created an extension, dubbed C3-PRO, that connects Apple's ResearchKit to health systems. C3-PRO is a clever name for the full platform: the Consent, Contact, and Community framework for Patient Reported Outcomes. The open-source tool uses FHIR to connect any Apple ResearchKit app to the Informatics for Integrating Biology and the Bedside (i2b2) standard. They found that FHIR formats standardizes the survey questions and consent libraries for study participation. And since they are standardized, they can be reused across other studies.
 
 The initial test case for C3-PRO, trialed in Pfiffner et al. 2016 [@Pfiffner_Pinyol_Natter_Mandl_2016], was to enroll a completely anonymous cohort in a study using data from i2b2. Participants used an app to track and report their symptoms of Hepatitis C for improved treatment. For any type of study though, C3-PRO could use FHIR to determine participant eligibility, format informed consent documents, and generate the actual surveys.
 
-Ahmad et al., 2020 [@Ahmad_Payne_Lackey_Komeshak_Kenney_Magnusen_Metts_Bailey_2020] uses REDCap to program surveys, and Apple ResearchKit to render and deliver them in a user-friendly format. The responses are then sent back to REDCap and a proprietary program that converts the data into an HL7 message, which is then added to the patient's EHR. A clinical decision support (CDS) tool then provided a suggested battery of tests based on the responses. The survey used in their study was offered to 15-21 year old patients that arrived in the ER. The objective of the survey was to determine what, if any, tests for sexually transmitted infections (STIs) would be most appropriate for the patients. Despite the potentially sensitive subject matter, 88.9% of patients that completed the survey rated it to be "somewhat" or "very comfortable" to answer the questions electronically and 72.2% preferred the digital method over a face-to-face conversation or paper questionnaire.
+Ahmad et al., 2020 [@Ahmad_Payne_Lackey_Komeshak_Kenney_Magnusen_Metts_Bailey_2020] uses REDCap to program surveys, and Apple ResearchKit to render and deliver them in a user-friendly format. The responses are then sent back to REDCap and a proprietary program that converts the data into an HL7 message, which is then added to the patient's EHR. A clinical decision support (CDS) tool then provided a suggested battery of tests based on the responses. The survey used in their study was offered to 15-21-year-old patients that arrived in the ER. The objective of the survey was to determine what, if any, tests for sexually transmitted infections (STIs) would be most appropriate for the patients. Despite the potentially sensitive subject matter, 88.9% of patients that completed the survey rated it to be "somewhat" or "very comfortable" to answer the questions electronically and 72.2% preferred the digital method over a face-to-face conversation or paper questionnaire.
 
 While Ahmad et al., 2020 used HL7 messages, a predecessor and alternative to FHIR, it is possible that the same methodology could be adapted to use FHIR instead. Apple Health uses FHIR, so an institution with an EHR that is FHIR-connected should already have endpoints for importing data from survey tools like Apple ResearchKit. This methodology could be reapplied to other sensitive health questions, or even for routine collection of health information.
 
@@ -119,361 +119,62 @@ While Ahmad et al., 2020 used HL7 messages, a predecessor and alternative to FHI
 
 Multi-site data-sharing requires standardized formats and common terminologies, which can be facilitated by FHIR. A larger pool of data from multiple healthcare institutions can support more comprehensive studies with broader groups of patients to draw from for research participation.
 
-#### Example fo FHIR for multi-site research
+#### Example of FHIR for multi-site research
 
 <!--# DISCUSS: I'm second-guessing whether Gruender et al. 2022 is a good example to highlight because it's a steeper implementation curve than some of the other examples listed here. Not sure how motivational it is when the bar is this high...--KMB -->
 
-Often, one of the initial steps in a study design is to determine the patient population that could particiapte in the study or be impacted by the work. However, if researchers can only query patient records local to their institution, they have an incomplete picture of the total patient population. Gruendner et al. 2022 [@Gruendner_Deppenwiese_Folz_Köhler_Kroll_Prokosch_Rosenau_Rühle_Scheidl_Schüttler_etal._2022] eliminated this institutional barrier by designing a feasiblity query that works across multiple health centers in Germany. The query process involved four components:
+Often, one of the initial steps in a study design is to determine the patient population that could participate in the study or be impacted by the work. However, if researchers can only query patient records local to their institution, they have an incomplete picture of the total patient population. Gruendner et al. 2022 [@Gruendner_Deppenwiese_Folz_Köhler_Kroll_Prokosch_Rosenau_Rühle_Scheidl_Schüttler_etal._2022] eliminated this institutional barrier by designing a feasibility query that works across multiple health centers in Germany. The query process involved four components:
 
   1. user-interface for writing queries
   2. backend for translating the user input to a standardized format
   3. middleware to transport the query
   4. execution service to convert the standardized query to FHIR
 
-For the query to work though, all participating insitutions had to share a common ontology and terminology mappings. The authors tested their feasibility query with 33 university hospitals in Germany, using synthetic data containing millions of FHIR resources. The feasibility query returned the number of patients that match the requested criteria within seconds. The authors note that they could easily tweak the returned value to be patient IDs to create a cohort.
+For the query to work though, all participating institutions had to share a common ontology and terminology mappings. The authors tested their feasibility query with 33 university hospitals in Germany, using synthetic data containing millions of FHIR resources. The feasibility query returned the number of patients that match the requested criteria within seconds. The authors note that they could easily tweak the returned value to be patient IDs to create a cohort.
 
 ## Other references
 
 While developing this course content, we <!--# DISCUSS: leaning into the informal here. Can change if that's too friendly--KMB -->compiled a list of studies we found that used FHIR in some capacity. These may be helpful for visualizing how FHIR could benefit your research:
 
-
-<!--# TO-DO: insert list of other papers from the Excel file. Thinking the citation should be listed? Or or more reader-friendly format?--KMB -->
-
-
+<!--# TO-DO: Haven't decided on best formatting approach for below information. Open to recommendations. Would like a better categorization as well.--KMB -->
 -   Data Models
+    -   [@Lambarki_Kern_Croft_Engels_Deppenwiese_Kerscher_Kiel_Palm_Lablans_2021]
+    -   [@Jiang_2017a]
+    -   [@Fischer_Stöhr_Gall_Michel-Backofen_Majeed_2020]
+    -   [@Pfaff_Champion_Bradford_Clark_Xu_Fecho_Krishnamurthy_Cox_Chute_Overby_Taylor_etal._2019]
+    -   [@Jiang_2017b]
 -   SMART on FHIR
-      [@Mandel_Kreda_Mandl_Kohane_Ramoni_2016]
+    -   [@Mandel_Kreda_Mandl_Kohane_Ramoni_2016]
+    -   [@Bloomfield_Polo-Wood_Mandel_Mandl_2017]
+    -   [@Jones_Gottlieb_Mandel_Ignatov_Ellis_Kubick_Mandl_2021]
+    -   [@Wesley_Blumenthal_Shah_Littlejohn_Pruitt_Dixit_Hsiao_Dymek_Ratwani_2021]
+    -   [@Sayeed_Gottlieb_Mandl_2020]
 -   Patient-Facing Apps
+    -   [@Pawelek_Baca-Motes_Pandit_Berk_Ramos_2022]
+    -   [@Bartschke_Börner_Thun_2021]
+    -   [@Burkhardt_Brandt_Lee_Karras_Bugni_Cvitkovic_Chen_Lober_2021]
+    -   [@Ploner_Prokosch_2020]
 -   Multi-site Research
--   Meta-Analysis
+    -   [@Garza_Rutherford_Myneni_Fenton_Walden_Topaloglu_Eisenstein_Kumar_Zimmerman_Rocca_etal._2020]
+-   Meta-Analysis on FHIR for Research
+    -   [@Vorisek_Lehne_Klopfenstein_Mayer_Bartschke_Haese_Thun_2022]
+    -   [@Griffin_He_Sunjaya_King_Khan_Nwadiugwu_Douthit_Subbian_Nguyen_Braunstein_etal._2022]
 -   REDCap
--   Analysis? Cohort Building?
+    -   [@Metke-Jimenez_Hansen_2019]
+-   Cohort Building
+    -   [@Gruendner_Gulden_Kampf_Mate_Prokosch_Zierk_2021]
+    -   [@Bradshaw_Kawamoto_Kaphingst_Kohlmann_Hess_Flynn_Nanjo_Warner_Shi_Morgan_etal._2022]
 -   Terminologies
+    -   [@Chatterjee_Pahari_Prinz_2022]
 -   FAIR Data
+    -   [@Sinaci_Núñez-Benjumea_Gencturk_Jauer_Deserno_Chronaki_Cangioli_Cavero-Barca_Rodríguez-Pérez_Pérez-Pérez_etal._2020]
 -   SDOH
--   Advese Event Reporting
+    -   [@Watkins_Viernes_Nguyen_Rojas_Mezarina_Silva_Valencia_Borbolla_2020]
+-   Adverse Event Reporting
+    -   [@Wang_Lehmann_Botsis_2021]
 -   Software Dev
--   CDS/Cohort Identification
-        [@Bradshaw_Kawamoto_Kaphingst_Kohlmann_Hess_Flynn_Nanjo_Warner_Shi_Morgan_etal._2022]
+    -   [@Hong_Prodduturi_Wang_Jiang_2017]
 -   Environmental Health
+    -   [@Xu_Cox_Stillwell_Pfaff_Champion_Ahalt_Fecho_2020]
 -   CDS/SMART
-
-<!--# WIP:
-
-@article{Chatterjee_Pahari_Prinz_2022, 
-    title={HL7 FHIR with SNOMED-CT to Achieve Semantic and Structural Interoperability in Personal Health Data: A Proof-of-Concept Study}, 
-    volume={22}, 
-    ISSN={1424-8220}, 
-    url={https://www.mdpi.com/1424-8220/22/10/3756}, 
-    DOI={10.3390/s22103756}, 
-    number={10}, 
-    journal={Sensors}, 
-    author={Chatterjee, Ayan and Pahari, Nibedita and Prinz, Andreas}, 
-    year={2022}, 
-    month={May}, 
-    pages={3756}, 
-    language={en} 
-}
-@inbook{Lambarki_Kern_Croft_Engels_Deppenwiese_Kerscher_Kiel_Palm_Lablans_2021, 
-    title={Oncology on FHIR: A Data Model for Distributed Cancer Research}, 
-    ISBN={9781643681764}, 
-    url={https://ebooks.iospress.nl/doi/10.3233/SHTI210070}, 
-    DOI={10.3233/SHTI210070}, 
-    booktitle={Studies in Health Technology and Informatics}, 
-    publisher={IOS Press}, 
-    author={Lambarki, Mohamed and Kern, Jori and Croft, David and Engels, Cäcilia and Deppenwiese, Noemi and Kerscher, Alexander and Kiel, Alexander and Palm, Stefan and Lablans, Martin}, 
-    editor={Röhrig, Rainer and Beißbarth, Tim and Brannath, Werner and Prokosch, Hans-Ulrich and Schmidtmann, Irene and Stolpe, Susanne and Zapf, Antonia}, 
-    year={2021}, 
-    month={May} 
-}
-@article{Sinaci_Núñez-Benjumea_Gencturk_Jauer_Deserno_Chronaki_Cangioli_Cavero-Barca_Rodríguez-Pérez_Pérez-Pérez_etal._2020, 
-    title={From Raw Data to FAIR Data: The FAIRification Workflow for Health Research}, 
-    volume={59}, 
-    ISSN={0026-1270, 2511-705X}, 
-    url={http://www.thieme-connect.de/DOI/DOI?10.1055/s-0040-1713684}, 
-    DOI={10.1055/s-0040-1713684}, 
-    number={S 01}, 
-    journal={Methods of Information in Medicine}, 
-    author={Sinaci, A. Anil and Núñez-Benjumea, Francisco J. and Gencturk, Mert and Jauer, Malte-Levin and Deserno, Thomas and Chronaki, Catherine and Cangioli, Giorgio and Cavero-Barca, Carlos and Rodríguez-Pérez, Juan M. and Pérez-Pérez, Manuel M. and Laleci Erturkmen, Gokce B. and Hernández-Pérez, Tony and Méndez-Rodríguez, Eva and Parra-Calderón, Carlos L.}, 
-    year={2020}, 
-    month={Jun}, 
-    pages={e21-e32}, 
-    language={en} 
-}
-@article{Vorisek_Lehne_Klopfenstein_Mayer_Bartschke_Haese_Thun_2022, 
-	title={Fast Healthcare Interoperability Resources (FHIR) for Interoperability in Health Research: Systematic Review}, 
-	volume={10}, 
-	ISSN={2291-9694}, 
-	url={https://medinform.jmir.org/2022/7/e35724}, 
-	DOI={10.2196/35724}, 
-	number={7}, 
-	journal={JMIR Medical Informatics}, 
-	author={Vorisek, Carina Nina and Lehne, Moritz and Klopfenstein, Sophie Anne Ines and Mayer, Paula Josephine and Bartschke, Alexander and Haese, Thomas and Thun, Sylvia}, 
-	year={2022}, 
-	month={Jul}, 
-	pages={e35724}, 
-	language={en}
-}
-@article{Hong_Prodduturi_Wang_Jiang_2017, 
-    title={Shiny FHIR: An Integrated Framework Leveraging Shiny R and HL7 FHIR to Empower Standards-Based Clinical Data Applications}, 
-    volume={245}, 
-    ISSN={1879-8365}, 
-    journal={Studies in Health Technology and Informatics}, 
-    author={Hong, Na and Prodduturi, Naresh and Wang, Chen and Jiang, Guoqian}, 
-    year={2017}, 
-    pages={868-872}, 
-    language={eng}
-}
-@inbook{Wang_Lehmann_Botsis_2021, 
-    title={Can FHIR Support Standardization in Post-Market Safety Surveillance?}, 
-    ISBN={9781643681849}, 
-    url={https://ebooks.iospress.nl/doi/10.3233/SHTI210115}, 
-    DOI={10.3233/SHTI210115}, 
-    booktitle={Studies in Health Technology and Informatics}, 
-    publisher={IOS Press}, 
-    author={Wang, Xingtong and Lehmann, Harold and Botsis, Taxiarchis}, 
-    editor={Mantas, John and Stoicu-Tivadar, Lăcrămioara and Chronaki, Catherine and Hasman, Arie and Weber, Patrick and Gallos, Parisis and Crişan-Vida, Mihaela and Zoulias, Emmanouil and Chirila, Oana Sorina}, 
-    year={2021}, 
-    month={May}
-}
-@article{Garza_Rutherford_Myneni_Fenton_Walden_Topaloglu_Eisenstein_Kumar_Zimmerman_Rocca_etal._2020, 
-    title={Evaluating the Coverage of the HL7 ® FHIR ® Standard to Support eSource Data Exchange Implementations for use in Multi-Site Clinical Research Studies}, 
-    volume={2020}, 
-    ISSN={1942-597X}, 
-    journal={AMIA ... Annual Symposium proceedings. AMIA Symposium}, 
-    author={Garza, Maryam Y. and Rutherford, Michael and Myneni, Sahiti and Fenton, Susan and Walden, Anita and Topaloglu, Umit and Eisenstein, Eric and Kumar, Karan R. and Zimmerman, Kanecia O. and Rocca, Mitra and Gordon, Gideon Scott and Hume, Sam and Wang, Zhan and Zozus, Meredith}, 
-    year={2020}, 
-    pages={472-481}, 
-    language={eng}
-}
-@article{Xu_Cox_Stillwell_Pfaff_Champion_Ahalt_Fecho_2020, 
-    title={FHIR PIT: an open software application for spatiotemporal integration of clinical data and environmental exposures data}, 
-    volume={20}, 
-    ISSN={1472-6947}, 
-    url={https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-020-1056-9}, 
-    DOI={10.1186/s12911-020-1056-9}, 
-    number={1}, 
-    journal={BMC Medical Informatics and Decision Making}, 
-    author={Xu, Hao and Cox, Steven and Stillwell, Lisa and Pfaff, Emily and Champion, James and Ahalt, Stanley C. and Fecho, Karamarie}, 
-    year={2020}, 
-    month={Dec}, 
-    pages={53}, 
-    language={en}
-}
-@article{Jiang_Kiefer_Sharma_Prud’hommeaux_Solbrig_2017, 
-    title={A Consensus-Based Approach for Harmonizing the OHDSI Common Data Model with HL7 FHIR}, 
-    volume={245}, 
-    ISSN={1879-8365}, 
-    journal={Studies in Health Technology and Informatics}, 
-    author={Jiang, Guoqian and Kiefer, Richard C. and Sharma, Deepak K. and Prud’hommeaux, Eric and Solbrig, Harold R.}, 
-    year={2017}, 
-    pages={887–891}, 
-    language={eng}
-}
-@article{Gruendner_Gulden_Kampf_Mate_Prokosch_Zierk_2021, 
-    title={A Framework for Criteria-Based Selection and Processing of Fast Healthcare Interoperability Resources (FHIR) Data for Statistical Analysis: Design and Implementation Study}, 
-    volume={9}, 
-    ISSN={2291-9694}, 
-    url={https://medinform.jmir.org/2021/4/e25645}, 
-    DOI={10.2196/25645}, 
-    number={4}, 
-    journal={JMIR Medical Informatics}, 
-    author={Gruendner, Julian and Gulden, Christian and Kampf, Marvin and Mate, Sebastian and Prokosch, Hans-Ulrich and Zierk, Jakob}, 
-    year={2021}, 
-    month={Apr}, 
-    pages={e25645}, 
-    language={en}
-}
-@article{Jung_Bae_Seong_Oh_Kim_Yi_2022, 
-    title={Shared Interoperable Clinical Decision Support Service for Drug-Allergy Interaction Checks: Implementation Study}, 
-    volume={10}, 
-    ISSN={2291-9694}, 
-    url={https://medinform.jmir.org/2022/11/e40338}, 
-    DOI={10.2196/40338}, 
-    number={11}, 
-    journal={JMIR Medical Informatics}, 
-    author={Jung, Sungwon and Bae, Sungchul and Seong, Donghyeong and Oh, Ock Hee and Kim, Yoomi and Yi, Byoung-Kee}, 
-    year={2022}, 
-    month={Nov}, 
-    pages={e40338}, 
-    language={en}
-}
-@article{Griffin_He_Sunjaya_King_Khan_Nwadiugwu_Douthit_Subbian_Nguyen_Braunstein_etal._2022, 
-    title={Clinical, technical, and implementation characteristics of real-world health applications using FHIR}, 
-    volume={5}, 
-    ISSN={2574-2531}, 
-    url={https://academic.oup.com/jamiaopen/article/doi/10.1093/jamiaopen/ooac077/6759783}, 
-    DOI={10.1093/jamiaopen/ooac077}, 
-    number={4}, 
-    journal={JAMIA Open}, 
-    author={Griffin, Ashley C and He, Lu and Sunjaya, Anthony P and King, Andrew J and Khan, Zubin and Nwadiugwu, Martin and Douthit, Brian and Subbian, Vignesh and Nguyen, Viet and Braunstein, Mark and Jaffe, Charles and Schleyer, Titus}, 
-    year={2022}, 
-    month={Oct}, 
-    pages={ooac077}, 
-    language={en}
-}
-@article{Pawelek_Baca-Motes_Pandit_Berk_Ramos_2022, 
-    title={The Power of Patient Engagement With Electronic Health Records as Research Participants}, 
-    volume={10}, 
-    ISSN={2291-9694}, 
-    url={https://medinform.jmir.org/2022/7/e39145}, 
-    DOI={10.2196/39145}, 
-    number={7}, 
-    journal={JMIR Medical Informatics}, 
-    author={Pawelek, Jeff and Baca-Motes, Katie and Pandit, Jay A and Berk, Benjamin B and Ramos, Edward}, 
-    year={2022}, 
-    month={Jul}, 
-    pages={e39145}, 
-    language={en}
-}
-@article{Bloomfield_Polo-Wood_Mandel_Mandl_2017, 
-    title={Opening the Duke electronic health record to apps: Implementing SMART on FHIR}, 
-    volume={99}, 
-    ISSN={13865056}, 
-    url={https://linkinghub.elsevier.com/retrieve/pii/S1386505616302738}, 
-    DOI={10.1016/j.ijmedinf.2016.12.005}, 
-    journal={International Journal of Medical Informatics}, 
-    author={Bloomfield, Richard A. and Polo-Wood, Felipe and Mandel, Joshua C. and Mandl, Kenneth D.}, 
-    year={2017}, 
-    month={Mar}, 
-    pages={1–10}, 
-    language={en}
-}
-@article{Jones_Gottlieb_Mandel_Ignatov_Ellis_Kubick_Mandl_2021, 
-    title={A landscape survey of planned SMART/HL7 bulk FHIR data access API implementations and tools}, 
-    volume={28}, 
-    ISSN={1527-974X}, 
-    url={https://academic.oup.com/jamia/article/28/6/1284/6155897}, 
-    DOI={10.1093/jamia/ocab028}, 
-    number={6}, 
-    journal={Journal of the American Medical Informatics Association}, 
-    author={Jones, James and Gottlieb, Daniel and Mandel, Joshua C and Ignatov, Vladimir and Ellis, Alyssa and Kubick, Wayne and Mandl, Kenneth D}, 
-    year={2021}, 
-    month={Jun}, 
-    pages={1284–1287}, 
-    language={en}
-}
-@article{Wesley_Blumenthal_Shah_Littlejohn_Pruitt_Dixit_Hsiao_Dymek_Ratwani_2021, 
-    title={A novel application of SMART on FHIR architecture for interoperable and scalable integration of patient-reported outcome data with electronic health records}, 
-    volume={28}, 
-    ISSN={1527-974X}, 
-    url={https://academic.oup.com/jamia/article/28/10/2220/6324051}, 
-    DOI={10.1093/jamia/ocab110}, 
-    number={10}, 
-    journal={Journal of the American Medical Informatics Association}, 
-    author={Wesley, Deliya B and Blumenthal, Joseph and Shah, Shrenikkumar and Littlejohn, Robin A and Pruitt, Zoe and Dixit, Ram and Hsiao, Chun-Ju and Dymek, Christine and Ratwani, Raj M}, 
-    year={2021}, 
-    month={Sep}, 
-    pages={2220–2225}, 
-    language={en}
-}
-@inbook{Bartschke_Börner_Thun_2021, 
-    title={Accessing the ECG Data of the Apple Watch and Accomplishing Interoperability Through FHIR}, 
-    ISBN={9781643681764}, 
-    url={https://ebooks.iospress.nl/doi/10.3233/SHTI210076}, 
-    DOI={10.3233/SHTI210076}, 
-    booktitle={Studies in Health Technology and Informatics}, 
-    publisher={IOS Press}, 
-    author={Bartschke, Alexander and Börner, Yannick and Thun, Sylvia}, 
-    editor={Röhrig, Rainer and Beißbarth, Tim and Brannath, Werner and Prokosch, Hans-Ulrich and Schmidtmann, Irene and Stolpe, Susanne and Zapf, Antonia}, 
-    year={2021}, 
-    month={May}
-}
-@article{Burkhardt_Brandt_Lee_Karras_Bugni_Cvitkovic_Chen_Lober_2021, 
-    title={StayHome: A FHIR-Native Mobile COVID-19 Symptom Tracker and Public Health Reporting Tool}, 
-    volume={13}, 
-    ISSN={1947-2579}, 
-    url={https://journals.uic.edu/ojs/index.php/ojphi/article/view/11462}, 
-    DOI={10.5210/ojphi.v13i1.11462}, 
-    number={1}, 
-    journal={Online Journal of Public Health Informatics}, 
-    author={Burkhardt, Hannah and Brandt, Pascal and Lee, Jenney and Karras, Sierramatice and Bugni, Paul and Cvitkovic, Ivan and Chen, Amy and Lober, William}, 
-    year={2021}, 
-    month={Mar}
-}
-@article{Fischer_Stöhr_Gall_Michel-Backofen_Majeed_2020, 
-    title={Data Integration into OMOP CDM for Heterogeneous Clinical Data Collections via HL7 FHIR Bundles and XSLT}, 
-    volume={270}, 
-    ISSN={1879-8365}, 
-    DOI={10.3233/SHTI200138}, 
-    journal={Studies in Health Technology and Informatics}, 
-    author={Fischer, Patrick and Stöhr, Mark R. and Gall, Henning and Michel-Backofen, Achim and Majeed, Raphael W.}, 
-    year={2020}, 
-    month={Jun}, 
-    pages={138–142}, 
-    language={eng}
-}
-@article{Ploner_Prokosch_2020, 
-    title={Integrating a Secure and Generic Mobile App for Patient Reported Outcome Acquisition into an EHR Infrastructure Based on FHIR Resources}, 
-    volume={270}, 
-    ISSN={1879-8365}, 
-    DOI={10.3233/SHTI200310}, 
-    journal={Studies in Health Technology and Informatics}, 
-    author={Ploner, Nico and Prokosch, Hans-Ulrich}, 
-    year={2020}, 
-    month={Jun}, 
-    pages={991–995}, 
-    language={eng}
-}
-@article{Sayeed_Gottlieb_Mandl_2020, 
-    title={SMART Markers: collecting patient-generated health data as a standardized property of health information technology}, 
-    volume={3}, 
-    ISSN={2398-6352}, 
-    url={https://www.nature.com/articles/s41746-020-0218-6}, 
-    DOI={10.1038/s41746-020-0218-6}, 
-    number={1}, 
-    journal={npj Digital Medicine}, 
-    author={Sayeed, Raheel and Gottlieb, Daniel and Mandl, Kenneth D.}, 
-    year={2020}, 
-    month={Jan}, 
-    pages={9}, 
-    language={en}
-}
-@article{Watkins_Viernes_Nguyen_Rojas_Mezarina_Silva Valencia_Borbolla_2020, 
-    title={Translating Social Determinants of Health into Standardized Clinical Entities}, 
-    volume={270}, 
-    ISSN={1879-8365}, 
-    DOI={10.3233/SHTI200205}, 
-    journal={Studies in Health Technology and Informatics}, 
-    author={Watkins, Michael and Viernes, Benjamin and Nguyen, Viet and Rojas Mezarina, Leonardo and Silva Valencia, Javier and Borbolla, Damian}, 
-    year={2020}, 
-    month={Jun}, 
-    pages={474–478}, 
-    language={eng}
-}
-@article{Pfaff_Champion_Bradford_Clark_Xu_Fecho_Krishnamurthy_Cox_Chute_Overby_Taylor_etal._2019, 
-    title={Fast Healthcare Interoperability Resources (FHIR) as a Meta Model to Integrate Common Data Models: Development of a Tool and Quantitative Validation Study}, 
-    volume={7}, 
-    ISSN={2291-9694}, 
-    url={https://medinform.jmir.org/2019/4/e15199}, 
-    DOI={10.2196/15199}, 
-    number={4}, 
-    journal={JMIR Medical Informatics}, 
-    author={Pfaff, Emily Rose and Champion, James and Bradford, Robert Louis and Clark, Marshall and Xu, Hao and Fecho, Karamarie and Krishnamurthy, Ashok and Cox, Steven and Chute, Christopher G and Overby Taylor, Casey and Ahalt, Stan}, 
-    year={2019}, 
-    month={Oct}, 
-    pages={e15199}, 
-    language={en}
-}
-@article{Metke-Jimenez_Hansen_2019, 
-    title={FHIRCap: Transforming REDCap forms into FHIR resources}, 
-    volume={2019}, 
-    ISSN={2153-4063}, 
-    journal={AMIA Joint Summits on Translational Science proceedings. AMIA Joint Summits on Translational Science}, 
-    author={Metke-Jimenez, Alejandro and Hansen, David}, 
-    year={2019}, 
-    pages={54–63}, 
-    language={eng}
-}
-@article{Jiang_Kiefer_Prud’hommeaux_Solbrig_2017, 
-    title={Building Interoperable FHIR-Based Vocabulary Mapping Services: A Case Study of OHDSI Vocabularies and Mappings}, 
-    volume={245}, 
-    ISSN={1879-8365}, 
-    journal={Studies in Health Technology and Informatics}, 
-    author={Jiang, Guoqian and Kiefer, Richard and Prud’hommeaux, Eric and Solbrig, Harold R.}, 
-    year={2017}, 
-    pages={1327}, 
-    language={eng}
-}
-
---KMB -->
+    -   [@Jung_Bae_Seong_Oh_Kim_Yi_2022]
