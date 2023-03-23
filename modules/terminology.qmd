@@ -1,7 +1,11 @@
 ---
-title: "Module: History of FHIR"
+title: "Terminology and FHIR"
 
-bibliography: bibliography.bib
+bibliography: ../bibliography.bib
+format:
+  html:
+    template-partials:
+      - title-block.html
 
 area:
   name: Overview
