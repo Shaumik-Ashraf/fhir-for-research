@@ -1,15 +1,27 @@
 ---
 title: "Home"
+
+# Canonical Markdown breaks the formatting for some reason -- but it doesn't look like this stops it
+editor_options:
+  markdown:
+    canonical: true
+
+format:
+  html:
+    css:
+      - styles.css
+      - index.css
+
 ---
 
 ![](images/DataSceinceFHIR_RFI_Banner_V3.png)
 
-::: {.column-page}
 ::: {.content-block}
 ::: {.features}
 
 ::: {.feature}
 ### Overview
+
 An introduction to FHIR for research, and details on two additional areas of general interest for researchers: SMART on FHIR and its research applications, and data modeling in FHIR.
 
 ::: {.learn-more}
@@ -19,6 +31,7 @@ An introduction to FHIR for research, and details on two additional areas of gen
 
 ::: {.feature}
 ### Working with FHIR Data
+
 Approaches to gathering and analyzing FHIR-formatted data for research purposes.
 
 ::: {.learn-more}
@@ -28,9 +41,13 @@ Approaches to gathering and analyzing FHIR-formatted data for research purposes.
 
 ::: {.feature}
 ### Advanced Topics
+
 Resources for technical leaders who are conducting their own trainings, or researchers who are interested in a deeper dive.
 
 ::: {.learn-more}
 [Learn more »](sections/advanced-topics.qmd)
+:::
+:::
+
 :::
 :::

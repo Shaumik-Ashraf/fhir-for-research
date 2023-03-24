@@ -180,12 +180,18 @@ title: "Test"
 }
 ```
 
-## Python code
-
 ```python
-# this should be unaffected by json viewer
+# This is Python code which should be unaffected by json viewer
 
 print(42);
+```
+
+```json
+{
+  "json": "example",
+  "evil": true,
+  "div": "<div><h3>Testing JS injection attack.</h3><p>Test failed if you saw an alert() popup. Inspect element to see script.</p><img onerror='alert(`Vulnerability Found!`)' src=''></div>"
+}
 ```
 
 ## This is a Quarto website.
