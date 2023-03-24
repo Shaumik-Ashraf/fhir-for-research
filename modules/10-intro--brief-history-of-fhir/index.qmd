@@ -14,146 +14,136 @@ roles:
   - Clinician Scientist/Trainee
 
 learning_objectives:
-  - question: Understand at a high-level why FHIR was developed in response to previous standards
-    answer: tbd
-  - question: Understand how a major part of the history of FHIR is related to the development of basic web technologies
-    answer: tbd
-  - question: Have a good idea of where FHIR will be going in the next 5 years based on its previous history
-    answer: tbd
-  - question: Understand at a high-level what each release of FHIR
-    answer: tbd
+  - question: Why FHIR was developed in response to previous standards?
+    answer: HL7 V2 was too limited and HL7 V3 was too complex to allow for health data exchange across organizations, disciplines, and borders.
+  - question: How are the development of basic web technologies a major part of the history of FHIR?
+    answer: Differentiating itself from previous HL7 versions, FHIR is based on basic web technologies such as HTTP and REST. This has allowed it to be easily developed and implemented by software developers across industries.
+  - question: Based on its previous history, where will FHIR be going in the next 5 years?
+    answer: With the core of FHIR development largely already happening, the next 5 years of FHIR will see an acceleration in its implementation in health systems and use cases.
+  - question: What are the details of each release of FHIR?
+    answer: FHIR has had 5 major releases since its inception in 2014, resulting in maturity and adoption across government and industry.
 ---
 
-<!--# FIX Rephrase learning objectives as questions and write answers. --MM -->
+## Evolution of HL7 standards
 
-<!--# FIX Update capitalization of headings, and "FHIR resources" per style guide please —MM 3/15/23 11:16 AM -->
+Before learning about FHIR, a brief understanding of the standards that came before can help explain how it came to its current state today. HL7 (Health Level 7) has been developing standards for the transfer of healthcare data since the late 1980s, and has released three major standards:
 
-<!--# DISCUSS What's your strategy for using bold in paragraphs? We should probably standardize this. I've made some modifications based on what I think makes sense intuitively, but we may need to take another pass at this depending on what we decide about standardization. —MM 3/15/23 10:05 AM -->
-
-## Evolution of HL7 Standards
-
-Before learning about FHIR, an understanding of the standards that came before it is necessary to understand why it was developed.<!--# FIX This first sentence seems weird to me. It's not _really_ necessary to learn about the history before learning about FHIR or to understand why it was developed. Maybe omit, or rewrite. —MM --> HL7 (Health Level 7) has been developing standards for the **transfer of healthcare data** since the late 1980s, and has released three major standards:
-
-| HL7 standard name | Year released |  
-| ----------------- | ------------- |  
-| V2                | 1989          |  
-| V3                | 2005          |  
-| FHIR              | 2014          |  
+| HL7 standard name | Year released |
+|-------------------|---------------|
+| V2                | 1989          |
+| V3                | 2005          |
+| FHIR              | 2014          |
 
 Each successive standard has been built on the lessons learned from the previous one, resulting in the current version of FHIR.
 
-### HL7 Version 2 ("V2"): Messages
+### HL7 Version 2 ("V2"): messages
 
-Released in 1989, HL7 V2 allowed for the **simple transfer of messages for clinical and patient care information**. It was mainly developed by clinical interface specialists and is a database query language that both developers can come up to speed quickly on and healthcare providers can use to send or request messages containing health data. The drawback of being simple is that it does not support complex interactions. It is currently the most widely used messaging standard in healthcare today, as it is the most mature. <!--# DISCUSS What's the reference for this description of V2? This doesn't match my understanding of V2 but I'm not an expert so I may be missing something. —MM 3/15/23 10:08 AM -->
+Released in 1989, HL7 V2 allowed for the simple transfer of messages for clinical and patient care information in hospital workflows. The drawback of being simple is that it does not support complex interactions. It is currently the most widely used messaging standard in healthcare today, as it is the most mature.
 
-### HL7 Version 3 ("V3"): Clinical Documents
+### HL7 Version 3 ("V3"): clinical documents
 
-Released in 2005, HL7 V3 was created to address the challenges brought by the simplicity of HL7 V2. As opposed to clinical interface specialists, who were the main developers of HL7 V2, it was instead largely **influenced by government and healthcare information users**. <!--# FIX Needs a citation/hyperlink —MM 3/15/23 10:09 AM --> In addition to just the simple transfer of messages, it specifies the **content of the data** **exchanged** between healthcare applications as well as **how the exchange is implemented** and managed. This data model was used in the developed <!--# FIX typo —MM 3/15/23 10:09 AM --> of **HL7 Clinical Documentation Architecture (CDA)**, which is a framework for creating clinical documents.
+Released in 2005, HL7 V3 was created to address the challenges brought by the simplicity of HL7 V2. In addition to just the simple transfer of messages, it specifies the content of the data exchanged between healthcare applications as well as how the exchange is implemented and managed. However, a downside to V3 is that it is very complex and not clearly specified, requiring significant onboarding and technical expertise for developers.
 
-This era of HL7 standards attempted to increase adoption yet ran into hurdles of its own:
+<!--# NOTE FROM Blake: I have removed all info in the above two sections from the non-gov sources. The info above only comes from our FHIR for Managers PPT. -->
 
-1.  HL7 V3 is not backwards compatible with HL7 V2, meaning existing interfaces cannot communicate with its implementations
-2.  HL7 V3 and HL7 CDA are very complex and not clearly specified, requiring significant onboarding for developers to understand
-<!--# FIX Both these need citations/hyperlinks —MM 3/15c/23 10:10 AM -->
+### FHIR: web technologies
 
-In response <!--# FIX word choice -- "because of" rather than "in response"? —MM 3/15/23 10:29 AM -->to these issues, HL7 V3 adoption has not been as large as HL7 V2, as it is primarily used in systems that either have never had HL7 V2 implementations or in areas with government enforcement of HL7 V3 usage.<!--# FIX would be good to have a citation for this the areas where V3 is used too —MM 3/15/23 10:30 AM -->
+In the early 2010s, the shortcomings of HL7 V2 and V3 were becoming more apparent, as healthcare systems wanted to start sharing data across organizations, disciplines, and borders. V2 was 30 years old and limited while V3 was too complex to implement at a large scale quickly and effectively. Demand was also increasing for mobile and cloud-based health applications, as other tech sectors began to largely embrace these technologies during that time period. This is where HL7 FHIR was able to fill in the gaps, which is an alternative to document-centric approaches and leverages web technologies (discussed further in the following section) to expand the types of information exchange and participating systems.
 
-### FHIR: Web Technologies
+With legacy health care system interoperability being a necessity, it both builds upon the previous standards discussed above as well as adopts modern web technologies. And with its focus away from specified messages and documents and more towards the use of building blocks (FHIR Resources) to build implementations, it can be customized to fit many more use cases compared to its predecessors. One of the core tenants of FHIR is the 80-20 rule, where it only includes an element if 80% of systems will implement it. This allows most applications of FHIR to mostly use built-in FHIR Resources with limited extensions.
 
-In the early 2010s, the scope of data sharing in the healthcare space needed to be broadened, going beyond simple messages and clinical documents to span organizations, disciplines, and borders. <!--# FIX You need to say why the scope needed broadening. "In the early 2010s, due to XXXXXX, the scope of data sharing...". Also, "needed to be broadened" is a bit clunky. —MM 3/15/23 10:30 AM --> The expansion of mobile and cloud-based applications was slowly <!--# FIX "slowly" -- I wouldn't editorialize here. Also this language can be simplified. "Demand was increasing for mobile and cloud-based health applications" or something. —MM 3/15/23 10:31 AM -->finding its way into the healthcare space and standards needed to keep up. Thus enters <!--# FIX "thus enters" is stilted —MM 3/15/23 10:33 AM --> HL7 FHIR, which is an alternative to document-centric approaches and leverages **web technologies such as HTTP-based RESTful APIs** <!--# FIX "HTTP-based RESTful APIs" is jargon. Either explain what it is without the jargon, or add a placeholder to link to the module where we explain this (or maybe doing both is optimal). —MM 3/15/23 10:33 AM -->to expand both the type of information that can be exchanged as well as the types of systems that can exchange it. <!--# FIX "to expand both the type of information that can be exchanged as well as the types of systems that can exchange it" → "to expand the types of information exchange and participating systems" —MM 3/15/23 10:34 AM -->
-
-With a major goal being to facilitate interoperability between legacy health care systems <!--# FIX this is clunky —MM 3/15/23 10:58 AM -->, it both builds upon previous standards (HL7 V2, HL7 V3, HL7 CDA <!--# FIX this is a bit weird because CDA isn't listed as a first-level standard above...I'm not sure how to handle this —MM 3/15/23 10:58 AM -->) as well as adopts modern web technologies. FHIR has been able to bridge the gap between 30 year old standards and modern web-based connectivity. <!--# FIX I would omit the preceding sentence. —MM 3/15/23 10:59 AM --> And with its focus away from specified messages and documents and more towards the use of small building blocks (Resources) <!--# FIX I don't know that I would describe resources as "small building blocks" —MM 3/15/23 10:59 AM -->to build implementations, it can be customized to fit much more use cases compared to its predecessors. <!--# FIX I think you need a clearer explanation for why FHIR is more customizable. Or just say "FHIR is designed with customization and extensibility built in". The 80/20 rule may also be relevant here -- most applications of FHIR can mostly use the built-in FHIR resources with limited extensions. A lot of FHIR customization is adding constraints (rather than extensions). —MM 3/15/23 11:00 AM -->
-
-## FHIR Eras
+## FHIR eras
 
 With an understanding of the history of standards before and leading up to FHIR, this section will now take a deep dive into the specific development history of FHIR. It can be divided into three major eras:
 
--   **Early Concepts**: Basic web technologies are developed and are starting to find their way <!--# FIX I think "find their way" is too ambiguous -- what was actually happening here? —MM 3/15/23 11:03 AM -->into healthcare data exchange
+-   **Early concepts (1993-2014)**: Basic web technologies are developed and beginning to become directly integrated into healthcare data exchange infrastructures.
 
--   **Developing the Core**: FHIR emerges as a new healthcare data exchange standard utilizing web technologies, resulting in base adoption across government, healthcare centers, EHR vendors, and even industry giants such as Apple
+-   **Developing the core (2014-2018)**: FHIR emerges as a new healthcare data exchange standard utilizing web technologies, resulting in base adoption across government, healthcare centers, EHR vendors, and even industry giants such as Apple.
 
--   **Acceleration**: With the core of FHIR developed and largely adopted, expansion begins to extend its base to a multitude of use cases, including but not limited to cancer and social determinants of health
+-   **Acceleration (2018-present)**: With the core of FHIR developed and largely adopted, expansion begins to extend its base to a multitude of use cases, including but not limited to cancer and social determinants of health.
 
-<!--# FIX I would include the years in the bulleted list above —MM 3/15/23 11:03 AM -->
+### 1993-2014: early concepts
 
-### 1993-2014: Early Concepts
+The technology FHIR is built on began with the fundamental web tech developed in the 1990s. Web 1.0 was largely based on static pages using **HTTP (Hypertext Transfer Protocol)** to retrieve them, enabling linear information exchange. Building on Web 1.0's technologies, Web 2.0 expanded information exchange to be dynamic and non-linear via **REST (REpresentational State Transfer)**, which was developed and popularized in the early 2000s. Its purpose was to create a standard framework for HTTP that could allow two servers to communicate and exchange data anywhere in the world, thus providing the structure for Web 2.0 and the explosion of worldwide websites in the 2000s.
 
-The basic concepts of FHIR <!--# FIX I don't think this is precise -- do you mean "the technology FHIR is built on began with the fundamental web tech developed in the 1990s?" —MM 3/15/23 11:04 AM -->start with the beginnings of the internet in the mid 1990s. Web 1.0 was largely based on static pages using **HTTP (Hypertext Transfer Protocol)** to retrieve them. With such a limited system<!--# FIX This is also not precise -- rather than "with such a limited system" I think you need to talk about the difference between Web 1.0 and Web 2.0, and how REST is built on the same HTTP technology that powered Web 1.0. —MM 3/15/23 11:04 AM -->, **REST (REpresentational State Transfer)** was developed and popularized in the early 2000s. Its purpose was to create a standard framework for HTTP that could allow two servers to communicate and exchange data anywhere in the world, thus providing the structure for Web 2.0 and the explosion of worldwide websites in the 2000s.
+In the early 2000s, healthcare data exchange was limited to sending messages and documents and was not using any web-based transactional frameworks. Then in the late 2000s, the idea emerged to apply RESTful data exchange principles in healthcare within HL7 and its interoperability and web development partners. Starting in 2012, a team at HL7 led by Grahame Grieve began to develop a draft standard that built on the simplicity of HL7 V2 messages with technologies of the world wide web, resulting in FHIR. This began the era of healthcare API development and web-based health data exchange. Shortly after, support also came from the JASON task force, which is an independent group of scientists that has advised the government on matters of science and technology since the 1960s. In 2014, the JASON Report titled "A Robust Health Data Infrastructure" [@jason_report] was published and called for health data APIs to be developed to liberate data that was locked in electronic health records. This helped pave the way for significant government support of FHIR in the coming years.
 
-At this point in time<!--# FIX It's not clear if you're talking about the 1990s or 2000s here —MM 3/15/23 11:07 AM -->, healthcare data exchange was very <!--# FIX remove "very", I think —MM 3/15/23 11:06 AM -->limited to sending messages and documents and was not using any web-based transactional frameworks. Then in the late 2000s, the idea emerged to apply RESTful data exchange principles in healthcare within HL7 and its interoperability and web development partners. Starting in 2012, a team at HL7 led by Grahame Grieve began to develop a draft standard that built on the simplicity of HL7 V2 messages with technologies of the world wide web, resulting in FHIR. This began the era of healthcare API development and web-based health data exchange. Shortly after, support also came from the JASON task force, which is an independent group of scientists that has advised the government on matters of science and technology since the 1960s. In 2014, the JASON Report titled "A Robust Health Data Infrastructure" [@jason_report] was published and called for health data APIs to be developed to liberate data that was locked in electronic health records. This helped pave the way for significant government support of FHIR in the coming years.
-
-### 2014-2018: Developing the Core
+### 2014-2018: developing the core
 
 In late 2014, the first official version of FHIR was released, kicking off its second era where core development would begin. By 2015, 87% of hospitals in the US were using FHIR certified EHRs as seen below. [@2015_fhir_adoption]
 
 ![](images/2015_hospital_fhir_usage.png)
 
-Around this time, both government and industry began to develop initiatives in response to the 2013 JASON Report. On the government side, the **Office of the National Coordinator for Health IT (ONC)** was in the beginnings of discussions around national standards for APIs. On the industry side, the **Argonaut Project** began, which is a private sector initiated and funded implementation community comprised of technology vendors and provider organizations. Its goal is to accelerate the use of FHIR in healthcare information exchange in a way that can be adopted by industry-specific needs and use cases. This specification <!--# FIX which spec? Is this USCDI? 3/15/23 11:09 AM -->was released in 2017 and formed the basis what is now known as US Core <!--# FIX If you're talking about USCDI, that's not the same as US Core. I believe US Core is the FHIR implementation of USCDI, but you should verify this. —MM 3/15/23 11:10 AM -->, discussed further in the FHIR From 10,000 Feet module.<!--# FIX I think we want to link to a different module here -- there's one where we're going to talk about key IGs including US Core —MM 3/15/23 11:09 AM -->
+Around this time, both government and industry began to develop initiatives in response to the 2013 JASON Report. On the government side, the **Office of the National Coordinator for Health IT (ONC)** was in the beginnings of discussions around national standards for APIs. On the industry side, the **Argonaut Project** began, which is a private sector initiated and funded implementation community comprised of technology vendors and provider organizations. Its goal is to accelerate the use of FHIR in healthcare information exchange in a way that can be adopted by industry-specific needs and use cases.
+
+<!--# NOTE FROM BLAKE: I decided to remove comments about USCDI & US CORE, since we will have a separate module about them and they didn't really fit in here in the first place. -->
 
 The late 2010s saw adoption from more industry-based vendors, with a notable example being Apple using FHIR in its HealthKit API to access consumer healthcare data. This brought significant legitimacy to the use of FHIR for not only healthcare systems but also the commercial tech space, with giants such as Google and Microsoft quickly following suit.
 
-### 2018-Present: Acceleration
+### 2018-present: acceleration
 
-By 2019, FHIR had reached maturity to a point that brought in the third major era, which saw an increase in the use <!--# FIX I think "use" is the wrong word. Maybe "activity"? —MM 3/15/23 11:11 AM -->of the [HL7 FHIR Accelerator](https://www.hl7.org/about/fhir-accelerator/) program. This program was designed by HL7 to "assist communities and collaborative groups across the global health care spectrum in the creation and adoption of high quality FHIR Implementation Guides or other standard artifacts to move toward the realization of global health data interoperability." <!--# FIX Need to clearly cite/link when quoting —MM 3/15/23 11:11 AM --> These projects are developing communities around specific use cases for FHIR, further accelerating its implementation across the healthcare field. Below are examples of current use cases explored by these Accelerators:
+By 2019, FHIR had reached maturity to a point that brought in the third major era, which saw an increase in activity of the HL7 FHIR Accelerator program. This program was designed by HL7 to "assist communities and collaborative groups across the global health care spectrum in the creation and adoption of high quality FHIR Implementation Guides or other standard artifacts to move toward the realization of global health data interoperability." [@fhir_accelerator] These projects are developing communities around specific use cases for FHIR, further accelerating its implementation across the healthcare field. Below are examples of current use cases explored by these Accelerators:
 
--   Standardizing cancer data
+-   [CodeX](https://www.hl7.org/codex/): Standardizing cancer data
 
--   Standardizing social determinants of health
+-   [Gravity](https://www.hl7.org/gravity/): Standardizing social determinants of health
 
--   Establishing a process for addressing value-based care delivery
+-   [Da Vinci](https://www.hl7.org/about/davinci/): Establishing a process for addressing value-based care delivery
 
--   Obtaining data for research via FHIR
+-   [Vulcan](https://www.hl7.org/vulcan/): Obtaining data for research via FHIR
 
--   Obtaining data for public health via FHIR
+-   [Helios](https://www.hl7.org/helios/): Obtaining data for public health via FHIR
 
-<!--# FIX Include the name and link to the Accelerators —MM 3/15/23 11:12 AM -->
+In the coming years, more FHIR Resources will become mature. However, the current state of FHIR is still far from realizing the vision of interoperability. The most important future eras have not been entered yet, which involve full-scale development and having a nationwide impact. One of the biggest factors to reach these new eras is the question of **who will pay** for such a significant change. Scaling FHIR to nationwide development includes complex and expensive changes and additions to existing IT systems, with organizations such as the US public health system and community health centers already limited budgets. The government (mainly ONC and CMS) have sponsored the development of FHIR standards for the past decade, but the main cost for nationwide deployment remains to be solved.<!--# DISCUSS I don't know if I fully agree with this paragraph. What's the source for this? We might be able to just omit this entirely.  —MM 3/15/23 11:13 AM -->
 
-In the coming years, more FHIR resources will become mature, along with an expansion <!--# FIX "further expansion"? You already said there was an increase in accelerator activity —MM 3/15/23 11:12 AM -->of FHIR Accelerators and their use cases. However, the current state of FHIR is still far from realizing the vision of interoperability. The most important future eras have not been entered yet, which involve full-scale development and having a nationwide impact. One of the biggest factors to reach these new eras is the question of **who will pay** for such a significant change. Scaling FHIR to nationwide development includes complex and expensive changes and additions to existing IT systems, with organizations such as the US public health system and community health centers already limited budgets. The government (mainly ONC and CMS) have sponsored the development of FHIR standards for the past decade, but the main cost for nationwide deployment still remains to be solved.<!--# DISCUSS I don't know if I fully agree with this paragraph. What's the source for this? We might be able to just omit this entirely.  —MM 3/15/23 11:13 AM -->
+<!--# NOTE FROM BLAKE: The above paragraph is directly from the content in the MITRE for Managers PPT. If we don't like it, we can just remove it completely. -->
 
-## FHIR Releases Over Time and Their Impacts
+## FHIR releases over time and their impacts
 
-Now with an understanding of the development history of FHIR, this section will provide further details about each release of FHIR and the impacts each one had. ONC has provided a brief but comprehensive sumary of the version history of FHIR releases since its debut in 2012. [@fhir_version_history] **The content below is largely quoted directly from this summary**: <!--# FIX Can this be entirely block quoted? I don't really like the idea of _mostly_ cribbing from ONC without actually quoting. —MM 3/15/23 11:15 AM -->
+Now with an understanding of the development history of FHIR, this section will provide further details about each release of FHIR and the impacts each one had. ONC has provided a brief but comprehensive summary of the version history of FHIR releases since its debut in 2012. [@fhir_version_history]
 
-HL7 FHIR has evolved through four releases since its initial presentation in May 2012. It has grown from a true draft standard with 49 Resources to its current 145 and continues to expand. In that time the standard has improved and changed to meet the needs of the health information technology community.
-
-### Draft Standard for Trial Use 1 (DSTU1)
-
-FHIR's first publication in September 2013 showed a new way forward for health care data exchange. Draft Standard for Trial Use 1 had 49 resources and focused on two use cases, creating a Personal Health Record on a mobile device and the retrieval of documents, such as encounter or discharge notes, to a mobile device. This initial release sparked the community's interest in expanding FHIR to cover a wider variety of health care and health IT needs.
-
-### Draft Standard for Trial Use 2 (DSTU2)
-
-FHIR grew in market acceptance with the publication of the Draft Standard for Trial Use 2 in 2015. Efforts including the Argonaut Project developed Implementation Guides (IGs) and other technologies to support FHIR adoption by EHR developers and other health IT entities. The structure of Resources was adjusted to make creating extensions easier, allowing for more use cases to be covered without changes to the core standard. New Resources were also added to support non-clinical data, including claims and benefits processing.
-
-The publication of FHIR DSTU2 included the creation of the FHIR Maturity Model (FMM). When new Resources are created, they are not immediately ready for use in live settings; they must be refined and tested for a variety of uses and settings. The FHIR Maturity Model established a set of levels that progressively measure technical advancement, known as maturity. Resource maturity as defined by the FMM begins with an initial draft and achieves final status with implementation in multiple settings. Since the maturity of the FHIR standard overall is not tied to the maturity of Resources, Resources can move up the maturity ladder between FHIR releases. The FMM, which is also applied to other components of the FHIR standard, defines Resource stability with six levels:
-
--   **FMM0 (Draft)**: The Resource is still in early development but has been accepted into the FHIR standard
-
--   **FMM1**: The Resource has no current technical errors and is believed to address all design goals
-
--   **FMM2**: The Resources has been tested and approved at a FHIR Connectathon with multiple FHIR-enabled computer systems tested
-
--   **FMM3**: The Resource passed all quality checks and an HL7 community ballot that determines if it is ready for trial use
-
--   **FMM4**: The Resource has been tested for functionality for all intended purposes, has been published in a formal HL7 publication, and is operating in at least one prototype system
-
--   **FMM5**: The Resource is in use in at least five distinct systems operating in at least two countries
-
-Substantive changes at the FMM4 or FMM5 levels that would change usage from those already established or would break compatibility with existing implementations would require significant justification to be accepted and to move forward. After FMM5, a Resource reaches "normative" level; at this level, future changes must be backwards compatible so that applications that implement those Resources aren't at risk of being broken as the FHIR standard changes. HL7 defines normative as the following [@normative_definition]:
-
-> This content has been subject to review and production implementation in a wide variety of environments. The content is considered to be stable and has been 'locked', subjecting it to FHIR [Inter-version Compatibility Rules](https://www.hl7.org/fhir/versions.html#change). While changes are possible, they are expected to be infrequent and are tightly constrained.
-
-### Standard for Trial Use 3 (STU 3)
-
-FHIR Standard for Trial Use 3 was released in 2017 with improvements to the core Clinical, Administrative, and Financial Resources, improvements to the Clinical Decision Support and Clinical Quality Measure Resources and a new framework for workflow and task management. Additionally, tools were introduced that made FHIR IG creation and publication to the web easier, faster, and more unified.
-
-### Release 4 (R4)
-
-As the first release with normative content, the 2019 release of FHIR Release 4 left behind the Trial Use name. Two key clinical Resources, Patient and Observation, were released as normative, along with the RESTful API, the XML and JSON formats, and nine additional Resources.
-
-In 2020, ONC published the Final Rule for the 21st Century Cures Act, establishing FHIR R4 as the standard required for Health IT Certification.
-
-### Looking ahead to Release 5 (R5)
-
-FHIR Release 5 will see increased normative content, with over 30 Resources having been nominated by their HL7 Workgroups to be matured to that status. In addition, the community will continue to develop the supportive specifications to FHIR, such as the authorization framework SMART, Clinical Decision Support Hooks (CDS Hooks), and the Bulk Data Transfer specification, which will help implementers create a complete FHIR-based exchange of health care data.
-
-With the maturing of the FHIR IG tools and templates, better integration with public health, imaging, financial management, genomics and other fields will keep FHIR at the forefront of health IT.
+> HL7® FHIR® has evolved through four releases since its initial presentation in May 2012. It has
+> grown from a true draft standard with 49 Resources to its current 145 and continues to expand.
+> In that time the standard has improved and changed to meet the needs of the health information
+> technology community.
+>
+> ### Draft standard for trial use 1 (DSTU1)
+>
+> FHIR\'s first publication in September 2013 showed a new way forward for health care data exchange. Draft Standard for Trial Use 1 had 49 resources and focused on two use cases, creating a Personal Health Record on a mobile device and the retrieval of documents, such as encounter or discharge notes, to a mobile device. This initial release sparked the community\'s interest in expanding FHIR to cover a wider variety of health care and health IT needs.
+>
+> ### Draft standard for trial use 2 (DSTU2)
+>
+> FHIR grew in market acceptance with the publication of the Draft Standard for Trial Use 2 in 2015. Efforts including the Argonaut Project developed Implementation Guides (IGs) and other technologies to support FHIR adoption by EHR developers and other health IT entities. The structure of Resources was adjusted to make creating extensions easier, allowing for more use cases to be covered without changes to the core standard. New Resources were also added to support non-clinical data, including claims and benefits
+> processing.
+>
+> The publication of FHIR DSTU2 included the creation of the FHIR Maturity Model (FMM). When new Resources are created, they are not immediately ready for use in live settings; they must be refined and tested for a variety of uses and settings. The FHIR Maturity Model established a set of levels that progressively measure technical advancement, known as maturity. Resource maturity as defined by the FMM begins with an initial draft and achieves final status with implementation in multiple settings. Since the maturity of the FHIR standard overall is not tied to the maturity of Resources, Resources can move up the maturity ladder between FHIR releases. The FMM, which is also applied to other components of the FHIR standard, defines Resource stability with six levels:
+>
+> -   **FMM0 (Draft)** - The resource is still in early development but has been accepted into the FHIR standard.
+>
+> -   **FMM1** - The Resource has no current technical errors and is believed to address all design goals.
+>
+> -   **FMM2** - The Resource has been tested and approved at a FHIR Connectathon with multiple FHIR-enabled computer systems tested.
+>
+> -   **FMM3** - The Resource passed all quality checks and an HL7 community ballot that determines if it is ready for trial use.
+>
+> -   **FMM4** - The Resource has been tested for functionality for all intended purposes, has been published in a formal HL7 publication, and is operating in at least one prototype system.
+>
+> -   **FMM5** - The Resource is in use in at least five distinct production systems operating in at least two countries.
+>
+> Substantive changes at the FMM4 or FMM5 levels that would change usage from those already established or would break compatibility with existing implementations would require significant justification to be accepted and to move forward. After FMM5, a Resource reaches \"normative\"1 level; at this level, future changes must be backwards compatible so that applications that implement those Resources aren't at risk of being broken as the FHIR standard changes.
+>
+> ### Standard for trial use 3 (STU 3)
+>
+> FHIR Standard for Trial Use 3 was released in 2017 with improvements to the core Clinical, Administrative, and Financial Resources, improvements to the Clinical Decision Support and Clinical Quality Measure Resources and a new framework for workflow and task management. Additionally, tools were introduced that made FHIR IG creation and publication to the web easier, faster, and more unified.
+>
+> ### Release 4 (R4)
+>
+> As the first release with normative content, the 2019 release of FHIR Release 4 left behind the Trial Use name. Two key clinical Resources, Patient and Observation, were released as normative, along with the RESTful API, the XML and JSON formats, and nine additional Resources.
+>
+> In 2020, ONC published the Final Rule for the 21st Century Cures Act, establishing FHIR R4 as the standard required for Health IT Certification.
+>
+> ### Looking ahead to Release 5 (R5)
+>
+> FHIR Release 5 will see increased normative content, with over 30 Resources having been nominated by their HL7 Workgroups to be matured to that status. In addition, the community will continue to develop the supportive specifications to FHIR, such as the authorization framework SMART, Clinical Decision Support Hooks (CDS Hooks), and the Bulk Data Transfer specification, which will help implementers create a complete FHIR-based exchange of health care data.
+>
+> With the maturing of the FHIR IG tools and templates, better integration with public health, imaging, financial management, genomics and other fields will keep FHIR at the forefront of health IT.
