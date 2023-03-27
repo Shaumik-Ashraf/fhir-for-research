@@ -15,7 +15,7 @@
   }, 1000);
 </script>
 
-<!-- improved citations with littlefootjs -->
+<!-- improved citations with littlefootjs -- DISABLED --
 <script
   src="https://unpkg.com/littlefoot/dist/littlefoot.js"
   type="application/javascript"
@@ -38,6 +38,7 @@
   })
   */
 </script>
+-->
 
 <script type="application/javascript">
   /* To Title Case (c) 2018 David Gouch | https://github.com/gouch/to-title-case */
@@ -88,6 +89,7 @@
 
 
 <!-- fancy json code viewer -->
+<script type="text/javascript" src="https://unpkg.com/dompurify@3.0.1/dist/purify.min.js"></script> <!-- load JS Sanitizer -->
 <script>
     function jsonViewer(json, collapsible=false) {
         let TEMPLATES = {
@@ -99,7 +101,9 @@
         function createItem(key, value, type){
             let element = TEMPLATES.item.replace('%KEY%', key);
 
-            if(type == 'string') {
+            if((key == 'div') && (type=='string')) { // Removes Resource.text.div value (looks bloated)
+                element = element.replace('%VALUE%', '...');
+            } else if(type == 'string') {
                 element = element.replace('%VALUE%', '"' + value + '"');
             } else {
                 element = element.replace('%VALUE%', value);
@@ -112,11 +116,11 @@
 
         function createCollapsibleItem(key, value, type, children){
             let tpl = 'itemCollapsible';
-            
+
             if(collapsible) {
                 tpl = 'itemCollapsibleOpen';
             }
-            
+
             let element = TEMPLATES[tpl].replace('%KEY%', key);
 
             element = element.replace('%VALUE%', type);
@@ -181,8 +185,9 @@
 
 
     function parseHTML(string) {
+        let sanitized = DOMPurify.sanitize(string);
         let parser = new DOMParser();
-        return parser.parseFromString(string, "text/html").body.firstChild;
+        return parser.parseFromString(sanitized, "text/html").body.firstChild;
     }
 
     let jsonCodeBlocks = document.querySelectorAll("code.sourceCode.json");
