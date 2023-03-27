@@ -34,25 +34,17 @@ FHIR has been adopted in many clinical settings, but its utilization in research
 
 A review of studies that use FHIR in their research, including a meta-analysis of papers on FHIR for research [@duda2022], found four themes that could be adapted to other health centers or projects:
 
-<!--# DISCUSS: I don't feel great about the "themes" and organization of this because several overlap and the themes aren't really consistent in topic. But I'm struggling to think of an alternative. --KMB-->
-
 ### Data models and platforms
 
 FHIR has been used in several studies to transform health data from different data models into an interoperable format. This is a common issue for studies or research that uses data from different sites, agencies, and sources.
 
-<!--# DISCUSS: The CTR's in particular will be familiar with this information but thought it might be helpful framing and level-setting if they're not familiar --KMB-->
-
-<!--# FIX: Note that this might have overlap with the CDMs & FHIR section. Please coordiante. --MM -->
-
 Common Data Models (CDMs) and platforms that have been used with FHIR in research include:
 
--   [Observational Medical Outcomes partnership (OMOP)](https://www.ohdsi.org/data-standardization/), a CDM for standardizing both administrative and electronic health record (EHR). It was developed by the Observational Health Data Sciences and Informatics (OHDSI) initiative, and has been used by researchers, healthcare workers, analysts, etc. There is an [OMOPonFHIR](https://omoponfhir.org) initiative led by Georgia Tech to map between OMOP and FHIR.
+-   [Observational Medical Outcomes partnership (OMOP)](https://www.ohdsi.org/data-standardization/), a CDM for standardizing both administrative and electronic health record (EHR). It was developed by the Observational Health Data Sciences and Informatics (OHDSI) initiative, and has been used by researchers, healthcare workers, analysts, etc. There is an [OMOP on FHIR](https://omoponfhir.org) initiative led by Georgia Tech to map between OMOP and FHIR.
 
 -   [PCORnet](https://pcornet.org/data/) is another CDM, containing clinical data, patient-reported outcomes, and payor data, with the intent to support multi-site research.
 
 -   [openEHR](https://www.openehr.org/about_us) is an EHR platform that includes modeling tools and clinical knowledge management (CKM).
-
--   [Research Electronic Data Capture (REDCap)](https://www.project-redcap.org) is a HIPAA compliant tool for managing online surveys and databases, commonly used by health researchers.
 
 #### Examples of FHIR for data transformation
 
@@ -72,16 +64,6 @@ Including one or both of the examples below from Rinaldi & Thun 2021 might be il
 ![Example of the cultures studied and mapping from openEHR, to FHIR, and then OMOP](images/rinaldi-culture-mapping.png)
 
 ![Example of mapping resources from openEHR, to FHIR, and then OMOP](images/rinaldi-openehr-fhir-omop-mappings.png)
-
-<!--# FIX: Link to REDCap module(s)/content --KMB -->
-
-<!--# DISCUSS: Does REDCap fit in this section or should it be moved to it's own spot? --KMB -->
-
-REDCap is another useful, FHIR-compatible tool. Cheng et al. 2021 [@Cheng_Duda_Taylor_Delacqua_Lewis_Bosler_Johnson_Harris_2021] describes the development of the Clinical Data Interoperability Services (CDIS), which facilitates the exchange of data between REDCap and any EHR via the FHIR API. The authors tested two use cases for CDIS: Clinical Data Pull (CDP) and Clinical Data Mart (CDM).
-
-The CDP use case would apply to prospective studies that aggregate data and fill out case report forms (CRFs) for study participants. The CDM use case is for studies with a known cohort of patients and requires a bulk data extraction from an EHR. At the time of publishing, 55 CDP projects and 27 CDM projects had been implemented. Both use cases significantly reduced manual data entry into REDCap. CDIS has also proven to be reusable between projects at an institution, without the need for support from IT staff.
-
-![The CDIS workflow uses FHIR to simplify the process of creating a registry from EHR data.](images/cheng-fhir-shortcut.png)
 
 ### SMART on FHIR
 
@@ -117,7 +99,7 @@ Pfiffner et al. 2016 [@Pfiffner_Pinyol_Natter_Mandl_2016] created an extension, 
 
 The initial test case for C3-PRO, trialed in Pfiffner et al. 2016 [@Pfiffner_Pinyol_Natter_Mandl_2016], was to enroll a completely anonymous cohort in a study using data from i2b2. Participants used an app to track and report their symptoms of Hepatitis C for improved treatment. For any type of study though, C3-PRO could use FHIR to determine participant eligibility, format informed consent documents, and generate the actual surveys.
 
-Ahmad et al., 2020 [@Ahmad_Payne_Lackey_Komeshak_Kenney_Magnusen_Metts_Bailey_2020] uses REDCap to program surveys, and Apple ResearchKit to render and deliver them in a user-friendly format. The responses are then sent back to REDCap and a proprietary program that converts the data into an HL7 message, which is then added to the patient's EHR. A clinical decision support (CDS) tool then provided a suggested battery of tests based on the responses. The survey used in their study was offered to 15-21-year-old patients that arrived in the ER. The objective of the survey was to determine what, if any, tests for sexually transmitted infections (STIs) would be most appropriate for the patients. Despite the potentially sensitive subject matter, 88.9% of patients that completed the survey rated it to be "somewhat" or "very comfortable" to answer the questions electronically and 72.2% preferred the digital method over a face-to-face conversation or paper questionnaire.
+Ahmad et al., 2020 [@Ahmad_Payne_Lackey_Komeshak_Kenney_Magnusen_Metts_Bailey_2020] uses [REDCap](redcap-intro.qmd) to program surveys, and Apple ResearchKit to render and deliver them in a user-friendly format. The responses are then sent back to REDCap and a proprietary program that converts the data into an HL7 message, which is then added to the patient's EHR. A clinical decision support (CDS) tool then provided a suggested battery of tests based on the responses. The survey used in their study was offered to 15-21-year-old patients that arrived in the ER. The objective of the survey was to determine what, if any, tests for sexually transmitted infections (STIs) would be most appropriate for the patients. Despite the potentially sensitive subject matter, 88.9% of patients that completed the survey rated it to be "somewhat" or "very comfortable" to answer the questions electronically and 72.2% preferred the digital method over a face-to-face conversation or paper questionnaire.
 
 While Ahmad et al., 2020 used HL7 messages, a predecessor and alternative to FHIR, it is possible that the same methodology could be adapted to use FHIR instead. Apple Health uses FHIR, so an institution with an EHR that is FHIR-connected should already have endpoints for importing data from survey tools like Apple ResearchKit. This methodology could be reapplied to other sensitive health questions, or even for routine collection of health information.
 
