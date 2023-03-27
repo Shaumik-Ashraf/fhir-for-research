@@ -43,7 +43,7 @@ website:
             - modules/10-intro--accessing-fhir-data/index.qmd
             - file: modules/10-intro--brief-history-of-fhir/index.qmd
               text: "History of FHIR"
-            - modules/10-intro--terminology-introduction/index.qmd
+            - modules/terminology.qmd
             - modules/10-intro--common-data-models-and-fhir/index.qmd
             - file: modules/10-intro--fhir-community-and-resources/index.qmd
               text: Community & Documentation

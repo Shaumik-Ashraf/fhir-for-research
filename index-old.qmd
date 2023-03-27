@@ -22,7 +22,7 @@
 -   [Accessing FHIR Data High Level](modules/10-intro--accessing-fhir-data/index.html)
 -   [Real-World Research Using FHIR](modules/10-intro--real-world-research-using-fhir/index.html)
 -   [Brief History of FHIR](modules/10-intro--brief-history-of-fhir/index.html)
--   [Terminology Introduction](modules/10-intro--terminology-introduction/index.html)
+-   [Terminology Introduction](modules/terminology.qmd)
 -   [Common Data Models & FHIR](modules/10-intro--common-data-models-and-fhir/index.html)
 -   [The FHIR Community & Documentation](modules/10-intro--fhir-community-and-resources/index.html)
 
@@ -40,7 +40,7 @@
 -   [*Terminology Introduction*](modules/10-intro--key-fhir-resources/index.html)
 -   [Real world FHIR specifications](modules/30-fhir-data-modeling--real-world-ig/index.html)
 -   [Reading a FHIR specification](modules/30-fhir-data-modeling--reading-ig/index.html)
--   [*Terminology Introduction*](modules/10-intro--terminology-introduction/index.html)
+-   [*Terminology Introduction*](modules/terminology.qmd)
 -   [Writing a FHIR specification](modules/30-fhir-data-modeling--writing-ig/index.html)
 -   [API-focused FHIR Resources](modules/30-fhir-data-modeling--api-focused-fhir-resources/index.html)
 
@@ -66,7 +66,7 @@
 -   [Provider-facing use case example](modules/60-smart-on-fhir--provider-facing-use-case-example/index.html)
 -   [Patient-facing use case example](modules/60-smart-on-fhir--patient-facing-use-case-example/index.html)
 -   [*Key FHIR Resources*](modules/10-intro--key-fhir-resources/index.html)
--   [*Terminology Introduction*](modules/10-intro--terminology-introduction/index.html)
+-   [*Terminology Introduction*](modules/terminology.qmd)
 -   [*Retrieving and subsetting data with FHIR*](modules/40-fhir-data-tabular--retrieving-and-subsetting/index.html)
 -   [*The FHIR community + resources*](modules/10-intro--fhir-community-and-resources/index.html)
 
