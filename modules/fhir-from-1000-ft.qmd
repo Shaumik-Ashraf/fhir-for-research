@@ -49,7 +49,9 @@ Below is a screenshot of the [Patient resource](https://www.hl7.org/fhir/R4B/pat
 [![](images/R4_Patient.png){fig-alt="Screenshot of Resource Contents table of the Patient resource in the FHIR R4B specification"}](https://www.hl7.org/fhir/R4B/patient.html)
 :::
 
-This view of a FHIR resource will become very familiar to you if you spend time working with FHIR specifications. It shows the hierarchy of elements (i.e., data fields) in the FHIR resource, starting with the name of the FHIR resource (`Patient`). Elements may be only one level deep (like `Patient.birthDate`) or nested (like `Patient.contact.name`).
+This view of a FHIR resource will become very familiar to you if you spend time working with FHIR specifications.[^1] It shows the hierarchy of elements (i.e., data fields) in the FHIR resource, starting with the name of the FHIR resource (`Patient`). Elements may be only one level deep (like `Patient.birthDate`) or nested (like `Patient.contact.name`).
+
+[^1]: More information on this table is found in [Key FHIR Resources](key-fhir-resources.qmd).
 
 Each element has properties that appear in the `Flag`, `Card.` (short for "Carnality"), and `Type` columns. These details are beyond the scope of this module; see **\<insert link to other module here\>** for more information.
 
@@ -153,9 +155,9 @@ A specific cake would be represented by an **instance** of the Cake resource. Fo
 
 : {tbl-colwidths="\[40,60\]"}
 
-Checking against the constraints added by the Chocolate Cake profile, Aaron's cake meets the constraints it adds: it has a value of `chocolate` for `flavor`, and has a value for `icing`.[^1] This means that Aaron's cake **conforms** to the Chocolate Cake profile defined above.
+Checking against the constraints added by the Chocolate Cake profile, Aaron's cake meets the constraints it adds: it has a value of `chocolate` for `flavor`, and has a value for `icing`.[^2] This means that Aaron's cake **conforms** to the Chocolate Cake profile defined above.
 
-[^1]: It also takes advantage of the extensions added by the Chocolate Cake profile, but both extensions are not marked as "required." This means that you could have a cake conforming to the Chocolate Cake profile *without* these extensions populated.
+[^2]: It also takes advantage of the extensions added by the Chocolate Cake profile, but both extensions are not marked as "required." This means that you could have a cake conforming to the Chocolate Cake profile *without* these extensions populated.
 
 More broadly, each instance of a Cake resource may or may not conform to a specific profile of Cake. The FHIR ecosystem provides software tools that can detect when an instance of a FHIR resource conforms to a specific profile.
 
@@ -163,9 +165,9 @@ More broadly, each instance of a Cake resource may or may not conform to a speci
 
 The [PACIO Project](https://pacioproject.org) is a post-acute care interoperability project that publishes several [FHIR profiles as part of an Implementation Guide](http://hl7.org/fhir/us/pacio-fs/) to support more seamless exchange of relevant data.
 
-The following table shows how PACIO approaches representing a narrative history of a patient's functional status[^2] using FHIR:
+The following table shows how PACIO approaches representing a narrative history of a patient's functional status[^3] using FHIR:
 
-[^2]: [PACIO defines functional status](http://hl7.org/fhir/us/pacio-fs/STU1/index.html#functional-status) as:
+[^3]: [PACIO defines functional status](http://hl7.org/fhir/us/pacio-fs/STU1/index.html#functional-status) as:
 
     > Functioning <mark>observations related to mobility, self-care and domestic life</mark> are often used to describe how a person is able to interact with their environment and is a foundation to patient centered care. It is used in reporting outcomes for clinical care, quality improvement activities, quality measure reporting, and research.
 
@@ -175,7 +177,7 @@ The following table shows how PACIO approaches representing a narrative history 
 +-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | FHIR term | PACIO's approach using FHIR                                                                                                                                                  | Commentary                                                                                                                                                                 |
 +===========+==============================================================================================================================================================================+============================================================================================================================================================================+
-| Resource  | Functional status data are represented with the [Observation](https://www.hl7.org/fhir/observation.html) FHIR resource.                                                      | "Observations are a central element in healthcare, used to support diagnosis, monitor progress, determine baselines and patterns\..."[^3]                                  |
+| Resource  | Functional status data are represented with the [Observation](https://www.hl7.org/fhir/observation.html) FHIR resource.                                                      | "Observations are a central element in healthcare, used to support diagnosis, monitor progress, determine baselines and patterns\..."[^4]                                  |
 +-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Profile   | PACIO provides a [Narrative History of Functional Status profile](http://hl7.org/fhir/us/pacio-fs/STU1/StructureDefinition-pacio-nhfs.html) of the Observation resource.     | Adds constraints like:                                                                                                                                                     |
 |           |                                                                                                                                                                              |                                                                                                                                                                            |
@@ -192,7 +194,7 @@ The following table shows how PACIO approaches representing a narrative history 
 : {tbl-colwidths="\[20,40,40\]"}
 :::
 
-[^3]: From the [FHIR specification's description of the Observation resource](http://hl7.org/fhir/5.0.0-draft-final/observation.html).
+[^4]: From the [FHIR specification's description of the Observation resource](http://hl7.org/fhir/5.0.0-draft-final/observation.html).
 
 ## Connecting systems together: the FHIR API
 
