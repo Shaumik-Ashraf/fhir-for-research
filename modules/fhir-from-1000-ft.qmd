@@ -198,7 +198,7 @@ The following table shows how PACIO approaches representing a narrative history 
 
 In addition to providing a standard way to represent and store data (in instances of FHIR resources, as described above), FHIR provides a standard way for systems to request and send instances of FHIR resources to each other.
 
-This standard communication approach is called an API (short for [Application Program Interface](https://en.wikipedia.org/wiki/API)). As mentioned in [Part 1](modules/fhir-from-10000-ft.qmd), FHIR's API uses a [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful approach, which is a widely used API paradigm throughout the technology industry. More specifics on FHIR's API can be found in the [Accessing FHIR Data module](modules/10-intro--accessing-fhir-data).
+This standard communication approach is called an API (short for [Application Program Interface](https://en.wikipedia.org/wiki/API)). As mentioned in [Part 1](fhir-from-10000-ft.qmd), FHIR's API uses a [REST](https://en.wikipedia.org/wiki/Representational_state_transfer)ful approach, which is a widely used API paradigm throughout the technology industry. More specifics on FHIR's API can be found in the [Accessing FHIR Data module](modules/10-intro--accessing-fhir-data).
 
 Here is a high-level diagram showing how FHIR's API can connect systems to each other:
 
