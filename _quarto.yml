@@ -35,15 +35,15 @@ website:
       contents:
         - section: "FHIR for Research"
           contents:
-            - modules/10-intro--intro-part-1-what-is-fhir/index.qmd
-            - modules/10-intro--intro-part-2-how-fhir-works/index.qmd
-            - file: modules/10-intro--real-world-research-using-fhir/index.qmd
+            - modules/fhir-from-10000-ft.qmd
+            - modules/fhir-from-1000-ft.qmd
+            - file: modules/fhir-research.qmd
               text: "Real World Research"
             - modules/10-intro--key-fhir-resources/index.qmd
             - modules/10-intro--accessing-fhir-data/index.qmd
             - file: modules/10-intro--brief-history-of-fhir/index.qmd
               text: "History of FHIR"
-            - modules/10-intro--terminology-introduction/index.qmd
+            - modules/terminology.qmd
             - modules/10-intro--common-data-models-and-fhir/index.qmd
             - file: modules/10-intro--fhir-community-and-resources/index.qmd
               text: Community & Documentation
@@ -62,10 +62,10 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - custom.scss
     css: styles.css
     toc: true
     include-in-header: head.html
     include-after-body: scripts.html
-
-

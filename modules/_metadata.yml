@@ -7,3 +7,4 @@ editor: visual
 number-sections: true
 number-depth: 3
 bibliography: ../../bibliography.bib
+reference-location: margin

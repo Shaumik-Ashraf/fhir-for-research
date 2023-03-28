@@ -7,6 +7,20 @@
   background-color: #20558a;
 }
 
+#relevant-roles li:after {
+  content: ' |';
+  color: #bbb;
+}
+#relevant-roles .list-inline-item:not(:last-child) {
+  margin-right: 0;
+}
+#relevant-roles li:last-child:after {
+  content: '';
+}
+#relevant-roles {
+  border-left-color: #bbb;
+}
+
 /* json viewer css */
 
 .json_view {
