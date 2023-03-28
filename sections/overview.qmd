@@ -23,7 +23,7 @@ Select your [role](/roles.html) to <mark>highlight</mark> the content that is mo
 -   [Brief History of FHIR](/modules/10-intro--brief-history-of-fhir/index.html)
 -   [Terminology Introduction](/modules/10-intro--terminology-introduction/index.html)
 -   [Common Data Models & FHIR](/modules/10-intro--common-data-models-and-fhir/index.html)
--   [The FHIR Community & Documentation](/modules/10-intro--fhir-community-and-resources/index.html)
+-   [The FHIR Community & Documentation](/modules/fhir-community.qmd)
 
 ## SMART on FHIR
 

@@ -1,6 +1,12 @@
 ---
 title: FHIR Community & Resources
 
+bibliography: ../bibliography.bib
+format:
+  html:
+    template-partials:
+      - title-block.html
+
 area:
   name: Overview
 topic:

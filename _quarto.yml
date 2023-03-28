@@ -45,7 +45,7 @@ website:
               text: "History of FHIR"
             - modules/terminology.qmd
             - modules/10-intro--common-data-models-and-fhir/index.qmd
-            - file: modules/10-intro--fhir-community-and-resources/index.qmd
+            - file: modules/fhir-community.qmd
               text: Community & Documentation
         - section: "SMART on FHIR"
           contents:

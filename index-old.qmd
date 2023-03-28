@@ -24,7 +24,7 @@
 -   [Brief History of FHIR](modules/10-intro--brief-history-of-fhir/index.html)
 -   [Terminology Introduction](modules/terminology.qmd)
 -   [Common Data Models & FHIR](modules/10-intro--common-data-models-and-fhir/index.html)
--   [The FHIR Community & Documentation](modules/10-intro--fhir-community-and-resources/index.html)
+-   [The FHIR Community & Documentation](modules/fhir-community.qmd)
 
 ## Overview \> SMART on FHIR
 
@@ -68,7 +68,7 @@
 -   [*Key FHIR Resources*](modules/10-intro--key-fhir-resources/index.html)
 -   [*Terminology Introduction*](modules/terminology.qmd)
 -   [*Retrieving and subsetting data with FHIR*](modules/40-fhir-data-tabular--retrieving-and-subsetting/index.html)
--   [*The FHIR community + resources*](modules/10-intro--fhir-community-and-resources/index.html)
+-   [*The FHIR community + resources*](modules/fhir-community.qmd)
 
 ## Train the Trainer \> Standing Up a FHIR Server With Custom Synthea Data
 
@@ -91,7 +91,7 @@
 -   [Updating or forking self-directed resources](modules/90-meta--contributing/index.html)
 -   [Contributing updates or additions "upstream"](modules/90-meta--forking/index.html)
 -   [Best practices identified in NIH-led webinars and workshops](modules/90-meta--training-best-practices/index.html)
--   [*The FHIR community + resources*](modules/10-intro--fhir-community-and-resources/index.html)
+-   [*The FHIR community + resources*](modules/fhir-community.qmd)
 -   What happens when FHIR version change?
 
 ## Train the Trainer \> Discussing FHIR With Executive Leaders
