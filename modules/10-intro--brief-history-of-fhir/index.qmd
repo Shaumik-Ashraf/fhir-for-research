@@ -1,7 +1,0 @@
----
-title: Brief History of FHIR
-area:
-  name: Overview
-topic:
-  name: FHIR for Research
----

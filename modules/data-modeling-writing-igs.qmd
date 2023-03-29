@@ -1,0 +1,25 @@
+---
+title: Writing Implementation Guides
+
+area:
+  name: Overview
+topic:
+  name: FHIR Data Modeling
+
+bibliography: ../bibliography.bib
+format:
+  html:
+    template-partials:
+      - title-block.html
+
+roles:
+  - Investigator
+  - Research Leaders
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives:
+  - question: Question here
+    answer: Answer here
+---

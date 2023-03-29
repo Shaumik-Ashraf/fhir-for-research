@@ -1,0 +1,25 @@
+---
+title: FHIR to Tabular
+
+area:
+  name: Working with Data
+topic:
+  name: Tabular Analysis
+
+bibliography: ../bibliography.bib
+format:
+  html:
+    template-partials:
+      - title-block.html
+
+roles:
+  - Investigator
+  - Research Leaders
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives:
+  - question: Question here
+    answer: Answer here
+---
