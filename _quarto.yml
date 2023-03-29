@@ -8,7 +8,7 @@ project:
 
 website:
   title: "FHIR for Research"
-  site-url: https://shaumik-ashraf.github.io/fhir-for-research-web # https://fhir-for-research.pages.mitre.org/
+  site-url: https://fhir-for-research.pages.mitre.org/ # TODO change this to: https://mitre.github.io/fhir-for-research
   navbar:
     left:
       - text: Overview
