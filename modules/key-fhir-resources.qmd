@@ -1,12 +1,6 @@
 ---
 title: "Key FHIR Resources"
 
-bibliography: ../bibliography.bib
-format:
-  html:
-    template-partials:
-      - title-block.html
-
 tbl-colwidths: [26,74]
 
 area:
@@ -21,9 +15,9 @@ roles:
 
 learning_objectives:
   - question: What are some key FHIR resources?
-    answer: Patient, Observation, and Bundle. 
+    answer: Patient, Observation, and Bundle.
   - question: How are FHIR resources structured?
-    answer: FHIR resources are defined in a structure table that lists out each attribute's name, flags, cardinality, type, constraints, and descriptions. 
+    answer: FHIR resources are defined in a structure table that lists out each attribute's name, flags, cardinality, type, constraints, and descriptions.
   - question: How do FHIR resources allow for interoperability?
     answer: FHIR attributes can be rigorously defined as basic types, complex types, choice types, or inherited types that allow for meaningful transfer of medical information without loss of semantics. Extensions can capture any other data and resource metadata aids with resource understanding.
 ---

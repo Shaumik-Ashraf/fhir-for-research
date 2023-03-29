@@ -40,18 +40,18 @@ website:
             - file: modules/fhir-research.qmd
               text: "Real World Research"
             - modules/key-fhir-resources.qmd
-            - modules/10-intro--accessing-fhir-data/index.qmd
-            - file: modules/10-intro--brief-history-of-fhir/index.qmd
-              text: "History of FHIR"
+            - text: "Accessing FHIR Data"
+            - text: History of FHIR
             - modules/terminology.qmd
-            - modules/10-intro--common-data-models-and-fhir/index.qmd
+            - text: Common Data Models
             - file: modules/fhir-community.qmd
               text: Community & Documentation
         - section: "SMART on FHIR"
           contents:
-            - modules/20-intro-smart-on-fhir--overview/index.qmd
-            - modules/20-intro-smart-on-fhir--real-world-research/index.qmd
-            - modules/20-intro-smart-on-fhir--technical-quick-start/index.qmd
+            - modules/smart-on-fhir-intro.qmd
+            - modules/smart-on-fhir-research.qmd
+            - modules/smart-on-fhir-technical-quick-start.qmd
+
 
 
   page-footer:

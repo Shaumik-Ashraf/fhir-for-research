@@ -1,12 +1,6 @@
 ---
 title: "FHIR from 10,000 Feet"
 
-bibliography: ../bibliography.bib
-format:
-  html:
-    template-partials:
-      - title-block.html
-
 area:
   name: Overview
 topic:
