@@ -39,7 +39,7 @@ website:
             - modules/fhir-from-1000-ft.qmd
             - file: modules/fhir-research.qmd
               text: "Real World Research"
-            - modules/10-intro--key-fhir-resources/index.qmd
+            - modules/key-fhir-resources.qmd
             - modules/10-intro--accessing-fhir-data/index.qmd
             - file: modules/10-intro--brief-history-of-fhir/index.qmd
               text: "History of FHIR"
