@@ -36,11 +36,12 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
         # includes dependency cache
 
-      - name: Set up Python
+      - name: Set up Python and install dependencies
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
           cache: 'pip' # cache pip dependencies
+        run: pip install -r requirements.txt
 
       - name: Render Quarto
         run: quarto render
