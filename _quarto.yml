@@ -31,8 +31,9 @@ website:
       style: floating
       search: false
       align: left
-      collapse-level: 1
+      collapse-level: 2
       contents:
+        - sections/overview.qmd
         - section: "FHIR for Research"
           contents:
             - modules/fhir-from-10000-ft.qmd
@@ -51,6 +52,26 @@ website:
             - modules/smart-on-fhir-intro.qmd
             - modules/smart-on-fhir-research.qmd
             - modules/smart-on-fhir-technical-quick-start.qmd
+
+    - id: working-with-data
+      title: Working With Data
+      style: floating
+      search: false
+      align: left
+      collapse-level: 2
+      contents:
+        - file: sections/working-with-data.qmd
+          text: Working With Data
+        - section: "Tabular Analysis"
+          contents:
+            - modules/tabular-real-world.qmd
+            - modules/tabular-from-fhir.qmd
+            - modules/tabular-retrieving-and-subsetting.qmd
+        - section: "REDCap With FHIR"
+          contents:
+            - modules/redcap-intro.qmd
+            - modules/redcap-best-practices.qmd
+            - modules/redcap-example.qmd
 
 
 

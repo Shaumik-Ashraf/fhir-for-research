@@ -18,3 +18,15 @@ body {
 #toc-title {
   font-weight: 500;
 }
+
+// Fake the section title in the left navbar
+.sidebar-menu-container .sidebar-item:first-child .sidebar-item-container {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0.5em;
+}
+.sidebar-menu-container .sidebar-item-section .sidebar-item-container {
+  // Reset back to normal for sub-sections
+  font-weight: normal !important;
+  border-bottom: none !important;
+}
