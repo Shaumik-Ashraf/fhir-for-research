@@ -16,14 +16,13 @@ Select your [role](/roles.html) to <mark>highlight</mark> the content that is mo
 ## Tabular Analysis
 
 -   <mark>**Prerequisite:** [Overview \> FHIR for Research](/modules/fhir-from-10000-ft.qmd)</mark>
--   <mark>[Real-World Use Cases](/modules/40-fhir-data-tabular--real-world-use-cases/index.html)</mark>
--   <mark>[FHIR to Tabular Data](/modules/40-fhir-data-tabular--from-fhir/index.html)</mark>
--   <mark>[Retrieving and Subsetting Data With FHIR](/modules/40-fhir-data-tabular--retrieving-and-subsetting/index.html)</mark>
--   <mark>[Integrating FHIR Data With Data From Other APIs](/modules/40-fhir-data-tabular--api-integration/index.html)</mark>
+-   <mark>[Real-World Use Cases](/modules/tabular-real-world.qmd)</mark>
+-   <mark>[FHIR to Tabular Data](/modules/tabular-from-fhir.qmd)</mark>
+-   <mark>[Retrieving and Subsetting Data With FHIR](/modules/tabular-retrieving-and-subsetting.qmd)</mark>
 
 ## Using REDCap with FHIR
 
 -   <mark>**Prerequisite:** [Overview \> FHIR for Research](/modules/fhir-from-10000-ft.qmd)</mark>
--   <mark>[Real-World Use Cases](/modules/50-fhir-data-redcap--real-world-use-cases/index.html)</mark>
--   <mark>[Best Practices Workflow](/modules/50-fhir-data-redcap--best-practices-workflow/index.html)</mark>
--   <mark>[Example for a Study](/modules/50-fhir-data-redcap--example-study/index.html)</mark>
+-   <mark>[Introduction](/modules/redcap-intro.qmd)</mark>
+-   <mark>[Best Practices Workflow](/modules/redcap-best-practices.qmd)</mark>
+-   <mark>[Example for a Study](/modules/redcap-example.qmd)</mark>

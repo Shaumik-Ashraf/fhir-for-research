@@ -1,10 +1,10 @@
 ---
-title: "Common Data Models"
+title: Reading IGs
 
 area:
   name: Overview
 topic:
-  name: FHIR for Research
+  name: FHIR Data Modeling
 
 roles:
   - Investigator
@@ -14,6 +14,6 @@ roles:
   - Clinician Scientist/Trainee
 
 learning_objectives:
-  - question: tbd
-    answer: tbd
+  - question: Question here
+    answer: Answer here
 ---

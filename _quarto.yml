@@ -31,27 +31,48 @@ website:
       style: floating
       search: false
       align: left
-      collapse-level: 1
+      collapse-level: 2
       contents:
+        - sections/overview.qmd
         - section: "FHIR for Research"
           contents:
             - modules/fhir-from-10000-ft.qmd
             - modules/fhir-from-1000-ft.qmd
             - file: modules/fhir-research.qmd
               text: "Real World Research"
-            - modules/10-intro--key-fhir-resources/index.qmd
-            - modules/10-intro--accessing-fhir-data/index.qmd
-            - file: modules/10-intro--brief-history-of-fhir/index.qmd
-              text: "History of FHIR"
+            - modules/key-fhir-resources.qmd
+            - text: "Accessing FHIR Data"
+            - text: History of FHIR
             - modules/terminology.qmd
-            - modules/10-intro--common-data-models-and-fhir/index.qmd
+            - text: Common Data Models
             - file: modules/fhir-community.qmd
               text: Community & Documentation
         - section: "SMART on FHIR"
           contents:
-            - modules/20-intro-smart-on-fhir--overview/index.qmd
-            - modules/20-intro-smart-on-fhir--real-world-research/index.qmd
-            - modules/20-intro-smart-on-fhir--technical-quick-start/index.qmd
+            - modules/smart-on-fhir-intro.qmd
+            - modules/smart-on-fhir-research.qmd
+            - modules/smart-on-fhir-technical-quick-start.qmd
+
+    - id: working-with-data
+      title: Working With Data
+      style: floating
+      search: false
+      align: left
+      collapse-level: 2
+      contents:
+        - file: sections/working-with-data.qmd
+          text: Working With Data
+        - section: "Tabular Analysis"
+          contents:
+            - modules/tabular-real-world.qmd
+            - modules/tabular-from-fhir.qmd
+            - modules/tabular-retrieving-and-subsetting.qmd
+        - section: "REDCap With FHIR"
+          contents:
+            - modules/redcap-intro.qmd
+            - modules/redcap-best-practices.qmd
+            - modules/redcap-example.qmd
+
 
 
   page-footer:

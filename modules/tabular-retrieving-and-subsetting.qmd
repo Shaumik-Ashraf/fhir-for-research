@@ -1,10 +1,10 @@
 ---
-title: "Common Data Models"
+title: Retrieving and Subsetting
 
 area:
-  name: Overview
+  name: Working with Data
 topic:
-  name: FHIR for Research
+  name: Tabular Analysis
 
 roles:
   - Investigator
@@ -14,6 +14,6 @@ roles:
   - Clinician Scientist/Trainee
 
 learning_objectives:
-  - question: tbd
-    answer: tbd
+  - question: Question here
+    answer: Answer here
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "Real World Example"
 
 area:
   name: FHIR Data
