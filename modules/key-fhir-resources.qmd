@@ -37,7 +37,7 @@ Jump to [the table of key resources](#table-of-key-resources). The rest of this 
 
 ## Overview of FHIR resources
 
-Resources are the key building blocks of FHIR. A [**FHIR resource**](https://www.healthit.gov/sites/default/files/page/2021-04/Intro%20to%20FHIR%20Resources%20Fact%20Sheet.pdf) is a structure that contains medical information in an unambiguous format. This allows different systems to understand information in the same way,[^1] which is necessary for health systems to accurately share information.
+Resources are the key building blocks of FHIR. A [**FHIR resource**](https://www.healthit.gov/sites/default/files/page/2021-04/Intro%20to%20FHIR%20Resources%20Fact%20Sheet.pdf) is a structure that contains medical information in an unambiguous format. This allows different systems to understand information in the same way,[^1] which is necessary for health systems to accurately share data.
 
 [^1]: When systems exchange information with unambiguous and shared meaning, it is called [semantic interoperability](https://en.wikipedia.org/wiki/Semantic_interoperability).
 
