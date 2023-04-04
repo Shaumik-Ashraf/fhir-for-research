@@ -8,7 +8,7 @@ project:
 
 website:
   title: "FHIR for Research"
-  site-url: https://fhir-for-research.pages.mitre.org/
+  site-url: https://mitre.github.io/fhir-for-research/
   navbar:
     left:
       - text: Overview
@@ -23,7 +23,7 @@ website:
       - href: contribute.qmd
         text: Contributions & Corrections
       - icon: github
-        href: https://github.com/mitre/
+        href: https://github.com/mitre/fhir-for-research
 
   sidebar:
     - id: overview
@@ -49,9 +49,12 @@ website:
               text: Community & Documentation
         - section: "SMART on FHIR"
           contents:
-            - modules/smart-on-fhir-intro.qmd
-            - modules/smart-on-fhir-research.qmd
-            - modules/smart-on-fhir-technical-quick-start.qmd
+            - text: Introduction
+            - text: Real World Research
+            - text: Technical Quick Start
+            # - modules/smart-on-fhir-intro.qmd
+            # - modules/smart-on-fhir-research.qmd
+            # - modules/smart-on-fhir-technical-quick-start.qmd
 
     - id: working-with-data
       title: Working With Data
