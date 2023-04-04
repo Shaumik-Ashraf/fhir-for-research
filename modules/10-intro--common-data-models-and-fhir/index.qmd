@@ -90,7 +90,7 @@ Its CDM is organized into the following major schemas: [@sentinel]
 
 -   Mother-Infant Linkage Data
 
--   Auxilary Data (facility, provider)
+-   Auxiliary Data (facility, provider)
 
 -   Registry Data (death, cause of death, state vaccine)
 
@@ -112,7 +112,7 @@ Below is a visual of its CDM schema. For more information, please review the [PC
 
 ### i2b2
 
-Developed in 2004 by Partners HealthCare and Harvard Medical School, i2b2 is an open-source research data application framework that "provides clinical and translational investigators with the tools necessary to integrate medical record and clinical research in the genomics age." [@i2b2_wiki_intro] This CDM's main purpose is to help tranlsate genomic findings and hypotheses for researchers.
+Developed in 2004 by Partners HealthCare and Harvard Medical School, i2b2 is an open-source research data application framework that "provides clinical and translational investigators with the tools necessary to integrate medical record and clinical research in the genomics age." [@i2b2_wiki_intro] This CDM's main purpose is to help translate genomic findings and hypotheses for researchers.
 
 i2b2's CDM is different from the other listed in that it does not have a separate database table for each data type. Its CDM is based on a "star schema" where all patient observations are stored in a single "fact" table that provides different codes for separate ontologies. There are three major upsides to this design choice: [@i2b2_wiki_intro]
 
