@@ -122,7 +122,7 @@ i2b2's CDM is different from the other listed in that it does not have a separat
 
 -   Queries, analyses, and tools developed using i2b2 are future-proof since this CDM can remain stable over time
 
-The visual below gives an example of this. The `observation_fact` table holds all observations that act as keys to connect to other tables that can be added by institutions with their own required data types.
+The visual below gives an example of this. [@i2b2_wiki_star_schema] The `observation_fact` table holds all observations that act as keys to connect to other tables that can be added by institutions with their own required data types.
 
 ![](images/image-1891753576.png)
 
