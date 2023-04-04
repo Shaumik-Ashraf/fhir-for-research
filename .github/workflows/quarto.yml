@@ -51,6 +51,19 @@ jobs:
       - name: Render Quarto
         run: quarto render
 
+      - name: Remove .html extensions
+        run: |
+          # Find all HTML files in the current directory and its subdirectories
+          HTML_FILES=$(find . -type f -name "*.html")
+
+          # Loop through each HTML file
+          for file in $HTML_FILES; do
+              # Replace .html extension from <a> tags with empty string for relative links only
+              sed -i 's/\(<a[^>]*href="\)\([^:"]*\)\.html\("[^>]*>\)/\1\2\3/g' $file
+          done
+
+          echo "HTML files processed successfully!"
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
