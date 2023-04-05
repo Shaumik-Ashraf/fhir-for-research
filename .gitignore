@@ -9,3 +9,6 @@ public/
 /python_env/
 
 /.luarc.json
+
+# Ignore JabRef temp files
+bibliography.bib.*

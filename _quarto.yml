@@ -8,7 +8,7 @@ project:
 
 website:
   title: "FHIR for Research"
-  site-url: https://fhir-for-research.pages.mitre.org/
+  site-url: https://mitre.github.io/fhir-for-research/
   navbar:
     left:
       - text: Overview
@@ -23,7 +23,7 @@ website:
       - href: contribute.qmd
         text: Contributions & Corrections
       - icon: github
-        href: https://github.com/mitre/
+        href: https://github.com/mitre/fhir-for-research
 
   sidebar:
     - id: overview
@@ -31,41 +31,65 @@ website:
       style: floating
       search: false
       align: left
-      collapse-level: 1
+      collapse-level: 2
       contents:
+        - sections/overview.qmd
         - section: "FHIR for Research"
           contents:
-            - modules/10-intro--intro-part-1-what-is-fhir/index.qmd
-            - modules/10-intro--intro-part-2-how-fhir-works/index.qmd
-            - file: modules/10-intro--real-world-research-using-fhir/index.qmd
+            - modules/fhir-from-10000-ft.qmd
+            - modules/fhir-from-1000-ft.qmd
+            - file: modules/fhir-research.qmd
               text: "Real World Research"
-            - modules/10-intro--key-fhir-resources/index.qmd
-            - modules/10-intro--accessing-fhir-data/index.qmd
-            - file: modules/10-intro--brief-history-of-fhir/index.qmd
-              text: "History of FHIR"
-            - modules/10-intro--terminology-introduction/index.qmd
-            - modules/10-intro--common-data-models-and-fhir/index.qmd
-            - file: modules/10-intro--fhir-community-and-resources/index.qmd
+            - modules/key-fhir-resources.qmd
+            - text: "Accessing FHIR Data"
+            - text: History of FHIR
+            - modules/terminology.qmd
+            - text: Common Data Models
+            - file: modules/fhir-community.qmd
               text: Community & Documentation
         - section: "SMART on FHIR"
           contents:
-            - modules/20-intro-smart-on-fhir--overview/index.qmd
-            - modules/20-intro-smart-on-fhir--real-world-research/index.qmd
-            - modules/20-intro-smart-on-fhir--technical-quick-start/index.qmd
+            - text: Introduction
+            - text: Real World Research
+            - text: Technical Quick Start
+            # - modules/smart-on-fhir-intro.qmd
+            # - modules/smart-on-fhir-research.qmd
+            # - modules/smart-on-fhir-technical-quick-start.qmd
+
+    - id: working-with-data
+      title: Working With Data
+      style: floating
+      search: false
+      align: left
+      collapse-level: 2
+      contents:
+        - file: sections/working-with-data.qmd
+          text: Working With Data
+        - section: "Tabular Analysis"
+          contents:
+            - modules/tabular-real-world.qmd
+            - modules/tabular-from-fhir.qmd
+            - modules/tabular-retrieving-and-subsetting.qmd
+        - section: "REDCap With FHIR"
+          contents:
+            - modules/redcap-intro.qmd
+            - modules/redcap-best-practices.qmd
+            - modules/redcap-example.qmd
+
 
 
   page-footer:
     center:
-      - text: Footer text goes here
+      - text: "&copy; 2023 The MITRE Corporation / <a href=\"https://github.com/mitre/fhir-for-research/README.md\">License information</a><br>Approved for Public Release / Case #23-0966"
 
 
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - custom.scss
     css: styles.css
     toc: true
     include-in-header: head.html
     include-after-body: scripts.html
-
-

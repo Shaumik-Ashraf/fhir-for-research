@@ -1,7 +1,27 @@
 <header id="title-block-header">
+<!--
 $if(area)$
-<div>$area.name$ > $topic.name$ ></div>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="#">$area.name$</a></li>
+<li class="breadcrumb-item"><a href="#">$topic.name$</a></li>
+</ol>
+</nav>
 $endif$
+-->
+
+  <div class="callout callout-style-default callout-warning callout-titled">
+    <div class="callout-header d-flex align-content-center">
+      <div class="callout-icon-container"><i class="callout-icon"></i></div>
+      <div class="callout-title-container flex-fill">
+        Under active development
+      </div>
+    </div>
+    <div class="callout-body-container callout-body">
+      <p>The content on this website is under active development. Please proceed with caution.</p>
+    </div>
+  </div>
+
 <h1 class="title">$title$</h1>
 $if(subtitle)$
 <p class="subtitle">$subtitle$</p>
@@ -40,17 +60,27 @@ $for(learning_objectives)$
 $endfor$
 
 </ol>
-<div class="target-roles-container">
-<hr>
-Target roles:
-<ul class="target-roles">
+</div>
+</div>
+
+<div class="callout-note callout callout-style-simple no-icon callout-captioned" id="relevant-roles">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Relevant roles:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="target-roles list-inline">
 $for(roles)$
-    <li>$roles$ </li>
+    <li class="list-inline-item">$roles$</li>
 $endfor$
 </ul>
 </div>
 </div>
-</div>
+
 <!-- End learning objectives block -->
 
 <!-- Hack to add key points block at end of page-->

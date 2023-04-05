@@ -1,9 +1,0 @@
----
-title: "R Demo"
----
-
-Below is 42 from R execution.
-
-```{r}
-42
-```
