@@ -1,26 +1,129 @@
 ---
-title: Standing up a FHIR server for training and testing
+title: Standing up a FHIR Testing Server
+area:
+  name: Advanced Topics
+topic:
+  name: Custom Synthea Data & FHIR Testing Servers
+
+roles:
+  - Investigator
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives:
+  - question: What options are available for hosting FHIR data for testing and training?
+    answer: .
 ---
 
-::: callout-tip
-## Key points
+This module describes a few options for hosting FHIR data. While these are generally not robust enough to be production capabilities, these offer the quickest and easiest options for getting something setup for testing and training.
 
-1.  The easiest approach is using the free Logica FHIR Sandbox
-2.  If this dose not meet your needs, you can also run a FHIR server via Docker
-:::
 
 ## Logica Sandbox
+The easiest option is to use a cloud service - no installation is required on your local computer. The other benefits are that registration is free, a common instance can be shared between multiple people, and you don't have to worry about losing everything when you restart your computer.
+
+This option does have a few downsides however: you are dependent on the service staying online and providing appropriate security to make sure your data is accessible to you, and only to you. Anything stored in a Logica sandbox should also have a local backup copy, just in case.
+
+There are no published limits on the Logica sandbox, in terms of number of Patients, number of Resources, physical size, or bandwidth usage, however we don't recommend adding a million Patient records all at once. 
 
 <!--# Discuss how to bulk load Synthea data in (and test this to make sure it actually works, noting any obvious limits on size or difficulties you encounter), the model for retrieving data, caveats related to having a public FHIR server anyone can write to (your data may disappear), and Logica's SMART on FHIR capabilities -->
 
-## Docker-based options
+Signup steps:
 
-<!--# Some options are: -->
+Register at https://sandbox.logicahealth.org
+Activate your account
 
-https://github.com/logicahealth/sandbox-community-edition may be an option
+Sign back in, accept the terms of use
 
+Create a New Sandbox
+
+![](../images/logica_create_sandbox.png)
+
+Choose a name, ID, and FHIR version that are appropriate for your usage. We recommend enabling the "Allow Open FHIR Endpoint" setting as this will make it easier to load the patients, and it can be disabled later for security.
+If you plan to load patients only for a specific use case, you may want to disable the "Import sample patients and practitioners" option to ensure only your selected patients are loaded. Feel free to select or deselect the sample applications option - it will have no impact on basic FHIR operations.
+
+After clicking create, it will take ~15 seconds to setup the instance. Once it's ready, click on the row to go to the dashboard for your server. Feel free to explore the various options and features available, however this guide will not touch on any of them. See the Logica Sandbox [Confluence page](https://logica.atlassian.net/wiki/spaces/HSPC/pages/64585866/Logica+Sandbox) and [FAQs](https://logica.atlassian.net/wiki/spaces/HSPC/pages/61767707/FAQs) for additional information. For now visit the Settings tab to see your "Open FHIR Server URL" - this is the server base URL that should be used for loading patients in the [Loading Synthea Patients](#loading-synthea-patients) section below.
+
+Later, once you have loaded all the patients you want and you want to require security on the server, return to this Settings tab and click the pencil icon to edit, and uncheck "Allow Open FHIR Endpoint".
+
+
+## Docker-based Options
+
+While Docker-based options generally require some configuration, especially when you want your test data to persist after you reboot, they can be setup quickly and do not require programming knowledge to get started. Each of these options can be installed either locally on your own computer if you will be the only person using it, or on a shared server for ease of access by multiple people. Your options may vary based on your organization's security requirements. The following instructions are intended for a Windows-based or Mac-based local installation. 
+
+::: callout-caution
+
+Unless you specifically configure them to do so, assume that none of the Docker-based options will persist data, for example if you shut down Docker or restart your computer any patients you had loaded will be lost. Please review all documentation before loading a lot of data to make sure you don't lose work.
+
+:::
+
+First install Docker Desktop.  https://www.docker.com/products/docker-desktop/
+(Note that Docker Desktop is not free for organizations - see https://www.docker.com/pricing/ . There are free alternatives but they require more manual effort to get everything working.)
+
+
+### Logica Sandbox
+https://github.com/logicahealth/sandbox-community-edition
+
+### HAPI
+HAPI is the FHIR server implementation that the Logica Sandbox uses under the covers. If all you want is a plain FHIR server to run queries against, without any of the bells and whistles, this is a good option.
+
+```sh
+docker pull hapiproject/hapi:latest
+docker run -p 8080:8080 hapiproject/hapi:latest
+```
+
+https://hub.docker.com/r/hapiproject/hapi
+
+### SMART Dev Sandbox
 https://github.com/smart-on-fhir/smart-dev-sandbox may be an option
 
-https://hub.docker.com/r/hapiproject/hapi may be an option
 
-<!--# Are there other options? -->
+## Other options
+
+Other options for public test servers are listed [on the HL7 Confluence](https://confluence.hl7.org/display/FHIR/Public+Test+Servers) with basic information and limitations of each. A few notable items:
+
+ -  
+ -  
+
+
+## Loading Synthea Data
+
+Finally, once you have your server running, it's time to load your Synthea data into it. For this we assume you're using the default settings of FHIR R4, transaction bundles, all resource types exported, etc, since certain setting changes may affect how you load the data. It's completely fine if you ran Synthea multiple times and your output folder contains several runs all mixed up, but it's difficult to separate them out if that's the case.
+
+We recommend using the `curl` utility which should be available by default on most systems, with the following arguments:
+
+```sh
+curl -d @FILE --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+```
+where:
+
+```
+FILE is the path to a FHIR Bundle .json file
+SERVER is your FHIR server's base URL
+```
+
+The main trick to loading Synthea patients is to ensure files are loaded in the following order, so that references to resources across files will work correctly. You should not see any error messages when loading files. Replace `SERVER`
+
+First, load all `hospitalInformation*.json` files. These contain the Organization resources that are referenced by Encounters in the patient data.
+
+```sh
+for file in `ls hospitalInformation*.json`
+  do curl -d @$file --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+done 
+```
+
+Second, load all `practitioner*.json` files.
+```sh
+for file in `ls practitioner*.json`
+  do curl -d @$file --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+done 
+```
+
+
+Finally, load all individual patient files. All patient file names start with a capital letter, unlike the hospital and practioner files above, so we can use that to select just the files we haven't already uploaded.
+
+```sh
+for file in `ls [A-Z]*.json`
+  do curl -d @$file --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+done 
+```

@@ -1,13 +1,242 @@
 ---
-title: Synthea synthetic data overview
+title: Synthea Synthetic Data Overview
+area:
+  name: Advanced Topics
+topic:
+  name: Custom Synthea Data & FHIR Testing Servers
+
+roles:
+  - Investigator
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives:
+  - question: What is synthetic data?
+    answer: Synthetic data is data that has been artifically generated ("synthesized") by a computer or person rather than collected from real events.
+  - question: What is Synthea?
+    answer: Synthea is a software tool that generates realistic but not real synthetic electronic health records.
+  - question: How can I use Synthea to generate synthetic data?
+    answer: Synthetic Synthea data can be downloaded as static datasets from https://synthea.mitre.org or generated locally by downloading and configuring the software from https://github.com/synthetichealth/synthea .
+
 ---
 
-::: callout-tip
-## Key points
 
-1.  Synthetic data is often the best way to provide training on using FHIR or for testing FHIR-related software.
-2.  Synthea is an open source tool for generating synthetic clinical data in FHIR Resource instances.
-3.  Synthetic Synthea data can be downloaded from https://synthea.mitre.org or generated locally
+It is often difficult to acquire or access real healthcare data for research purposes. Even in situations where data of interest actually exists in interoperable forms, privacy regulations strictly limit what can be done with it. For many organizations such as hospitals that host their own data, research queries may require approval from an institutional review board (IRB) before they are allowed to be run against real data.  
+
+**Synthetic data** is an alternative to real data, that is artifically generated (usually by a computer, but can be created in small amounts by hand) rather than collected from the real world. When real healthcare data is unavailable or insufficient due to privacy, cost, or other restrictions, synthetic data is often the best alternative for software development, training, or testing purposes.
+
+::: callout-tip
+Synthetic data is not just deidentified data!
+
+Deidentified, anonymized, or pseudonymized data are categories of real data where identifiers have been removed or altered for privacy reasons. Because this is real data it is extremely valuable for research purposes, however it also still carries the risk of re-identification.
+On the other hand, because synthetic data is constructed, there is no privacy risk. When no individual's data was used to create the data, it is impossible for any individual's data to be in it.
 :::
 
-Content TBD
+
+## Synthea
+Synthea™ is a synthetic data generator that models the life and medical history of synthetic patients to produce realistic, but not real, synthetic electronic health records. Synthea is open source and built entirely from publicly available information, so the resulting records are free of cost and free of privacy restrictions. The resulting records are intended to be realistic both at the individual level and at the population level.
+
+
+[![](https://github.com/synthetichealth/synthea/raw/gh-pages/images/architecture.png){fig-alt="Basic Data Architecture of Synthea, showing how various forms of data are used to construct and export a synthetic population"}](https://github.com/synthetichealth/synthea/wiki/Architecture)
+
+
+Synthea starts with demographic information for a given region, based on the US Census. These demographics are used to randomly seed the individuals in the population with a realistic race, sex, target age, etc. Each individual is simulated independently from birth until either death or to the current day. As each individual lives out their synthetic life they flow through modules representing the progression and treatment of various diseases - these "disease modules" are built up from publicly available statistics such as disease incidence and prevalence, along with care guidelines from medical institutions. No real person's data is ever used to create a Synthea module. Finally, once the simulation is complete, the patient record is exported into selected industry-standard formats such as FHIR (DSTU2, STU3, and/or R4), C-CDA, CSV, or plain text.
+
+This page gives an overview of some of the key features of Synthea, but the [GitHub wiki](https://github.com/synthetichealth/synthea/wiki) is a great resource for understanding the details of the various aspects of Synthea.
+
+
+## Generic Modules
+At the core of Synthea is its set of disease modules, representing the progression and treatment of disease. A small snippet of one module is shown below.
+
+INSERT IMAGE HERE
+
+These modules are state transition machines, where each individual flows through the modules based on logical conditions and weighted randomness. Every synthetic patient starts in each synthetic module at birth at an Initial state, and they immediately start flowing through the modules. Each state represents a spot where something happens: some examples are a Delay state which waits a certain amount of time before progressing, commonly used to represent how the risk of certain conditions changes with age; or a ConditionOnset state to represent the spot where the patient acquires a given condition, not necessarily where it was diagnosed; or a Procedure state representing the point in time in a healthcare encounter that a procedure was performed. Each state has a transition that points to which state to go to next: direct transitions point to a single state, distributed transitions include multiple options with a weighting and one is chosen randomly each time, conditional transitions include logical criteria to choose which path to follow, and complex transitions are a combination of conditional and distributed. Modules will run until either the simulation ends (at patient death or when it reaches the current date) or until it reaches a Terminal state. 
+
+
+These simple concepts combined together allow for building up robust and detailed models of disease progression and treatment.
+
+::: {.callout-caution collapse="true"}
+## A note on Synthea clinical detail
+
+Because Synthea is open source and accepts contributions from a global user base, the level of detail does vary across modules. For instance, the Appendicitis module was the first to be created and the level of detail is fairly basic and minimal. On the other hand, the COVID-19 module and submodules were intentionally designed to replicate disease progression as closely as possible to early publications focused on early outbreaks in Wuhan, China and New York City, and is probably the largest and most detailed module. 
+
+Further, the number of disease modules is limited. Early efforts focused on the "top ten" causes of premature death and reasons people see their primary care provider, and further additions have added a large number of modules representing common conditions, but rarer and more complex conditions may not be represented at all. The Synthea community encourages and welcomes users to create new modules representing conditions of interest, or to improve the detail and realism of existing modules.
+:::
+
+
+The [Synthea Module Builder](https://synthetichealth.github.io/module-builder/) is a web interface for clinicians and other healthcare professionals to view, modify, and create Synthea modules with no programming experience required. A [short video introduction to the Module Builder is available on YouTube](https://www.youtube.com/watch?v=cOfI6FOKv0s), and a [tutorial is available on the Wiki](https://github.com/synthetichealth/synthea/wiki/Module-Builder-Tutorial).
+
+
+## FHIR Resources
+The FHIR resources generated by Synthea tend to be fairly basic -- required fields are always present, but optional fields are rarely populated. If your use case requires fields not populated by Synthea, there are often ways to customize it for your needs. Additional info on customizing Synthea is available on (link to the next page here)
+
+By default, Synthea will export one file per patient, as a transaction-type Bundle. Organizations and Practitioners are exported separately since these resources may be referenced by multiple patients' resources.
+Synthea may also be configured to export Bulk FHIR.
+
+As of April 2023, Synthea can produce the following resource types: 
+
+-  `AllergyIntolerance`
+-  `Bundle`
+-  `CarePlan`
+-  `Claim`
+-  `Condition`
+-  `Coverage` (R4 and STU3 only)
+-  `DiagnosticReport` (for labs)
+-  `Encounter`
+-  `ExplanationOfBenefit` (R4 and STU3 only, Blue Button 2.0 Implementation Guide in STU3)
+-  `Goal`
+-  `ImagingStudy`
+-  `Immunization` 
+-  `MedicationRequest`
+-  `MedicationAdministration`
+-  `Observation`
+-  `Organization`
+-  `Patient`
+-  `Practitioner`
+-  `Procedure`
+
+Resources only supported with R4 and US Core enabled:  
+
+-  `CareTeam`
+-  `Device`
+-  `DiagnosticReport` (for clinical notes)
+-  `DocumentReference` (for clinical notes)
+-  `Location`
+-  `Medication`
+-  `PractitionerRole`
+-  `Provenance`
+
+## Pregenerated Datasets
+As an alternative to running Synthea yourself, a number of datasets have already been generated and are available for download at the following locations:
+
+ -  [https://synthea.mitre.org/downloads](https://synthea.mitre.org/downloads)
+ -  [https://confluence.hl7.org/display/COD/mCODE+Test+Data](https://confluence.hl7.org/display/COD/mCODE+Test+Data)
+ -  [https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/QDXLWR](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/QDXLWR)
+
+## Prerequisites
+Synthea requires the Java™ JDK 11 or newer to be installed (make sure to select the JDK, not the JRE install). We recommend the prebuilt OpenJDK binaries available from
+[https://adoptium.net/](https://adoptium.net/).
+
+## Basic Setup
+For users who just want to run Synthea, and not make detailed changes to the internal models, the basic setup is recommended.
+
+1. Download the binary distribution to a file from 
+[https://github.com/synthetichealth/synthea/releases/download/master-branch-latest/synthea-with-dependencies.jar](https://github.com/synthetichealth/synthea/releases/download/master-branch-latest/synthea-with-dependencies.jar
+)
+
+2. Run Synthea with the `java -jar synthea-with-dependencies.jar` command. Additional command-line options may be appended at the end of the command, see [Common Configuration](#common-configuration) below for details.
+
+When you run this command, you should see output similar to the following:
+
+```
+Scanned 60 modules and 36 submodules.
+Loading submodule modules/breast_cancer/tnm_diagnosis.json
+Loading submodule modules/allergies/allergy_incidence.json
+Loading submodule modules/dermatitis/moderate_cd_obs.json
+...
+Loading module modules/opioid_addiction.json
+Loading module modules/dialysis.json
+...
+Loading module modules/hypertension.json
+Running with options:
+Population: 1
+Seed: 1570658792125
+Provider Seed:1570658792125
+Location: Massachusetts
+Min Age: 0
+Max Age: 140
+1 -- Arthur650 Carroll471 (39 y/o M) Southwick, Massachusetts 
+{alive=1, dead=0}
+```
+
+## Developer Setup
+These instructions are intended for those wishing to examine the Synthea source code, extend it or build the code locally. 
+
+
+To copy the repository locally, install the necessary dependencies, and run the test suite, open a terminal window and run the following commands:
+
+```sh
+git clone https://github.com/synthetichealth/synthea.git
+cd synthea
+./gradlew build check
+```
+**Note: if running on Windows, use `.\gradlew.bat` instead of `./gradlew` -- this guide uses `./gradlew` for brevity**
+
+
+The primary entry point of Synthea is the `run` gradle task, which can be run from the terminal in the `synthea` folder by running the following command.
+
+```sh
+./gradlew run
+```
+
+Alternatively, you may run the provided `run_synthea` script which makes it easier to pass command-line arguments to the simulation:
+
+```sh
+./run_synthea
+```
+**Note: if running on Windows, use `.\run_synthea.bat` instead of `./run_synthea` -- going forward this guide uses `run_synthea` for brevity**
+
+When you run this command, you should see output similar to the following:
+
+```
+$ ./run_synthea
+
+> Task :run
+Loading C:\Users\example\synthea\build\resources\main\modules\allergic_rhinitis.json
+Loading C:\Users\example\synthea\build\resources\main\modules\allergies\allergy_incidence.json
+[... many more lines of Loading ...]
+Loading C:\Users\example\synthea\build\resources\main\modules\wellness_encounters.json
+Loaded 68 modules.
+Running with options:
+Population: 1
+Seed: 1519063214833
+Location: Massachusetts
+
+1 -- Jerilyn993 Parker433 (10 y/o) Lawrence, Massachusetts
+```
+
+
+## Common Configuration
+Synthea includes a variety of command-line arguments and configuration options to enable or disable common settings, or change certain aspects of the output data. A small subset of the common options are listed below; more complete documentation is available on the Synthea wiki.
+
+(Note: the examples below use `run_synthea` as the base command for brevity. Replace `run_synthea` with `java -jar synthea-with-dependencies.jar` if you followed the basic setup above)
+
+Command line arguments
+```
+run_synthea [options] [state [city]]
+-p # population size
+-a #-# age range
+-s # seed for randomness / reproducibility
+-h print usage
+
+--*config=option 
+
+Examples:
+run_synthea Massachusetts
+run_synthea Alaska Juneau
+run_synthea -s 12345
+run_synthea -p 1000
+run_synthea -s 987 Washington Seattle
+run_synthea -s 21 -p 100 Utah "Salt Lake City"
+run_synthea -g M -a 60-65
+run_synthea -p 10 --exporter.fhir.export=true
+run_synthea --exporter.baseDirectory="./output_tx/" Texas
+```
+
+Configuration Options
+
+```properties
+exporter.baseDirectory = ./output/
+
+exporter.fhir.export = true
+exporter.years_of_history = 0
+exporter.csv.export = false
+exporter.fhir.included_resources =
+exporter.fhir.excluded_resources =
+
+generate.append_numbers_to_person_names = true
+```
+
+
+
