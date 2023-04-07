@@ -42,7 +42,7 @@ website:
               text: "Real World Research"
             - modules/key-fhir-resources.qmd
             - text: "Accessing FHIR Data"
-            - text: History of FHIR
+            - modules/fhir-history.qmd
             - modules/terminology.qmd
             - text: Common Data Models
             - file: modules/fhir-community.qmd
