@@ -150,6 +150,8 @@ Max Age: 140
 {alive=1, dead=0}
 ```
 
+Once the process completes, you will see an `output` folder alongside the `synthea-with-dependencies.jar`, and a `fhir` folder inside the `output` folder. Inside that `fhir` folder are the FHIR Bundle JSON files that were produced by Synthea. You can review these in your text editor of choice, or the Synthea team has made an online tool for quickly reviewing the content of a Synthea-generated Bundle. Simply visit [https://synthetichealth.github.io/spt/#/record_viewer](https://synthetichealth.github.io/spt/#/record_viewer) and drag & drop a patient file onto the page to load it.
+
 ## Developer Setup
 These instructions are intended for those wishing to examine the Synthea source code, extend it or build the code locally. 
 
@@ -196,6 +198,7 @@ Location: Massachusetts
 1 -- Jerilyn993 Parker433 (10 y/o) Lawrence, Massachusetts
 ```
 
+Once the process completes, you will see a new `output` folder, and a `fhir` folder inside the `output` folder. Inside that `fhir` folder are the FHIR Bundle JSON files that were produced by Synthea. You can review these in your text editor of choice, or the Synthea team has made an online tool for quickly reviewing the content of a Synthea-generated Bundle. Simply visit [https://synthetichealth.github.io/spt/#/record_viewer](https://synthetichealth.github.io/spt/#/record_viewer) and drag & drop a patient file onto the page to load it.
 
 ## Common Configuration
 Synthea includes a variety of command-line arguments and configuration options to enable or disable common settings, or change certain aspects of the output data. A small subset of the common options are listed below; more complete documentation is available on the Synthea wiki.
