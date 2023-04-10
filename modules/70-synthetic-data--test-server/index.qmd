@@ -20,11 +20,11 @@ This module describes a few options for hosting FHIR data. While these are gener
 
 
 ## Logica Sandbox
-The easiest option is to use a cloud service - no installation is required on your local computer. The other benefits are that registration is free, a common instance can be shared between multiple people, and you don't have to worry about losing everything when you restart your computer.
+The easiest option for hosting data is to use a cloud service - no installation is required on your local computer. The other benefits are that registration is free, a common instance can be shared between multiple people, and you don't have to worry about losing everything when you restart your computer.
 
-This option does have a few downsides however: you are dependent on the service staying online and providing appropriate security to make sure your data is accessible to you, and only to you. Anything stored in a Logica sandbox should also have a local backup copy, just in case.
+This option does have a few downsides however: you are dependent on the service staying online and providing appropriate security to make sure your data is accessible to you and only to you. Real health data and synthetic data containing alterations you want to keep private should never be uploaded to a Logica sandbox. Anything stored in a Logica sandbox should also have a local backup copy, just in case.
 
-There are no published limits on the Logica sandbox, in terms of number of Patients, number of Resources, physical size, or bandwidth usage, however we don't recommend adding a million Patient records all at once. 
+There are no published limits on the Logica Sandbox, in terms of number of Patients, number of Resources, physical size, or bandwidth usage, however we recommend keeping your population as small as possible - both in terms of number of Patients and the total amount of data per Patients - in order to ensure good performance. The servers are fairly resource limited so timeouts may occur if you try to upload files larger than `TODO figure out this limit`
 
 <!--# Discuss how to bulk load Synthea data in (and test this to make sure it actually works, noting any obvious limits on size or difficulties you encounter), the model for retrieving data, caveats related to having a public FHIR server anyone can write to (your data may disappear), and Logica's SMART on FHIR capabilities -->
 
@@ -54,7 +54,6 @@ While Docker-based options generally require some configuration, especially when
 ::: callout-caution
 
 Unless you specifically configure them to do so, assume that none of the Docker-based options will persist data, for example if you shut down Docker or restart your computer any patients you had loaded will be lost. Please review all documentation before loading a lot of data to make sure you don't lose work.
-
 :::
 
 First install Docker Desktop.  https://www.docker.com/products/docker-desktop/
@@ -62,6 +61,8 @@ First install Docker Desktop.  https://www.docker.com/products/docker-desktop/
 
 
 ### Logica Sandbox
+This set of Docker images mirrors the Logica Sandbox, but can be run locally. If you like the full suite of what Logica provides but either want higher performance or don't want to use a fully public Internet service, this is a good option.
+
 https://github.com/logicahealth/sandbox-community-edition
 
 ### HAPI
@@ -75,6 +76,7 @@ docker run -p 8080:8080 hapiproject/hapi:latest
 https://hub.docker.com/r/hapiproject/hapi
 
 ### SMART Dev Sandbox
+
 https://github.com/smart-on-fhir/smart-dev-sandbox may be an option
 
 
@@ -90,16 +92,18 @@ Other options for public test servers are listed [on the HL7 Confluence](https:/
 
 Finally, once you have your server running, it's time to load your Synthea data into it. For this we assume you're using the default settings of FHIR R4, transaction bundles, all resource types exported, etc, since certain setting changes may affect how you load the data. It's completely fine if you ran Synthea multiple times and your output folder contains several runs all mixed up, but it's difficult to separate them out if that's the case.
 
-We recommend using the `curl` utility which should be available by default on most systems, with the following arguments:
+
+We recommend using the `curl` utility which should be available by default on most computers, with the following arguments:
 
 ```sh
-curl -d @FILE --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+curl -d @FILE -H 'Content-Type: application/json' SERVER
 ```
 where:
 
 ```
 FILE is the path to a FHIR Bundle .json file
 SERVER is your FHIR server's base URL
+-H 'Content-Type: application/json' sets the content type to JSON to ensure the server handles it correctly
 ```
 
 The main trick to loading Synthea patients is to ensure files are loaded in the following order, so that references to resources across files will work correctly. You should not see any error messages when loading files. Replace `SERVER`
@@ -108,14 +112,14 @@ First, load all `hospitalInformation*.json` files. These contain the Organizatio
 
 ```sh
 for file in `ls hospitalInformation*.json`
-  do curl -d @$file --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+  do curl -d @$file -H 'Content-Type: application/json' SERVER
 done 
 ```
 
 Second, load all `practitioner*.json` files.
 ```sh
 for file in `ls practitioner*.json`
-  do curl -d @$file --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+  do curl -d @$file -H 'Content-Type: application/json' SERVER
 done 
 ```
 
@@ -124,6 +128,6 @@ Finally, load all individual patient files. All patient file names start with a 
 
 ```sh
 for file in `ls [A-Z]*.json`
-  do curl -d @$file --progress-bar --output /dev/null --show-error --fail -H 'Content-Type: application/json' SERVER
+  do curl -d @$file -H 'Content-Type: application/json' SERVER
 done 
 ```

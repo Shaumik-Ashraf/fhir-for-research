@@ -22,12 +22,12 @@ learning_objectives:
 ---
 
 
-It is often difficult to acquire or access real healthcare data for research purposes. Even in situations where data of interest actually exists in interoperable forms, privacy regulations strictly limit what can be done with it. For many organizations such as hospitals that host their own data, research queries may require approval from an institutional review board (IRB) before they are allowed to be run against real data.  
+It is often difficult to acquire or access real healthcare data for research purposes. Even in situations where data of interest actually exists in interoperable forms, privacy regulations such as HIPAA strictly limit what can be done with it. For many organizations such as hospitals that host their own data, research queries may require approval from an institutional review board (IRB) before they are allowed to be run against real data.  
 
 **Synthetic data** is an alternative to real data, that is artifically generated (usually by a computer, but can be created in small amounts by hand) rather than collected from the real world. When real healthcare data is unavailable or insufficient due to privacy, cost, or other restrictions, synthetic data is often the best alternative for software development, training, or testing purposes.
 
 ::: callout-tip
-Synthetic data is not just deidentified data!
+## Synthetic data is not just deidentified data!
 
 Deidentified, anonymized, or pseudonymized data are categories of real data where identifiers have been removed or altered for privacy reasons. Because this is real data it is extremely valuable for research purposes, however it also still carries the risk of re-identification.
 On the other hand, because synthetic data is constructed, there is no privacy risk. When no individual's data was used to create the data, it is impossible for any individual's data to be in it.
@@ -38,20 +38,20 @@ On the other hand, because synthetic data is constructed, there is no privacy ri
 Synthea™ is a synthetic data generator that models the life and medical history of synthetic patients to produce realistic, but not real, synthetic electronic health records. Synthea is open source and built entirely from publicly available information, so the resulting records are free of cost and free of privacy restrictions. The resulting records are intended to be realistic both at the individual level and at the population level.
 
 
-[![](https://github.com/synthetichealth/synthea/raw/gh-pages/images/architecture.png){fig-alt="Basic Data Architecture of Synthea, showing how various forms of data are used to construct and export a synthetic population"}](https://github.com/synthetichealth/synthea/wiki/Architecture)
+[![](https://github.com/synthetichealth/synthea/raw/gh-pages/images/architecture.png){fig-alt="Basic Data Architecture of Synthea, showing how various sources of data are used to create a synthetic population"}](https://github.com/synthetichealth/synthea/wiki/Architecture)
 
 
-Synthea starts with demographic information for a given region, based on the US Census. These demographics are used to randomly seed the individuals in the population with a realistic race, sex, target age, etc. Each individual is simulated independently from birth until either death or to the current day. As each individual lives out their synthetic life they flow through modules representing the progression and treatment of various diseases - these "disease modules" are built up from publicly available statistics such as disease incidence and prevalence, along with care guidelines from medical institutions. No real person's data is ever used to create a Synthea module. Finally, once the simulation is complete, the patient record is exported into selected industry-standard formats such as FHIR (DSTU2, STU3, and/or R4), C-CDA, CSV, or plain text.
+Synthea starts with demographic information for a given region, based on the US Census. These demographics are used to randomly seed the individuals in the population with a realistic race, sex, target age, etc. Each individual is simulated independently from birth until either death or to the current day. As each individual lives out their synthetic life they flow through modules representing the progression and treatment of various diseases - these "disease modules" are built up from publicly available statistics such as disease incidence and prevalence, along with care guidelines from medical institutions. No real person's data is ever used to create a Synthea module. Finally, once the simulation is complete, the patient record is exported into industry-standard formats such as FHIR (DSTU2, STU3, and/or R4), C-CDA, CSV, or plain text.
 
-This page gives an overview of some of the key features of Synthea, but the [GitHub wiki](https://github.com/synthetichealth/synthea/wiki) is a great resource for understanding the details of the various aspects of Synthea.
+This page gives an overview of the basics and some of the key features of Synthea, but the [Synthea wiki on GitHub](https://github.com/synthetichealth/synthea/wiki) is a great resource for understanding the details of the various aspects of Synthea.
 
 
 ## Generic Modules
-At the core of Synthea is its set of disease modules, representing the progression and treatment of disease. A small snippet of one module is shown below.
+At the core of Synthea is a set of disease modules, representing the progression and treatment of various conditions. A small snippet of the Appendicitis is shown below.
 
-INSERT IMAGE HERE
+![](../images/synthea_example_module.png)
 
-These modules are state transition machines, where each individual flows through the modules based on logical conditions and weighted randomness. Every synthetic patient starts in each synthetic module at birth at an Initial state, and they immediately start flowing through the modules. Each state represents a spot where something happens: some examples are a Delay state which waits a certain amount of time before progressing, commonly used to represent how the risk of certain conditions changes with age; or a ConditionOnset state to represent the spot where the patient acquires a given condition, not necessarily where it was diagnosed; or a Procedure state representing the point in time in a healthcare encounter that a procedure was performed. Each state has a transition that points to which state to go to next: direct transitions point to a single state, distributed transitions include multiple options with a weighting and one is chosen randomly each time, conditional transitions include logical criteria to choose which path to follow, and complex transitions are a combination of conditional and distributed. Modules will run until either the simulation ends (at patient death or when it reaches the current date) or until it reaches a Terminal state. 
+These modules are state transition machines, where each individual flows through the modules based on logical conditions and weighted randomness. Every synthetic patient starts in each module at birth at an Initial state, and they immediately start progressing through. Each state represents a spot where something happens: some examples are a Delay state which waits a certain amount of time before progressing, commonly used to represent how the risk of certain conditions changes with age; or a ConditionOnset state to represent the spot where the patient acquires a given condition, not necessarily where it was diagnosed; or a Procedure state representing the point in time in a healthcare encounter that a procedure was performed. Each state has a transition that points to which state to go to next: direct transitions point to a single state, distributed transitions include multiple options with a weighting and one is chosen randomly each time, conditional transitions include logical criteria to choose which path to follow, and complex transitions are a combination of conditional and distributed. Modules will run until either the simulation ends (at patient death or when it reaches the current date) or until it reaches a Terminal state. (Terminal meaning "end of this module" not "the patient has a terminal condition and died")
 
 
 These simple concepts combined together allow for building up robust and detailed models of disease progression and treatment.
@@ -69,7 +69,7 @@ The [Synthea Module Builder](https://synthetichealth.github.io/module-builder/) 
 
 
 ## FHIR Resources
-The FHIR resources generated by Synthea tend to be fairly basic -- required fields are always present, but optional fields are rarely populated. If your use case requires fields not populated by Synthea, there are often ways to customize it for your needs. Additional info on customizing Synthea is available on (link to the next page here)
+The FHIR resources generated by Synthea tend to be fairly basic -- required fields are always present, but optional fields are rarely populated. If your use case requires fields not populated by Synthea, there are often ways to customize it for your needs. Additional info on customizing Synthea is available on `(link to the next page here)`
 
 By default, Synthea will export one file per patient, as a transaction-type Bundle. Organizations and Practitioners are exported separately since these resources may be referenced by multiple patients' resources.
 Synthea may also be configured to export Bulk FHIR.
@@ -119,13 +119,13 @@ Synthea requires the Java™ JDK 11 or newer to be installed (make sure to selec
 [https://adoptium.net/](https://adoptium.net/).
 
 ## Basic Setup
-For users who just want to run Synthea, and not make detailed changes to the internal models, the basic setup is recommended.
+For users who just want to run Synthea, and not make detailed changes to the internal models, the basic setup is recommended. However, the number of customizations available in this setup is limited. See the [Developer Setup instructions below](#developer-setup) for instructions if you want to make changes to Synthea.
 
 1. Download the binary distribution to a file from 
 [https://github.com/synthetichealth/synthea/releases/download/master-branch-latest/synthea-with-dependencies.jar](https://github.com/synthetichealth/synthea/releases/download/master-branch-latest/synthea-with-dependencies.jar
 )
 
-2. Run Synthea with the `java -jar synthea-with-dependencies.jar` command. Additional command-line options may be appended at the end of the command, see [Common Configuration](#common-configuration) below for details.
+2. Open a command-line prompt/terminal window and run Synthea by running the command `java -jar synthea-with-dependencies.jar` . Additional command-line options may be appended at the end of the command, see [Common Configuration](#common-configuration) below for details.
 
 When you run this command, you should see output similar to the following:
 
@@ -166,13 +166,7 @@ cd synthea
 **Note: if running on Windows, use `.\gradlew.bat` instead of `./gradlew` -- this guide uses `./gradlew` for brevity**
 
 
-The primary entry point of Synthea is the `run` gradle task, which can be run from the terminal in the `synthea` folder by running the following command.
-
-```sh
-./gradlew run
-```
-
-Alternatively, you may run the provided `run_synthea` script which makes it easier to pass command-line arguments to the simulation:
+The primary entry point of Synthea is the provided `run_synthea` script. Additional command-line options may be appended at the end of the command, see [Common Configuration](#common-configuration) below for details. 
 
 ```sh
 ./run_synthea
@@ -228,16 +222,25 @@ run_synthea --exporter.baseDirectory="./output_tx/" Texas
 ```
 
 Configuration Options
-
-```properties
+<!--# This is not actually ruby, but there's no syntax highlighter for properties files and this seems to be the closest -->
+```ruby
+# Set the folder where exported records will be created.
+# Each export type (e.g., FHIR, CCDA, CSV) will be a subfolder under this:
 exporter.baseDirectory = ./output/
 
+# Set to true to enable the FHIR R4 exporter:
 exporter.fhir.export = true
-exporter.years_of_history = 0
-exporter.csv.export = false
+
+# Set the number of years of active history to keep from each patient. Default: 10
+# Set to 0 to keep all history from every patient, note this will increase file size significantly.
+exporter.years_of_history = 10
+
+# Set this to only include selected resource types: (e.g. Patient,Condition,Encounter)
 exporter.fhir.included_resources =
+# Set this to exclude certain resource types from export: (e.g. Observation)
 exporter.fhir.excluded_resources =
 
+# Set to false to enable adding numbers to synthetic patient names, to make it more obvious they are not real data.
 generate.append_numbers_to_person_names = true
 ```
 
