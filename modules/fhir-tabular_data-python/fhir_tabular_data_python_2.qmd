@@ -45,6 +45,7 @@ Tabular data is not able to store such nested object hierarchies, since it has a
 Let's use the FHIR query from above as an example. Below is the raw JSON from the query. For this example, lets focus on the `telecom` key - it has a value of an array, which contains three more key-value pairs (`system`, `value`, and `use`). In this case, converting this into tabular format would require three separate rows for `system`, `value`, and `use` that are all related to each other.
 
 ::: {.callout-caution .}
+
 ```{json}
 {
   "resourceType": "Bundle",
@@ -222,6 +223,7 @@ Let's use the FHIR query from above as an example. Below is the raw JSON from th
   } ]
 }
 ```
+
 :::
 
 Let's take a closer look at the `patient_bundle` DataFrame we created from before. Below summarizes all columns created - notice how the `telecom` columns are stored. Each key-value pair has a `name` prefix in front, which represents the higher level object that each key-pair is associated with. If a column has multiple prefixes, that means that given key-value pair is more deeply nested and each parent key is being added as a prefix. Try comparing other JSON key-value pairs with their corresponding tabular column titles to better understand how the conversion is working.
@@ -229,7 +231,7 @@ Let's take a closer look at the `patient_bundle` DataFrame we created from befor
 You also may have noticed a number appearing after each prefix. These are related to situations (which are common in FHIR) where a key is paired with an array of multples instanes of the same key-value pairs, but each instance has different values. This is exemplified in the `identifer` key, which has multiple different instances of `system`, `value`, and a nested array of `system`, `code`, and `display`. We can't differentiate each of these instances simply by their key names (since they're all the same), so `fhir_pyrate` addresses this issue by simply listing the numerical order that a given instance of keys is in. For example, the `identifer` key has 5 different values for the nested `system` key. This is stored in tabular format as the following: `identifer_0_system`, `identifer_1_system`, `identifer_2_system`, `identifer_3_system`, `identifer_4_system`.
 
 ```{python}
-patient_bundle.info()
+patient_all.info()
 ```
 
 ## Processing Our DataFrame
