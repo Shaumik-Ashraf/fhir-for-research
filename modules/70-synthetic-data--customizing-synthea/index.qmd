@@ -161,7 +161,81 @@ More detail on creating and using overrides files is available [on the Synthea w
 ## Flexporter
 The Flexible Exporter, aka "Flexporter" is an experimental feature that allows for arbitrary customizations in Synthea.
 
-More detail on using the Flexporter is available [on the Synthea wiki](https://github.com/synthetichealth/synthea/wiki/Flexporter)
+The Flexporter works using a YAML-based mapping file to define transformations that are applied to each patient record that is exported. Transformations generally contain a location, represented in [FHIRPath](https://hl7.org/fhir/fhirpath.html), and a value to put at that location.
+
+As with other customization features built into Synthea, the Flexporter is intended to tweak Synthea data, not radically transform it. Common situations where the Flexporter will be most valuable are situations where specific fields or resource types are needed but not exported. (For instance, imagine a use case that requires an `Appointment` resource prior to every `Encounter`. Synthea out of the box supports `Encounter` resources but not `Appointment`.) The Flexporter is intended to support a number of different use cases, but since it's not possible to predict every possible use case in advance, there are things that are outside the capability of the Flexporter.
+
+As of April 2023, the Flexporter supports the following types of actions:
+
+ - `apply_profiles`: Adds a given profile URI to the `meta.profile` field on resources matching the given FHIRPath
+ - `set_values`: Set values on fields on resources that already exist within the `Bundle`
+ - `create_resource`: Create new resources with specific values and add them to the `Bundle`.
+ - `keep_resources`: Keep only resources matching certain FHIRPath. Other resources will be filtered out
+ - `delete_resources`: Delete resources matching certain FHIRPath.
+ - `execute_script`: Execute arbitrary JavaScript against either the entire `Bundle` or against individual resources of specific types. Note that the provided JavaScript may be arbitrarily complex, but loading libraries such as from npm is not supported.
+
+Sample Flexporter Mapping File:
+
+```yaml
+---
+# name is just a friendly name for this mapping
+name: Random Testing
+
+# applicability determines whether this mapping applies to a given patient record
+applicability: true
+
+actions:
+ - name: Set Immunization.recorded = Immunization.occurrenceDateTime
+   set_values:
+     - applicability: Immunization
+       fields:
+         - location: Immunization.recorded
+           value: $getField([Immunization.occurrence])
+
+
+ - name: Create ServiceRequest for every Procedure
+   create_resource: 
+     - resourceType: ServiceRequest
+       based_on: 
+         resource: Procedure
+       fields:
+         - location: ServiceRequest.intent
+           value: plan
+         - location: ServiceRequest.encounter.reference
+           value: $getField([Procedure.encounter.reference])
+         - location: ServiceRequest.subject.reference
+           value: $findRef([Patient])
+         - location: ServiceRequest.code
+           value: $getField([Procedure.code])
+
+       writeback:
+         - location: Procedure.basedOn.reference
+           value: $setRef([ServiceRequest])
+```
+
+This example mapping does the following:
+
+ 1. For every instance of `Immunization`:
+   -  Copy the value from `Immunization.occurrence[x]` (note as of today in Synthea this will always be a `dateTime`) into the field `Immunization.recorded`
+ 2. For every instance of `Procedure`:
+   - Create a new instance of `ServiceRequest` and add it to the `Bundle`.
+   - Set the following values on the created `ServiceRequest`:
+     - Set `ServiceRequest.intent` to the fixed value "plan"
+     - Copy the value from the source `Procedure.encounter.reference` into the field `ServiceRequest.encounter.reference`
+     - Find the first resource matching `Patient` in the Bundle, create a reference to it, and set that on the field `ServiceRequest.subject.reference`
+     - Copy the value from the source `Procedure.code` into the field `ServiceRequest.code`
+   - Set the following values on the source `Procedure`:
+     - Create a reference to the created `ServiceRequest` and set that on the field `Procedure.basedOn.reference`
+
+Because the Flexporter is still experimental, to use it you must be working off the `flexporter` branch of the Synthea repository.
+
+To run Synthea with Flexporter mappings enabled, use the `-fm` flag to specify a path to a mapping file. Multiple Flexporter mappings may be used at the same time, in which case they will be applied in the order listed in the command, for example:
+
+```sh
+run_synthea -fm ./src/test/resources/flexporter/qicore_common.yaml -fm additional_fields.yaml`
+```
+
+Full detail on the mapping file specification and using the Flexporter is available [on the Synthea wiki](https://github.com/synthetichealth/synthea/wiki/Flexporter)
 
 ## Free-form tools
 Finally, if all else fails, other languages such as Python, JavaScript, or R allow you to write your own scripts and tools to filter and modify the data created by Synthea as you see fit. The ecosystem is too broad to get into detail here, but some libraries of note that may be helpful are:

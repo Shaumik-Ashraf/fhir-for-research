@@ -13,7 +13,7 @@ roles:
 
 learning_objectives:
   - question: What options are available for hosting FHIR data for testing and training?
-    answer: .
+    answer: There are both cloud-based and local options for hosting FHIR servers, with varying levels of capabilities, ease of setup and access, and performance. As always, the best option depends on the specific use case.
 ---
 
 This module describes a few options for hosting FHIR data. While these are generally not robust enough to be production capabilities, these offer the quickest and easiest options for getting something setup for testing and training.
@@ -22,9 +22,11 @@ This module describes a few options for hosting FHIR data. While these are gener
 ## Logica Sandbox
 The easiest option for hosting data is to use a cloud service - no installation is required on your local computer. The other benefits are that registration is free, a common instance can be shared between multiple people, and you don't have to worry about losing everything when you restart your computer.
 
+The [Logica FHIR Sandbox](https://www.logicahealth.org/solutions/fhir-sandbox/) is a free service provided by Logica Health that allows the FHIR community to experiment with and develop FHIR applications. The Sandbox supports SMART-on-FHIR and includes a number of pre-installed apps. We recommend the Logica Sandbox as a good first step.
+
 This option does have a few downsides however: you are dependent on the service staying online and providing appropriate security to make sure your data is accessible to you and only to you. Real health data and synthetic data containing alterations you want to keep private should never be uploaded to a Logica sandbox. Anything stored in a Logica sandbox should also have a local backup copy, just in case.
 
-There are no published limits on the Logica Sandbox, in terms of number of Patients, number of Resources, physical size, or bandwidth usage, however we recommend keeping your population as small as possible - both in terms of number of Patients and the total amount of data per Patients - in order to ensure good performance. The servers are fairly resource limited so timeouts may occur if you try to upload files larger than `TODO figure out this limit`
+There are no published limits on the Logica Sandbox, in terms of number of Patients, number of Resources, physical size, or bandwidth usage, however we recommend keeping your population as small as possible - both in terms of number of Patients and the total amount of data per Patients - in order to ensure good performance. Timeouts may occur if you try to upload files larger than `TODO figure out this limit`
 
 <!--# Discuss how to bulk load Synthea data in (and test this to make sure it actually works, noting any obvious limits on size or difficulties you encounter), the model for retrieving data, caveats related to having a public FHIR server anyone can write to (your data may disappear), and Logica's SMART on FHIR capabilities -->
 
@@ -52,7 +54,6 @@ Later, once you have loaded all the patients you want and you want to require se
 While Docker-based options generally require some configuration, especially when you want your test data to persist after you reboot, they can be setup quickly and do not require programming knowledge to get started. Each of these options can be installed either locally on your own computer if you will be the only person using it, or on a shared server for ease of access by multiple people. Your options may vary based on your organization's security requirements. The following instructions are intended for a Windows-based or Mac-based local installation. 
 
 ::: callout-caution
-
 Unless you specifically configure them to do so, assume that none of the Docker-based options will persist data, for example if you shut down Docker or restart your computer any patients you had loaded will be lost. Please review all documentation before loading a lot of data to make sure you don't lose work.
 :::
 
@@ -60,20 +61,21 @@ First install Docker Desktop.  https://www.docker.com/products/docker-desktop/
 (Note that Docker Desktop is not free for organizations - see https://www.docker.com/pricing/ . There are free alternatives but they require more manual effort to get everything working.)
 
 
-### Logica Sandbox
-This set of Docker images mirrors the Logica Sandbox, but can be run locally. If you like the full suite of what Logica provides but either want higher performance or don't want to use a fully public Internet service, this is a good option.
+### Logica Sandbox Community Edition
+This set of Docker images mirrors the public Logica Sandbox, but can be run locally. If you like the full suite of what Logica provides but either want higher performance or don't want to use a fully public Internet service, this is a good option.
 
-https://github.com/logicahealth/sandbox-community-edition
+Full instructions are available at [https://github.com/logicahealth/sandbox-community-edition](https://github.com/logicahealth/sandbox-community-edition).
 
 ### HAPI
 HAPI is the FHIR server implementation that the Logica Sandbox uses under the covers. If all you want is a plain FHIR server to run queries against, without any of the bells and whistles, this is a good option.
 
+To quickly pull and run the HAPI FHIR server on port 8080, make sure Docker is running, and then run the following:
 ```sh
 docker pull hapiproject/hapi:latest
 docker run -p 8080:8080 hapiproject/hapi:latest
 ```
 
-https://hub.docker.com/r/hapiproject/hapi
+For more detail on the HAPI FHIR docker image, see [https://hub.docker.com/r/hapiproject/hapi](https://hub.docker.com/r/hapiproject/hapi).
 
 ### SMART Dev Sandbox
 
