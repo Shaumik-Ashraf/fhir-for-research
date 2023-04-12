@@ -1,0 +1,67 @@
+---
+title: "FHIR & Tabular Data Analysis: Python 1"
+
+area:
+  name: 
+topic:
+  name: FHIR for Research
+  
+roles:
+  - Software Engineer
+  - Informaticist
+  
+learning_objectives:
+  - question: What is the FHIR-PYrate package for Python?
+    answer: FHIR-PYrate is a Python library that provides a high-level API for querying FHIR servers and returning information as `pandas` DataFrames.
+  - question: How can you connect to a FHIR server and query data using FHIR-PYrate?
+    answer: Using the `Pirate` class, you can instantiate a FHIR `search` object and use the `steal_bundles_to_dataframe` method to query a FHIR server and automatically convert the response into a `pandas` DataFrame.
+---
+
+Researchers who use Python are familiar with the [pandas](https://pandas.pydata.org/) [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html), a two-dimensional tabular data structure that is ubiquitous in the data science community for data object creation and manipulation. The most common data formats converted in DataFrames are CSV files and queries from relational databases.
+
+However, FHIR data is often stored in either XML or JSON formats, meaning we will have to convert it into a tabular format to work with it in pandas. Luckily, the [FHIR-PYrate](https://github.com/UMEssen/FHIR-PYrate) package can do this for us. Its API provides two major functionalities that are helpful to us:
+
+1.  Capability to connect to and query data from FHIR servers
+2.  Automatically convert queried FHIR data into a pandas DataFrame object
+
+First, let's get our environment setup. We will explain the Pirate class in the next section.
+
+```{python}
+from fhir_pyrate import Pirate
+```
+
+## Step 1: Instantiate the Pirate Class
+
+The `Pyrate` class will be the only class from `fhir_pyrates`'s API that we will be using. It gives us a 2-for-1 deal in that it both can query FHIR servers as well as automatically convert the response object into a `pandas` DataFrame.
+
+It is the norm in this library to create a `search` instance, as it is using the HL7 terminology of a [FHIR Search](https://build.fhir.org/search.html) for its query functionality. Authentication is beyond the scope of this module, so we can keep that parameter equal to `None`. For more information on `fhir_pyrate`'s authentication functionality, please read further [documentation for the Ahoy class](https://github.com/UMEssen/FHIR-PYrate/#ahoy).
+
+The `base_url` parameter is the most important, as this is where you provide the base FHIR server URL from which you will query data. In this case, we will be connecting to a Logica server with FHIR data created from [Synthea](https://synthetichealth.github.io/synthea/).
+
+```{python}
+search = Pirate(
+    auth=None,
+    base_url="https://api.logicahealth.org/FHIRResearchSynthea/open/"
+)
+```
+
+## Step 2: Query FHIR Data
+
+Once instantiated, our `search` object has some useful methods from `fhir_pyrate`'s API that we can use. The only one we will focus on in this module is the `steal_bundles_to_dataframe()` which (1) allows us to specify parameters for a query and (2) works behind the scenes to return the data as a `pandas` DataFrame object.
+
+The goal of this module is only to show a high-level overview of how to query FHIR data in Python, so we won't go into the details of search parameters (that will be for an upcoming module). Below, we can see that a specific Patient is being queried and return is a `pandas` DataFrame with their information.
+
+```{python}
+patient_bundle = search.steal_bundles_to_dataframe(  
+    resource_type="Patient",
+    request_params={
+        "_id": "11149"
+    },
+)
+patient_bundle
+```
+
+In the next two modules, we will dive deeper into the `steal_bundles_to_dataframe()` function and learn the following:
+
+1.  How to better customize our newly created DataFrame with the `fhir_paths` parameter
+2.  How to specify FHIR searches with the `resource_type` and `request_params` parameters
