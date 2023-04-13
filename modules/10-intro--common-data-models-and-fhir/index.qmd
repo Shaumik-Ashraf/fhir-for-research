@@ -17,14 +17,14 @@ roles:
   
 learning_objectives:
   - question: Why are Common Data Models necessary in healthcare?
-    answer: Observational data in healthcare settings comes from many disparate sources and requires harmonization into a standard structure.
+    answer: Healthcare data comes from many different data sources, each with their own data format. Analyzing data from multiple sources is difficult if each source formats the data differently. However, if the data sources agree to use a Common Data Model, analysis becomes much easier, and the data can be combined to provide a broader picture of the healthcare landscape.
   - question: How do Common Data Models help researchers?
-    answer: Faciliting research is one of the major function of Common Data Models in healthcare, since they provide researchers an organized and standardized environment to pull data.
+    answer: Common Data Models enable researchers to create a single query to send to multiple partner organizations rather than create different queries for each organization. CDMs also enable the partner organizations to process the query internally so the researcher does not need to work directly with the raw data.
   - question: How does FHIR help researchers work with Common Data Models?
-    answer: The Common Data Models Harmonization (CDMH) FHIR Implementation Guide maps observational data between common CDMs, allowing researchers to harmonize data from multiple health systems that might use different CDMs.
+    answer: FHIR enables researchers to work with multiple CDMs at the same time. The Common Data Models Harmonization (CDMH) FHIR Implementation Guide maps FHIR resources to common CDMs, allowing researchers to easily work between multiple CDMs.
 ---
 
-A Common Data Model (CDM) is a set of standardized data schemas that allow data to be organized and shared across different applications.<!-- no - not shared. allows queries to be used consistently acorss orgs --LDC -->[@pcornet] In healthcare, a CDM provides a standard structure for health applications to organize the data they have received from different sources.
+A Common Data Model (CDM) is a set of standardized data schemas that are used by several partner organizations. CDMs are helpful to researchers: If a researcher wants to use data from the partner organizations, they can create a single query. Each partner organization then runs the same query internally and returns the result to the researcher. Without a CDM, the researcher would need to create a different query for each organization.
 
 ::: {.callout-note collapse="true"}
 
@@ -32,9 +32,9 @@ A Common Data Model (CDM) is a set of standardized data schemas that allow data 
 
 Shared Health Data Network (SHDN)
 
-:   Network of organizations that establish a common CDM. An SHDN can make data available to researchers in three major ways: [@cdm_timeline_paper]
+:   Network of organizations that establish a common CDM. An SHDN makes data available to researchers in one of three ways: [@cdm_timeline_paper]
 
-    -   **Pooled SHDN** - Data is centralized into a single location where researchers can access it in a client/server relationship.
+    -   **Pooled SHDN** - Data is centralized at a single location where researchers  access it through a client/server relationship.
 
     -   **Federated SHDN** - Data is stored at individual source organizations but a centralized clearinghouse exists for remote querying of collective data batches.
 
@@ -58,48 +58,20 @@ Observational data in healthcare is complex and comes from many data sources. Th
 | Support conduct of healthcare                   | EHR data                |
 | Manage healthcare payments                      | Claims                  |
 
-Researchers often pull data from each of the source types listed above. They also require large amounts of patient data to draw statistically significant conclusions. If each data source has a different structure, a simple query can grow into a data pipeline problem.
-<!-- COMMENT:
-removing
-"In addition, data use agreements and complex access control for individual data sources create additional roadblocks."
-because this module is about CDMs so didn't seem relevant.
+Researchers often pull data from each of the source types listed above. They also require large amounts of patient data to draw statistically significant conclusions. If each data source has a different structure, the researcher would need to create a different query for each data source.
 
-AMMENDED!!!
+In addition, if a researcher took the data outside of the source organization to process it, they would need to manage data use agreements for each data source. Managing legal requirements adds time and expense to the research effort.
 
-This is *very* relevant with this context:
-
-"A common data standard can alleviate this need by omitting the extraction step and allowing a standardized analytic to be executed on the data in it’s native environment - the analytic comes to the data instead of the data to the analytic."
-https://ohdsi.github.io/TheBookOfOhdsi/CommonDataModel.html
-
-This needs to be included.
-
--- LDC -->
 
 ### How CDMs help
 
-CDMs allows researchers to query data batches with methods that can be "systematically applied to produce meaningfully comparable and reproducible results." [@book_of_ohdsi] A CDM can be thought of as the "middleman" that organizes disparate data sources within a healthcare organization in a structured way so that researchers can focus on analytics instead of complex data ingestion. Researchers no longer need to worry about individual data source connection, formatting, or protection issues.
+Each partner organization implements the CDM internally and can receive and process data queries based on the CDM's structure. This means that researchers can create a single query instead of multiple queries, significantly reducing the time and complexity of the research effort.
 
-<!-- QUESTION
-
-The CDM is internal to the health system, yes?
-So is it really the "middleman"?
-
-Wouldn't it be something like:
-- health app ingests data and converts it to the CDM
-- health app stores the data as the CDM
-- researcher wants to query the data. Gets permission to do so.
-- researcher is able to use the *same* query for this health system as with others because the health system uses the CDM
-
-If so, then I wouldn't call it the "middleman".
-
-Please confirm my understanding!
-
---LDC
--->
+Additionally, because the partner organizations process the queries internally, the researcher never accesses or stores the raw data. As a result, the legal requirements for working with the data are much simpler.
 
 ## Commons CDMs
 
-Common CDMs the reseachers in the US use include:
+Common CDMs the researchers in the US use include:
 
 -   [Sentinel](https://www.sentinelinitiative.org/)
 
@@ -113,10 +85,10 @@ Common CDMs the reseachers in the US use include:
 
 Launched by the FDA in 2007, Sentinel monitors whether FDA-regulated medical products cause unexpected adverse reactions. 
 
-Although FDA-regulated products undergo clinical testing before approval, the testing may miss adverse reactions. This is because the test population rarely matches the population that actually uses the product. To detect and assess adverse events after approval, the FDA created Sentinel.
+Although FDA-regulated products undergo clinical testing before approval, the testing may miss adverse reactions. This is because the test population rarely matches the population that uses the product. To detect and assess adverse events after approval, the FDA created Sentinel.
 
 Sentinel follows a DHDN model:
-Partner organizations implement the Sentinel CDM internally. If an adverse reaction is suspected, researchers send a query to a secure portal, which distributes the query to the partner organizations. The partner organizations process the query internally, and send back the results.
+Partner organizations implement the Sentinel CDM internally. If an adverse reaction is suspected, researchers send a query to a secure portal, which distributes the query to the partner organizations. The partner organizations process the query internally and send back the results.
 [@cdm_timeline_paper]
 
 <!-- I used this paper to write ^. https://www.healthaffairs.org/do/10.1377/hpb20150604.936915/. Needs a reference. --LDC -->
@@ -132,7 +104,7 @@ The Patient-Centered Outcomes Research Institute (PCORI) developed PCORnet to ma
 
 PCORnet follows a DHDN model: Researchers submit a research question to the PCORnet "front door." PCORnet leadership reviews the question and transforms it into a computable query. PCORnet then distributes the query to its partners. Because each partner uses the PCORnet CDM, they can process the query without making changes and respond with the result.
 
-<!-- great image: https://pcornet.org/wp-content/uploads/2021/11/Process.png -->
+<!-- add this image: https://pcornet.org/wp-content/uploads/2021/11/Process.png -->
 
 PCORnet data is largely drawn from EHRs, as well as some patient-reported and payor data. The PCORnet includes data from 66 million patients that researchers can use for observational studies.
 
@@ -146,11 +118,11 @@ Developed in 2004 by Partners HealthCare and Harvard Medical School, i2b2 is an 
 
 i2b2's CDM is different from the other listed in that it does not have a separate database table for each data type. Its CDM is based on a "star schema" where all patient observations are stored in a single "fact" table that provides different codes for separate ontologies. There are three major upsides to this design choice: [@i2b2_wiki_intro]
 
--   Institutions can use their own local codes without the need to map to other data sets
+-   Institutions can use their own local codes without the need to map to other data sets.
 
--   Institutions can easily add new data types
+-   Institutions can easily add new data types.
 
--   Queries, analyses, and tools developed using i2b2 are future-proof since this CDM can remain stable over time
+-   Queries, analyses, and tools developed using i2b2 are future-proof since this CDM can remain stable over time.
 
 The visual below gives an example of this. [@i2b2_wiki_star_schema] The `observation_fact` table holds all observations that act as keys to connect to other tables that can be added by institutions with their own required data types.
 
@@ -158,7 +130,7 @@ The visual below gives an example of this. [@i2b2_wiki_star_schema] The `observa
 
 For more information, please visit the [i2b2 CDM documentation](https://community.i2b2.org/wiki/display/BUN/i2b2+Common+Data+Model+Documentation).
 
-<!-- gibberish. i need to review again. --LDC -->
+<!-- DISCUSS: I have no idea what this section is saying. I looked at the i2b2 site and that didn't help either. Maybe max can rework?. --LDC -->
 
 ### OMOP
 
@@ -178,10 +150,12 @@ OMOP uses [OHDSI standardized vocabularies](https://github.com/OHDSI/Vocabulary-
 
 ## CDMs and FHIR
 
-A problem arises when a researcher may want to aggregate data from multiple SHDNs that each use a different CDM. This is an issue well suited for FHIR to address, as its flexibility allows for such mappings to be developed. The [Common Data Models Harmonization FHIR Implementation Guide](http://hl7.org/fhir/us/cdmh/2019May/) has created mappings between each of the four CDMs discussed in the previous section.
+A CDM enables researchers to send a single query to multiple partner organizations and receive the results.
 
-Its infrastructure is "sustainable, flexible, and modifiable based on the research questions." [@onc_cdm_harmonization] It allows researchers to have even larger sample sizes as well as additional demographics, such as elderly, children, and non-U.S. population.
+FHIR enables multiple organizations to share data and be semantically interoperable.
 
-Below is an abstract model of the data flow from multiple SHDNs to an aggregated form ready for a researcher to query. [@cdmh_overview]
+FHIR and CDM work well together when a researcher wants to query multiple SHDNs that each use a different CDM. For example, a researcher can create a single query in a FHIR resource and send that resource to a portal. The portal will then convert the query for each CDM and send the converted query to the partner organization. After the portal receives the result, it will convert it back into a FHIR resource and return it to the researcher.
 
-![](images/image-843796542.png)
+![](images/image-843796542.png)[@cdmh_overview]
+
+This allows researchers to have even larger sample sizes as well as additional demographics, such as elderly, children, and non-U.S. population.
