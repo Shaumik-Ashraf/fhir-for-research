@@ -49,12 +49,8 @@ website:
               text: Community & Documentation
         - section: "SMART on FHIR"
           contents:
-            - text: Introduction
-            - text: Real World Research
-            - text: Technical Quick Start
-            # - modules/smart-on-fhir-intro.qmd
-            # - modules/smart-on-fhir-research.qmd
-            # - modules/smart-on-fhir-technical-quick-start.qmd
+            - modules/smart-on-fhir-intro.qmd
+            - modules/smart-on-fhir-tech.qmd
 
     - id: working-with-data
       title: Working With Data

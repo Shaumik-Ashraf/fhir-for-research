@@ -103,7 +103,7 @@ While developing this course content, we compiled a list of studies we found tha
 
     -   @Jones_Gottlieb_Mandel_Ignatov_Ellis_Kubick_Mandl_2021
 
-        @Wesley_Blumenthal_Shah_Littlejohn_Pruitt_Dixit_Hsiao_Dymek_Ratwani_2021
+        @Wesley_2021
 
     -   @Sayeed_Gottlieb_Mandl_2020
 -   Patient-Facing Apps
