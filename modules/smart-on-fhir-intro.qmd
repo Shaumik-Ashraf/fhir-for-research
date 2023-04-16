@@ -29,12 +29,14 @@ SMART on FHIR can also be used for adding new data to EHR workflows. For example
 
 Bulk Data Access (see below) facilitate by SMART on FHIR may provide a new avenue for researchers to access population-scale data (compared to focusing a specific patient or patients). This could be especially useful for multi-institution collaborations that do not already use a shared common data model, especially if the necessary data are part of the widely implemented [US Core FHIR Implementation Guide](https://www.hl7.org/fhir/us/core/). However, Bulk Data Access is relatively new and has not yet appeared in peer-reviewed research publications.
 
+The [SMART App Gallery](https://apps.smarthealthit.org/apps) lists a number of SMART on FHIR applications, which may provide additional ideas of how SMART on FHIR could be applied to research.
+
 ## Capabilities
 
 SMART on FHIR pulls together a number of existing standards to provide a complete set of capabilities necessary to enable third-party application integration with EHRs. These include:
 
 | Capability              | Approach                                                                                                                                                                                                           |
-|:---------------|:------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Authorization           | The [OAuth 2](https://oauth.net/2/) web standard is to allow a third party SMART on FHIR application to access a specific set of data from an EHR.                                                                 |
 | Authentication          | The [OpenID Connect](https://openid.net/connect/) web standard allows SMART on FHIR applications to tell the EHR who is running them (e.g., to allow a patient to access their own health data via SMART on FHIR). |
 | Data models             | The standard set of [FHIR resources](https://www.hl7.org/fhir/resourcelist.html) are used to represent data. Additional customization can occur via FHIR profiles (see below).                                     |
