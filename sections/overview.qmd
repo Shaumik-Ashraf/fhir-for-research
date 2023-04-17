@@ -18,30 +18,30 @@ Select your [role](/roles.html) to <mark>highlight</mark> the content that is mo
 -   <mark>[FHIR from 10,000 Feet](/modules/fhir-from-10000-ft.qmd)</mark>
 -   [FHIR from 1,000 Feet](/modules/fhir-from-1000-ft.qmd)
 -   <mark>[Real-World Research Using FHIR](/modules/fhir-research.qmd)</mark>
--   [Key FHIR Resources](/modules/10-intro--key-fhir-resources/index.html)
--   [Accessing FHIR Data High Level](/modules/10-intro--accessing-fhir-data/index.html)
--   [Brief History of FHIR](/modules/10-intro--brief-history-of-fhir/index.html)
--   [Terminology Introduction](/modules/10-intro--terminology-introduction/index.html)
--   [Common Data Models & FHIR](/modules/10-intro--common-data-models-and-fhir/index.html)
+-   [Key FHIR Resources](/modules/key-fhir-resources.qmd)
+-   [Accessing FHIR Data High Level](#)
+-   [Brief History of FHIR](#)
+-   [Terminology Introduction](/modules/terminology.qmd)
+-   [Common Data Models & FHIR](#)
 -   [The FHIR Community & Documentation](/modules/fhir-community.qmd)
 
 ## SMART on FHIR
 
--   [*FHIR from 10,000 feet*](/modules//index.html)
--   <mark>[SMART on FHIR high level overview](/modules/20-intro-smart-on-fhir--overview/index.html)</mark>
--   <mark>[Real-world research using SMART on FHIR](/modules/20-intro-smart-on-fhir--real-world-research/index.html)</mark>
--   [Technical quick start](/modules/20-intro-smart-on-fhir--technical-quick-start/index.html)
+-   [*FHIR from 10,000 feet*](/modules/fhir-from-10000-ft.qmd)
+-   <mark>[SMART on FHIR high level overview](#)</mark>
+-   <mark>[Real-world research using SMART on FHIR](#)</mark>
+-   [Technical quick start](#)
 
 ## Data Modeling in FHIR
 
 -   [*FHIR from 10,000 feet*](/modules/fhir-from-10000-ft.qmd)
--   [*Key FHIR Resources*](/modules/10-intro--key-fhir-resources/index.html)
--   [*Terminology Introduction*](/modules/10-intro--key-fhir-resources/index.html)
--   <mark>[Real world FHIR specifications](/modules/30-fhir-data-modeling--real-world-ig/index.html)</mark>
--   [Reading a FHIR specification](/modules/30-fhir-data-modeling--reading-ig/index.html)
--   [*Terminology Introduction*](/modules/10-intro--terminology-introduction/index.html)
--   [Writing a FHIR specification](/modules/30-fhir-data-modeling--writing-ig/index.html)
--   [API-focused FHIR Resources](/modules/30-fhir-data-modeling--api-focused-fhir-resources/index.html)
+-   [*Key FHIR Resources*](/modules/key-fhir-resources.qmd)
+-   [*Terminology Introduction*](/modules/key-fhir-resources.qmd)
+-   <mark>[Real world FHIR specifications](#)</mark>
+-   [Reading a FHIR specification](#)
+-   [*Terminology Introduction*](/modules/terminology.qmd)
+-   [Writing a FHIR specification](#)
+-   [API-focused FHIR Resources](#)
 
 
 <script>

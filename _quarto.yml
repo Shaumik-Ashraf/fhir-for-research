@@ -8,7 +8,7 @@ project:
 
 website:
   title: "FHIR for Research"
-  site-url: https://fhir-for-research.pages.mitre.org/
+  site-url: https://mitre.github.io/fhir-for-research/
   navbar:
     left:
       - text: Overview
@@ -23,7 +23,7 @@ website:
       - href: contribute.qmd
         text: Contributions & Corrections
       - icon: github
-        href: https://github.com/mitre/
+        href: https://github.com/mitre/fhir-for-research
 
   sidebar:
     - id: overview
@@ -42,7 +42,7 @@ website:
               text: "Real World Research"
             - modules/key-fhir-resources.qmd
             - text: "Accessing FHIR Data"
-            - text: History of FHIR
+            - modules/fhir-history.qmd
             - modules/terminology.qmd
             - text: Common Data Models
             - file: modules/fhir-community.qmd
@@ -50,8 +50,7 @@ website:
         - section: "SMART on FHIR"
           contents:
             - modules/smart-on-fhir-intro.qmd
-            - modules/smart-on-fhir-research.qmd
-            - modules/smart-on-fhir-technical-quick-start.qmd
+            - modules/smart-on-fhir-tech.qmd
 
     - id: working-with-data
       title: Working With Data
@@ -77,7 +76,7 @@ website:
 
   page-footer:
     center:
-      - text: Footer text goes here
+      - text: "&copy; 2023 The MITRE Corporation / <a href=\"https://github.com/mitre/fhir-for-research/README.md\">License information</a><br>Approved for Public Release / Case #23-0966"
 
 
 
