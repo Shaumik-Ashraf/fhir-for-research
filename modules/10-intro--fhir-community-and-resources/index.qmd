@@ -1,7 +1,0 @@
----
-title: FHIR Community & Documentation
-area:
-  name: Overview
-topic:
-  name: FHIR for Research
----

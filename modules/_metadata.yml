@@ -1,9 +1,11 @@
+bibliography: ../bibliography.bib
+
 format:
   html:
     template-partials:
-      - ../title-block.html
+      - title-block.html
+
 toc: true
 editor: visual
 number-sections: true
 number-depth: 3
-bibliography: ../../bibliography.bib

@@ -1,12 +1,15 @@
-# FHIR for Research Resources
+# FHIR for Research
 
-[![pipeline status](https://gitlab.mitre.org/fhir-for-research/web/badges/main/pipeline.svg)](https://gitlab.mitre.org/fhir-for-research/web/-/commits/main)
-[![Latest Release](https://gitlab.mitre.org/fhir-for-research/web/-/badges/release.svg)](https://gitlab.mitre.org/fhir-for-research/web/-/releases)
+**The content in this repository is under active development. Please proceed with caution.**
+
+GitHub Actions automatically builds commits to the `main` branch to <https://mitre.github.io/fhir-for-research>.
+
+----
 
 ## Dependencies
 
 - [Quarto](https://quarto.org/docs/get-started/)
-- R (if you use RMarkdown)
+- R
 - Jupyter and Python3 (if you use embedded Python)
 
 Python uses `venv` (https://quarto.org/docs/projects/virtual-environments.html):
@@ -24,51 +27,26 @@ If you add a dependency, run `pip freeze > requirements.txt` to update the requi
 ## Quick start
 
 - Clone this repository
-- Run `quarto preview` (this will compile everthing into _site, start a server, and launch web browser to load localhost server)
+- Run `quarto preview` (this will compile everything, start a local web server, and launch web browser to show the content form the server)
 
-### To add a page
+----
 
-- create a `.qmd` file
-- add the file to _quarto.yml under navbar, for example:
+## License
 
-    ```yaml
-    # ... (snipped for brevity)
+Copyright 2023 The MITRE Corporation
 
-    website:
-      navbar:
-        left:
-          - about.qmd
-          - NEW_FILE.qmd
-    ```
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-- In `NEW_FILE.qmd`:
+    http://www.apache.org/licenses/LICENSE-2.0
 
-      ---
-      title: NEW_FILE
-      ---
-      Markdown or HTML goes here
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
-      ```{r}
-      # R code goes here
-      ```
+----
 
-      ```{python}
-      # Python code goes here, but you can't embed R and Python code in the same file
-      ```
-
- - run `quarto preview`
-
-### To view pages by branch
-
- - on gitlab sidebar navigate to Deployments -> Environments
-
-### To view failed deployments
-
- - on gitlab sidebar navigate to CI/CD -> Pipelines
-
-
-## Documentation
-
- - [Quarto Guides](https://quarto.org/docs/guide/)
-
-The GitLab pipeline is setup to re-compute and re-render everything on CI Server. If you use Python libraries you need to add a requirements.txt, and if you use R libraries you need whatever R uses for package management.
+MITRE: Approved for Public Release / Case #23-0966
