@@ -1,0 +1,78 @@
+---
+title: "FHIR & Tabular Data Analysis: Python 3"
+
+area:
+  name: 
+topic:
+  name: FHIR for Research
+  
+roles:
+  - Software Engineer
+  - Informaticist
+  
+learning_objectives:
+  - question: How can a FHIR search query be specified in Python?
+    answer: The `fhir_pyrate` library provides the `resource_type` and `request_params` parameters that allow for FHIR search functionailty in Python.
+  - question: What are some examples of possible FHIR queries in Python?
+    answer: Querying an entire FHIR bundle, adding one or more search parameters, querying a specific Resource.
+---
+
+The previous two modules have given us a fundamental understanding how to use `fhir_pyrate` to (1) query FHIR data and (2) process it into a `pandas` DataFrame. Now we will go into more details of specifying our FHIR queries with search parameters in this module.
+
+## How to Specify FHIR Queries
+
+FHIR's [search functionality](https://build.fhir.org/search.html) allows researchers to specify the type of data they'd like to query. The `fhir_pyrate` library allows access to this search functionality via two parameters in its `steal_bundles_to_dataframe()` function:
+
+-   `resource_type`: Specify what type of FHIR Resource to query, e.g., Patient or Observation
+
+-   `request_params`: Provide FHIR search parameters to specify query
+
+We have already seen how to query a specific Resource via the `ID` parameter in the previous two modules. Below are example of a variety of different queries a researcher can specify.
+
+## Example Queries
+
+```{python}
+# Setup
+from fhir_pyrate import Pirate
+import pandas as pd
+pd.options.display.max_columns = None  # so we can display all columns
+
+# Instantiating Search Object
+search = Pirate(
+    auth=None,
+    base_url="https://api.logicahealth.org/FHIRResearchSynthea/open/"
+)
+```
+
+### Querying an Entire Bundle
+
+Pulling all patients from a FHIR server.
+
+```{python}
+patient_bundle = search.steal_bundles_to_dataframe(  
+    resource_type="Patient"
+)
+patient_bundle
+```
+
+### Adding a Search Parameter
+
+Pulling only female patients from a FHIR server.
+
+```{python}
+patient_bundle_female = search.steal_bundles_to_dataframe(  
+    resource_type="Patient",
+    request_params={
+        "gender": "female"
+    },
+)
+patient_bundle_female
+```
+
+### Adding Multiple Search Parameters
+
+<!--# NOTE FROM BLAKE: Having trouble using any search parameter besides gender, currently investigating.-->
+
+```{python}
+
+```

@@ -17,16 +17,21 @@ learning_objectives:
     answer: The `fhir_pyrate` library provides the `fhir_paths` parameter in the `steal_bundles_to_dataframe()` function that allows a user to specify what columms they want to keep and how to name them.
 ---
 
-This exercise will build of the previous module, where we connected to a Logica FHIR server and made a simple query for a specific patient:
+This exercise will build off the previous module, where we connected to a Logica FHIR server and made a simple query for a specific patient:
 
 ```{python}
+# Setup
 from fhir_pyrate import Pirate
+import pandas as pd
+pd.options.display.max_columns = None  # so we can display all columns
 
+# Instantiating Search Object
 search = Pirate(
     auth=None,
     base_url="https://api.logicahealth.org/FHIRResearchSynthea/open/"
 )
 
+# Query FHIR Data
 patient_all = search.steal_bundles_to_dataframe(  
     resource_type="Patient",
     request_params={
@@ -38,13 +43,63 @@ patient_all
 
 ## A Closer Look at JSON -\> DataFrame Conversion
 
-Before cleaning up our dataframe, it is worth understanding exactly how `fhir_pyrate` is converting JSON data into a tabular format. JSON data is organized like a regular JavaScript object, meaning it is a collection of key-value pairs. However, a given key-value pair could be another object as the value, or even an array of more objects. This means we can have nested objects inside of a single JSON file.
+Before cleaning up our dataframe, it is worth understanding exactly how `fhir_pyrate` is converting JSON data into a tabular format so we can know what the returned `pandas` DataFrame represents.
 
-Tabular data is not able to store such nested object hierarchies, since it has a simple structure columns representing a single variable and rows representing a different entry. This means that each column will need to represent a single key-value pair - but what happens with a key-value pair has an array of key-value pairs nested in it? In this case, we will need to create multiple separate columns that somehow are still related to each other.
+### General Example
 
-Let's use the FHIR query from above as an example. Below is the raw JSON from the query. For this example, lets focus on the `telecom` key - it has a value of an array, which contains three more key-value pairs (`system`, `value`, and `use`). In this case, converting this into tabular format would require three separate rows for `system`, `value`, and `use` that are all related to each other.
+JSON data is organized like a JavaScript object, meaning it is a collection of key-value pairs. The table below describes three major types of key-value pairs you will see in a FHIR bundle and how `fhir_pyrate` converts them into a tabular format.
+
++---------------------+--------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Key-Value Pair Type | Description                                                                                      | `fhir_pyrate`'s tabular conversion                                                                                                          |
++=====================+==================================================================================================+=============================================================================================================================================+
+| Simple              | Key is paired to a single value                                                                  | Key -\> column title                                                                                                                        |
+|                     |                                                                                                  |                                                                                                                                             |
+|                     |                                                                                                  | Value -\> row entry                                                                                                                         |
++---------------------+--------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Nested              | Key is paired to a single object that contains multiple nested key-value pairs                   | Each nested key-value pair is a column/row (same as above) with the parent key string appended to the front of each nested key column title |
++---------------------+--------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Nested Repeats      | Key is paired to an array of objects, each of which have the same keys but with different values | Same as Nested, but since the nested keys have the same values, a number is appended in front to differentiate them (index starts at 0)     |
++---------------------+--------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+
+Below shows an example of a JSON with `key1`, `key2`, and `key3` resectively representing simple, nested, and nested repeating key-value pairs.
+
+```{json}
+{
+  "key1": "simple_value",
+  "key2": [{
+      "nested_key1": "nested_value1",
+      "nested_key2": "nested_value2",
+      "nested_key3": "nested_value3"
+  }],
+  "key3": [{
+    "repeated_key1": "repeated_value1",
+    "repeated_key2": "repeated_value2",
+  }, {
+    "repeated_key1": "repeated_value3",
+    "repeated_key2": "repeated_value4"
+  }, {
+    "repeated_key1": "repeated_value5",
+    "repeated_key2": "repeated_value6"
+  }]
+}
+```
+
+Below shows the resulting tabular format of the above JSON object using `fhir_pyrate`
+
+```{python}
+tabular_conversion = pd.read_csv("tabular_conversion_example.csv")
+tabular_conversion
+```
+
+### FHIR Example
+
+Now that we understand the basics of how `fhir_pyrate` converts a JSON file to tabular format, let's see how an actual FHIR JSON bundle gets converted.
+
+Below is the source JSON object for the Patient query we made earlier. Compare its contents with the `patient_all` DataFrame printed above. Examples of simple, nested, and nested repeating key-value paris are respectively `id`, `telecom`, and `identifier`.
 
 ::: {.callout-caution .}
+## Expand to View Raw FHIR JSON Object
+:::
 
 ```{json}
 {
@@ -226,9 +281,7 @@ Let's use the FHIR query from above as an example. Below is the raw JSON from th
 
 :::
 
-Let's take a closer look at the `patient_bundle` DataFrame we created from before. Below summarizes all columns created - notice how the `telecom` columns are stored. Each key-value pair has a `name` prefix in front, which represents the higher level object that each key-pair is associated with. If a column has multiple prefixes, that means that given key-value pair is more deeply nested and each parent key is being added as a prefix. Try comparing other JSON key-value pairs with their corresponding tabular column titles to better understand how the conversion is working.
-
-You also may have noticed a number appearing after each prefix. These are related to situations (which are common in FHIR) where a key is paired with an array of multples instanes of the same key-value pairs, but each instance has different values. This is exemplified in the `identifer` key, which has multiple different instances of `system`, `value`, and a nested array of `system`, `code`, and `display`. We can't differentiate each of these instances simply by their key names (since they're all the same), so `fhir_pyrate` addresses this issue by simply listing the numerical order that a given instance of keys is in. For example, the `identifer` key has 5 different values for the nested `system` key. This is stored in tabular format as the following: `identifer_0_system`, `identifer_1_system`, `identifer_2_system`, `identifer_3_system`, `identifer_4_system`.
+Since there are a lot of columns, it might be tough to easily review them. The `info()` function from `pandas` gives us a nice view of each column title printed vertically:
 
 ```{python}
 patient_all.info()
@@ -236,11 +289,17 @@ patient_all.info()
 
 ## Processing Our DataFrame
 
-The first step of processing a DataFrame from a FHIR query is to do an initial query for all variables and inspect the resulting dataframe. This will give us an idea of what our data looks like and what columns we actually want. We have completed this step with the previous code (that's why our `patient` variable was named `patient_all` - we pulled all variables).
+Now that we understand what is happening under the hood of `fhir_pyrate`, we can process our data.
 
-After understanding what variables we actually want in our final DataFrame, our second step will be to perform a second query for the same bundle, but this include the `fhir_paths` parameter in the `steal_bundles_to_dataframe()` method to specify and rename wanted variables. Note that in oder to use this parameter, [firepath-py](https://github.com/beda-software/fhirpath-py) must be installed first.
+### Step 1: Initial Query for Examination
 
-The `fire_paths` parameter takes an array of the columns you want in your final DataFrame. We can either keep the same name as the original key, or rename it. Note that when referencing original column names, replace the underscores with periods.
+`fhir_pyrate` does not have functionality to examine a JSON file before querying it. Therefore, we need to make an initial query that pulls all data so we can examine its contents and what we'd like to keep. We have completed this step with the previous code (that's why our `patient` variable was named `patient_all` - we pulled all variables).
+
+### Step 2: Final Query
+
+After understanding what variables we actually want in our final DataFrame, our second step will be to perform a second query for the same bundle, but this time include the `fhir_paths` parameter to specify and rename wanted variables. Note that in order to use this parameter, [firepath-py](https://github.com/beda-software/fhirpath-py) must be installed first.
+
+The `fire_paths` parameter takes an array of the columns we want in our final DataFrame. We can either keep the same name as the original key, or rename it. Note that when referencing original column names, replace the underscores with periods.
 
 Below we are creating a newly formatted DataFrame that only contains the patient ID, name, phone number, gender, and birth date.
 
