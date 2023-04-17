@@ -43,7 +43,7 @@ Select your [role](/roles.html) to <mark>highlight</mark> the content that is mo
 -   [Writing a FHIR specification](#)
 -   [API-focused FHIR Resources](#)
 
-
+<script src="../modules/mappings.js"></script>
 <script>
 
 /* constant variable role_module_map: array<object> [
@@ -56,29 +56,6 @@ Select your [role](/roles.html) to <mark>highlight</mark> the content that is mo
  * TODO: ideally extract this from each qmd file's frontmatter, or define this in one json file and let each file build off of it
  *
  */
-const role_module_map = [
-  {
-    role: "investigator",
-    modules: ["fhir-from-10000-ft", "history-of-fhir", "terminology-introduction", "common-data-models", "fhir-community", "smart-on-fhir--overview",  "reading-ig"]
-  },
-  {
-    role: "research-leader",
-    modules: ["fhir-from-10000-ft", "fhir-from-1000-ft", "fhir-research", "terminology-introduction", "fhir-community", "reading-ig", "writing-ig", "api-focused-fhir-resources"]
-  },
-  {
-    role: "informaticist",
-    modules: ["fhir-from-10000-ft", "fhir-from-1000-ft", "fhir-research", "key-fhir-resources", "terminology-introduction", "common-data-models", "fhir-community", "smart-on-fhir--overview", "smart-on-fhir--real-world"]
-  },
-  {
-    role: "software-engineer",
-    modules: ["fhir-from-10000-ft", "fhir-from-1000-ft", "key-fhir-resources", "terminology-introduction", "smart-on-fhir--overview", "smart-on-fhir--technical", "reading-ig", "writing-ig", "api-focused-fhir-resources"]
-  },
-  {
-    role: "clinician-scientist",
-    modules: ["fhir-from-10000-ft", "fhir-from-1000-ft", "fhir-research", "key-fhir-resources", "history-of-fhir", "terminology-introduction", "common-data-models", "fhir-community", "smart-on-fhir--overview", "smart-on-fhir--real-world", "smart-on-fhir--technical", "reading-ig", "writing-ig", "api-focused-fhir-resources"]
-  }
-]
-
 const all_modules = document.querySelectorAll("section>ul>li");
 
 /* select_modules(string)
