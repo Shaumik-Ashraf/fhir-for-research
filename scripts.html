@@ -136,3 +136,22 @@
         }
     });
 </script>
+
+<!-- Use store.js to save roles -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.12/store.modern.js" integrity="sha512-P4A4HNIIW5cs59d9Wl0f7HWhToxMcmTKa/2/fvUsFTuhn/N18rm9HduCfsob2tF/7P3132fLGU7c63btpRRjRg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    /* Possible Roles:
+     *  investigator,
+     *  research-leader,
+     *  informaticist,
+     *  software-engineer,
+     *  clinician-scientist,
+     *
+     * TODO: set cookie when you select role in overview.html, (and other sections)
+     *
+     */
+
+    store.set("role", "research-leader");
+</script>
+
+
