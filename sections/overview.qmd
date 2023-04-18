@@ -8,7 +8,7 @@ The **Overview** provides an introduction to FHIR for research, and details on t
 Select your [role](/roles.html) to <mark>highlight</mark> the content that is most relevant to you:
 
 <a href="#" class="btn-role" data-role="investigator">Investigator</a>
-<a href="#" class="btn-role" data-role="research-leader" class="fw-bold text-decoration-none">Research Leader</a>
+<a href="#" class="btn-role" data-role="research-leader">Research Leader</a>
 <a href="#" class="btn-role" data-role="informaticist">Informaticist</a>
 <a href="#" class="btn-role" data-role="software-engineer">Software Engineer</a>
 <a href="#" class="btn-role" data-role="clinician-scientist">Clinician Scientist/Trainee</a>
@@ -65,8 +65,6 @@ const all_modules = document.querySelectorAll("section>ul>li");
 function select_modules(string) {
     // remove all highlights
     all_modules.forEach((li_node) => {
-        //console.log("removing highlight for ", li_node);
-
         var mark_node = li_node.firstChild;
         var a_node = mark_node.firstChild;
 
@@ -115,27 +113,13 @@ function select_role(role) {
     Cookies.set("role", role, { secure: true, sameSite: "strict" }); // TODO: parse domain from quarto for IE compatability & quarto cookie consent
 
     document.querySelectorAll("[data-role]").forEach((a_node) => {
-        a_node.classList.remove("fw-bold");
-        a_node.classList.remove("text-decoration-none");
-
-        var mark_node = a_node.firstChild;
-        var text_node = mark_node.firstChild;
-
-        if( mark_node.nodeName == "MARK" ) {
-            a_node.removeChild(mark_node);
-            a_node.appendChild(text_node);
-        }
+        a_node.classList.remove("btn", "btn-sm", "btn-secondary", "fw-bold", "rounded");
+        a_node.classList.add("btn-role");
     });
 
     var selected_a_node = document.querySelector(`[data-role="${role}"]`);
-    selected_a_node.classList.add("fw-bold");
-    selected_a_node.classList.add("text-decoration-none");
-
-    var text_node = selected_a_node.firstChild;
-    var mark_node = document.createElement("mark");
-
-    selected_a_node.appendChild(mark_node);
-    mark_node.appendChild(text_node);
+    selected_a_node.classList.add("btn", "btn-sm", "btn-secondary", "fw-bold", "rounded");
+    selected_a_node.classList.remove("btn-role");
 }
 
 
