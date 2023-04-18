@@ -88,7 +88,10 @@ website:
     center:
       - text: "&copy; 2023 The MITRE Corporation / <a href=\"https://github.com/mitre/fhir-for-research/README.md\">License information</a><br>Approved for Public Release / Case #23-0966"
 
-
+  cookie-consent:
+    type: express
+    style: headline
+    palette: light
 
 format:
   html:
