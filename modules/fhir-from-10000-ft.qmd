@@ -77,7 +77,7 @@ FHIR has several characteristics that benefit research:
 
 -   There are no fees when using FHIR (though technology vendors may charge fees related to using their products that implement FHIR).
 
--   FHIR uses common web technologies, which are widely used in technology outside of health care. Because software developers are familiar with these web technologies, implementing FHIR systems is cost effective even if software developers aren't familiar with FHIR.<!-- FIX: not a huge fan of my rewrite here... but i felt like it needed something. --LDC -->
+-   FHIR uses common web technologies, which are widely used in technology outside of health care. Because software developers are familiar with these web technologies, implementing FHIR systems is cost effective even if software developers aren't familiar with FHIR.
 
 -   The FHIR specification can be easily customized and extended for specific use case (e.g., [representing oncology data](https://hl7.org/fhir/us/mcode/)).
 
