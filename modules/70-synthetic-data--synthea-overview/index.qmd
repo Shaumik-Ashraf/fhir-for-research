@@ -156,7 +156,7 @@ Max Age: 140
 Once the process completes, you will see an `output` folder alongside the `synthea-with-dependencies.jar`, and a `fhir` folder inside the `output` folder. Inside that `fhir` folder are the FHIR Bundle JSON files that were produced by Synthea. Each Bundle will contain a single Patient resource as the first entry, followed by resources roughly ordered by time.
 
 
-::: {.callout-info collapse="true"}
+::: {.callout-note collapse="true"}
 ## A sample Patient resource
 ```json
 {
@@ -305,7 +305,7 @@ Once the process completes, you will see an `output` folder alongside the `synth
 ``` 
 :::
 
-::: {.callout-info collapse="true"}
+::: {.callout-note collapse="true"}
 ## A sample Observation resource
 
 ```json
