@@ -50,17 +50,35 @@ SMART on FHIR can also be used to provide patients access to their clinical data
 
 Below is a list of studies that used FHIR in some capacity. These may be helpful for generating ideas of how FHIR could benefit your research:
 
--   Reviews
-    -   @duda2022
-    -   @Vorisek_Lehne_Klopfenstein_Mayer_Bartschke_Haese_Thun_2022
-    -   @Griffin_2022
--   Data Models
+-   **Adverse Event Reporting**: @Wang_Lehmann_Botsis_2021
+-   **Clinical Decision Support**: @Jung_Bae_Seong_Oh_Kim_Yi_2022
+-   **Clinical Statistics and Analysis**: @Hong_Prodduturi_Wang_Jiang_2017
+-   **Cohort Building**:
+    -   @Gruendner_Gulden_Kampf_Mate_Prokosch_Zierk_2021
+    -   @Bradshaw_2022
+-   **Data Models**:
     -   @Lambarki_2021
     -   @Jiang_2017a
     -   @Fischer_2020
     -   @Pfaff_2019
     -   @Jiang_2017b
--   SMART on FHIR
+-   **Environmental Health Using Spatiotemporal Data**: @Xu_Cox_Stillwell_Pfaff_Champion_Ahalt_Fecho_2020
+-   **Findable, Accessible, Interoperable, and Resusabe ([FAIR](https://www.go-fair.org/fair-principles/)) Data Principles**: @Sinaci_Nunez_2020
+-   **Multi-site Research**: @Garza_2020
+-   **Patient-Facing Apps**:
+    -   @Pawelek_Baca-Motes_Pandit_Berk_Ramos_2022
+    -   @Bartschke_Börner_Thun_2021
+    -   @Burkhardt_Brandt_Lee_Karras_Bugni_Cvitkovic_Chen_Lober_2021
+    -   @Ploner_Prokosch_2020
+    -   @Chatterjee_Pahari_Prinz_2022
+-   **REDCap**:
+    -   The [REDCap examples page](redcap-example.qmd)
+    -   @Metke-Jimenez_Hansen_2019
+-   **Reviews of studies that use FHIR**:
+    -   @duda2022
+    -   @Vorisek_Lehne_Klopfenstein_Mayer_Bartschke_Haese_Thun_2022
+    -   @Griffin_2022
+-   **SMART on FHIR**:
     -   The [SMART on FHIR Introduction page](smart-on-fhir-intro.qmd#research-use-cases)
     -   @Mandel_Kreda_Mandl_Kohane_Ramoni_2016
     -   @Bloomfield_Polo-Wood_Mandel_Mandl_2017
@@ -68,32 +86,6 @@ Below is a list of studies that used FHIR in some capacity. These may be helpful
     -   @Wesley_2021
     -   @Sayeed_Gottlieb_Mandl_2020
     -   @Wagholikar_2017
--   Patient-Facing Apps
-    -   @Pawelek_Baca-Motes_Pandit_Berk_Ramos_2022
-    -   @Bartschke_Börner_Thun_2021
-    -   @Burkhardt_Brandt_Lee_Karras_Bugni_Cvitkovic_Chen_Lober_2021
-    -   @Ploner_Prokosch_2020
--   Multi-site Research
-    -   @Garza_2020
--   REDCap
-    -   The [REDCap examples page](redcap-example.qmd)
-    -   @Metke-Jimenez_Hansen_2019
--   Cohort Building
-    -   @Gruendner_Gulden_Kampf_Mate_Prokosch_Zierk_2021
-    -   @Bradshaw_2022
--   Terminologies
-    -   @Chatterjee_Pahari_Prinz_2022
--   Findable, Accessible, Interoperable, and Resusabe ([FAIR](https://www.go-fair.org/fair-principles/)) Data Principles
-    -   @Sinaci_Nunez_2020
--   Social Determinants of Health
-    -   @Watkins_Viernes_Nguyen_Rojas_Mezarina_Silva_Valencia_Borbolla_2020
--   Adverse Event Reporting
-    -   @Wang_Lehmann_Botsis_2021
--   Software Development
-    -   @Hong_Prodduturi_Wang_Jiang_2017
--   Environmental Health
-    -   @Xu_Cox_Stillwell_Pfaff_Champion_Ahalt_Fecho_2020
--   Clinical Decision Support
-    -   @Jung_Bae_Seong_Oh_Kim_Yi_2022
+-   **Social Determinants of Health**: @Watkins_Viernes_Nguyen_Rojas_Mezarina_Silva_Valencia_Borbolla_2020
 
 
