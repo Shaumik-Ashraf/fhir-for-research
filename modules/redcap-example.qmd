@@ -20,11 +20,20 @@ learning_objectives:
     answer: REDCap administrators serve a critical role in the REDCap adoption process at an institution. They are a go-to resource for any questions related to the platform.
 ---
 
+<!-- DISCUSS: I'm confused about the purpose of this module. I would think it would be a real-world example of *FHIR* being used with REDCap.
+
+However, it seems to be an intro to REDCap (wouldn't this be in the redcap-intro section?), and an example of REDCap being used.
+
+I think you can remove most of this, refer people back to the intro module for intro stuff, and expand on section 2: "Examples of REDCap with FHIR".
+
+--LDC
+-->
+
 ## Introduction
 
 #### What is REDCap
 
-Research Electronic Data Capture (REDCap) is a HIPAA-compliant survey tool. It was designed in 2004 by researchers at Vanderbilt University that needed to capture personal health information in a secure and reliable format [@About_REDCap]. Since then, REDCap has grown into a global community with 3200 partner institutions in 128 countries and more than 56,000 projects[@Harris_Taylor_Minor_Elliott_Fernandez_ONeal_McLeod_Delacqua_Delacqua_Kirby_etal._2019]. 
+Research Electronic Data Capture (REDCap) is a HIPAA-compliant survey tool. It was designed in 2004 by researchers at Vanderbilt University that needed to capture personal health information in a secure and reliable format [@About_REDCap]. Since then, REDCap has grown into a global community with 3200 partner institutions in 128 countries and more than 56,000 projects [@Harris_Taylor_Minor_Elliott_Fernandez_ONeal_McLeod_Delacqua_Delacqua_Kirby_etal._2019]. 
 
 
 FHIR can be used with REDCap to facilitate data exchange, particularly if researchers want to utilize information that is already captured in an electronic health record (EHR). Within the United States and Canada, 40 institutions have integrated REDCap with their Epic or Cerner EHR [@Cheng_Banasiewicz_Johnson_Sulieman_Kennedy_Delacqua_Lewis_Joly_Bistran-Hall_Collins_2023].
@@ -69,8 +78,10 @@ FHIR and REDCap can also be used together to automate the process of population 
 
 ## REDCap Adoption 
 
+<!-- DISCUSS: what is the purpose of this section? it doesn't talk about fhir at all. Do we want a general "redcap is being used"? or a more specific "redcap with fhir is being used"? If the former, why? If the latter, the use cases below should be changed to include fhir. --LDC -->
 Hawley et al. (2021) [@Hawley_Yu_Bogetic_Potapova_Wakefield_Thompson_Kloiber_Hill_Jankowicz_Rotenberg_2021] describes a usability and implementation study at the Centre for Addiction and Mental Health (CAMH) in which they used REDCap to capture self-assessments from patients and transfer the data into a Cerner EHR. When a patient arrived the process saved time, improved the accuracy of data going into the EHR, and made the data accessible in real-time. Hawley et al. (2021) also identified useful roles and responsibilities for implementing REDCap:
 
+<!-- DISCUSS: I think this can just be a list of roles w/o the explanations and link to the source for the explanations. --LDC -->
 > -   **Clinical REDCap administrator**: Clinical REDCap staff responsible for account creation, modification, and suspension for all user types. Responsible for moving projects and draft changes to production. Limited to 2-3 staff members.
 > -   **Project developer administrator**: Clinical REDCap staff responsible for creating REDCap projects and associated forms or surveys. Leads project validation to be carried out in collaboration with clinical stakeholders.
 > -   **Service administrator**: Specialized account for managing secure services post data collection (e.g., application programming interface data export to electronic health record).
@@ -95,7 +106,7 @@ The authors also used two strategies to support adoption of REDCap:
 
 REDCap and FHIR have global communities of users with an array of resources and forums for user support. 
 
--   More on the REDCap community <!--# Some of REDCap resources are going to be institutionally-based but given conversation with Will, maybe we consider a brief REDCap community module? Or add something here on REDCap community? -->
+-   More on the REDCap community <!--# Some of REDCap resources are going to be institutionally-based but given conversation with Will, maybe we consider a brief REDCap community module? Or add something here on REDCap community? --><!-- needs link --LDC -->
 -   [More on the FHIR community](fhir-community.qmd)
 
 When used together, FHIR can help researchers using REDCap to streamline their data collection and storage processes, find study participants, and develop study cohorts with greater accuracy.
