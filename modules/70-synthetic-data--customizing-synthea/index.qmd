@@ -136,6 +136,9 @@ Once your module has been loaded, no special command line flags are necessary. S
  - Why isn't Synthea processing my module?
     - First, make sure you are not encountering the same issue as the previous question, where your module is being processed but the record entries are filtered out. Next, make sure the module is actually being loaded - watch the list of modules being loaded at startup and confirm your new module is in that list. It may be useful to temporarily remove other modules to speed up the process.
 
+ - How can I run only my module and none of the default modules?
+    - Generally this is not recommended as there are dependencies between modules which may be non-obvious and removing some can result in unexpected behavior, errors, or crashes. Also note that some of the modules are included as part of the core engine and cannot be easily disabled. However if for debugging purposes you would like to disable the default modules, the best approach is to remove the files from `src/main/resources/modules` (or move them somewhere else).
+
 If your module still does not work as expected, please feel free to post a [discussion item on the Synthea GitHub](https://github.com/synthetichealth/synthea/discussions) to request assistance. Make sure to include as much information as possible, including the module and any errors you are seeing.
 
 
@@ -309,11 +312,11 @@ run_synthea -fm ./src/test/resources/flexporter/qicore_common.yaml -fm additiona
 Full detail on the mapping file specification and using the Flexporter is available [on the Synthea wiki](https://github.com/synthetichealth/synthea/wiki/Flexporter)
 
 ## Free-form tools
-Finally, if all else fails, other languages such as Python, JavaScript, or R allow you to write your own scripts and tools to filter and modify the data created by Synthea as you see fit. The ecosystem is too broad to get into detail here, but some libraries of note that may be helpful are:
+Finally, if all else fails, other languages such as Python, JavaScript, or R can allow you to write your own scripts and tools to filter and modify the data created by Synthea as you see fit. The ecosystem is too broad to get into detail here, but some libraries of note that may be helpful are:
 
  -  JavaScript
     -  [fhir-mapper: https://github.com/standardhealth/fhir-mapper](https://github.com/standardhealth/fhir-mapper)
  -  Python
-    - []
+    -  [fhir.resources: https://github.com/nazrulworld/fhir.resources](https://github.com/nazrulworld/fhir.resources)
  -  R
-    - []
+    -  [fhircrackr: https://github.com/POLAR-fhiR/fhircrackr](https://github.com/POLAR-fhiR/fhircrackr)
