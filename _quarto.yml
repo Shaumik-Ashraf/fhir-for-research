@@ -83,15 +83,18 @@ website:
             - modules/redcap-example.qmd
 
 
-
   page-footer:
     center:
       - text: "&copy; 2023 The MITRE Corporation / <a href=\"https://github.com/mitre/fhir-for-research/README.md\">License information</a><br>Approved for Public Release / Case #23-0966"
+
+  page-navigation: true
 
   cookie-consent:
     type: express
     style: headline
     palette: light
+    prefs-text: "change cookie settings"
+
 
 format:
   html:
