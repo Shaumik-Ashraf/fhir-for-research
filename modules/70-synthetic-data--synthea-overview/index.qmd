@@ -118,6 +118,8 @@ As an alternative to running Synthea yourself, a number of datasets have already
     - 10,000 synthetic Medicare patients spanning the entire United States
 
 ## Prerequisites
+
+<!-- this section through the end feel like they should be in a separate module. Maybe "getting started with synthea" or similar. they don't feel like they belong in the intro module. --LDC -->
 Synthea requires the Java™ JDK 11 or newer to be installed (make sure to select the JDK, not the JRE install). We recommend the prebuilt OpenJDK binaries available from
 <https://adoptium.net/>.
 
