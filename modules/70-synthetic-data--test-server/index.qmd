@@ -16,7 +16,13 @@ learning_objectives:
     answer: There are both cloud-based and local options for hosting FHIR servers, with varying levels of capabilities, ease of setup and access, and performance. As always, the best option depends on the specific use case.
 ---
 
-This module describes a few options for hosting FHIR data. While the options listed here may not be robust enough to be production capabilities out of the box, they offer the quickest and easiest options for setting up a FHIR server for testing and training. The options on this page often include a set of default patient data which can be used for basic testing, or you can load your own data created by Synthea.
+This module describes a the following options for hosting FHIR data:
+
+- Logica Sandbox
+- Docker
+- Public Test Servers
+
+While the options listed here may not be robust enough to be production capabilities out of the box<!-- "listed here may not be robust enough to be production capabilities out of the box" seems like it's missing a word --LDC -->, they offer the quickest and easiest options for setting up a FHIR server for testing and training. The options on this page often include a set of default patient data which can be used for basic testing, or you can load your own data created by Synthea.
 
 
 ## Logica Sandbox
@@ -121,7 +127,7 @@ Other popular FHIR servers include:
  - [LinuxForHealth FHIR Server (formerly IBM)](https://github.com/LinuxForHealth/FHIR)
  - [BlueHalo FHIR Server (formerly Asymmetrik)](https://github.com/bluehalo/node-fhir-server-mongo#getting-started-with-docker)
 
-## Other Options
+## Public Test Servers
 
 Some options for public test servers are listed [on the HL7 Confluence](https://confluence.hl7.org/display/FHIR/Public+Test+Servers) with basic information and limitations of each. A couple notable items:
 
