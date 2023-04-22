@@ -7,8 +7,6 @@ roles:
 bibliography: ../bibliography.bib
 ---
 
-<!-- FIX: needs learning objectives --LDC -->
-
 This module is meant for technical users who would like to start working hands-on with SMART on FHIR. Read the [SMART on FHIR Introduction](smart-on-fhir-intro.qmd) before continuing.
 
 ## High-level technical considerations
@@ -53,9 +51,9 @@ You can create a SMART on FHIR application without relying on third-party librar
 
 ### Security and privacy
 
-FHIR servers will likely return health data that can be linked to an individual. If so, [rules around handling Protected Health Information (PHI)](https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html) apply. Your institution's [IRB](https://www.hhs.gov/ohrp/education-and-outreach/online-education/human-research-protection-training/lesson-3-what-are-irbs/index.html) will also have policies for handling sensitive patient data used in research. 
+FHIR servers will likely return health data that can be linked to an individual. If so, [rules around handling Protected Health Information (PHI)](https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html) apply. Your institution's [IRB](https://www.hhs.gov/ohrp/education-and-outreach/online-education/human-research-protection-training/lesson-3-what-are-irbs/index.html) will also have policies for handling sensitive patient data used in research.
 
-Determine the security and privacy approach for health data early in your design process before working with any real patient data. You can use synthetic data and a test FHIR server [**(add link to relevant module)**]{style="background-color: pink;"}<!-- FIX (in case you miss teh highlight) --LDC --> during development and testing.
+Determine the security and privacy approach for health data early in your design process before working with any real patient data. You can use synthetic data and a test FHIR server<!--# Add link to relevant module --> during development and testing.
 
 ### Human-centered design
 
@@ -67,15 +65,15 @@ For more information on human-centered design in healthcare research, see @gottg
 
 ## Example SMART on FHIR app
 
-Follow the steps below to create a simple browser-based SMART on FHIR app (based on [this tutorial](https://docs.smarthealthit.org/tutorials/javascript/)) using JavaScript. This example will use SMART App Launch's EHR Launch flow<!--FIX: add link for launch flow --LDC -->.
+Follow the steps below to create a simple browser-based SMART on FHIR app (based on [this tutorial](https://docs.smarthealthit.org/tutorials/javascript/)) using JavaScript. This example will use SMART App Launch's [EHR Launch flow](https://www.hl7.org/fhir/smart-app-launch/app-launch.html#launch-app-ehr-launch).
 
 ### Prerequisites
 
-You need: 
+You need:
 
-- a text editor
-- a way to run a local HTTP server (see below)<!-- link? --LDC -->
-- familiarity with HTML, JavaScript, and the command line.
+-   a text editor
+-   a way to run a local HTTP server (described [below](#step-4-run-a-local-web-server))
+-   familiarity with HTML, JavaScript, and the command line
 
 ### Instructions
 
@@ -217,7 +215,7 @@ Add the following contents to `index.html`. This will be the testing "app" for t
 </html>
 ```
 
-#### Step 4: Run a local web server
+#### Step 4: Run a local web server {#step-4-run-a-local-web-server}
 
 1.  Open a command prompt window and go to the folder you created.
 
@@ -248,7 +246,6 @@ Go to <https://launch.smarthealthit.org>, enter `localhost:8000/launch.html` for
 You should see the following happen:
 
 {{< video images/smart-on-fhir-flow.mp4 >}}
-<!-- FIX: this video didn't work for me in the preview - likely works in browser but should be double checked --LDC -->
 
 ### App launch process explanation {#explanation}
 
@@ -289,7 +286,7 @@ Here are the details of this process:
 
 2.  `http://localhost:8000/launch.html` loads in your browser, and [`FHIR.oauth2.authorize()`](https://docs.smarthealthit.org/client-js/api.html#authorizeoptionsoptions-promisenever) is called with the options defined in `launch.html`'s source code. The `authorize()` method [obtains an authorization code](https://hl7.org/fhir/smart-app-launch/STU2/app-launch.html#obtain-authorization-code) from the testing server's "authorize" endpoint. In this case, it does this by triggering a browser redirect to `https://launch.smarthealthit.org/v/r4/auth/authorize` with [a number of parameters](https://hl7.org/fhir/smart-app-launch/STU2/app-launch.html#obtain-authorization-code).
 
-3.  Your browser loads a flow on the `launch.smarthealthit.org` server for a dummy provider log-in and patient selection process<!--FIX: rephrase. jargony. "flow" "dummy" --LDC -->. (Note: If this application was being used in a real-world EHR, the provider would be logged in through the EHR and the selected patient would be whichever patient the provider was viewing when they launched the app in the EHR.)
+3.  Your browser loads a page on the `launch.smarthealthit.org` server simulating provider log-in and patient selection. (Note: If this application was being used in a real-world EHR, the provider would be logged in through the EHR and the selected patient would be whichever patient the provider was viewing when they launched the app in the EHR.)
 
     This dummy flow gathers the information needed for `launch.smarthealthit.org` to provide the example application with the authorization code. It does this by redirecting your browser to `localhost:8000/index.html?code=...&state=...`. It knows to take you to `localhost:8000/index.html` because you specified the parameter `redirectUri: "index.html"` in the source code of `launch.html`.
 
