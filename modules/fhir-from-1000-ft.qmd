@@ -1,11 +1,6 @@
 ---
 title: "FHIR from 1,000 Feet"
 
-area:
-  name: Overview
-topic:
-  name: FHIR for Research
-
 roles:
   - Investigator
   - Informaticist
@@ -21,8 +16,6 @@ learning_objectives:
     answer: It is a standard way for systems to request and send instances of resources to each other.
 ---
 
-<!-- FIX: I seem to have done something odd with the numbering, but am not sure what. It's not showing as 0.1, 0.2., 0.3 for the section numbers. --LDC -->
-
 ::: callout-caution
 ## Did you read FHIR from 10,000 Feet?
 
@@ -33,27 +26,9 @@ This module looks at how FHIR works from a technical standpoint, and is targeted
 
 ## The structure of FHIR
 
-ONC (Office of the National Coordinator for Health IT)'s [FHIR Fact Sheet](https://www.healthit.gov/sites/default/files/page/2021-04/What%20Is%20FHIR%20Fact%20Sheet.pdf) describes the core capabilities of FHIR:
-
-> The philosophy behind FHIR is to create a set of Resources that, individually or in combination, satisfy most common use cases. The Patient Resource, for example, includes demographic data related to a patient, such as their name, address, and phone number. Resources also improve granular data retrieval, so that a request returns just the relevant data rather than a full record or document that itself must then be searched.
->
-> Once they are modified for specific requirements using FHIR's built-in capabilities, combinations of Resources are brought together in an Implementation Guide to address a specific use case, such as a provider directory or patient-reported outcomes. This structure lends itself well to expansion beyond FHIR's core capabilities.
-
-<!-- NOTE: i removed the bit about REST above because I thought ONC's explanation was weird, poorly phrased, and confusing. It also didn't seem very relevant to this section. --LDC -->
-
-<!-- DISCUSS:
-this is very confusingly phrased:
-
-> Once they are modified for specific requirements using FHIR's built-in capabilities, combinations of Resources are brought together in an Implementation Guide to address a specific use case, such as a provider directory or patient-reported outcomes. This structure lends itself well to expansion beyond FHIR's core capabilities.
-
-It's not clear if ONC is talking about apps using FHIR resources to get data (it's not, but the context sounds like it is) or FHIR developers creating implementation guides for their use cases (what it *is* talking about, but you'd only know that if you knew FHIR).
-
-I suggest removing or rephrasing. A possibel rephrase might be something like:
+The FHIR specification groups data elements into "[resources](https://www.hl7.org/fhir/resource.html)," like [Patient](https://www.hl7.org/fhir/patient.html) for representing demographics and administrative information about an individual, and [Observation](https://www.hl7.org/fhir/observation.html) for representing measurements and assertions about a patient or other subject.
 
 FHIR implementers can constrain what information gets included in a FHIR resource or use FHIR extensions to add information to a resource. They can also specify which FHIR resources should be used together for their use case. They share these constraints, extensions, and combinations with others through an Implementation Guide.
-
---LDC
--->
 
 Below is a screenshot of the [Patient resource](https://www.hl7.org/fhir/R4B/patient.html) from the FHIR specification (`R4B` version):
 
@@ -70,10 +45,8 @@ Each element has properties that appear in the `Flag`, `Card.` (short for "Cardi
 Elements also have short descriptions (`Description & Constraints`) as well as longer descriptions. To see the longer description, click on the element's name (e.g., see the [details of `Patient.gender`](https://www.hl7.org/fhir/R4B/patient-definitions.html#Patient.gender)).
 
 When a FHIR resource is created and populated with data, we call this an **instance** of the FHIR resource. An instance of the `Patient` resource would assign `Patient.name` to a value like `Andy Smith`. Instances are formatted in [JSON](https://en.wikipedia.org/wiki/JSON) or [XML](https://en.wikipedia.org/wiki/XML). To see an example of a patient instance formatted as JSON, expand the box below.
-<!-- QUESTION: do we want to list turtle here? --LDC -->
 
-<!-- FIX: use a different callout type here. Maybe an info one or a lightbulb one? --LDC -->
-::: {.callout-caution collapse="true"}
+::: {.callout-note collapse="true"}
 ## JSON format FHIR `Patient` instance example
 
 Below is an example of a what a FHIR resource instance looks like in JSON format.
@@ -123,14 +96,7 @@ Below is an example of a what a FHIR resource instance looks like in JSON format
 
 ## Customizing FHIR
 
-<!-- DISCUSS: will the expected reader understand why customization and interoperability would be "trade offs"? Is more background needed for this sentence? 
-
-Original sentence:
-FHIR balances the trade-off between customization and interoperability with [the 80/20 rule](http://www.healthintersections.com.au/?p=1924):
-
-Also changed "20% of data elements" to be just "data elements" because we're not actually talking data elements w these percentages. It's "80% of relevant systems", not "80% of data elements". The percentage doesn't translate directly to data elements.
---LDC -->
-FHIR uses [the 80/20 rule](http://www.healthintersections.com.au/?p=1924): the core FHIR specification includes a data element if 80% of relevant systems use it. The remaining data elements are handled through [FHIR extensions](https://www.hl7.org/fhir/extensibility.html) (discussed below). <!-- This paragraph is quoted in fhir-history.qmd -- any changes here should be synchronized there manually. -->
+The FHIR specification follows [the 80/20 rule](http://www.healthintersections.com.au/?p=1924) to determine which data elements are included in a resource: data elements are typically included only if 80% of relevant systems will use them. Less common data needs are handled through [FHIR extensions](https://www.hl7.org/fhir/extensibility.html) (discussed below). This means that FHIR-enabled systems will implement *most* common data elements consistently.<!-- This paragraph is quoted in fhir-history.qmd -- any changes here should be synchronized there manually. -->
 
 To maximize usability, data elements contained in FHIR resources have minimal constraints. **Constraints** restrict how a data element can be populated. For example, a constraint on Patient resource might require that `Patient.birthDate` be populated. However, some systems record a patient's age in years rather than date of birth for privacy reasons. If the constraint on `Patient.birthDate` existed, those system would not be able to use the Patient resource.
 
@@ -138,11 +104,11 @@ However, some use cases may require `Patient.birthDate` be populated. To achieve
 
 ### Example: customizing Patient in US Core
 
-The [US Core FHIR IG](https://www.hl7.org/fhir/us/core/) ("US Core" hereafter<!--FIX: rephrase? --LDC -->) defines a FHIR implementation for [USCDI](https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi), and is widely used in the US as the basis for FHIR implementations. In other words, EHRs in the US that support FHIR are likely also conformant with US Core.
+The [US Core FHIR IG](https://www.hl7.org/fhir/us/core/) (referred to as "US Core" below) defines a FHIR implementation for [USCDI](https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi), and is widely used in the US as the basis for FHIR implementations. In other words, EHRs in the US that support FHIR are likely also conformant with US Core.
 
 US Core defines a [profile of Patient](https://hl7.org/fhir/us/core/StructureDefinition-us-core-patient.html), which does two things:
 
-1.  **Adds constraints:** For example, [the Patient resource in base FHIR](https://www.hl7.org/fhir/R5/patient.html) does not require that the `name` element is populated. US Core's profile of Patient <mark>adds a constraint to make `name` required</mark>.[^2]<!-- QUESTION: why is this 'mark'ed? should it be? remove? I don't think i've seen this in any other modules --LDC -->
+1.  **Adds constraints:** For example, [the Patient resource in base FHIR](https://www.hl7.org/fhir/R5/patient.html) does not require that the `name` element is populated. US Core's profile of Patient adds a constraint to make `name` required.[^2]
 2.  **Adds extensions:** The base Patient resource in FHIR does not provide a way to capture patient race and ethnicity, which are common data elements in US health data. US Core adds `Patient.us-core-race` and `Patient.us-core-ethnicity` extensions to provide a consistent, interoperable way to store these data.
 
 [^2]: You can see this in the "Card." (Cardinality) column for the `Patient.name` element on [the US Core Patient profile's "differential table"](https://hl7.org/fhir/us/core/STU5/StructureDefinition-us-core-patient.html#tabs-diff), which defines the changes this profile makes compared to the parent resource. Find more information on reading differential tables in IGs [here](data-modeling-reading-igs.qmd).
@@ -161,9 +127,9 @@ The following table shows how PACIO represents a narrative history of a patient'
 
     > Functioning <mark>observations related to mobility, self-care and domestic life</mark> are often used to describe how a person is able to interact with their environment and is a foundation to patient centered care. It is used in reporting outcomes for clinical care, quality improvement activities, quality measure reporting, and research.
 
-    (Highlights added.) <!-- 'mark' used again here. should it be? If not, delete 'Highlights added' as well --LDC -->
+    (Highlights added.)
 
-::: column-page-left
+::: column-page-right
 +-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | FHIR term | PACIO's approach using FHIR                                                                                                                                                   | Commentary                                                                                                                                                                 |
 +===========+===============================================================================================================================================================================+============================================================================================================================================================================+
@@ -186,7 +152,9 @@ The following table shows how PACIO represents a narrative history of a patient'
 
 [^5]: From the [FHIR specification's description of the Observation resource](http://hl7.org/fhir/5.0.0-draft-final/observation.html).
 
-<!-- I finish this section wanting more. Conclusion sentence? --LDC -->
+In general, a concept like "narrative history of a patient's functional status" will be represented by one or more profiles of FHIR resources in a FHRI IG, each with a set of relevant constraints and (if necessary) extensions.
+
+Note that extensions can make interoperability more difficult compared to using data elements in the base FHIR resources, so they should be used only when needed.
 
 ### Customizing FHIR and research
 
@@ -215,7 +183,7 @@ Using FHIR for research depends on whether the relevant systems support FHIR and
 
 If the necessary FHIR support exists or can be added, researchers may benefit by using FHIR. The table below illustrates the benefits by comparing common research-related tasks using (a) FHIR to access data and (b) accessing data via a custom one-off extract:
 
-::: column-page-left
+::: column-page-right
 +----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------+
 | Task                                         | Via FHIR                                                                                                                                                                            | Via custom data extract                                                  |
 +==============================================+=====================================================================================================================================================================================+==========================================================================+
