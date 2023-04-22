@@ -12,21 +12,20 @@ learning_objectives:
   - question: How have researchers used FHIR in the past?
     answer: Researchers have used FHIR to extract data from EHRs, define phenotypes that are portable across systems and institutions, and enable research that requires integration with clinical workflows.
 ---
-<!-- more learning objectives? ^ --LDC -->
 
 Researchers have published work using FHIR in a number of areas, usually related to:
 
-- Extracting data from EHRs.
-- Defining phenotypes that are portable across systems and institutions.
-- Enabling research that requires integration with clinical workflows.
+-   Extracting data from EHRs.
+-   Defining phenotypes that are portable across systems and institutions.
+-   Enabling research that requires integration with clinical workflows.
 
 Below are summaries of recent published research in each of these areas. At the bottom of this page is a list of other published research involving FHIR.
 
 ## Extracting data
 
--   @cheng2023 used FHIR to automatically populate clinical trial case report forms. In a COVID-19-related trial at Vanderbilt University Medical Center, they populated 10,081 of 11,952 values (84%) using FHIR, with 89% agreement with human entry. Manual review indicated that disagreement with human entry was often due to data entry error<!-- whose error? the humans with the human entry? so FHIR more accurate? Or somethign on FHIR's end? confusing. --LDC -->, suggesting that the FHIR-based approach could improve accuracy over manual chart abstraction.
+-   @cheng2023 used FHIR to automatically populate clinical trial case report forms. In a COVID-19-related trial at Vanderbilt University Medical Center, they populated 10,081 of 11,952 values (84%) using FHIR, with 89% agreement with human entry. Manual review indicated that disagreement with human entry was often due to errors in manual data entry, suggesting that the FHIR-based approach could improve accuracy over manual chart abstraction.
 
--   @zong2021 used FHIR to automatically<!-- missing a verb here. automatically <what> case report forms? --LDC --> case report forms for a colorectal cancer clinical trial. They were able to successfully extract a portion of the data needed to fill case report forms with 98.5% positive predictive value and 96.2% sensitivity using clinical records from 331 Mayo Clinic patients.
+-   @zong2021 used FHIR to automatically fill case report forms for a colorectal cancer clinical trial. They were able to successfully extract a portion of the data needed to fill case report forms with 98.5% positive predictive value and 96.2% sensitivity using clinical records from 331 Mayo Clinic patients.
 
 -   @Lenert_2021 describes a way of using FHIR to replace custom data pipelines for extracting COVID-19 data from EHRs. They used FHIR to populate [PCORnet](https://pcornet.org/) and [OMOP](https://www.ohdsi.org/data-standardization/) databases with significantly less delay than previous approaches. (For more information on PCORnet and OMOP, please see [Common Data Models](cdms.qmd).) This approach should be portable across EHRs and institutions.
 
@@ -36,8 +35,6 @@ Below are summaries of recent published research in each of these areas. At the 
 
 -   @brandt2022 created cross-institution phenotype definitions (aka cohort definitions) using a combination of FHIR and Clinical Quality Language ([CQL](https://cql.hl7.org))[^1]. Three institutions successfully used their system to identify cases and non-cases by [generating queries](https://github.com/PheMA/cql-on-omop) to run against existing [OMOP](https://www.ohdsi.org/data-standardization/) databases. Institutions that do not have OMOP research databases could possibly use FHIR and CQL directly to identify cases and non-cases, though the authors did not test this.
 
-[^1]: CQL is an HL7 standard that expresses inclusion and exclusion logic.
-
 -   @Gruendner_2022 also developed a cross-institution phenotyping approach using FHIR and CQL. Their system had four components:
 
     1.  User-interface for writing queries.
@@ -46,6 +43,8 @@ Below are summaries of recent published research in each of these areas. At the 
     4.  Execution service to convert the standardized query to FHIR.
 
     Their approach could be deployed at multiple institutions and scaled to millions of records using synthetic data.
+
+[^1]: CQL is an HL7 standard that expresses inclusion and exclusion logic.
 
 ## Interacting with clinical workflows
 
