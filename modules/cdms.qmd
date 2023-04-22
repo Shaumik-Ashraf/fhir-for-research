@@ -1,13 +1,6 @@
 ---
-title: Common Data Models & FHIR
+title: Common Data Models
 
-area:
-  name: Overview
-topic:
-  name: FHIR for Research
-  
-bibliography: bibliography.bib
-  
 roles:
   - Investigator
   - Research Leaders
