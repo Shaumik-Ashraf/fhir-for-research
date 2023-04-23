@@ -1,89 +1,8 @@
 <!-- scripts.html -->
 <!-- any content in this file is inserted right before </body> -->
 
-<!-- Fix up CI build links -->
-<script type="application/javascript">
-  setTimeout(() => {
-    const links = document.querySelectorAll(
-      'a[href^="https://fhir-for-research.pages.mitre.org/-/web/-/jobs/"]'
-    );
-    for (let i = 0; i < links.length; i++) {
-      const href = links[i].getAttribute("href");
-      const newHref = href + "index.html";
-      links[i].setAttribute("href", newHref);
-    }
-  }, 1000);
-</script>
-
-<!-- improved citations with littlefootjs -->
-<script
-  src="https://unpkg.com/littlefoot/dist/littlefoot.js"
-  type="application/javascript"
-></script>
-
-<script type="application/javascript">
-  littlefoot.littlefoot({
-    activateOnHover: true,
-    buttonTemplate: `
-        <button
-          class="littlefoot__button btn btn-link"
-          id="<% reference %>"
-          title="See Footnote <% number %>"
-          style="line-height:1;vertical-align:top;text-decoration:none;"
-        >
-          <% number %>
-        </button>
-    `
-  })
-
-  /* To Title Case (c) 2018 David Gouch | https://github.com/gouch/to-title-case */
-  /* MIT license */
-  // eslint-disable-next-line no-extend-native
-  String.prototype.toTitleCase = function () {
-    'use strict'
-    var smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|the|to|v.?|vs.?|via)$/i
-    var alphanumericPattern = /([A-Za-z0-9\u00C0-\u00FF])/
-    var wordSeparators = /([ :â€“â€”-])/
-
-    return this.split(wordSeparators)
-      .map(function (current, index, array) {
-        if (
-          /* Check for small words */
-          current.search(smallWords) > -1 &&
-          /* Skip first and last word */
-          index !== 0 &&
-          index !== array.length - 1 &&
-          /* Ignore title end and subtitle start */
-          array[index - 3] !== ':' &&
-          array[index + 1] !== ':' &&
-          /* Ignore small words that start a hyphenated phrase */
-          (array[index + 1] !== '-' ||
-            (array[index - 1] === '-' && array[index + 1] === '-'))
-        ) {
-          return current.toLowerCase()
-        }
-
-        /* Ignore intentional capitalization */
-        if (current.substr(1).search(/[A-Z]|\../) > -1) {
-          return current
-        }
-
-        /* Ignore URLs */
-        if (array[index + 1] === ':' && array[index + 2] !== '') {
-          return current
-        }
-
-        /* Capitalize the first letter */
-        return current.replace(alphanumericPattern, function (match) {
-          return match.toUpperCase()
-        })
-      })
-      .join('')
-  }
-</script>
-
-
 <!-- fancy json code viewer -->
+<script type="text/javascript" src="https://unpkg.com/dompurify@3.0.1/dist/purify.min.js"></script> <!-- load JS Sanitizer -->
 <script>
     function jsonViewer(json, collapsible=false) {
         let TEMPLATES = {
@@ -95,7 +14,9 @@
         function createItem(key, value, type){
             let element = TEMPLATES.item.replace('%KEY%', key);
 
-            if(type == 'string') {
+            if((key == 'div') && (type=='string')) { // Removes Resource.text.div value (looks bloated)
+                element = element.replace('%VALUE%', '...');
+            } else if(type == 'string') {
                 element = element.replace('%VALUE%', '"' + value + '"');
             } else {
                 element = element.replace('%VALUE%', value);
@@ -108,11 +29,11 @@
 
         function createCollapsibleItem(key, value, type, children){
             let tpl = 'itemCollapsible';
-            
+
             if(collapsible) {
                 tpl = 'itemCollapsibleOpen';
             }
-            
+
             let element = TEMPLATES[tpl].replace('%KEY%', key);
 
             element = element.replace('%VALUE%', type);
@@ -177,8 +98,9 @@
 
 
     function parseHTML(string) {
+        let sanitized = DOMPurify.sanitize(string);
         let parser = new DOMParser();
-        return parser.parseFromString(string, "text/html").body.firstChild;
+        return parser.parseFromString(sanitized, "text/html").body.firstChild;
     }
 
     let jsonCodeBlocks = document.querySelectorAll("code.sourceCode.json");

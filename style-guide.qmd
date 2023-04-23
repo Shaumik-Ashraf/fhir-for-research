@@ -44,23 +44,8 @@ Each module needs frontmatter like the following:
 
 ### Title
 
-You can use use the widget below to convert to proper title case:
+Use [this website](https://individed.com/code/to-title-case/) to properly capitalize titles.
 
-<form id="tester" action>
-
-<input aria-label="Title to convert" id="untitled" type="text" value="Turn me into a title" /><input type="submit" value="Convert &rarr;" /><input aria-label="Result" id="titled" type="text" />
-
-</form>
-
-```{=html}
-<script type="text/javascript">
-document.getElementById('tester').addEventListener('submit', function(ev) {
-ev.preventDefault()
-document.getElementById('titled').value =
-document.getElementById('untitled').value.trim().toTitleCase()
-})
-</script>
-```
 ### Area and topic
 
 The `area` and `topic` properties are used to create the "breadcrumb" above the title on module pages.
@@ -69,17 +54,18 @@ The `area` and `topic` properties are used to create the "breadcrumb" above the 
 
 Roles should be listed as a YAML array in the frontmatter. The following roles are valid, and should appear verbatim as below:
 
--   `Investigator`
--   `Research Leaders`
--   `Informaticist`
--   `Software Engineer`
--   `Clinician Scientist/Trainee`
+    - Investigator
+    - Research Leaders
+    - Informaticist
+    - Software Engineer
+    - Clinician Scientist/Trainee
 
 ## Voice
 
 See [Microsoft's](https://learn.microsoft.com/en-us/style-guide/grammar/person) and [Google's](https://developers.google.com/style/person) style guides for examples of using first person, second person, and imperative voice in writing.
 
 ### First person
+
 Avoid singular first person pronouns ("I"/"me").
 
 Use plural first person sparingly ("we"/"us") to refer to the authors.
@@ -87,14 +73,16 @@ Use plural first person sparingly ("we"/"us") to refer to the authors.
 Never use the global "we": "We need to solve world-hunger."
 
 ### Second person
+
 Write as though you are speaking to the reader and use second person "you." Avoid using phrases like, "the reader."
 
 ### Imperative
-When providing instructions, use imperative voice where possible. 
+
+When providing instructions, use imperative voice where possible.
 
 From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/grammar/person):
 
-> Change your password (Instead of _We recommend that you change your password._)
+> Change your password (Instead of *We recommend that you change your password.*)
 >
 > That didn’t work. Try again. (Instead of _We weren’t able to run the Solution Checker. Try running it again._)
 

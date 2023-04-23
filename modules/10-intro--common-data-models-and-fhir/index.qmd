@@ -1,7 +1,0 @@
----
-title: Common Data Models & FHIR
-area:
-  name: Overview
-topic:
-  name: FHIR for Research
----
