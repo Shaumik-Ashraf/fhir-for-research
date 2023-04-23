@@ -24,11 +24,6 @@ Each module needs frontmatter like the following:
     ---
     title: FHIR From 1,000 Feet
 
-    area:
-      name: Overview
-    topic:
-      name: FHIR for Research
-
     roles:
       - Informaticist
       - Software Engineer
@@ -116,8 +111,8 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
     - _virtually_ and _conference call_ are redundant: only one is necessary.
 
 - "Very" and "really" are absent.
-  - **Ctrl-f for "very" and "really".** Remove these words. 
-  - If necessary, replace the verb or adjective with a more description verb or adjective. 
+  - **Ctrl-f for "very" and "really".** Remove these words.
+  - If necessary, replace the verb or adjective with a more description verb or adjective.
     - **Examples** "It's really good."
       - "It's excellent."
 
@@ -143,7 +138,7 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
     - _understanding_ is a nominalization of _to understand_. You can rewrite this sentence as "Because she understood the situation, they could proceed."
 
 - Sentences are simple, as long as simplicity doesn't reduce readability.
-  - **Look for sentences with 2 or more commas (where the commas aren't part of a list).** 
+  - **Look for sentences with 2 or more commas (where the commas aren't part of a list).**
   - **Does the sentence have multiple purposes?** If so, try dividing it into two separate sentences.
     - **Example** "After they went to the park, they drove to a restaurant, and at the restaurant, they had dinner."
       - The sentence says what they did after the park, _and_ what they did at the restaurant.
@@ -170,7 +165,7 @@ From [Microsoft's style guide](https://learn.microsoft.com/en-us/style-guide/gra
 
 - **You use [plain language](https://www.plainlanguage.gov/).** [You use simpler words where the simple word has the same meaning.](https://www.plainlanguage.gov/guidelines/words/use-simple-words-phrases/)
   - **Example** [Try words like "use" instead of "utilize," "about" instead of "approximately" and "try" instead of "attempt."](https://zapier.com/blog/plain-language/)
-  - **Example** 
+  - **Example**
     - [Original: "It is suggested that the wire should be connected to the terminal by the engineer when the switch-box assembly is completed."](https://zapier.com/blog/plain-language/)
     - [Simplified: "We suggest that you connect the wire to the terminal when you finish assembling the switch-box."](https://zapier.com/blog/plain-language/)
 
