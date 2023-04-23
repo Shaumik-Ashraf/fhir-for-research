@@ -45,7 +45,7 @@ website:
             - text: "Accessing FHIR Data"
             - modules/fhir-history.qmd
             - modules/terminology.qmd
-            - text: Common Data Models
+            - modules/cdms.qmd
             - file: modules/fhir-community.qmd
               text: Community & Documentation
         - section: "SMART on FHIR"
