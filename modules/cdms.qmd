@@ -7,15 +7,13 @@ roles:
   - Informaticist
   - Software Engineer
   - Clinician Scientist/Trainee
-  
-learning_objectives:
-  - question: Why are Common Data Models necessary in healthcare?
-    answer: Healthcare data comes from many different data sources, each with their own data format. Analyzing data from multiple sources is difficult if each source formats the data differently. However, if the data sources agree to use a Common Data Model, analysis becomes much easier, and the data can be combined to provide a broader picture of the healthcare landscape.
-  - question: How do Common Data Models help researchers?
-    answer: Common Data Models enable researchers to create a single query to send to multiple partner organizations rather than create different queries for each organization. CDMs also enable the partner organizations to process the query internally so the researcher does not need to work directly with the raw data.
-  - question: How does FHIR help researchers work with Common Data Models?
-    answer: FHIR enables researchers to work with multiple CDMs at the same time. The Common Data Models Harmonization (CDMH) FHIR Implementation Guide maps FHIR resources to common CDMs, allowing researchers to easily work between multiple CDMs.
-    
+
+learning_objectives2:
+  - Understand the purpose of a CDM for research.
+  - Describe the differences between CDMs and FHIR.
+  - Describe how FHIR can be used alongside CDMs.
+  - Identify some notable research CDMs used in the US.
+
 bibliography: ../bibliography.bib
 ---
 
