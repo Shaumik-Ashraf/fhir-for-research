@@ -15,56 +15,49 @@ learning_objectives:
     answer: Common Data Models enable researchers to create a single query to send to multiple partner organizations rather than create different queries for each organization. CDMs also enable the partner organizations to process the query internally so the researcher does not need to work directly with the raw data.
   - question: How does FHIR help researchers work with Common Data Models?
     answer: FHIR enables researchers to work with multiple CDMs at the same time. The Common Data Models Harmonization (CDMH) FHIR Implementation Guide maps FHIR resources to common CDMs, allowing researchers to easily work between multiple CDMs.
+    
+bibliography: ../bibliography.bib
 ---
 
-A Common Data Model (CDM) is a set of standardized data schemas that are used by several partner organizations. CDMs are helpful to researchers: If a researcher wants to use data from the partner organizations, they can create a single query. Each partner organization then runs the same query internally and returns the result to the researcher. Without a CDM, the researcher would need to create a different query for each organization.
+A Common Data Model (CDM) is a set of standardized data schemas that are used across organizations. CDMs can facilitate research by making it possible to write a single data query that will run across organizations using the same CDM. Without a CDM, a researcher would need to create a different query for each organization.
 
-::: {.callout-note collapse="true"}
+Organizations that use CDMs can form a health data network to facilitate data access by network members. For more information on how health data networks are structured, see @cdm_timeline_paper.
 
-## Shared Health Data Network (SHDN) and Distributed Health Data Network (DHDN)
+## CDMs and FHIR
 
-Shared Health Data Network (SHDN)
+CDMs and FHIR are both important parts of the health research data ecosystem, but differ in key ways:
 
-:   Network of organizations that establish a common CDM. An SHDN makes data available to researchers in one of three ways: [@cdm_timeline_paper]
+#### Purpose and scope
 
-    -   **Pooled SHDN** - Data is centralized at a single location where researchers  access it through a client/server relationship.
+-   CDMs: Provide a consistent structure for storing and querying health data to faciliate research.
 
-    -   **Federated SHDN** - Data is stored at individual source organizations but a centralized clearinghouse exists for remote querying of collective data batches.
+-   FHIR: Enable interoperability between health IT systems (which can included research-related systems).
 
-    -   **Hybrid SHDN** - Functionally the same as Federated SHDNs from the researcher's perspective, but some data batches are pooled from multiple organizations while others are single-organization only.
+#### Structure
 
-Distributed Health Data Network (DHDN)
+-   CDMs: Typically, CDMs consist of a standardized set of relational database tables, with columns for each data element. CDMs also typically define standardized [terminology](terminology.qmd) for representing concepts.
 
-:   Type of SDHN where data is available to remote users via a query interface as opposed to onsite only like the examples above. [@dhdn]
-<!-- this appears to be very closely copied from https://doi.org/10.5334/egems.279. Add a reference and possibly block quotations. --LDC -->
-:::
+-   FHIR: FHIR defines [resources](key-fhir-resources.qmd) for each type of data, which can be extended to add additional data elements as needed for a given use case. Resources have a nested structure (like a multi-level outline) rather than a tabular structure (like a spreadsheet). The base FHIR specification does have strict terminology constraints, though these can be added for a specific use case in an [Implementation Guide](data-modeling-reading-igs.qmd).
 
-## The importance of CDMs in research
+#### Implementation
 
-### The problem
+-   CDMs: Typically implemented as a database within a research data warehouse. When CDMs are used as part of a research data network, additional mechanisms may be implemented for sharing data across the network [@cdm_timeline_paper].
 
-Observational data in healthcare is complex and comes from many data sources. There are three major reasons for collecting observational data: [@book_of_ohdsi]
+-   FHIR: Typically implemented as an API within a health IT system like an EHR, though research-specific databases may also implement FHIR (e.g., [Kids First](https://kidsfirstdrc.org)).
 
-| Reason to collect observational healthcare data | Common data source      |
-|-------------------------------------------------|-------------------------|
-| Facilitate research                             | Survey or registry data |
-| Support conduct of healthcare                   | EHR data                |
-| Manage healthcare payments                      | Claims                  |
+Because of these differences, FHIR does not obviate existing CDMs and health data networks. However, FHIR can be used in conjunction with CDMs. For example:
 
-Researchers often pull data from each of the source types listed above. They also require large amounts of patient data to draw statistically significant conclusions. If each data source has a different structure, the researcher would need to create a different query for each data source.
+-   **Populating a CDM:** FHIR can be used as part of the process for populating a CDM. Typically, data are extracted from EHRs and other clinical or billing systems, transformed into the CDM's format, and then loaded into the CDM database. (Note that this type of process is generally referred to as [ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load) for Extract, Transform, Load.) FHIR can be used as the input into an ETL process, which may allow for ETL logic that is more portable across institutions and EHR installations.
 
-In addition, if a researcher took the data outside of the source organization to process it, they would need to manage data use agreements for each data source. Managing legal requirements adds time and expense to the research effort.
+-   **Mapping between CDMs:** The [Common Data Models Harmonization IG](http://hl7.org/fhir/us/cdmh/) uses FHIR to map and translate between PCORNet, i2b2, OMOP, and Sentinel (all described below).
 
+-   **Portable phenotypes:** FHIR and Clinical Quality Language ([CQL](https://cql.hl7.org)) were used by @brandt2022 to create phenotypes for cohort definitions. These were translated to run against the OMOP CDM. Theoretically, institutions that do not have OMOP research databases could use FHIR and CQL directly to identify cases and non-cases.
 
-### How CDMs help
+## Notable CDMs
 
-Each partner organization implements the CDM internally and can receive and process data queries based on the CDM's structure. This means that researchers can create a single query instead of multiple queries, significantly reducing the time and complexity of the research effort.
+If you are not familiar with CMS, below are some notable CDMs used in the US:
 
-Additionally, because the partner organizations process the queries internally, the researcher never accesses or stores the raw data. As a result, the legal requirements for working with the data are much simpler.
-
-## Commons CDMs
-
-Common CDMs the researchers in the US use include:
+-   [OMOP (Observational Medical Outcomes Partnership)](https://www.ohdsi.org/data-standardization/)
 
 -   [Sentinel](https://www.sentinelinitiative.org/)
 
@@ -72,83 +65,38 @@ Common CDMs the researchers in the US use include:
 
 -   [i2b2 (Informatics for Integrating Biology & the Bedside)](https://www.i2b2.org/about/index.html)
 
--   [OMOP (Observational Medical Outcomes Partnership)](https://www.ohdsi.org/data-standardization/)
-
-### Sentinel
-
-Launched by the FDA in 2007, Sentinel monitors whether FDA-regulated medical products cause unexpected adverse reactions. 
-
-Although FDA-regulated products undergo clinical testing before approval, the testing may miss adverse reactions. This is because the test population rarely matches the population that uses the product. To detect and assess adverse events after approval, the FDA created Sentinel.
-
-Sentinel follows a DHDN model:
-Partner organizations implement the Sentinel CDM internally. If an adverse reaction is suspected, researchers send a query to a secure portal, which distributes the query to the partner organizations. The partner organizations process the query internally and send back the results.
-[@cdm_timeline_paper]
-
-<!-- I used this paper to write ^. https://www.healthaffairs.org/do/10.1377/hpb20150604.936915/. Needs a reference. --LDC -->
-
-For more information, visit [Sentinel's CDM webpage](https://www.sentinelinitiative.org/methods-data-tools/sentinel-common-data-model).
-
-
-<!-- FIX: I removed the list above. instead, include this visual: https://www.sentinelinitiative.org/sites/default/files/SCDM_Table_v8.1.0_with%20SVT%20%281%29%20%281%29.png --LDC -->
-
-### PCORnet
-
-The Patient-Centered Outcomes Research Institute (PCORI) developed PCORnet to make clinical research more streamlined, representative, and efficient.
-
-PCORnet follows a DHDN model: Researchers submit a research question to the PCORnet "front door." PCORnet leadership reviews the question and transforms it into a computable query. PCORnet then distributes the query to its partners. Because each partner uses the PCORnet CDM, they can process the query without making changes and respond with the result.
-
-<!-- add this image: https://pcornet.org/wp-content/uploads/2021/11/Process.png -->
-
-PCORnet data is largely drawn from EHRs, as well as some patient-reported and payor data. The PCORnet includes data from 66 million patients that researchers can use for observational studies.
-
-Below is a visual of its CDM schema. For more information, review the [PCORnet CDM specification](https://pcornet.org/wp-content/uploads/2022/01/PCORnet-Common-Data-Model-v60-2020_10_221.pdf).
-
-![](images/image-1116756803.png)
-
-### i2b2
-
-Developed in 2004 by Partners HealthCare and Harvard Medical School, i2b2 is an open-source research data application framework that "provides clinical and translational investigators with the tools necessary to integrate medical record and clinical research in the genomics age." [@i2b2_wiki_intro] This CDM's main purpose is to help translate genomic findings and hypotheses for researchers.
-
-i2b2's CDM is different from the other listed in that it does not have a separate database table for each data type. Its CDM is based on a "star schema" where all patient observations are stored in a single "fact" table that provides different codes for separate ontologies. There are three major upsides to this design choice: [@i2b2_wiki_intro]
-
--   Institutions can use their own local codes without the need to map to other data sets.
-
--   Institutions can easily add new data types.
-
--   Queries, analyses, and tools developed using i2b2 are future-proof since this CDM can remain stable over time.
-
-The visual below gives an example of this. [@i2b2_wiki_star_schema] The `observation_fact` table holds all observations that act as keys to connect to other tables that can be added by institutions with their own required data types.
-
-![](images/image-1891753576.png)
-
-For more information, please visit the [i2b2 CDM documentation](https://community.i2b2.org/wiki/display/BUN/i2b2+Common+Data+Model+Documentation).
-
-<!-- DISCUSS: I have no idea what this section is saying. I looked at the i2b2 site and that didn't help either. Maybe max can rework?. --LDC -->
-
 ### OMOP
 
-Similar to Sentinel, OMOP was originally created in 2007 by the FDA and other partners to study the effects of medical products.[@cdm_timeline_paper] It is now managed by the OHDSI (Observational Health Data Science and Informatics).
+OMOP was originally created in 2007 by the FDA and other partners to study the effects of medical products.[@cdm_timeline_paper] It is now managed by the [OHDSI](https://www.ohdsi.org/) (Observational Health Data Science and Informatics).
 
 [OMOP is an](https://www.ohdsi.org/data-standardization/):
 
 > open community data standard, designed to standardize the structure and content of observational data and to enable efficient analyses that can produce reliable evidence.
 
-Below is a visual representation of the OMOP CDM: [@book_of_ohdsi]
+![Diagram showing the structure of the OMOP CDM. From @book_of_ohdsi.](images/image-1041728868.png){alt="caption" fig-alt="Diagram showing the structure of the OMOP CDM."}
 
-![](images/image-1041728868.png)
+OMOP uses [OHDSI standardized vocabularies](https://github.com/OHDSI/Vocabulary-v5.0/wiki). The OHDSI standardized vocabularies establish a single [standard concept](https://ohdsi.github.io/TheBookOfOhdsi/StandardizedVocabularies.html#standardConcepts) for each clinical entity. When data is converted into OMOP, the source concept is mapped to the corresponding standard concept. This allows researchers to interpret and use clinical entities from different organizations.[@ohdsi_vocab]
 
-<!-- question to answer: how do queries get distributed and processed by partner orgs? Looks like some info here: https://ohdsi.github.io/CommonDataModel/faq.html#Network_Research_Studies Is OMOP an SHDN because there's no distribution hub? --LDC -->
+### Sentinel
 
-OMOP uses [OHDSI standardized vocabularies](https://github.com/OHDSI/Vocabulary-v5.0/wiki). The OHDSI standardized vocabularies establish a single **standard concept** for each clinical entity. When data is converted into OMOP, the source concept is mapped to the corresponding standard concept. This allows researchers to interpret and use clinical entities from different organizations.[@ohdsi_vocab]
+[Sentinel](https://www.sentinelinitiative.org/methods-data-tools/sentinel-common-data-model) is a CDM designed to monitor whether FDA-regulated medical products cause unexpected adverse reactions.
 
-## CDMs and FHIR
+Although FDA-regulated products undergo clinical testing before approval, the testing may miss adverse reactions. This is because the test population may not fully represnt the population that uses the product. To detect and assess adverse events after approval, the FDA created Sentinel in 2007. [See here for more information about the Sentinel data network](https://www.sentinelinitiative.org/about/how-sentinel-gets-its-data).
 
-A CDM enables researchers to send a single query to multiple partner organizations and receive the results.
+[![Diagram showing the structure of the Sentinel CDM. From <https://www.sentinelinitiative.org/methods-data-tools/sentinel-common-data-model>.](images/cdms_sentinel.png){.column-page-right fig-alt="Diagram describing the contents of the Sentinel CDM."}](https://www.sentinelinitiative.org/methods-data-tools/sentinel-common-data-model)
 
-FHIR enables multiple organizations to share data and be semantically interoperable.
+### PCORnet
 
-FHIR and CDM work well together when a researcher wants to query multiple SHDNs that each use a different CDM. For example, a researcher can create a single query in a FHIR resource and send that resource to a portal. The portal will then convert the query for each CDM and send the converted query to the partner organization. After the portal receives the result, it will convert it back into a FHIR resource and return it to the researcher.
+The Patient-Centered Outcomes Research Institute (PCORI) developed [PCORnet](https://pcornet.org/news/pcornet-common-data-model/) to make clinical research more streamlined, representative, and efficient. PCORnet data is largely drawn from EHRs, as well as some patient-reported and payor data. The PCORnet includes data from [66 million patients](https://pcornet.org/wp-content/uploads/2022/01/PCORnet-An-Introduction-2022-01-0711.pdf) that researchers can use for observational studies. PCORnet launched in 2014 [@fleurence2014].
 
-![](images/image-843796542.png)[@cdmh_overview]
+[![Diagram showing the structure of the PCORnet CDM v6.1. From @pcornet_cdm_6.1.](images/cdms_pcornet.png){.column-page-right fig-alt="Diagram showing the structure of the PCORnet CDM v6.1."}](https://pcornet.org/wp-content/uploads/2023/04/PCORnet-Common-Data-Model-v61-2023_04_031.pdf)
 
-This allows researchers to have even larger sample sizes as well as additional demographics, such as elderly, children, and non-U.S. population.
+### i2b2
+
+Developed in 2004 by Partners HealthCare and Harvard Medical School, i2b2 is an open-source research data application framework that "provides clinical and translational investigators with the tools necessary to integrate medical record and clinical research in the genomics age." [@i2b2_wiki_intro]
+
+i2b2 is structured differently from the other CDMs discussed here: rather than having separate data tables for each type of data (e.g., procedures and diagnoses are stored in different database tables, each with a different set of columns), i2b2 uses the same set of tables for all data types. i2b2 refers to this as the "star schema" (see diagram below). [i2b2 describes this](https://community.i2b2.org/wiki/display/BUN/1.+Introduction) as follows:
+
+> Instead of separate tables for diagnoses, medications, and other data types, all patient observations are stored in a single "fact" table. A separate ontology describes the different codes that are placed in this fact table. As a result, institutions can use their own local codes, without having to map to common code sets. Furthermore, institutions can easily add new types of data to i2b2 and tranSMART just by extending the ontology. No changes to the database or software are needed. This enables software developers to build query, analysis, and visualization tools that are generalizable to different types of data and future-proof since the i2b2 CDM can remain stable over time.
+
+[![Diagram showing the i2b2 "star schema", from @i2b2_wiki_star_schema.](images/image-1891753576.png){fig-alt="Diagram showing the i2b2 \"star schema\"."}](https://community.i2b2.org/wiki/display/BUN/2.+Quick+Start+Guide)
