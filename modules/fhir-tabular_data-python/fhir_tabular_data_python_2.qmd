@@ -97,9 +97,7 @@ Now that we understand the basics of how `fhir_pyrate` converts a JSON file to t
 
 Below is the source JSON object for the Patient query we made earlier. Compare its contents with the `patient_all` DataFrame printed above. Examples of simple, nested, and nested repeating key-value paris are respectively `id`, `telecom`, and `identifier`.
 
-::: {.callout-caution .}
-## Expand to View Raw FHIR JSON Object
-:::
+::: {.callout-caution .} \## Expand to View Raw FHIR JSON Object :::
 
 ```{json}
 {

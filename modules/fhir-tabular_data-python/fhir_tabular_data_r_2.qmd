@@ -1,0 +1,84 @@
+---
+title: "FHIR & Tabular Data Analysis: R 2"
+
+area:
+  name: 
+topic:
+  name: FHIR for Research
+  
+roles:
+  - Software Engineer
+  - Informaticist
+  
+learning_objectives:
+  - question: What are good ways to examine a FHIR Resource before converting it to a data frame?
+    answer: You can either examine the raw XML response from the FHIR server or reference the FHIR specificaiton for the resource you're working with.
+---
+
+This module will build off the previous "Hello World" overview of `fhircrackr` and dive deeper into the process of converting the FHIR XML response into a data frame.
+
+First, we will setup our environment:
+
+```{r}
+library(fhircrackr)
+library(tidyverse)
+```
+
+Last module, we specified our query to a single bundle. This time, we will query for all patients:
+
+```{r}
+fhir_server <- "https://api.logicahealth.org/FHIRResearchSynthea/open/"
+request <- fhir_url(url = fhir_server, resource = "Patient")
+patient_bundle <- fhir_search(request = request)
+```
+
+Note that FHIR servers will typically split responses into [\"pages\"](http://www.hl7.org/fhir/http.html#paging) to limit the response size. This is important for servers that could have thousands or millions of instances of a given resource.
+
+By default, `fhircrackr` will make a separate request to get the Bundle of FHIR resources contained in each \"page\" from the server for a given query, and will automatically stitch the results together into a single data frame. However, this can take a *long* time, so you may wish to set the maximum number of Bundles downloaded by `fhircrackr`, like `fhir_search(request = request, max_bundles = 1)`.
+
+You can also request a certain number of resources in each Bundle with the [`_count` parameter](https://www.hl7.org/fhir/search.html#count).
+
+Once we have our Bundle(s) of Patient resources, we need to define the table description for `fhircrackr` to convert from the FHIR resources into data frames. To understand the structure of the XML, let\'s look at the second resource returned by the server (using `./entry[2]/resource` as the XPath query to get the 2nd resource instead of `./entry[1]/resource` to get the first resource; the first one is missing some data that the others have):
+
+```{r}
+xml2::xml_find_first(x = patient_bundle[[1]], xpath = "./entry[2]/resource") %>%
+  paste0 %>%
+  cat
+```
+
+You can also just print the structure, which can help when constructing XPath queries:
+
+```{r}
+xml2::xml_structure(
+  xml2::xml_find_first(x = patient_bundle[[1]], xpath = "./entry[2]/resource")
+)
+```
+
+Each instance of a given resource will be *roughly* the same (assuming the FHIR server is working properly), so looking at the structure of just one resource typically provides *most* of the information you\'ll need to extract the data from *all* the resources. By incrementing `entry[1]` to `entry[2]` (to see the next resource in the bundle) or `[[1]]` to `[[2]]` (to see the \_n_th resource in the 2nd bundle), etc. in the commands above you can look at additional resource instances.
+
+You may also want to reference the [FHIR specification](https://www.hl7.org/fhir/resourcelist.html) for the resource you\'re working with (in this case, [Patient](https://www.hl7.org/fhir/patient.html)) to better understand what elements may be available, as well as documentation specific to the server\'s implementation (which may be found in a [FHIR Implementation Guide](https://www.hl7.org/fhir/implementationguide.html)).
+
+Using this information, we can use these to create the `fhircrackr` \"table description\":
+
+```{r}
+table_desc_patient <- fhir_table_description(
+  resource = "Patient",
+
+  cols = c(
+    PID           = "id",
+    given_name    = "name/given",
+    family_name   = "name/family",
+    gender        = "gender",
+    birthday      = "birthDate",
+    maritalStatus = "maritalStatus/coding[1]/code", # Note that marital status is not in the example we printed above - but you can see it may be available
+                                                    # by looking at the FHIR spec: https://www.hl7.org/fhir/R4/patient.html
+    maritalStatusDisplay = "maritalStatus/coding[1]/display"
+  )
+
+)
+
+# Convert to R data frame
+df_patient <- fhir_crack(bundles = patient_bundle, design = table_desc_patient, verbose = 0)
+
+df_patient
+```
