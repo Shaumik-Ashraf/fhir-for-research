@@ -8,5 +8,6 @@ sidebar: false
 ## Custom Synthea Data & FHIR Testing Servers
 
 -   [Synthea Synthetic Data Overview](/modules/70-synthetic-data--synthea-overview/index.html)
+-   [Running Synthea](/modules/70-synthetic-data--running-synthea/index.html)
 -   [Customizing Synthea](/modules/70-synthetic-data--customizing-synthea/index.html)
 -   [Standing Up a FHIR Testing Server](/modules/70-synthetic-data--test-server/index.html)
