@@ -4,8 +4,7 @@ import yaml
 import json
 
 # Set the path to ../modules/ relative to the location of the script
-path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
-                    "modules")
+path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "modules")
 
 # Define the role to slug mapping
 role_mapping = {
@@ -18,6 +17,14 @@ role_mapping = {
 
 # Define the role module map
 role_module_map = []
+
+# Extract order from _quarto.yml sidebar
+quarto_data = {}
+with open(os.path.join(path, '..', '_quarto.yml'), 'r') as f:
+    quarto_data = yaml.safe_load(f.read().strip());
+
+print(str(quarto_data['website']['sidebar']))
+exit()
 
 # Loop through each Markdown file in the path
 for filename in glob.glob(os.path.join(path, "*.qmd")):
@@ -41,8 +48,7 @@ for filename in glob.glob(os.path.join(path, "*.qmd")):
                         (r for r in role_module_map if r["role"] == role_slug),
                         None)
                     if existing_role:
-                        existing_role["modules"].append(
-                            os.path.splitext(os.path.basename(filename))[0])
+                        existing_role["modules"].append(os.path.splitext(os.path.basename(filename))[0])
                     else:
                         role_module_map.append({
                             "role":
@@ -53,6 +59,7 @@ for filename in glob.glob(os.path.join(path, "*.qmd")):
 
 # Sort the role module map by role
 role_module_map = sorted(role_module_map, key=lambda r: r["role"])
+
 
 # Convert the role module map to a JavaScript variable
 js_var = "const role_module_map = " + json.dumps(role_module_map, indent=2) + ";"
