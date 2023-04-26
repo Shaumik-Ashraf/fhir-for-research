@@ -18,13 +18,25 @@ role_mapping = {
 # Define the role module map
 role_module_map = []
 
-# Extract order from _quarto.yml sidebar
-quarto_data = {}
-with open(os.path.join(path, '..', '_quarto.yml'), 'r') as f:
-    quarto_data = yaml.safe_load(f.read().strip());
+# Load data from _quarto.yml sidebar
+#sidebar = None;
+#with open(os.path.join(path, '..', '_quarto.yml'), 'r') as f:
+#    quarto_data = yaml.safe_load(f.read().strip());
+#    sidebar = quarto_data['website']['sidebar']
 
-print(str(quarto_data['website']['sidebar']))
-exit()
+#print(str(quarto_data['website']['sidebar'][0]))
+
+# Extract data
+#for item in sidebar:
+#    if isinstance(item, str): # direct link item
+#        pass # save order, extract title from frontmatter
+#    elif isinstance(item, dict) and item.has_key?('text'):
+#        pass # save order and title
+#    elif isinstance(item, dict) and item.has_key?('contents'):
+#        pass # recurse
+#    else:
+#        pass
+
 
 # Loop through each Markdown file in the path
 for filename in glob.glob(os.path.join(path, "*.qmd")):
