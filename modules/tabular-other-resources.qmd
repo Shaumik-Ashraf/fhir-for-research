@@ -1,0 +1,11 @@
+---
+title: Other Resources for Analyzing FHIR Data for Research
+
+roles:
+  - Investigator
+  - Informaticist
+
+learning_objectives2:
+  - Identify other resources for working with FHIR in R and Python.
+  - Understand how cloud services may be useful in working with FHIR data..
+---

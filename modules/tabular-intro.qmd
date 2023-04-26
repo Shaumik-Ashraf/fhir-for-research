@@ -1,0 +1,52 @@
+---
+title: Introduction to Analyzing FHIR Data in a Tabular Format
+
+roles:
+  - Investigator
+  - Informaticist
+  - Software Engineer
+  - Clinician Scientist/Trainee
+
+learning_objectives2:
+  - Understand why it may be useful to convert FHIR-formatted data to a tabular format.
+  - Identify the main approaches to converting FHIR data to a tabular format using Python or R.
+  - Understand why it may be preferable uto use Python or R to ingest FHIR-formatted data for final analysis in a statistics package like SAS or Stata.
+---
+
+Most approaches to data analysis require [tidy data](http://vita.had.co.nz/papers/tidy-data.pdf):
+
+> Tidy datasets are easy to manipulate, model and visualise, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table.
+
+FHIR's data format is not tidy. While instances of FHIR resources do typically map onto observational units, the data contained within instances of FHIR resources is not "flat" -- instead, data are stored in nested data structures. In some cases, like [`Observation.component`](https://www.hl7.org/fhir/observation.html), there may even be multiple "observational units" inside of a single FHIR resource instance.
+
+Fortunately, FHIR's computable [JSON or XML data format](fhir-from-1000-ft.qmd#the-structure-of-fhir) makes it possible to use software to convert FHIR data into a tabular format. This is can be done with custom code, or via existing purpose-build libraries.
+
+
+
+
+
+
+
+
+
+
+
+
+This module provides short examples of converting FHIR data to native tabular data structure ("data frames") in Python and R. These examples use FHIR API requests, which are described in detail in [Using the FHIR API to Access Data](fhir-accessing-data.qmd). Additional information is provided in the separate [Python](tabular-python.qmd) and [R](tabular-r.qmd) modules, and in the [Other Resources](tabular-other-resources.qmd) module.
+
+::: callout-info
+## FHIR testing server
+
+The examples in this module use a FHIR testing server populated with [Synthea data in FHIR R4 format](https://synthea.mitre.org/downloads) via [Logica Health](https://www.logicahealth.org)'s [Sandbox service](https://www.logicahealth.org/solutions/fhir-sandbox/).
+
+The endpoint for this testing server is:
+
+```
+https://api.logicahealth.org/FHIRResearchSynthea/open
+```
+
+However, any FHIR server loaded with testing data can be used.
+
+:::
+
+## Python approaches

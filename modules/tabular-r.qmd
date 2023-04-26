@@ -1,0 +1,215 @@
+---
+title: Analyzing FHIR Data in a Tabular Format With R
+
+roles:
+  - Informaticist
+
+learning_objectives2:
+  - Understand the high-level approaches for converting FHIR-formatted data into tabular for analysis in R.
+  - Learn how the fhircrackr library facilitates requesting data from a FHIR server, and creating tidy tabular data tables.
+---
+
+Data analysis approaches in R typically uses [data frames](https://cran.r-project.org/doc/manuals/r-release/R-intro.html#Data-frames-1) to store tabular data. There are two primary approaches to loading FHIR-formatted data into Pandas DataFrames:
+
+1. Writing R code to manually convert FHIR instances in JSON format into data frames.
+
+2. Using a purpose-built library like [fhircrackr](https://polar-fhir.github.io/fhircrackr/) to automatically convert FHIR instances into DataFrames.
+
+    It is recommended to try this approach first. If it is not possible to use fhircrackr for your use case, it may be easier to convert the data from FHIR to tabular format [using Python](tabular-python.qmd) and then export it to R format compared to doing this completely in R. The [Reticulate package](https://rstudio.github.io/reticulate/) may facilitate this by allowing Python and R code to share data objects within [RStduio](https://support.posit.co/hc/en-us/articles/1500007929061-Using-Python-with-the-RStudio-IDE).
+
+To use fhircrackr, you will need a [R](https://www.r-project.org) runtime with fhircrackr installed. Typically R users work in the [RStudio IDE](https://posit.co/products/open-source/rstudio/) but this is not strictly necessary.
+
+::: callout-tip
+The code blocks in the following section show sample output immediately after. This is similar to the code blocks and results in a rendered [RMarkdown file](https://rmarkdown.rstudio.com/).
+:::
+
+## Retrieving FHIR data
+
+Once your environment is set up, you can run the following R code to retrieve instances of the Patient resource from a test server:
+
+```{r}
+# Load dependencies
+library(fhircrackr)
+library(tidyverse) # Not strictly necessary, but helpful for working with data in R
+
+# Define the URL of the FHIR server and the request that will be made
+request <- fhir_url(url = "https://api.logicahealth.org/FHIRResearchSynthea/open", resource = "Patient")
+
+# Perform the request
+patient_bundle <- fhir_search(request = request, max_bundles = 1, verbose = 0)
+
+# Define the columns that fhircrackr will create, and which elements will be used to
+# populate them
+table_desc_patient <- fhir_table_description(
+    resource = "Patient",
+    cols = c(
+        id = "id",
+        gender = "gender",
+        date_of_birth = "birthDate",
+        marital_status = "maritalStatus/coding[1]/code"
+    )
+)
+
+# Convert to R data frame
+df_patient <- fhir_crack(bundles = patient_bundle, design = table_desc_patient, verbose = 0)
+
+df_patient %>% head(5)
+```
+
+## Selecting specific columns
+
+Usually not every single value from a FHIR instance is needed for analysis. Fhircrackr requires that you define the FHIR-to-column mapping before you can view the data (in contrast to the [Python approach](tabular-python.qmd), which provides a mechanism to see all the data in a table before mapping FHIR elements to columns). This can make it a bit difficult to figure out what to put in the FHIR-to-column mapping (this is the `fhir_table_description()` function call in the code sample above).
+
+There are two different approaches to identifying the elements available in the FHIR instances returned by the server:
+
+1. Look at the FHIR specification or the relevant [FHIR Implementation Guide](data-modeling-reading-igs.qmd) to determine the paths of available data elements. For example, the [Patient page in the FHIR specification](https://www.hl7.org/fhir/patient.html) describes the elements and their hierarchy for instances of Patient.
+
+2. Print out the raw data returned by the FHIR server. Fhircrackr uses XML-formatted data, and the following code will print out one of the instances of Patient requested above:
+
+    ```{r}
+    xml2::xml_find_first(x = patient_bundle[[1]], xpath = "./entry[1]/resource") %>%
+      paste0 %>%
+      cat
+    ```
+
+Once you have identified which data elements you want to include, you will need to write [XPath expressions](https://en.wikipedia.org/wiki/XPath) to select these elements. Many of the XPath expressions you write will be straight-forward, like `name/given` to select `Patient.name.given`.
+
+In some cases, you may need to construct more complex expressions like the one to extract `marital_status` from `Patient.maritalStatus.coding[0].code`. You can use a tool like [this XPath tester](https://extendsclass.com/xpath-tester.html) to help generate XPath expressions, though online tools such as these should not be used with real patient data. For more information on XPath, see [this guide](https://www.w3schools.com/xml/xpath_intro.asp).
+
+## Elements with multiple sub-values
+
+There are multiple `identifier[N].value` values for each instance of Patient in this dataset.
+
+```{r}
+# Define the columns that fhircrackr will create, and which elements will be used to
+# populate them
+table_desc_patient <- fhir_table_description(
+    resource = "Patient",
+    cols = c(
+        id = "id",
+        identifiers = "identifier/value"
+    )
+)
+
+# Convert to R data frame
+df_patient <- fhir_crack(bundles = patient_bundle, design = table_desc_patient, verbose = 0)
+
+df_patient %>% head(5)
+```
+
+To convert to separate columns, you can do the following:
+
+```{python}
+df.join(
+    pd.DataFrame(
+        df.pop('identifiers').values.tolist()
+    ).add_prefix('identifier_')
+)
+```
+
+This will give you separate `identifier_0`, `identifier_1`, ... columns for each `Patient.identifier[N]` value.
+
+## Retrieving related data
+
+To retrieve instances of related resources, additional `request_params` can be added. See [Using the FHIR API to Access Data](fhir-accessing-data.qmd#multiple-types-of-resources) for more information on constructing the parameters for FHIR search interactions.
+
+In the example below, instances of Patient and instances of related Observation resources are requested:
+
+```{python}
+# Instantiate and perform the FHIR search interaction in a single function call
+dfs = search.steal_bundles_to_dataframe(
+    resource_type='Patient',
+    request_params={
+        # Get instances of Observation where `Observation.patient` refers to a fetched Patient instance
+        "_revinclude": "Observation:patient",
+
+        "_count": 10  # Get 10 instances per page
+    },
+    num_pages=1,  # Get 1 page (so a total of 10 instances)
+)
+
+# `dfs` is a dictionary where the key is the FHIR resource type, and the value is the DataFrame
+#
+# Split these into separate variables for easy access:
+df_patients = dfs['Patient']
+df_observations = dfs['Observation']
+
+# Look at the first row of the Observations DataFrame
+df_observations.head(1).T
+```
+
+As of April 2023, fhircrackr [does not have a good approach to `fhir_paths` for searches that return instances of multiple FHIR resource types](TKTKTK#bundles_to_dataframe).
+
+To work around this, you can also iterate over all the rows in a DataFrame and request related resources using [`trade_rows_for_bundles()`](TKTKTK#trade_rows_for_bundles):
+
+```{python}
+df_observations2 = search.trade_rows_for_dataframe(
+    df_patients,
+    resource_type="Observation",
+
+    # Limit to 10 instances of Observation per patient
+    request_params={
+        "_count": "10"
+    },
+    num_pages=1,
+
+    # Load Observations where `Observation.subject` references the instance of Patient
+    # identified by `id` in the `df_patients` DataFrame
+    df_constraints={"subject": "id"},
+    fhir_paths=[
+      ("observation_id", "id"),
+      ("patient", "subject.reference"),
+      ("status", "status"),
+      ("code", "code.coding[0].code"),
+      ("code_display", "code.coding[0].display"),
+      ("value", "valueQuantity.value"),
+      ("value_units", "valueQuantity.unit"),
+      ("datetime", "effectiveDateTime")
+    ]
+)
+
+# Look at the first row of the Observations DataFrame
+df_observations2.head(15)
+```
+
+Note that this will only display `value` for instances of Observation that record a value in `Observation.valueQuantity`. Typically, you would filter by `Observation.code` and then choose the appropriate data type for `Observation.value[x]` to import. For example, `http://loinc.org|72166-2` is the LOINC for smoking status. To get smoking status records for all patients in `df_patients`:
+
+```{python}
+df_observations2 = search.trade_rows_for_dataframe(
+    df_patients,
+    resource_type="Observation",
+
+    # Limit to 10 instances of Observation per patient
+    request_params={
+        "_count": "10",
+        "code": "http://loinc.org|72166-2"
+    },
+    num_pages=1,
+
+    # Load Observations where `Observation.subject` references the instance of Patient
+    # identified by `id` in the `df_patients` DataFrame
+    df_constraints={"subject": "id"},
+    fhir_paths=[
+      ("observation_id", "id"),
+      ("patient", "subject.reference"),
+      ("status", "status"),
+      ("code", "code.coding[0].code"),
+      ("code_display", "code.coding[0].display"),
+      ("value", "valueCodeableConcept.coding[0].code"),
+      ("value_display", "valueCodeableConcept.coding[0].display"),
+      ("datetime", "effectiveDateTime")
+    ]
+)
+
+# Look at the first row of the Observations DataFrame
+df_observations2.head(15)
+```
+
+More information about the [`search` interaction used above to filter Observations is here](fhir-accessing-data.qmd#getting-all-patients-that-meet-specified-criteria).
+
+
+## Additional resources
+
+NIH's Office of Data Science Strategy has [online exercises](https://datascience.nih.gov/fhir-initiatives/researchers-training) for converting FHIR-formatted data into tabular format for further analysis. These exercises include implementations in both Python and R.
+
+Note that the Python version of these exercises was created before the fhircrackr library existed, so they use the "writing Python code to manually convert FHIR instances in JSON Format into DataFrames" approach. This approach may still be useful for use cases that are not well-supported by fhircrackr or for integrating FHIR data with data from other web APIs.
