@@ -137,7 +137,6 @@
     });
 </script>
 
-<script src="/modules/mappings.js"></script>
 <script>
 // Below function is usable by CC BY-SA 3.0 from https://stackoverflow.com/a/6475125
 String.prototype.toTitleCase = function() {
@@ -169,7 +168,7 @@ String.prototype.toTitleCase = function() {
 document.addEventListener("DOMContentLoaded", function() {
     // Get current module and role
     const current_module = window.location.toString().split('/').pop().split('.')[0];
-    const role = Cookies.get("role");
+    const role = store.getItem("role");
 
     console.log("DEBUG: current module:", current_module, "role: ", role);
 

@@ -89,12 +89,6 @@ website:
 
   page-navigation: true
 
-  cookie-consent:
-    type: express
-    style: headline
-    palette: light
-    prefs-text: "change cookie settings"
-
 
 format:
   html:

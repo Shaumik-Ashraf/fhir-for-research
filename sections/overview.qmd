@@ -43,17 +43,8 @@ Select your [role](/roles.html) to <mark>highlight</mark> the content that is mo
 -   [Writing a FHIR specification](#)
 -   [API-focused FHIR Resources](#)
 
-<script src="../modules/mappings.js"></script>
 <script type="module">
 
-/* constant variable role_module_map: array<object> [
- *   {
- *     role: string
- *     modules: array<string> (substring of each html link such that it uniquely identifies a module)
- *   }
- * ]
- *
- */
 const all_modules = document.querySelectorAll("section>ul>li");
 
 /* select_modules(string)
@@ -108,7 +99,7 @@ function select_modules(string) {
  *   sets the corresponding cookie
  */
 function select_role(role) {
-    Cookies.set("role", role, { secure: true, sameSite: "strict" }); // TODO: parse domain from quarto for IE compatability & quarto cookie consent
+    store.setItem("role", role);
 
     document.querySelectorAll("[data-role]").forEach((a_node) => {
         a_node.classList.remove("btn", "btn-sm", "btn-secondary", "fw-bold", "rounded");
@@ -132,9 +123,9 @@ document.querySelectorAll("a[data-role]").forEach((role_link) => {
 
 // execute select_role and select_modules once to make sure the page is aligned with cookie
 // or set cookie if it is unset
-if( Cookies.get("role") ) {
-    select_role(Cookies.get("role"));
-    select_modules(Cookies.get("role"));
+if( store.getItem("role") ) {
+    select_role(store.getItem("role"));
+    select_modules(store.getItem("role"));
 }
 else {
     const DEFAULT_ROLE = "research-leader";
