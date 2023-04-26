@@ -7,12 +7,12 @@ roles:
 learning_objectives2:
   - Understand the high-level approaches for converting FHIR-formatted data into tabular for analysis in R.
   - Learn how the fhircrackr library facilitates requesting data from a FHIR server, and creating tidy tabular data tables.
-  
-execute: 
+
+execute:
   cache: true
 
 # Print data frames
-format: 
+format:
    html:
      df-print: paged
 ---
@@ -27,7 +27,19 @@ Data analysis approaches in R typically uses [data frames](https://cran.r-projec
 
 To use fhircrackr, you will need a [R](https://www.r-project.org) runtime with fhircrackr installed. Typically R users work in the [RStudio IDE](https://posit.co/products/open-source/rstudio/) but this is not strictly necessary.
 
-::: callout-tip
+::: callout-info
+## FHIR testing server
+
+The examples in this module use a FHIR testing server populated with [Synthea data in FHIR R4 format](https://synthea.mitre.org/downloads) via [Logica Health](https://www.logicahealth.org)'s [Sandbox service](https://www.logicahealth.org/solutions/fhir-sandbox/).
+
+The endpoint for this testing server is:
+
+```
+https://api.logicahealth.org/FHIRResearchSynthea/open
+```
+
+However, any FHIR server loaded with testing data can be used.
+
 The code blocks in the following section show sample output immediately after. This is similar to the code blocks and results in a rendered [RMarkdown file](https://rmarkdown.rstudio.com/).
 :::
 

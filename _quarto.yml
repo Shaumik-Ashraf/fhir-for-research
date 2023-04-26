@@ -79,8 +79,6 @@ website:
               text: Using Python
             - file: modules/tabular-r.qmd
               text: Using R
-            - file: modules/tabular-other-resources.qmd
-              text: Other Resources
         - section: "REDCap With FHIR"
           contents:
             - modules/redcap-intro.qmd
