@@ -46,7 +46,8 @@ website:
             - modules/cdms.qmd
             - file: modules/fhir-community.qmd
               text: Community & Documentation
-            - modules/key-fhir-resources.qmd
+            - file: modules/key-fhir-resources.qmd
+              text: FHIR Resources
             - file: modules/fhir-accessing-data.qmd
               text: Using the FHIR API
         - section: "SMART on FHIR"
