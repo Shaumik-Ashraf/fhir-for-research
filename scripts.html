@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const prev_text_elmt = document.querySelector(".page-navigation .nav-page-previous .pagination-link .nav-page-text");
         if( prev_link_elmt ) {
             prev_link_elmt.href = prev_href
-            prev_link_elmt.classList.add("btn", "btn-outline-primary", "rounded");
+            prev_link_elmt.classList.add("btn", "btn-outline-custom", "rounded");
             prev_link_elmt.parentNode.classList.toggle("nav-page");
             prev_text_elmt.innerText = prev_text;
         }
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const next_text_elmt = document.querySelector(".page-navigation .nav-page-next .pagination-link .nav-page-text");
         if( next_link_elmt ) {
             next_link_elmt.href = next_href;
-            next_link_elmt.classList.add("btn", "btn-outline-primary", "rounded");
+            next_link_elmt.classList.add("btn", "btn-outline-custom", "rounded");
             next_link_elmt.parentNode.classList.toggle("nav-page");
             next_text_elmt.innerText = next_text;
         }
