@@ -7,15 +7,18 @@ roles:
 learning_objectives2:
   - Understand the high-level approaches for converting FHIR-formatted data into tabular for analysis in Python.
   - Learn how the FHIR-PYrate library facilitates requesting data from a FHIR server, and creating tidy tabular data tables.
+  
+execute: 
+  cache: true
 ---
 
 Data analysis approaches in Python often use [Pandas DataFrames](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html) to store tabular data. There are two primary approaches to loading FHIR-formatted data into Pandas DataFrames:
 
-1. Writing Python code to manually convert FHIR instances in JSON format into DataFrames.
+1.  Writing Python code to manually convert FHIR instances in JSON format into DataFrames.
 
     This does not require any special skills beyond data manipulation in Python, but in practice can be laborious (especially with large number of data elements) and prone to bugs.
 
-2. Using a purpose-built library like [FHIR-PYrate](https://github.com/UMEssen/FHIR-PYrate) to automatically convert FHIR instances into DataFrames.
+2.  Using a purpose-built library like [FHIR-PYrate](https://github.com/UMEssen/FHIR-PYrate) to automatically convert FHIR instances into DataFrames.
 
     It is recommended to try this approach first, and only fall back to (1) if needed.
 
@@ -72,13 +75,13 @@ If you look at the output above, you can see FHIR-PYrate collapsed the hierarchi
 
 Usually not every single value from a FHIR instance is needed for analysis. There are two ways to get a more concise DataFrame:
 
-1. Use the approach above to load all elements into a DataFrame, remove the unneeded columns, and rename the remaining columns as needed. The [`process_function` capability in FHIR-PYrate](https://github.com/UMEssen/FHIR-PYrate#bundles_to_dataframe) allows you to integrate this approach into the `bundles_to_dataframe()` method call.
-2. Use [FHIRPath](https://hl7.org/fhirpath/) to select specific elements and map them onto column names.
+1.  Use the approach above to load all elements into a DataFrame, remove the unneeded columns, and rename the remaining columns as needed. The [`process_function` capability in FHIR-PYrate](https://github.com/UMEssen/FHIR-PYrate#bundles_to_dataframe) allows you to integrate this approach into the `bundles_to_dataframe()` method call.
+2.  Use [FHIRPath](https://hl7.org/fhirpath/) to select specific elements and map them onto column names.
 
 The second approach is typically more concise. For example, to generate a DataFrame like this...
 
 | id  | gender | date_of_birth | marital_status |
-| --- | ------ | ------------- | -------------- |
+|-----|--------|---------------|----------------|
 | ... | ...    | ...           | ...            |
 
 ...you could use the following code:
@@ -230,7 +233,6 @@ df_observations2.head(15)
 ```
 
 More information about the [`search` interaction used above to filter Observations is here](fhir-accessing-data.qmd#getting-all-patients-that-meet-specified-criteria).
-
 
 ## Additional resources
 
