@@ -41,13 +41,14 @@ website:
             - modules/fhir-from-1000-ft.qmd
             - file: modules/fhir-research.qmd
               text: "Real World Research"
-            - modules/key-fhir-resources.qmd
-            - text: "Accessing FHIR Data"
             - modules/fhir-history.qmd
             - modules/terminology.qmd
-            - text: Common Data Models
+            - modules/cdms.qmd
             - file: modules/fhir-community.qmd
               text: Community & Documentation
+            - modules/key-fhir-resources.qmd
+            - file: modules/fhir-accessing-data.qmd
+              text: Using the FHIR API
         - section: "SMART on FHIR"
           contents:
             - modules/smart-on-fhir-intro.qmd
@@ -60,7 +61,6 @@ website:
               text: Real World IGs
             - file: modules/data-modeling-writing-igs.qmd
               text: Writing IGs
-            - modules/data-modeling-api-resources.qmd
 
     - id: working-with-data
       title: Working With Data
@@ -73,14 +73,32 @@ website:
           text: Working With Data
         - section: "Tabular Analysis"
           contents:
-            - modules/tabular-real-world.qmd
-            - modules/tabular-from-fhir.qmd
-            - modules/tabular-retrieving-and-subsetting.qmd
+            - file: modules/tabular-intro.qmd
+              text: Introduction
+            - file: modules/tabular-python.qmd
+              text: Using Python
+            - file: modules/tabular-r.qmd
+              text: Using R
         - section: "REDCap With FHIR"
           contents:
             - modules/redcap-intro.qmd
             - modules/redcap-best-practices.qmd
             - modules/redcap-example.qmd
+
+    - id: advanced-topics
+      title: Advanced Topics
+      style: floating
+      search: false
+      align: left
+      collapse-level: 2
+      contents:
+        - file: sections/advanced-topics.qmd
+          text: Advanced Topics
+        - section: "Synthetic Data"
+          contents:
+            - modules/synthea-overview.qmd
+            - modules/synthea-customizing.qmd
+            - modules/synthea-test-server.qmd
 
 
   page-footer:

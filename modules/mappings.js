@@ -2,7 +2,8 @@ const role_module_map = [
   {
     "role": "clinician-scientist",
     "modules": [
-        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000ft"},
+        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
+        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
         {"slug": "fhir-history",                        "text": "History of FHIR"},
         {"slug": "terminology",                         "text": "Terminology"},
         {"slug": "key-fhir-resources",                  "text": "Key FHIR Resources"},
@@ -33,6 +34,7 @@ const role_module_map = [
     "role": "informaticist",
     "modules": [
         {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
+        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
         {"slug": "fhir-history",                        "text": "History of FHIR"},
         {"slug": "terminology",                         "text": "Terminology"},
         {"slug": "key-fhir-resources",                  "text": "Key FHIR Resources"},
@@ -58,13 +60,13 @@ const role_module_map = [
         {"slug": "smart-on-fhir-intro",                 "text": "Introduction to SMART on FHIR"},
         {"slug": "smart-on-fhir-research",              "text": "SMART on FHIR for Research"},
         {"slug": "smart-on-fhir-technical-quick-start", "text": "SMART on FHIR Technical Quickstart"}
-
     ]
   },
   {
     "role": "investigator",
     "modules": [
         {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
+        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
         {"slug": "fhir-history",                        "text": "History of FHIR"},
         {"slug": "terminology",                         "text": "Terminology"},
         {"slug": "fhir-research",                       "text": "FHIR for Research"},
@@ -95,6 +97,7 @@ const role_module_map = [
     "role": "research-leader",
     "modules": [
         {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
+        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
         {"slug": "fhir-history",                        "text": "History of FHIR"},
         {"slug": "fhir-research",                       "text": "FHIR for Research"},
         {"slug": "example-study",                       "text": "Examples of Real World Studies"},
@@ -121,6 +124,7 @@ const role_module_map = [
     "role": "software-engineer",
     "modules": [
         {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000ft"},
+        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
         {"slug": "fhir-history",                        "text": "History of FHIR"},
         {"slug": "terminology",                         "text": "Terminology"},
         {"slug": "key-fhir-resources",                  "text": "Key FHIR Resources"},
