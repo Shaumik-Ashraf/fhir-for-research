@@ -85,6 +85,21 @@ website:
             - modules/redcap-best-practices.qmd
             - modules/redcap-example.qmd
 
+    - id: advanced-topics
+      title: Advanced Topics
+      style: floating
+      search: false
+      align: left
+      collapse-level: 2
+      contents:
+        - file: sections/advanced-topics.qmd
+          text: Advanced Topics
+        - section: "Synthetic Data"
+          contents:
+            - modules/synthea-overview.qmd
+            - modules/synthea-customizing.qmd
+            - modules/synthea-test-server.qmd
+
 
 
   page-footer:

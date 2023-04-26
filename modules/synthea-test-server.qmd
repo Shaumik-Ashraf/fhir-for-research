@@ -1,15 +1,9 @@
 ---
 title: Standing up a FHIR Testing Server
-area:
-  name: Advanced Topics
-topic:
-  name: Custom Synthea Data & FHIR Testing Servers
 
 roles:
-  - Investigator
   - Informaticist
   - Software Engineer
-  - Clinician Scientist/Trainee
 
 learning_objectives:
   - question: What options are available for hosting FHIR data for testing and training?
@@ -36,13 +30,13 @@ There are no published limits on the Logica Sandbox, in terms of number of Patie
 
 **Signup Steps**
 
-To create your own Logica Sandbox, first register at <https://sandbox.logicahealth.org>. You will need to provide an email address, where you will receive a confirmation email which you should click to activate your new account. Sign in using your email and password and accept the terms of use. 
+To create your own Logica Sandbox, first register at <https://sandbox.logicahealth.org>. You will need to provide an email address, where you will receive a confirmation email which you should click to activate your new account. Sign in using your email and password and accept the terms of use.
 
 Now you can create a new sandbox by clicking the New Sandbox button. The creation screen is shown below.
 
-![](../images/logica_create_sandbox.png){fig-alt="A screenshot of the creation options for a Logica Sandbox"}
+![](images/logica_create_sandbox.png){fig-alt="A screenshot of the creation options for a Logica Sandbox"}
 
-Choose a name, ID, and FHIR version that are appropriate for your usage. We recommend enabling the "Allow Open FHIR Endpoint" setting as this will make it easier to load an initial set of data, and it may be disabled later for security.  
+Choose a name, ID, and FHIR version that are appropriate for your usage. We recommend enabling the "Allow Open FHIR Endpoint" setting as this will make it easier to load an initial set of data, and it may be disabled later for security.
 
 If you plan to load patients for a specific use case, you may want to disable the "Import sample patients and practitioners" option to ensure only your selected patients are loaded. Feel free to select or deselect the sample applications option - it will have no impact on basic FHIR operations.
 
@@ -60,8 +54,8 @@ If for any reason you do not wish to use a cloud-based service like a Logica San
 
 At its most basic level, Docker is a tool that allows you to run packaged software. Packaging software to run on Docker allows it to be preconfigured, include any additional dependencies it may require, and run on nearly any hardware and operating system. This is in contrast to traditional software which needs to be  built separately or even developed separately for Windows and Mac, may need separate libraries to be installed first, and may have a complex setup process. Docker is very commonly used for running servers.
 
-Key terms:  
- - **Images** are the packaged software definition. Images are tagged with a version so that you can use either the latest available, or a specific other version if necessary. Images may be layered on top of one another in order to combine them into a single software package.  
+Key terms:
+ - **Images** are the packaged software definition. Images are tagged with a version so that you can use either the latest available, or a specific other version if necessary. Images may be layered on top of one another in order to combine them into a single software package.
  - **Containers** are the running instances of images. A container can be thought of as a separate virtual computer that is running the image.
 
 Detailed technical documentation on Docker is available at <https://docs.docker.com/get-started/overview/>.
@@ -69,7 +63,7 @@ Detailed technical documentation on Docker is available at <https://docs.docker.
 :::
 
 
-While Docker-based options generally require some configuration, especially when you want your test data to persist after you reboot, they can be setup quickly and do not require programming knowledge to get started. Each of these options can be installed either locally on your own computer if you will be the only person using it, or on a shared server for ease of access by multiple people. Your options may vary based on your organization's security requirements. The following instructions are intended for a Windows-based or Mac-based local installation. 
+While Docker-based options generally require some configuration, especially when you want your test data to persist after you reboot, they can be setup quickly and do not require programming knowledge to get started. Each of these options can be installed either locally on your own computer if you will be the only person using it, or on a shared server for ease of access by multiple people. Your options may vary based on your organization's security requirements. The following instructions are intended for a Windows-based or Mac-based local installation.
 
 ::: callout-caution
 ## Warning: Data Persistence on Docker
@@ -84,7 +78,7 @@ Once Docker is installed, launch Docker Desktop, and confirm it is running with 
 ```sh
 $ docker ps
 CONTAINER ID   IMAGE                                      COMMAND                  CREATED        STATUS                 PORTS
-$ 
+$
 ```
 
 [Git](https://git-scm.com/) is also required for several of the Docker-based options.
@@ -92,7 +86,7 @@ $
 ### Logica Sandbox Community Edition
 This set of Docker images mirrors the public Logica Sandbox, but can be run locally. If you like the full suite of what Logica provides but either want higher performance or do not want to use a fully public Internet service, this is a good option.
 
-**Quick Start**  
+**Quick Start**
 Make sure Docker is running, then clone the project, change to the directory, and launch the services with the following commands:
 
 ```sh
@@ -141,7 +135,7 @@ Some options for public test servers are listed [on the HL7 Confluence](https://
     - STU3 Endpoint: <https://lforms-fhir.nlm.nih.gov/baseDstu3>
     - R4 Endpoint: <https://lforms-fhir.nlm.nih.gov/baseR4>
 
-Note that these are open to the public so there is no guarantee of availability of any data you upload nor of the service itself. 
+Note that these are open to the public so there is no guarantee of availability of any data you upload nor of the service itself.
 
 ## Loading Synthea Data
 
@@ -161,7 +155,7 @@ SERVER is your FHIR server's base URL
 -H 'Content-Type: application/json' sets the content type to JSON to ensure the server handles it correctly
 ```
 
-If you strongly prefer a graphical tool, [Insomnia](https://insomnia.rest/), which allows you to invoke APIs such as FHIR endpoints, is a good choice. For uploading multiple files though, the snippets below which call `curl` in a loop are likely to be the easiest. If you have experience with other tools such as Postman, feel free to use those instead. 
+If you strongly prefer a graphical tool, [Insomnia](https://insomnia.rest/), which allows you to invoke APIs such as FHIR endpoints, is a good choice. For uploading multiple files though, the snippets below which call `curl` in a loop are likely to be the easiest. If you have experience with other tools such as Postman, feel free to use those instead.
 
 The key to loading Synthea patients is to ensure files are loaded in the following order, so that references to resources across files will work correctly. You should not see any error messages when loading files. Replace `SERVER` in the following examples with your FHIR server's base URL.
 
@@ -170,14 +164,14 @@ First, load all `hospitalInformation*.json` files. These contain the Organizatio
 ```sh
 for file in hospitalInformation*.json
   do curl -d @$file -H 'Content-Type: application/json' SERVER
-done 
+done
 ```
 
 Second, load all `practitioner*.json` files. These contain Practitioners and PractitionerRoles.
 ```sh
 for file in practitioner*.json
   do curl -d @$file -H 'Content-Type: application/json' SERVER
-done 
+done
 ```
 
 
@@ -186,9 +180,9 @@ Finally, load all individual patient files. All patient file names start with a 
 ```sh
 for file in [A-Z]*.json
   do curl -d @$file -H 'Content-Type: application/json' SERVER
-done 
+done
 ```
 
 
 
-Once all the data has been loaded onto your server, you can access it as any other FHIR server by making API calls to the various resource endpoints. 
+Once all the data has been loaded onto your server, you can access it as any other FHIR server by making API calls to the various resource endpoints.

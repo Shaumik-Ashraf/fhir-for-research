@@ -38,7 +38,7 @@ The endpoint for this testing server is:
 https://api.logicahealth.org/FHIRResearchSynthea/open
 ```
 
-However, any FHIR server loaded with testing data can be used.
+However, any FHIR server loaded with testing data can be used. See [Standing up a FHIR Testing Server](synthea-test-server.qmd) for instructions to set up your own test server.
 
 The code blocks in the following section show sample output immediately after. This is similar to the code blocks and results in a rendered [RMarkdown file](https://rmarkdown.rstudio.com/).
 :::
