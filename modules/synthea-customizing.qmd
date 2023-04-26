@@ -150,7 +150,7 @@ Other types of information which can be modified or replaced to meet various nee
 Full details for customizing Synthea to generate other areas are available [on the Synthea wiki](https://github.com/synthetichealth/synthea/wiki/Other-Areas).
 
 ## Module Overrides
-Module Overrides allow you to set specific values in a module, such as transition probabilities, without having to edit and replace the entire module. This makes it suitable for use with the "Basic setup"/JAR file version of Synthea.
+Module Overrides allow you to set specific values in a module, such as transition probabilities, without having to edit and replace the entire module. This makes it suitable for use with the Basic setup of Synthea.
 
 Module overrides are defined using a Java properties file, where each key is the path to a specific field within a module, and the value is the new value to set for that field.
 

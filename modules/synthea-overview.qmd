@@ -36,7 +36,8 @@ Researchers often use real healthcare data that have had personal identifiers re
 - Anonymized data
 - Pseudonymized data
 
-Because this is real data, it is valuable for research. However, this data also carries the risk of re-identification.[^1]
+Because this is real data, it is valuable for research. However, this data also carries the risk of re-identification.[^1] 
+
 
 In contrast, synthetic data is constructed so there is no privacy risk. When no individual's data was used to create a dataset, no individual's data can be in the dataset.
 :::
@@ -263,10 +264,12 @@ At Synthea's core is a set of disease modules, representing the progression and 
 Disease modules are **state transition machines** where each individual flows through the modules based on logical conditions and weighted randomness.
 
 Every synthetic patient starts in each module's Initial state at birth and immediately begins progressing through the module's **states**. Each state represents a spot where something happens. There are two broad categories of states: **control states**, which drive the flow of a patient through the module, for example:
+
 - **Delay:** Wait a certain amount of time before progressing, commonly used to represent how the risk of certain conditions changes with age.
 - **Guard:** Wait until given criteria become true before progressing.
 
 And **clinical states**, which add entries to a patient's health record, for example:
+
 - **ConditionOnset:** Represent the spot where the patient acquires a given condition, not necessarily where it is diagnosed.
 - **Procedure:** Represent the point in time in a healthcare encounter that a procedure is performed.
 
