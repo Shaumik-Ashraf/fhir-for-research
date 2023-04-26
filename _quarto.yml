@@ -79,11 +79,12 @@ website:
               text: Using Python
             - file: modules/tabular-r.qmd
               text: Using R
-        - section: "REDCap With FHIR"
+        - section: "REDCap"
           contents:
-            - modules/redcap-intro.qmd
-            - modules/redcap-best-practices.qmd
-            - modules/redcap-example.qmd
+            - file: modules/redcap-intro.qmd
+              text: Introduction
+            - file: modules/redcap-fhir.qmd
+              text: REDCap on FHIR
 
     - id: advanced-topics
       title: Advanced Topics
@@ -96,9 +97,15 @@ website:
           text: Advanced Topics
         - section: "Synthetic Data"
           contents:
-            - modules/synthea-overview.qmd
-            - modules/synthea-customizing.qmd
-            - modules/synthea-test-server.qmd
+            - file: modules/synthea-overview.qmd
+              text: "Synthea Overview"
+            - file: modules/synthea-customizing.qmd
+              text: Customizing Synthea
+            - file: modules/synthea-test-server.qmd
+              text: FHIR Test Server
+        - fhir-versions.qmd
+        - contribute.qmd
+        - style-guide.qmd
 
 
 
