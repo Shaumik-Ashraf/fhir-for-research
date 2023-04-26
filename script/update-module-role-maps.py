@@ -3,6 +3,10 @@ import glob
 import yaml
 import json
 
+
+print("The format of modules/mappings.js has been changed without updating this script. Running this script as is would overwrite and break it. Exiting.")
+exit();
+
 # Set the path to ../modules/ relative to the location of the script
 path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "modules")
 

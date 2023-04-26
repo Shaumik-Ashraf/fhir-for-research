@@ -167,10 +167,10 @@ String.prototype.toTitleCase = function() {
 // Custom Hack to overwrite Quarto's built in navigators
 document.addEventListener("DOMContentLoaded", function() {
     // Get current module and role
-    const current_module = window.location.toString().split('/').pop().split('.')[0];
+    const current_module_slug = window.location.toString().split('/').pop().split('.')[0];
     const role = store.getItem("role");
 
-    console.log("DEBUG: current module:", current_module, "role: ", role);
+    //console.log("DEBUG: current module:", current_module, "role: ", role);
 
     // Get next and prev modules data
     let prev_href, prev_text;
@@ -178,12 +178,15 @@ document.addEventListener("DOMContentLoaded", function() {
     role_module_map.forEach((mapping) => {
         if( mapping.role == role ) {
             for(let i=0; i<mapping.modules.length; i++) {
-                if( mapping.modules[i] == current_module ) {
-                    prev_href = (i > 0) ? `/modules/${mapping.modules[i-1]}.html` : null;
-                    prev_text = (i > 0) ? mapping.modules[i-1].replaceAll('-', ' ').toTitleCase() : null;
+                if( mapping.modules[i].slug == current_module_slug ) {
+                    prev_href = (i > 0) ? `/modules/${mapping.modules[i-1].slug}.html` : null;
+                    prev_text = (i > 0) ? mapping.modules[i-1].text : null;
 
-                    next_href = (i+1 < mapping.modules.length) ? `/modules/${mapping.modules[i+1]}.html` : null;
-                    next_text = (i+1 < mapping.modules.length) ? mapping.modules[i+1].replaceAll('-', ' ').toTitleCase() : null;
+                    next_href = (i+1 < mapping.modules.length) ? `/modules/${mapping.modules[i+1].slug}.html` : null;
+                    next_text = (i+1 < mapping.modules.length) ? mapping.modules[i+1].text : null;
+                
+                    console.log("DEBUG 2");
+
                 }
             }
         }
@@ -194,9 +197,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const prev_link_elmt = document.querySelector(".page-navigation .nav-page-previous .pagination-link");
         const prev_text_elmt = document.querySelector(".page-navigation .nav-page-previous .pagination-link .nav-page-text");
         if( prev_link_elmt ) {
+
+
+            console.log("DEBUG 3");
+
             prev_link_elmt.href = prev_href
-            prev_link_elmt.classList.add("btn", "btn-outline-custom", "rounded");
-            prev_link_elmt.parentNode.classList.toggle("nav-page");
+            //prev_link_elmt.classList.add("btn", "btn-outline-custom", "rounded");
+            //prev_link_elmt.parentNode.classList.toggle("nav-page");
             prev_text_elmt.innerText = prev_text;
         }
     }
@@ -205,10 +212,13 @@ document.addEventListener("DOMContentLoaded", function() {
     if( next_href ) {
         const next_link_elmt = document.querySelector(".page-navigation .nav-page-next .pagination-link");
         const next_text_elmt = document.querySelector(".page-navigation .nav-page-next .pagination-link .nav-page-text");
+
+        console.log("DEBUG 4");
+
         if( next_link_elmt ) {
             next_link_elmt.href = next_href;
-            next_link_elmt.classList.add("btn", "btn-outline-custom", "rounded");
-            next_link_elmt.parentNode.classList.toggle("nav-page");
+            //next_link_elmt.classList.add("btn", "btn-outline-custom", "rounded");
+            //next_link_elmt.parentNode.classList.toggle("nav-page");
             next_text_elmt.innerText = next_text;
         }
     }
@@ -220,5 +230,22 @@ document.addEventListener("DOMContentLoaded", function() {
         key_points.insertAdjacentElement("afterend", page_nav);
     }
 
+    console.log("DEBUG 10");
+
+});
+
+
+// Override style of Quarto page navigation (prev/next buttons)
+document.addEventListener("DOMContentLoaded", function() {
+
+    console.log("DEBUG 20");
+
+    const page_navigators = document.querySelectorAll(".pagination-link");
+    page_navigators.forEach((node) => {
+        console.log("DEBUG 21");
+
+        node.classList.add("btn", "btn-outline-custom", "rounded");
+        node.parentNode.classList.remove("nav-page");
+    });
 });
 </script>

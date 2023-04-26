@@ -67,7 +67,7 @@ function select_modules(string) {
     role_module_map.forEach((mapping) => {
         if( mapping.role == string ) {
             mapping.modules.forEach((interest_module) => {
-                document.querySelectorAll(`[href*="${interest_module}"]`).forEach((interest_a_node) => {
+                document.querySelectorAll(`li [href*="${interest_module.slug}"]`).forEach((interest_a_node) => {
 
                     //console.log("selecting module ", interest_a_node);
 
