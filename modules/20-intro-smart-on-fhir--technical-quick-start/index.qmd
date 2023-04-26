@@ -1,7 +1,0 @@
----
-title: Technical Quick Start
-area:
-  name: Overview
-topic:
-  name: SMART on FHIR
----
