@@ -97,6 +97,7 @@ website:
         - section: "Synthetic Data"
           contents:
             - modules/synthea-overview.qmd
+            - modules/synthea-running.qmd
             - modules/synthea-customizing.qmd
             - modules/synthea-test-server.qmd
 
