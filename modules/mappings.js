@@ -2,154 +2,416 @@ const role_module_map = [
   {
     "role": "clinician-scientist",
     "modules": [
-        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
-        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
-        {"slug": "fhir-history",                        "text": "History of FHIR"},
-        {"slug": "terminology",                         "text": "Terminology"},
-        {"slug": "key-fhir-resources",                  "text": "Key FHIR Resources"},
-        {"slug": "fhir-research",                       "text": "FHIR for Research"},
-        {"slug": "example-study",                       "text": "Examples of Real World Studies"},
-
-        {"slug": "data-modeling-api-resources",         "text": "Data Modeling: API Resources"},
-        {"slug": "data-modeling-reading-igs",           "text": "Data Modeling: Reading IGs"},
-        {"slug": "data-modeling-real-world-igs",        "text": "Data Modeling: Real World IGs"},
-        {"slug": "data-modeling-writing-igs",           "text": "Data Modeling: Writing IGs"},
-
-        {"slug": "cdms",                                "text": "Common Data Models"},
-
-        {"slug": "tabular-from-fhir",                   "text": "Tabular Data: to and from FHIR"},
-        {"slug": "tabular-retrieving-and-subsetting",   "text": "Tabular Data: Retrieving and Subsetting"},
-        {"slug": "tabular-real-world",                  "text": "Tabular Data: Real World Cases"},
-
-        {"slug": "redcap-intro",                        "text": "Introduction to REDCap"},
-        {"slug": "redcap-example",                      "text": "REDCap Examples"},
-        {"slug": "redcap-best-practices",               "text": "REDCap Best Practices"},
-
-        {"slug": "smart-on-fhir-intro",                 "text": "Introduction to SMART on FHIR"},
-        {"slug": "smart-on-fhir-research",              "text": "SMART on FHIR for Research"},
-        {"slug": "smart-on-fhir-technical-quick-start", "text": "SMART on FHIR Technical Quickstart"}
+      {
+        "slug": "fhir-from-10000-ft",
+        "position": 0,
+        "text": "FHIR from 10,000 Feet"
+      },
+      {
+        "slug": "fhir-from-1000-ft",
+        "position": 1,
+        "text": "FHIR from 1,000 Feet"
+      },
+      {
+        "slug": "fhir-research",
+        "position": 2,
+        "text": "Real World Research"
+      },
+      {
+        "slug": "fhir-history",
+        "position": 3,
+        "text": "FHIR History"
+      },
+      {
+        "slug": "terminology",
+        "position": 4,
+        "text": "Terminology and FHIR"
+      },
+      {
+        "slug": "cdms",
+        "position": 5,
+        "text": "Common Data Models"
+      },
+      {
+        "slug": "fhir-community",
+        "position": 6,
+        "text": "Community & Documentation"
+      },
+      {
+        "slug": "key-fhir-resources",
+        "position": 7,
+        "text": "FHIR Resources"
+      },
+      {
+        "slug": "smart-on-fhir-intro",
+        "position": 9,
+        "text": "Introduction"
+      },
+      {
+        "slug": "data-modeling-reading-igs",
+        "position": 11,
+        "text": "Reading IGs"
+      },
+      {
+        "slug": "data-modeling-real-world-igs",
+        "position": 12,
+        "text": "Real World IGs"
+      },
+      {
+        "slug": "data-modeling-writing-igs",
+        "position": 13,
+        "text": "Writing IGs"
+      },
+      {
+        "slug": "tabular-intro",
+        "position": 14,
+        "text": "Introduction to Analyzing FHIR Data in a Tabular Format"
+      },
+      {
+        "slug": "redcap-intro",
+        "position": 17,
+        "text": "Introduction to REDCap"
+      },
+      {
+        "slug": "synthea-overview",
+        "position": 19,
+        "text": "Synthea Overview"
+      }
     ]
   },
   {
     "role": "informaticist",
     "modules": [
-        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
-        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
-        {"slug": "fhir-history",                        "text": "History of FHIR"},
-        {"slug": "terminology",                         "text": "Terminology"},
-        {"slug": "key-fhir-resources",                  "text": "Key FHIR Resources"},
-        {"slug": "fhir-community",                      "text": "FHIR Community"},
-        {"slug": "fhir-research",                       "text": "FHIR for Research"},
-        {"slug": "example-study",                       "text": "Examples of Real World Studies"},
-
-        {"slug": "data-modeling-api-resources",         "text": "Data Modeling: API Resources"},
-        {"slug": "data-modeling-reading-igs",           "text": "Data Modeling: Reading IGs"},
-        {"slug": "data-modeling-real-world-igs",        "text": "Data Modeling: Real World IGs"},
-        {"slug": "data-modeling-writing-igs",           "text": "Data Modeling: Writing IGs"},
-
-        {"slug": "cdms",                                "text": "Common Data Models"},
-
-        {"slug": "tabular-from-fhir",                   "text": "Tabular Data: to and from FHIR"},
-        {"slug": "tabular-retrieving-and-subsetting",   "text": "Tabular Data: Retrieving and Subsetting"},
-        {"slug": "tabular-real-world",                  "text": "Tabular Data: Real World Cases"},
-
-        {"slug": "redcap-intro",                        "text": "Introducion to REDCap"},
-        {"slug": "redcap-example",                      "text": "REDCap Examples"},
-        {"slug": "redcap-best-practices",               "text": "REDCap Best Practices"},
-
-        {"slug": "smart-on-fhir-intro",                 "text": "Introduction to SMART on FHIR"},
-        {"slug": "smart-on-fhir-research",              "text": "SMART on FHIR for Research"},
-        {"slug": "smart-on-fhir-technical-quick-start", "text": "SMART on FHIR Technical Quickstart"}
+      {
+        "slug": "fhir-from-10000-ft",
+        "position": 0,
+        "text": "FHIR from 10,000 Feet"
+      },
+      {
+        "slug": "fhir-from-1000-ft",
+        "position": 1,
+        "text": "FHIR from 1,000 Feet"
+      },
+      {
+        "slug": "fhir-research",
+        "position": 2,
+        "text": "Real World Research"
+      },
+      {
+        "slug": "fhir-history",
+        "position": 3,
+        "text": "FHIR History"
+      },
+      {
+        "slug": "terminology",
+        "position": 4,
+        "text": "Terminology and FHIR"
+      },
+      {
+        "slug": "cdms",
+        "position": 5,
+        "text": "Common Data Models"
+      },
+      {
+        "slug": "fhir-community",
+        "position": 6,
+        "text": "Community & Documentation"
+      },
+      {
+        "slug": "key-fhir-resources",
+        "position": 7,
+        "text": "FHIR Resources"
+      },
+      {
+        "slug": "fhir-accessing-data",
+        "position": 8,
+        "text": "Using the FHIR API"
+      },
+      {
+        "slug": "smart-on-fhir-intro",
+        "position": 9,
+        "text": "Introduction"
+      },
+      {
+        "slug": "data-modeling-reading-igs",
+        "position": 11,
+        "text": "Reading IGs"
+      },
+      {
+        "slug": "data-modeling-real-world-igs",
+        "position": 12,
+        "text": "Real World IGs"
+      },
+      {
+        "slug": "data-modeling-writing-igs",
+        "position": 13,
+        "text": "Writing IGs"
+      },
+      {
+        "slug": "tabular-intro",
+        "position": 14,
+        "text": "Introduction to Analyzing FHIR Data in a Tabular Format"
+      },
+      {
+        "slug": "tabular-python",
+        "position": 15,
+        "text": "Using Python"
+      },
+      {
+        "slug": "tabular-r",
+        "position": 16,
+        "text": "Using R"
+      },
+      {
+        "slug": "redcap-intro",
+        "position": 17,
+        "text": "Introduction to REDCap"
+      },
+      {
+        "slug": "redcap-fhir",
+        "position": 18,
+        "text": "REDCap on FHIR"
+      },
+      {
+        "slug": "synthea-overview",
+        "position": 19,
+        "text": "Synthea Overview"
+      },
+      {
+        "slug": "synthea-customizing",
+        "position": 20,
+        "text": "Customizing Synthea"
+      },
+      {
+        "slug": "synthea-test-server",
+        "position": 21,
+        "text": "FHIR Test Server"
+      }
     ]
   },
   {
     "role": "investigator",
     "modules": [
-        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
-        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
-        {"slug": "fhir-history",                        "text": "History of FHIR"},
-        {"slug": "terminology",                         "text": "Terminology"},
-        {"slug": "fhir-research",                       "text": "FHIR for Research"},
-        {"slug": "example-study",                       "text": "Examples of Real World Studies"},
-
-
-        {"slug": "data-modeling-api-resources",         "text": "Data Modeling: API Resources"},
-        {"slug": "data-modeling-reading-igs",           "text": "Data Modeling: Reading IGs"},
-        {"slug": "data-modeling-real-world-igs",        "text": "Data Modeling: Real World IGs"},
-        {"slug": "data-modeling-writing-igs",           "text": "Data Modeling: Writing IGs"},
-
-        {"slug": "cdms",                                "text": "Common Data Models"},
-
-        {"slug": "tabular-from-fhir",                   "text": "Tabular Data: to and from FHIR"},
-        {"slug": "tabular-retrieving-and-subsetting",   "text": "Tabular Data: Retrieving and Subsetting"},
-        {"slug": "tabular-real-world",                  "text": "Tabular Data: Real World Cases"},
-
-        {"slug": "redcap-intro",                        "text": "Introducion to REDCap"},
-        {"slug": "redcap-example",                      "text": "REDCap Examples"},
-        {"slug": "redcap-best-practices",               "text": "REDCap Best Practices"},
-
-        {"slug": "smart-on-fhir-intro",                 "text": "Introduction to SMART on FHIR"},
-        {"slug": "smart-on-fhir-research",              "text": "SMART on FHIR for Research"},
-        {"slug": "smart-on-fhir-technical-quick-start", "text": "SMART on FHIR Technical Quickstart"}
+      {
+        "slug": "fhir-from-10000-ft",
+        "position": 0,
+        "text": "FHIR from 10,000 Feet"
+      },
+      {
+        "slug": "fhir-from-1000-ft",
+        "position": 1,
+        "text": "FHIR from 1,000 Feet"
+      },
+      {
+        "slug": "fhir-research",
+        "position": 2,
+        "text": "Real World Research"
+      },
+      {
+        "slug": "fhir-history",
+        "position": 3,
+        "text": "FHIR History"
+      },
+      {
+        "slug": "terminology",
+        "position": 4,
+        "text": "Terminology and FHIR"
+      },
+      {
+        "slug": "cdms",
+        "position": 5,
+        "text": "Common Data Models"
+      },
+      {
+        "slug": "fhir-community",
+        "position": 6,
+        "text": "Community & Documentation"
+      },
+      {
+        "slug": "smart-on-fhir-intro",
+        "position": 9,
+        "text": "Introduction"
+      },
+      {
+        "slug": "data-modeling-reading-igs",
+        "position": 11,
+        "text": "Reading IGs"
+      },
+      {
+        "slug": "data-modeling-real-world-igs",
+        "position": 12,
+        "text": "Real World IGs"
+      },
+      {
+        "slug": "data-modeling-writing-igs",
+        "position": 13,
+        "text": "Writing IGs"
+      },
+      {
+        "slug": "tabular-intro",
+        "position": 14,
+        "text": "Introduction to Analyzing FHIR Data in a Tabular Format"
+      },
+      {
+        "slug": "redcap-intro",
+        "position": 17,
+        "text": "Introduction to REDCap"
+      },
+      {
+        "slug": "redcap-fhir",
+        "position": 18,
+        "text": "REDCap on FHIR"
+      },
+      {
+        "slug": "synthea-overview",
+        "position": 19,
+        "text": "Synthea Overview"
+      },
+      {
+        "slug": "synthea-customizing",
+        "position": 20,
+        "text": "Customizing Synthea"
+      }
     ]
   },
   {
     "role": "research-leader",
     "modules": [
-        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000 Feet"},
-        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
-        {"slug": "fhir-history",                        "text": "History of FHIR"},
-        {"slug": "fhir-research",                       "text": "FHIR for Research"},
-        {"slug": "example-study",                       "text": "Examples of Real World Studies"},
-
-        {"slug": "data-modeling-api-resources",         "text": "Data Modeling: API Resources"},
-        {"slug": "data-modeling-real-world-igs",        "text": "Data Modeling: Real World IGs"},
-        {"slug": "data-modeling-writing-igs",           "text": "Data Modeling: Writing IGs"},
-
-        {"slug": "cdms",                                "text": "Common Data Models"},
-
-        {"slug": "tabular-from-fhir",                   "text": "Tabular Data: to and from FHIR"},
-        {"slug": "tabular-retrieving-and-subsetting",   "text": "Tabular Data: Retrieving and Subsetting"},
-
-        {"slug": "redcap-intro",                        "text": "Introducion to REDCap"},
-        {"slug": "redcap-example",                      "text": "REDCap Examples"},
-        {"slug": "redcap-best-practices",               "text": "REDCap Best Practices"},
-
-        {"slug": "smart-on-fhir-intro",                 "text": "Introduction to SMART on FHIR"},
-        {"slug": "smart-on-fhir-research",              "text": "SMART on FHIR for Research"},
-        {"slug": "smart-on-fhir-technical-quick-start", "text": "SMART on FHIR Technical Quickstart"}
+      {
+        "slug": "fhir-from-10000-ft",
+        "position": 0,
+        "text": "FHIR from 10,000 Feet"
+      },
+      {
+        "slug": "fhir-research",
+        "position": 2,
+        "text": "Real World Research"
+      },
+      {
+        "slug": "fhir-history",
+        "position": 3,
+        "text": "FHIR History"
+      },
+      {
+        "slug": "cdms",
+        "position": 5,
+        "text": "Common Data Models"
+      },
+      {
+        "slug": "smart-on-fhir-intro",
+        "position": 9,
+        "text": "Introduction"
+      },
+      {
+        "slug": "redcap-intro",
+        "position": 17,
+        "text": "Introduction to REDCap"
+      },
+      {
+        "slug": "redcap-fhir",
+        "position": 18,
+        "text": "REDCap on FHIR"
+      }
     ]
   },
   {
     "role": "software-engineer",
     "modules": [
-        {"slug": "fhir-from-10000-ft",                  "text": "FHIR from 10,000ft"},
-        {"slug": "fhir-from-1000-ft",                   "text": "FHIR from 1,000 Feet"},
-        {"slug": "fhir-history",                        "text": "History of FHIR"},
-        {"slug": "terminology",                         "text": "Terminology"},
-        {"slug": "key-fhir-resources",                  "text": "Key FHIR Resources"},
-        {"slug": "fhir-community",                      "text": "FHIR Community"},
-        {"slug": "fhir-research",                       "text": "FHIR for Research"},
-        {"slug": "example-study",                       "text": "Examples of Real World Studies"},
-
-        {"slug": "data-modeling-api-resources",         "text": "Data Modeling: API Resources"},
-        {"slug": "data-modeling-reading-igs",           "text": "Data Modeling: Reading IGs"},
-        {"slug": "data-modeling-real-world-igs",        "text": "Data Modeling: Real World IGs"},
-        {"slug": "data-modeling-writing-igs",           "text": "Data Modeling: Writing IGs"},
-
-        {"slug": "cdms",                                "text": "Common Data Models"},
-
-        {"slug": "tabular-retrieving-and-subsetting",   "text": "Tabular Data: Retrieving and Subsetting"},
-        {"slug": "tabular-from-fhir",                   "text": "Tabular Data: to and from FHIR"},
-        {"slug": "tabular-real-world",                  "text": "Tabular Data: Real World Cases"},
-
-        {"slug": "redcap-intro",                        "text": "Introduction to REDCap"},
-        {"slug": "redcap-example",                      "text": "REDCap Examples"},
-        {"slug": "redcap-best-practices",               "text": "REDCap Best Practices"},
-
-        {"slug": "smart-on-fhir-intro",                 "text": "Introduction to SMART on FHIR"},
-        {"slug": "smart-on-fhir-research",              "text": "SMART on FHIR for Research"},
-        {"slug": "smart-on-fhir-technical-quick-start", "text": "SMART on FHIR Technical Quickstart"}
+      {
+        "slug": "fhir-from-10000-ft",
+        "position": 0,
+        "text": "FHIR from 10,000 Feet"
+      },
+      {
+        "slug": "fhir-from-1000-ft",
+        "position": 1,
+        "text": "FHIR from 1,000 Feet"
+      },
+      {
+        "slug": "fhir-research",
+        "position": 2,
+        "text": "Real World Research"
+      },
+      {
+        "slug": "fhir-history",
+        "position": 3,
+        "text": "FHIR History"
+      },
+      {
+        "slug": "terminology",
+        "position": 4,
+        "text": "Terminology and FHIR"
+      },
+      {
+        "slug": "cdms",
+        "position": 5,
+        "text": "Common Data Models"
+      },
+      {
+        "slug": "fhir-community",
+        "position": 6,
+        "text": "Community & Documentation"
+      },
+      {
+        "slug": "key-fhir-resources",
+        "position": 7,
+        "text": "FHIR Resources"
+      },
+      {
+        "slug": "fhir-accessing-data",
+        "position": 8,
+        "text": "Using the FHIR API"
+      },
+      {
+        "slug": "smart-on-fhir-intro",
+        "position": 9,
+        "text": "Introduction"
+      },
+      {
+        "slug": "smart-on-fhir-tech",
+        "position": 10,
+        "text": "Technical Details"
+      },
+      {
+        "slug": "data-modeling-reading-igs",
+        "position": 11,
+        "text": "Reading IGs"
+      },
+      {
+        "slug": "data-modeling-real-world-igs",
+        "position": 12,
+        "text": "Real World IGs"
+      },
+      {
+        "slug": "tabular-intro",
+        "position": 14,
+        "text": "Introduction to Analyzing FHIR Data in a Tabular Format"
+      },
+      {
+        "slug": "redcap-intro",
+        "position": 17,
+        "text": "Introduction to REDCap"
+      },
+      {
+        "slug": "redcap-fhir",
+        "position": 18,
+        "text": "REDCap on FHIR"
+      },
+      {
+        "slug": "synthea-overview",
+        "position": 19,
+        "text": "Synthea Overview"
+      },
+      {
+        "slug": "synthea-customizing",
+        "position": 20,
+        "text": "Customizing Synthea"
+      },
+      {
+        "slug": "synthea-test-server",
+        "position": 21,
+        "text": "FHIR Test Server"
+      }
     ]
   }
 ];
