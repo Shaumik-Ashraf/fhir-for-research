@@ -24,6 +24,7 @@ executing==1.2.0
 fastjsonschema==2.16.3
 fhir-pyrate==0.2.0
 fhirpathpy==0.1.2
+flatten-json==0.1.13
 fqdn==1.5.1
 idna==3.4
 importlib-metadata==6.6.0
