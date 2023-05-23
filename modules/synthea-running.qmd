@@ -219,4 +219,4 @@ Additional information on configuration options can be found [on the Synthea wik
 ---
 
 
-You should now feel comfortable with the basics of how to run Synthea to generate synthetic health records. The next section will describe some options for customizing the patients that Synthea produces.
+You should now feel comfortable with the basics of how to run Synthea to generate synthetic health records. The [next section](synthea-customizing.qmd) will describe some options for customizing the patients that Synthea produces.
