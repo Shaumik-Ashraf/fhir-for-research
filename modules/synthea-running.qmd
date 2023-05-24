@@ -17,37 +17,6 @@ learning_objectives:
 
 ---
 
-<!-- Split into 2 modules:
-
-- running synthea
-  * include "basic" setup - JAR setup
-  * include "developer" setup - getting the code
-
-  - proposed outline:
-
-    * intro
-      * 2 ways to run synthea: basic (JAR) and developer (code)
-      * Use basic when <bullet point list>
-      * Use developer when <bullet point list>
-    
-    * Basic setup
-      * <instructions from the synthea intro>
-
-    * Developer setup
-      * <instructions from the customization section 1
-
-    * Configuration
-      * command line configs
-        * needs more detail than currently exists given your audience's expected experience. 
-          * How do they list the command line args so they see the options?
-          * You list examples. Also explain a few of them argument by argument.
-      * config file
-          * where is it?
-          * what does it look like?
-          * how do they change it?
-
-  -->
-
 There are two ways to run Synthea: a basic setup using a prepackaged JAR file and a developer setup. The [Basic setup](#basic-setup) is recommended for users who want to get started quickly and do not anticipate making significant changes or customizations to Synthea. The [Developer setup](#developer-setup) is recommended for users who want the ability to fully modify and customize all aspects of Synthea.
 
 ## Prerequisites
