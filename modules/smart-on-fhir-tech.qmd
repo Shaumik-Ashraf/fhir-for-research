@@ -53,7 +53,7 @@ You can create a SMART on FHIR application without relying on third-party librar
 
 FHIR servers will likely return health data that can be linked to an individual. If so, [rules around handling Protected Health Information (PHI)](https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html) apply. Your institution's [IRB](https://www.hhs.gov/ohrp/education-and-outreach/online-education/human-research-protection-training/lesson-3-what-are-irbs/index.html) will also have policies for handling sensitive patient data used in research.
 
-Determine the security and privacy approach for health data early in your design process before working with any real patient data. You can use synthetic data and a test FHIR server<!--# Add link to relevant module --> during development and testing.
+Determine the security and privacy approach for health data early in your design process before working with any real patient data. You can use synthetic data and a [test FHIR server](smart-on-fhir-tech.qmd) during development and testing.
 
 ### Human-centered design
 
