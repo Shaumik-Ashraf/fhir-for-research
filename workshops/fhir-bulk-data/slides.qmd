@@ -1,7 +1,7 @@
 ---
 format:
   revealjs: 
-    theme: [default, ../slides.scss]
+    theme: [default, ../../slides.scss]
     preview-links: true
     slide-number: c/t
 editor: visual
